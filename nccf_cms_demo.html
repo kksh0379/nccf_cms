@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>통합회원 CMS</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0c0f16;--bg2:#111623;--bg3:#171d2e;--bg4:#1e2640;--bg5:#263050;
+  --bdr:#232e48;--bdr2:#2e3b5c;
+  --pri:#00b4d8;--pri-d:rgba(0,180,216,.1);--pri-m:rgba(0,180,216,.22);
+  --acc:#48cae4;--sec:#0096c7;
+  --mint:#06d6a0;--mint-d:rgba(6,214,160,.1);
+  --coral:#ef476f;--coral-d:rgba(239,71,111,.1);
+  --amber:#ffd166;--amber-d:rgba(255,209,102,.1);
+  --purple:#a78bfa;--purple-d:rgba(167,139,250,.1);
+  --txt:#e4e9f2;--txt2:#9aa4bc;--txt3:#6a7694;--txt4:#4a5572;
+  --side:232px;--head:56px;--rad:8px;--rad-s:5px;
+  --tr:.18s cubic-bezier(.4,0,.2,1);
+}
+html{font-size:13px}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:3px}
+
+.app{display:flex;min-height:100vh}
+
+/* ══ Sidebar ══ */
+.side{width:var(--side);background:var(--bg2);border-right:1px solid var(--bdr);position:fixed;top:0;left:0;bottom:0;display:flex;flex-direction:column;z-index:100}
+.side-logo{height:var(--head);display:flex;align-items:center;padding:0 16px;gap:8px;border-bottom:1px solid var(--bdr)}
+.side-logo .ico{width:28px;height:28px;background:linear-gradient(135deg,var(--pri),var(--acc));border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--bg)}
+.side-logo span{font-weight:700;font-size:14px;background:linear-gradient(135deg,var(--pri),var(--acc));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.side-nav{flex:1;padding:10px 8px;overflow-y:auto}
+.nav-g{margin-bottom:14px}
+.nav-g-label{font-size:9px;font-weight:700;color:var(--txt4);text-transform:uppercase;letter-spacing:1.2px;padding:0 10px;margin-bottom:4px}
+.ni{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:var(--rad-s);cursor:pointer;transition:all var(--tr);color:var(--txt2);font-size:12px;position:relative}
+.ni:hover{background:var(--bg3);color:var(--txt)}
+.ni.act{background:var(--pri-d);color:var(--pri);font-weight:600}
+.ni.act::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:16px;background:var(--pri);border-radius:2px}
+.ni svg{width:16px;height:16px;flex-shrink:0;opacity:.6}
+.ni.act svg{opacity:1}
+.ni .cnt{margin-left:auto;font-size:9px;font-weight:600;background:var(--bg4);color:var(--txt3);padding:1px 6px;border-radius:8px}
+.ni.act .cnt{background:var(--pri-m);color:var(--pri)}
+.ni-sub{padding-left:34px;font-size:11px}
+.side-ft{padding:10px;border-top:1px solid var(--bdr)}
+.side-ft .uc{display:flex;align-items:center;gap:8px;padding:8px;border-radius:var(--rad-s);background:var(--bg3)}
+.side-ft .av{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--pri),var(--mint));display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--bg)}
+.side-ft .nm{font-size:11px;font-weight:600}.side-ft .rl{font-size:9px;color:var(--txt3)}
+
+/* ══ Main ══ */
+.mn{flex:1;margin-left:var(--side);display:flex;flex-direction:column}
+.hd{height:var(--head);display:flex;align-items:center;justify-content:space-between;padding:0 24px;border-bottom:1px solid var(--bdr);background:var(--bg2);position:sticky;top:0;z-index:50}
+.hd-title{font-size:15px;font-weight:700}
+.hd-sub{font-size:11px;color:var(--txt3);margin-top:1px}
+.hd-r{display:flex;gap:8px}
+.hd-btn{width:32px;height:32px;border-radius:var(--rad-s);background:var(--bg3);border:1px solid var(--bdr);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--txt2);transition:all var(--tr)}
+.hd-btn:hover{background:var(--bg4);color:var(--txt)}
+.hd-btn svg{width:16px;height:16px}
+.ct{flex:1;padding:20px 24px}
+
+/* ══ Screens ══ */
+.scr{display:none;animation:fi .3s ease}.scr.on{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ══ Tabs ══ */
+.tabs{display:flex;gap:2px;background:var(--bg3);border-radius:var(--rad);padding:3px;margin-bottom:20px;width:fit-content}
+.tab{padding:7px 16px;border-radius:var(--rad-s);font-size:11px;font-weight:500;color:var(--txt3);cursor:pointer;transition:all var(--tr);white-space:nowrap}
+.tab:hover{color:var(--txt2)}
+.tab.on{background:var(--bg);color:var(--pri);font-weight:600;box-shadow:0 1px 4px rgba(0,0,0,.3)}
+
+/* ══ Stats ══ */
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:20px}
+.sc{background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--rad);padding:16px;position:relative;overflow:hidden;transition:all var(--tr)}
+.sc::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--sc-c,var(--pri));opacity:0;transition:opacity var(--tr)}
+.sc:hover{border-color:var(--bdr2);transform:translateY(-1px)}.sc:hover::after{opacity:1}
+.sc-l{font-size:11px;color:var(--txt3);margin-bottom:6px}
+.sc-v{font-size:24px;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--sc-c,var(--pri))}
+.sc-d{display:inline-flex;align-items:center;gap:3px;margin-top:6px;font-size:10px;font-weight:500;padding:2px 7px;border-radius:12px}
+.sc-d.up{background:var(--mint-d);color:var(--mint)}.sc-d.dn{background:var(--coral-d);color:var(--coral)}.sc-d.nt{background:rgba(100,115,150,.1);color:var(--txt3)}
+
+/* ══ Cards ══ */
+.cd{background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--rad);overflow:hidden}
+.cd-h{padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bdr)}
+.cd-t{font-size:13px;font-weight:600}.cd-b{padding:16px}
+
+/* ══ Chart ══ */
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.bars{display:flex;align-items:flex-end;gap:10px;height:150px}
+.bc{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+.br{width:100%;border-radius:3px 3px 0 0;background:linear-gradient(180deg,var(--bar-c,var(--pri)),var(--sec));min-height:3px;cursor:pointer;transition:all .3s;position:relative}
+.br:hover{filter:brightness(1.2);transform:scaleX(1.06)}
+.br::after{content:attr(data-v);position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:9px;font-weight:600;color:var(--txt);opacity:0;transition:opacity var(--tr)}
+.br:hover::after{opacity:1}
+.bl{font-size:9px;color:var(--txt3)}
+.donut{width:130px;height:130px;border-radius:50%;position:relative;transition:transform .3s}
+.donut:hover{transform:scale(1.04)}
+.donut::after{content:'';position:absolute;top:24px;left:24px;right:24px;bottom:24px;background:var(--bg3);border-radius:50%}
+.dleg{display:flex;flex-direction:column;gap:8px}
+.dl{display:flex;align-items:center;gap:6px;font-size:11px}
+.dd{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.dp{font-family:'JetBrains Mono',monospace;font-weight:500;margin-left:auto;font-size:11px}
+
+/* ══ Table ══ */
+.tb-bar{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.sr{flex:1;min-width:200px;display:flex;align-items:center;gap:6px;background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--rad-s);padding:7px 12px;transition:border-color var(--tr)}
+.sr:focus-within{border-color:var(--pri)}
+.sr svg{width:14px;height:14px;color:var(--txt3);flex-shrink:0}
+.sr input{flex:1;background:none;border:none;outline:none;font-family:inherit;font-size:12px;color:var(--txt)}
+.sr input::placeholder{color:var(--txt4)}
+.chips{display:flex;gap:4px;flex-wrap:wrap}
+.ch{padding:5px 11px;border-radius:14px;font-size:11px;font-weight:500;background:var(--bg3);border:1px solid var(--bdr);color:var(--txt2);cursor:pointer;transition:all var(--tr);white-space:nowrap}
+.ch:hover{border-color:var(--bdr2);color:var(--txt)}.ch.on{background:var(--pri-d);border-color:var(--pri);color:var(--pri)}
+
+/* Marketing tag chips */
+.tag{display:inline-flex;align-items:center;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:500;margin:1px;cursor:default}
+.tag-aac{background:var(--purple-d);color:var(--purple)}
+.tag-ai{background:var(--pri-d);color:var(--pri)}
+.tag-proj{background:var(--mint-d);color:var(--mint)}
+.tag-donate{background:var(--amber-d);color:var(--amber)}
+.tag-event{background:rgba(251,146,60,.1);color:#fb923c}
+.tag-news{background:rgba(129,140,248,.1);color:#818cf8}
+.tag-dormant{background:var(--coral-d);color:var(--coral)}
+.tag-child{background:rgba(244,114,182,.1);color:#f472b6}
+.tag-org{background:rgba(148,163,184,.1);color:#94a3b8}
+
+.dt{width:100%;border-collapse:separate;border-spacing:0}
+.dt th{text-align:left;font-size:10px;font-weight:600;color:var(--txt3);text-transform:uppercase;letter-spacing:.4px;padding:8px 12px;background:var(--bg4);border-bottom:1px solid var(--bdr)}
+.dt th:first-child{border-radius:var(--rad-s) 0 0 0}.dt th:last-child{border-radius:0 var(--rad-s) 0 0}
+.dt td{padding:10px 12px;font-size:12px;border-bottom:1px solid var(--bdr);transition:background var(--tr)}
+.dt tbody tr{cursor:pointer}.dt tbody tr:hover td{background:var(--bg4)}
+.uc2{display:flex;align-items:center;gap:8px}
+.uc2 .av2{width:28px;height:28px;border-radius:50%;background:var(--bg4);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--pri);flex-shrink:0}
+
+/* ══ Badges ══ */
+.bd{display:inline-flex;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:600}
+.bd-pri{background:var(--pri-d);color:var(--pri)}.bd-mt{background:var(--mint-d);color:var(--mint)}
+.bd-am{background:var(--amber-d);color:var(--amber)}.bd-co{background:var(--coral-d);color:var(--coral)}
+.bd-mu{background:rgba(100,115,150,.1);color:var(--txt3)}
+
+/* ══ Buttons ══ */
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:var(--rad-s);font-family:inherit;font-size:12px;font-weight:600;border:none;cursor:pointer;transition:all var(--tr)}
+.btn-p{background:var(--pri);color:var(--bg)}.btn-p:hover{filter:brightness(1.1)}
+.btn-g{background:transparent;color:var(--txt2);border:1px solid var(--bdr)}.btn-g:hover{background:var(--bg3);color:var(--txt)}
+
+/* ══ Detail panel (replaces list) ══ */
+.detail-view{animation:fi .25s ease}
+.back{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--txt3);cursor:pointer;margin-bottom:14px;transition:color var(--tr)}
+.back:hover{color:var(--txt)}
+.back svg{width:13px;height:13px}
+.prof{display:flex;align-items:center;gap:16px;padding:20px;background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--rad);margin-bottom:16px;position:relative}
+.prof-av{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--pri),var(--acc));display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:var(--bg);flex-shrink:0}
+.prof-nm{font-size:18px;font-weight:700;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.prof-meta{color:var(--txt2);font-size:12px;margin-top:3px}
+.prof-id{color:var(--txt3);font-size:11px;margin-top:2px;font-family:'JetBrains Mono',monospace}
+.prof-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:6px}
+.prof-act{position:absolute;top:16px;right:16px;display:flex;gap:6px}
+.dg{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.ir{display:flex;padding:8px 0;border-bottom:1px solid var(--bdr)}.ir:last-child{border-bottom:none}
+.il{width:90px;color:var(--txt3);font-size:11px;flex-shrink:0}.iv{font-size:12px}
+.svc-sec{margin-bottom:12px}
+.svc-sec-h{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--bg4);border-radius:var(--rad) var(--rad) 0 0;border:1px solid var(--bdr);border-bottom:none}
+.svc-sec-h .dot{width:8px;height:8px;border-radius:50%}
+.svc-sec-h .nm{font-size:12px;font-weight:600}
+.svc-sec-b{padding:14px 16px;background:var(--bg3);border:1px solid var(--bdr);border-top:none;border-radius:0 0 var(--rad) var(--rad)}
+.timeline{position:relative;padding-left:20px}
+.timeline::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--bdr)}
+.tl-i{position:relative;padding-bottom:14px}.tl-i:last-child{padding-bottom:0}
+.tl-d{position:absolute;left:-20px;top:3px;width:8px;height:8px;border-radius:50%;border:2px solid var(--bg3)}
+.tl-t{font-size:10px;color:var(--txt3);font-family:'JetBrains Mono',monospace}.tl-e{font-size:12px;margin-top:1px}
+
+/* Consent */
+.pb{width:70px;height:5px;background:var(--bg4);border-radius:3px;overflow:hidden}
+.pf{height:100%;border-radius:3px;transition:width .5s ease}
+
+/* Pagination */
+.pag{display:flex;align-items:center;justify-content:center;gap:3px;margin-top:12px;padding:10px 0}
+.pg{width:28px;height:28px;border-radius:var(--rad-s);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;background:transparent;border:none;color:var(--txt3);cursor:pointer;transition:all var(--tr)}
+.pg:hover{background:var(--bg3);color:var(--txt)}.pg.on{background:var(--pri-d);color:var(--pri);font-weight:600}
+
+/* Toast */
+.toast{position:fixed;bottom:20px;right:20px;background:var(--bg4);border:1px solid var(--bdr2);border-radius:var(--rad);padding:12px 18px;font-size:12px;box-shadow:0 8px 28px rgba(0,0,0,.4);transform:translateY(80px);opacity:0;transition:all .3s;z-index:200}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* Activity row */
+.ar{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--bdr);font-size:12px}
+.ar:last-child{border-bottom:none}
+.ar-t{width:80px;color:var(--txt3);font-size:11px;font-family:'JetBrains Mono',monospace}
+.ar-e{flex:1}.ar-s{color:var(--txt3);font-size:11px}
+
+/* Segment bar chart */
+.seg-bars{display:flex;flex-direction:column;gap:8px}
+.seg-row{display:flex;align-items:center;gap:10px}
+.seg-label{width:110px;font-size:11px;color:var(--txt2);text-align:right;flex-shrink:0}
+.seg-track{flex:1;height:20px;background:var(--bg4);border-radius:3px;overflow:hidden;position:relative}
+.seg-fill{height:100%;border-radius:3px;transition:width .6s ease;display:flex;align-items:center;padding-left:6px}
+.seg-fill span{font-size:9px;font-weight:600;color:var(--bg);white-space:nowrap}
+.seg-val{width:50px;font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--txt2)}
+
+/* version row */
+.vr{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--bdr);font-size:12px}
+.vr:last-child{border-bottom:none}
+.vt{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;padding:2px 7px;border-radius:var(--rad-s);background:var(--pri-d);color:var(--pri)}
+
+@media(max-width:1100px){.sg{grid-template-columns:repeat(2,1fr)}.cg,.dg{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- ══════ SIDEBAR ══════ -->
+<aside class="side">
+  <div class="side-logo"><div class="ico">C</div><span>통합 CMS</span></div>
+  <nav class="side-nav">
+    <div class="nav-g">
+      <div class="nav-g-label">메인</div>
+      <div class="ni act" onclick="go('dash')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>대시보드</div>
+    </div>
+    <div class="nav-g">
+      <div class="nav-g-label">회원</div>
+      <div class="ni" onclick="go('members')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>전체 회원<span class="cnt">12,847</span></div>
+    </div>
+    <div class="nav-g">
+      <div class="nav-g-label">서비스별 회원</div>
+      <div class="ni ni-sub" onclick="goSvc('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>대표 홈페이지<span class="cnt">8,421</span></div>
+      <div class="ni ni-sub" onclick="goSvc('fair')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>FAIR AI<span class="cnt">3,210</span></div>
+      <div class="ni ni-sub" onclick="goSvc('proj')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>프로젝토리<span class="cnt">5,892</span></div>
+      <div class="ni ni-sub" onclick="goSvc('aac')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>나의AAC<span class="cnt">4,115</span></div>
+    </div>
+    <div class="nav-g">
+      <div class="nav-g-label">관리</div>
+      <div class="ni" onclick="go('consent')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>동의·약관 관리</div>
+    </div>
+  </nav>
+  <div class="side-ft"><div class="uc"><div class="av">관</div><div><div class="nm">관리자</div><div class="rl">Super Admin</div></div></div></div>
+</aside>
+
+<!-- ══════ MAIN ══════ -->
+<main class="mn">
+<header class="hd">
+  <div><div class="hd-title" id="hdT">대시보드</div><div class="hd-sub" id="hdS">통합회원 현황 개요</div></div>
+  <div class="hd-r">
+    <div class="hd-btn" onclick="toast('검색 기능 준비 중')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
+    <div class="hd-btn" onclick="toast('새 알림 없음')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></div>
+  </div>
+</header>
+<div class="ct" id="ct"></div>
+</main>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════ DATA ═══════════════
+const SVCS = {home:'대표 홈페이지',fair:'FAIR AI',proj:'프로젝토리',aac:'나의AAC'};
+const SVC_COLORS = {home:'var(--pri)',fair:'var(--acc)',proj:'var(--mint)',aac:'var(--purple)'};
+const TAG_MAP = {
+  'AAC 관심':{cls:'tag-aac',key:'aac_interest'},
+  'AI 관심':{cls:'tag-ai',key:'ai_interest'},
+  '프로젝토리 멤버십':{cls:'tag-proj',key:'proj_member'},
+  '기부 가능성 높음':{cls:'tag-donate',key:'donate_high'},
+  '행사 참여 경험 있음':{cls:'tag-event',key:'event_exp'},
+  '뉴스레터 반응 높음':{cls:'tag-news',key:'newsletter'},
+  '최근 6개월 미접속':{cls:'tag-dormant',key:'dormant'},
+  '아동/보호자 회원':{cls:'tag-child',key:'child'},
+  '기관 관계자':{cls:'tag-org',key:'org'},
+};
+
+const members = [
+  {name:"김서연",email:"kim.sy@email.com",type:"회원",date:"2026-04-12",status:"활성",
+   svcs:{home:{joined:"2026-04-12",donation:"월 3만원 정기기부",membership:"일반"},fair:{joined:"2026-04-15",usage:"AI 진단 12회"},proj:{joined:"2026-04-20",membership:"정회원",docs:"서류제출완료"}},
+   tags:["AI 관심","기부 가능성 높음","뉴스레터 반응 높음"],
+   phone:"010-1234-5678",birth:"1995-03-15",addr:"서울 강남구 테헤란로 123",auth:"NICE"},
+  {name:"이준호",email:"lee.jh@email.com",type:"이용자",date:"2026-04-28",status:"활성",
+   svcs:{fair:{joined:"2026-04-28",usage:"AI 상담 3회"}},
+   tags:["AI 관심"],phone:"010-2345-6789",birth:"1988-07-22",addr:"경기 성남시 분당구",auth:"NICE"},
+  {name:"박민지",email:"park.mj@email.com",type:"후원자",date:"2026-03-15",status:"활성",
+   svcs:{home:{joined:"2026-03-15",donation:"일시 50만원",membership:"후원회원"},aac:{joined:"2026-04-01",role:"보호자",child:"박하린(8세)"}},
+   tags:["기부 가능성 높음","AAC 관심","아동/보호자 회원","행사 참여 경험 있음"],phone:"010-3456-7890",birth:"1990-11-05",addr:"서울 서초구",auth:"NICE"},
+  {name:"정우진",email:"jung.wj@email.com",type:"회원",date:"2026-05-01",status:"활성",
+   svcs:{home:{joined:"2026-05-01",donation:"없음",membership:"일반"},fair:{joined:"2026-05-03",usage:"AI 교육 참여"},proj:{joined:"2026-05-05",membership:"준회원",docs:"대기중"},aac:{joined:"2026-05-10",role:"이용자",device:"태블릿"}},
+   tags:["AI 관심","프로젝토리 멤버십","AAC 관심","행사 참여 경험 있음"],phone:"010-4567-8901",birth:"1992-02-18",addr:"부산 해운대구",auth:"NICE"},
+  {name:"최하은",email:"choi.he@email.com",type:"이용자",date:"2026-02-20",status:"휴면",
+   svcs:{proj:{joined:"2026-02-20",membership:"준회원",docs:"미제출"}},
+   tags:["최근 6개월 미접속","프로젝토리 멤버십"],phone:"010-5678-9012",birth:"2001-09-30",addr:"대전 유성구",auth:"NICE"},
+  {name:"강도윤",email:"kang.dy@email.com",type:"회원",date:"2026-01-08",status:"활성",
+   svcs:{home:{joined:"2026-01-08",donation:"월 5만원 정기기부",membership:"정회원"},proj:{joined:"2026-02-15",membership:"정회원",docs:"서류제출완료"}},
+   tags:["기부 가능성 높음","프로젝토리 멤버십","뉴스레터 반응 높음"],phone:"010-6789-0123",birth:"1985-04-12",addr:"서울 마포구",auth:"NICE"},
+  {name:"윤서아",email:"yoon.sa@email.com",type:"후원자",date:"2025-12-30",status:"활성",
+   svcs:{home:{joined:"2025-12-30",donation:"월 10만원 정기기부",membership:"후원회원"}},
+   tags:["기부 가능성 높음","행사 참여 경험 있음","뉴스레터 반응 높음"],phone:"010-7890-1234",birth:"1978-12-25",addr:"서울 용산구",auth:"NICE"},
+  {name:"조현우",email:"cho.hw@email.com",type:"이용자",date:"2026-05-10",status:"활성",
+   svcs:{aac:{joined:"2026-05-10",role:"이용자",device:"스마트폰"}},
+   tags:["AAC 관심"],phone:"010-8901-2345",birth:"2010-06-15",addr:"인천 남동구",auth:"법정대리인"},
+  {name:"한예진",email:"han.yj@email.com",type:"회원",date:"2026-03-22",status:"탈퇴",
+   svcs:{home:{joined:"2026-03-22",donation:"없음",membership:"일반"},fair:{joined:"2026-03-25",usage:"AI 진단 1회"}},
+   tags:[],phone:"010-9012-3456",birth:"1997-08-08",addr:"광주 서구",auth:"NICE"},
+  {name:"송민석",email:"song.ms@email.com",type:"이용자",date:"2026-04-05",status:"활성",
+   svcs:{proj:{joined:"2026-04-05",membership:"준회원",docs:"심사중"}},
+   tags:["프로젝토리 멤버십"],phone:"010-0123-4567",birth:"1999-01-20",addr:"대구 수성구",auth:"NICE"},
+  {name:"유지현",email:"yu.jh@email.com",type:"회원",date:"2026-05-15",status:"활성",
+   svcs:{home:{joined:"2026-05-15",donation:"일시 10만원",membership:"일반"},fair:{joined:"2026-05-16",usage:"캠페인 2회 참여"},aac:{joined:"2026-05-18",role:"보호자",child:"유다은(6세)"}},
+   tags:["AI 관심","AAC 관심","아동/보호자 회원","기부 가능성 높음"],phone:"010-1111-2222",birth:"1991-05-10",addr:"서울 송파구",auth:"NICE"},
+  {name:"임채원",email:"lim.cw@email.com",type:"후원자",date:"2026-02-28",status:"활성",
+   svcs:{home:{joined:"2026-02-28",donation:"월 2만원 정기기부",membership:"후원회원"},proj:{joined:"2026-03-10",membership:"정회원",docs:"서류제출완료"}},
+   tags:["기부 가능성 높음","프로젝토리 멤버십","기관 관계자"],phone:"010-3333-4444",birth:"1982-10-03",addr:"경기 수원시",auth:"NICE"},
+  {name:"오태영",email:"oh.ty@email.com",type:"이용자",date:"2026-01-20",status:"휴면",
+   svcs:{fair:{joined:"2026-01-20",usage:"AI 진단 1회"}},
+   tags:["최근 6개월 미접속","AI 관심"],phone:"010-5555-6666",birth:"2003-03-28",addr:"충남 천안시",auth:"NICE"},
+];
+
+const consentItems = [
+  {name:"개인정보 처리방침",ver:"v3.2",req:"필수",rate:99.8,date:"2026-05-01",status:"활성"},
+  {name:"서비스 이용약관",ver:"v3.2",req:"필수",rate:99.5,date:"2026-05-01",status:"활성"},
+  {name:"마케팅 정보 수신 동의",ver:"v2.1",req:"선택",rate:62.1,date:"2026-04-15",status:"활성"},
+  {name:"제3자 정보 제공 동의",ver:"v2.0",req:"선택",rate:45.3,date:"2026-03-20",status:"활성"},
+  {name:"위치정보 수집 동의",ver:"v1.5",req:"선택",rate:38.7,date:"2026-02-10",status:"활성"},
+  {name:"이벤트 알림 동의 (구)",ver:"v1.0",req:"선택",rate:0,date:"2025-12-01",status:"폐기"},
+];
+
+// ═══════════════ STATE ═══════════════
+let S = {screen:'dash',svcTab:'all',filter:'all',tagFilter:'',search:'',page:1,detailIdx:null,svcView:null};
+const PER=8;
+
+// ═══════════════ NAVIGATION ═══════════════
+function go(scr){
+  S.screen=scr;S.detailIdx=null;S.svcView=null;S.page=1;S.filter='all';S.tagFilter='';S.search='';
+  setNav(scr);render();
+}
+function goSvc(svc){
+  S.screen='svc';S.svcView=svc;S.detailIdx=null;S.page=1;S.filter='all';S.tagFilter='';S.search='';
+  setNav('svc-'+svc);render();
+}
+function setNav(id){
+  document.querySelectorAll('.ni').forEach(n=>{
+    const match = n.getAttribute('onclick')||'';
+    n.classList.toggle('act',match.includes("'"+id.replace('svc-','')+"'") || (id==='dash'&&match.includes("'dash'")) || (id==='members'&&match.includes("'members'")) || (id==='consent'&&match.includes("'consent'")));
+  });
+}
+const META={
+  dash:{t:'대시보드',s:'통합회원 현황 개요'},
+  members:{t:'전체 회원',s:'마케팅 태그 기반 회원 관리'},
+  consent:{t:'동의·약관 관리',s:'개인정보 처리방침, 이용약관, 마케팅 동의 통합 관리'},
+};
+
+// ═══════════════ RENDER ═══════════════
+function render(){
+  const ct=document.getElementById('ct');
+  if(S.screen==='dash') renderDash(ct);
+  else if(S.screen==='members') renderMembers(ct);
+  else if(S.screen==='svc') renderSvcMembers(ct);
+  else if(S.screen==='consent') renderConsent(ct);
+  const m=S.screen==='svc'?{t:SVCS[S.svcView]+' 회원',s:'서비스 연동 회원 목록'}:META[S.screen];
+  document.getElementById('hdT').textContent=m.t;
+  document.getElementById('hdS').textContent=m.s;
+}
+
+// ═══════════════ DASHBOARD ═══════════════
+function renderDash(ct){
+  const tabs=['all','home','fair','proj','aac'];
+  const tabNames={all:'전체',home:'대표 홈페이지',fair:'FAIR AI',proj:'프로젝토리',aac:'나의AAC'};
+  const t=S.svcTab||'all';
+  const isAll=t==='all';
+
+  // stats per tab
+  const total=isAll?members.length:members.filter(m=>m.svcs[t]).length;
+  const active=isAll?members.filter(m=>m.status==='활성').length:members.filter(m=>m.svcs[t]&&m.status==='활성').length;
+  const newM=isAll?members.filter(m=>m.date>='2026-05-01').length:members.filter(m=>m.svcs[t]&&(m.svcs[t].joined||'')>='2026-05-01').length;
+  const dormant=members.filter(m=>m.tags.includes('최근 6개월 미접속')&&(isAll||m.svcs[t])).length;
+
+  let statsHtml=`
+  <div class="sg">
+    <div class="sc" style="--sc-c:var(--pri)"><div class="sc-l">${isAll?'전체 회원수':'연동 회원수'}</div><div class="sc-v">${total.toLocaleString()}</div><div class="sc-d up">▲ 8.2%</div></div>
+    <div class="sc" style="--sc-c:var(--mint)"><div class="sc-l">활성 회원</div><div class="sc-v">${active}</div><div class="sc-d nt">${Math.round(active/total*100)}%</div></div>
+    <div class="sc" style="--sc-c:var(--acc)"><div class="sc-l">이번달 신규</div><div class="sc-v">${newM}</div><div class="sc-d up">▲ 12%</div></div>
+    <div class="sc" style="--sc-c:var(--coral)"><div class="sc-l">휴면 회원</div><div class="sc-v">${dormant}</div><div class="sc-d ${dormant>0?'dn':'nt'}">${dormant>0?'관리 필요':'양호'}</div></div>
+  </div>`;
+
+  // Segment breakdown (only for 전체)
+  let segHtml='';
+  if(isAll){
+    const segCounts=Object.entries(TAG_MAP).map(([label,{cls}])=>{
+      const c=members.filter(m=>m.tags.includes(label)).length;
+      return {label,cls,count:c};
+    }).sort((a,b)=>b.count-a.count);
+    const maxC=Math.max(...segCounts.map(s=>s.count),1);
+    segHtml=`<div class="cd" style="margin-bottom:12px"><div class="cd-h"><div class="cd-t">마케팅 세그먼트 분포</div></div><div class="cd-b"><div class="seg-bars">
+    ${segCounts.map(s=>{
+      const pct=Math.round(s.count/maxC*100);
+      const color=getComputedStyle(document.documentElement).getPropertyValue(
+        s.cls==='tag-aac'?'--purple':s.cls==='tag-ai'?'--pri':s.cls==='tag-proj'?'--mint':
+        s.cls==='tag-donate'?'--amber':s.cls==='tag-event'?'--amber':s.cls==='tag-news'?'--pri':
+        s.cls==='tag-dormant'?'--coral':s.cls==='tag-child'?'--coral':'--txt3'
+      ).trim()||'#6a7694';
+      const cssColor=s.cls==='tag-aac'?'var(--purple)':s.cls==='tag-ai'?'var(--pri)':s.cls==='tag-proj'?'var(--mint)':
+        s.cls==='tag-donate'?'var(--amber)':s.cls==='tag-event'?'#fb923c':s.cls==='tag-news'?'#818cf8':
+        s.cls==='tag-dormant'?'var(--coral)':s.cls==='tag-child'?'#f472b6':'#94a3b8';
+      return `<div class="seg-row"><div class="seg-label">${s.label}</div><div class="seg-track"><div class="seg-fill" style="width:${pct}%;background:${cssColor}"><span>${s.count}명</span></div></div><div class="seg-val">${Math.round(s.count/members.length*100)}%</div></div>`;
+    }).join('')}
+    </div></div></div>`;
+  }
+
+  // Charts
+  const chartData=isAll?[780,890,960,1020,1105,1205]:{home:[420,490,530,580,620,680],fair:[180,210,240,260,290,320],proj:[290,330,370,400,440,490],aac:[210,240,260,280,310,350]}[t]||[0,0,0,0,0,0];
+  const maxBar=Math.max(...chartData);
+  const months=['12월','1월','2월','3월','4월','5월'];
+
+  // Type breakdown for donut
+  const typeMembers=isAll?members:members.filter(m=>m.svcs[t]);
+  const tCounts={회원:typeMembers.filter(m=>m.type==='회원').length,이용자:typeMembers.filter(m=>m.type==='이용자').length,후원자:typeMembers.filter(m=>m.type==='후원자').length};
+  const tTotal=Object.values(tCounts).reduce((a,b)=>a+b,0)||1;
+  const tPcts={회원:Math.round(tCounts.회원/tTotal*100),이용자:Math.round(tCounts.이용자/tTotal*100),후원자:Math.round(tCounts.후원자/tTotal*100)};
+  const d1=tPcts.회원*3.6, d2=tPcts.이용자*3.6, d3=tPcts.후원자*3.6;
+
+  const chartHtml=`<div class="cg">
+    <div class="cd"><div class="cd-h"><div class="cd-t">월별 가입 추이</div></div><div class="cd-b">
+      <div class="bars">${chartData.map((v,i)=>`<div class="bc"><div class="br" style="height:${Math.round(v/maxBar*100)}%;--bar-c:${isAll?'var(--pri)':SVC_COLORS[t]}" data-v="${v}"></div><div class="bl">${months[i]}</div></div>`).join('')}</div>
+    </div></div>
+    <div class="cd"><div class="cd-h"><div class="cd-t">회원 유형 비율</div></div><div class="cd-b" style="display:flex;align-items:center;gap:20px">
+      <div class="donut" style="background:conic-gradient(var(--pri) 0deg ${d1}deg,var(--mint) ${d1}deg ${d1+d2}deg,var(--amber) ${d1+d2}deg 360deg)"></div>
+      <div class="dleg">
+        <div class="dl"><div class="dd" style="background:var(--pri)"></div>회원<div class="dp">${tPcts.회원}%</div></div>
+        <div class="dl"><div class="dd" style="background:var(--mint)"></div>이용자<div class="dp">${tPcts.이용자}%</div></div>
+        <div class="dl"><div class="dd" style="background:var(--amber)"></div>후원자<div class="dp">${tPcts.후원자}%</div></div>
+      </div>
+    </div></div>
+  </div>`;
+
+  // Recent activity
+  const actHtml=`<div class="cd"><div class="cd-h"><div class="cd-t">최근 활동</div></div><div class="cd-b" style="padding:8px 16px">
+    <div class="ar"><div class="ar-t">10:23</div><div class="ar-e">김OO 회원가입 완료</div><div class="ar-s">프로젝토리</div><span class="bd bd-mt">완료</span></div>
+    <div class="ar"><div class="ar-t">10:15</div><div class="ar-e">이OO 마케팅 동의 변경</div><div class="ar-s">통합회원</div><span class="bd bd-am">변경</span></div>
+    <div class="ar"><div class="ar-t">09:58</div><div class="ar-e">박OO AAC 보호자 등록</div><div class="ar-s">나의AAC</div><span class="bd bd-pri">진행</span></div>
+    <div class="ar"><div class="ar-t">09:42</div><div class="ar-e">최OO 멤버십 서류 제출</div><div class="ar-s">프로젝토리</div><span class="bd bd-mt">완료</span></div>
+  </div></div>`;
+
+  ct.innerHTML=`<div class="scr on">
+    <div class="tabs">${tabs.map(k=>`<div class="tab ${t===k?'on':''}" onclick="S.svcTab='${k}';render()">${tabNames[k]}</div>`).join('')}</div>
+    ${statsHtml}${segHtml}${chartHtml}${actHtml}
+  </div>`;
+}
+
+// ═══════════════ MEMBER LIST (전체) ═══════════════
+function renderMembers(ct){
+  if(S.detailIdx!==null) return renderDetail(ct, members[S.detailIdx]);
+  const tagKeys=Object.keys(TAG_MAP);
+  const filtered=getFiltered(members);
+  const totalP=Math.ceil(filtered.length/PER);
+  if(S.page>totalP)S.page=totalP||1;
+  const slice=filtered.slice((S.page-1)*PER,S.page*PER);
+
+  ct.innerHTML=`<div class="scr on">
+    <div class="tb-bar">
+      <div class="sr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input placeholder="이름, 이메일 검색..." value="${S.search}" oninput="S.search=this.value;S.page=1;render()"></div>
+      <div class="chips">
+        <span class="ch ${S.filter==='all'?'on':''}" onclick="S.filter='all';S.page=1;render()">전체</span>
+        <span class="ch ${S.filter==='이용자'?'on':''}" onclick="S.filter='이용자';S.page=1;render()">이용자</span>
+        <span class="ch ${S.filter==='후원자'?'on':''}" onclick="S.filter='후원자';S.page=1;render()">후원자</span>
+        <span class="ch ${S.filter==='회원'?'on':''}" onclick="S.filter='회원';S.page=1;render()">회원</span>
+      </div>
+      <button class="btn btn-p" onclick="toast('엑셀 다운로드')">⬇ 내보내기</button>
+    </div>
+    <div style="margin-bottom:10px">
+      <div style="font-size:11px;color:var(--txt3);margin-bottom:6px">마케팅 태그 필터</div>
+      <div class="chips">${tagKeys.map(k=>`<span class="ch ${S.tagFilter===k?'on':''}" onclick="S.tagFilter=S.tagFilter==='${k}'?'':'${k}';S.page=1;render()">${k}</span>`).join('')}</div>
+    </div>
+    <div class="cd"><div class="cd-b" style="padding:0;overflow-x:auto">
+      <table class="dt"><thead><tr><th>이름</th><th>이메일</th><th>유형</th><th>가입일</th><th>마케팅 태그</th><th>상태</th></tr></thead>
+      <tbody>${slice.map((m,i)=>{
+        const ri=members.indexOf(m);
+        const tc=m.type==='회원'?'bd-pri':m.type==='후원자'?'bd-am':'bd-mu';
+        const sc=m.status==='활성'?'bd-mt':m.status==='휴면'?'bd-am':'bd-co';
+        return `<tr onclick="S.detailIdx=${ri};render()">
+          <td><div class="uc2"><div class="av2">${m.name[0]}</div>${m.name}</div></td>
+          <td style="color:var(--txt2)">${m.email}</td>
+          <td><span class="bd ${tc}">${m.type}</span></td>
+          <td style="color:var(--txt3);font-family:'JetBrains Mono',monospace;font-size:11px">${m.date}</td>
+          <td>${m.tags.slice(0,3).map(t=>`<span class="tag ${TAG_MAP[t]?.cls||''}">${t}</span>`).join('')}${m.tags.length>3?`<span class="tag tag-org">+${m.tags.length-3}</span>`:''}</td>
+          <td><span class="bd ${sc}">${m.status}</span></td>
+        </tr>`;
+      }).join('')}</tbody></table>
+    </div></div>
+    ${pagHtml(totalP)}
+  </div>`;
+}
+
+// ═══════════════ SERVICE MEMBER LIST ═══════════════
+function renderSvcMembers(ct){
+  const svc=S.svcView;
+  if(S.detailIdx!==null) return renderDetail(ct, members[S.detailIdx]);
+  const svcMembers=members.filter(m=>m.svcs[svc]);
+  const filtered=getFiltered(svcMembers);
+  const totalP=Math.ceil(filtered.length/PER);
+  if(S.page>totalP)S.page=totalP||1;
+  const slice=filtered.slice((S.page-1)*PER,S.page*PER);
+
+  // Extra columns per service
+  const extraTh=svc==='home'?'<th>기부</th><th>멤버십</th>':svc==='fair'?'<th>이용현황</th>':svc==='proj'?'<th>멤버십</th><th>서류</th>':svc==='aac'?'<th>역할</th><th>상세</th>':'';
+
+  function extraTd(m){
+    const d=m.svcs[svc];if(!d)return '';
+    if(svc==='home')return `<td style="font-size:11px">${d.donation||'—'}</td><td><span class="bd bd-pri">${d.membership||'—'}</span></td>`;
+    if(svc==='fair')return `<td style="font-size:11px;color:var(--txt2)">${d.usage||'—'}</td>`;
+    if(svc==='proj')return `<td><span class="bd bd-mt">${d.membership||'—'}</span></td><td style="font-size:11px;color:var(--txt2)">${d.docs||'—'}</td>`;
+    if(svc==='aac')return `<td style="font-size:11px">${d.role||'—'}</td><td style="font-size:11px;color:var(--txt2)">${d.child||d.device||'—'}</td>`;
+    return '';
+  }
+
+  ct.innerHTML=`<div class="scr on">
+    <div class="tb-bar">
+      <div class="sr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input placeholder="이름, 이메일 검색..." value="${S.search}" oninput="S.search=this.value;S.page=1;render()"></div>
+      <div class="chips">
+        <span class="ch ${S.filter==='all'?'on':''}" onclick="S.filter='all';S.page=1;render()">전체</span>
+        <span class="ch ${S.filter==='이용자'?'on':''}" onclick="S.filter='이용자';S.page=1;render()">이용자</span>
+        <span class="ch ${S.filter==='후원자'?'on':''}" onclick="S.filter='후원자';S.page=1;render()">후원자</span>
+        <span class="ch ${S.filter==='회원'?'on':''}" onclick="S.filter='회원';S.page=1;render()">회원</span>
+      </div>
+    </div>
+    <div class="cd"><div class="cd-b" style="padding:0;overflow-x:auto">
+      <table class="dt"><thead><tr><th>이름</th><th>이메일</th><th>유형</th><th>연동일</th>${extraTh}<th>태그</th><th>상태</th></tr></thead>
+      <tbody>${slice.map(m=>{
+        const ri=members.indexOf(m);
+        const tc=m.type==='회원'?'bd-pri':m.type==='후원자'?'bd-am':'bd-mu';
+        const sc=m.status==='활성'?'bd-mt':m.status==='휴면'?'bd-am':'bd-co';
+        const jd=m.svcs[svc]?.joined||m.date;
+        return `<tr onclick="S.detailIdx=${ri};render()">
+          <td><div class="uc2"><div class="av2">${m.name[0]}</div>${m.name}</div></td>
+          <td style="color:var(--txt2)">${m.email}</td>
+          <td><span class="bd ${tc}">${m.type}</span></td>
+          <td style="color:var(--txt3);font-family:'JetBrains Mono',monospace;font-size:11px">${jd}</td>
+          ${extraTd(m)}
+          <td>${m.tags.slice(0,2).map(t=>`<span class="tag ${TAG_MAP[t]?.cls||''}">${t}</span>`).join('')}</td>
+          <td><span class="bd ${sc}">${m.status}</span></td>
+        </tr>`;
+      }).join('')}</tbody></table>
+    </div></div>
+    ${pagHtml(totalP)}
+  </div>`;
+}
+
+// ═══════════════ MEMBER DETAIL ═══════════════
+function renderDetail(ct, m){
+  const tc=m.type==='회원'?'bd-pri':m.type==='후원자'?'bd-am':'bd-mu';
+  const sc=m.status==='활성'?'bd-mt':m.status==='휴면'?'bd-am':'bd-co';
+
+  // Service-specific sections (only connected)
+  let svcSections='';
+  const svcConfigs={
+    home:{name:'대표 홈페이지',color:'var(--pri)',fields:m=>([['기부현황',m.donation||'없음'],['멤버십',m.membership||'—']])},
+    fair:{name:'FAIR AI',color:'var(--acc)',fields:m=>([['이용현황',m.usage||'—']])},
+    proj:{name:'프로젝토리',color:'var(--mint)',fields:m=>([['멤버십',m.membership||'—'],['서류상태',m.docs||'—']])},
+    aac:{name:'나의AAC',color:'var(--purple)',fields:m=>([['역할',m.role||'—'],m.child?['대상아동',m.child]:m.device?['이용기기',m.device]:['상세','—']])},
+  };
+
+  Object.entries(svcConfigs).forEach(([key,cfg])=>{
+    if(!m.svcs[key])return;
+    const fields=cfg.fields(m.svcs[key]);
+    svcSections+=`<div class="svc-sec">
+      <div class="svc-sec-h"><div class="dot" style="background:${cfg.color}"></div><div class="nm">${cfg.name}</div><span class="bd bd-mt" style="margin-left:auto;font-size:9px">연동</span><span style="font-size:10px;color:var(--txt3);margin-left:4px">${m.svcs[key].joined||''}</span></div>
+      <div class="svc-sec-b">${fields.map(([l,v])=>`<div class="ir"><div class="il">${l}</div><div class="iv">${v}</div></div>`).join('')}</div>
+    </div>`;
+  });
+
+  // Not connected services
+  const notConnected=Object.entries(SVCS).filter(([k])=>!m.svcs[k]);
+  if(notConnected.length){
+    svcSections+=notConnected.map(([k,name])=>`<div class="svc-sec">
+      <div class="svc-sec-h" style="opacity:.4"><div class="dot" style="background:var(--txt4)"></div><div class="nm">${name}</div><span class="bd bd-mu" style="margin-left:auto;font-size:9px">미연동</span></div>
+    </div>`).join('');
+  }
+
+  ct.innerHTML=`<div class="scr on detail-view">
+    <div class="back" onclick="S.detailIdx=null;render()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> 목록으로 돌아가기</div>
+    <div class="prof">
+      <div class="prof-av">${m.name[0]}</div>
+      <div style="flex:1">
+        <div class="prof-nm">${m.name} <span class="bd ${tc}">${m.type}</span> <span class="bd ${sc}">${m.status}</span></div>
+        <div class="prof-meta">${m.email} · ${m.phone}</div>
+        <div class="prof-id">통합 ID: USR-${m.date.replace(/-/g,'')}-${String(members.indexOf(m)).padStart(4,'0')}</div>
+        <div class="prof-tags">${m.tags.map(t=>`<span class="tag ${TAG_MAP[t]?.cls||''}">${t}</span>`).join('')}${m.tags.length===0?'<span style="font-size:11px;color:var(--txt4)">태그 없음</span>':''}</div>
+      </div>
+      <div class="prof-act"><button class="btn btn-g" onclick="toast('비밀번호 초기화 메일 발송')">비밀번호 초기화</button><button class="btn btn-p" onclick="toast('편집 모드')">편집</button></div>
+    </div>
+    <div class="dg">
+      <div class="cd"><div class="cd-h"><div class="cd-t">공통 기본정보</div></div><div class="cd-b">
+        <div class="ir"><div class="il">이름</div><div class="iv">${m.name}</div></div>
+        <div class="ir"><div class="il">생년월일</div><div class="iv">${m.birth}</div></div>
+        <div class="ir"><div class="il">본인인증</div><div class="iv"><span class="bd bd-mt">${m.auth} 인증 완료</span></div></div>
+        <div class="ir"><div class="il">연락처</div><div class="iv">${m.phone}</div></div>
+        <div class="ir"><div class="il">이메일</div><div class="iv">${m.email}</div></div>
+        <div class="ir"><div class="il">주소</div><div class="iv">${m.addr}</div></div>
+        <div class="ir"><div class="il">가입일</div><div class="iv">${m.date}</div></div>
+      </div></div>
+      <div>
+        <div style="font-size:12px;font-weight:600;margin-bottom:8px;color:var(--txt2)">서비스별 부가정보</div>
+        ${svcSections}
+      </div>
+    </div>
+    <div class="dg">
+      <div class="cd"><div class="cd-h"><div class="cd-t">동의 현황</div></div><div class="cd-b" style="padding:8px 16px">
+        ${['개인정보 처리방침','서비스 이용약관','마케팅 정보 수신','제3자 정보 제공','위치정보 수집'].map((c,i)=>{
+          const agreed=i<2||(i===2&&m.tags.includes('뉴스레터 반응 높음'));
+          return `<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--bdr)"><span style="font-size:12px">${c}</span><span class="bd ${agreed?'bd-mt':'bd-co'}">${agreed?'동의':'미동의'}</span></div>`;
+        }).join('')}
+      </div></div>
+      <div class="cd"><div class="cd-h"><div class="cd-t">활동 이력</div></div><div class="cd-b">
+        <div class="timeline">
+          <div class="tl-i"><div class="tl-d" style="background:var(--pri)"></div><div class="tl-t">05-26 10:23</div><div class="tl-e">통합회원 사이트 로그인</div></div>
+          <div class="tl-i"><div class="tl-d" style="background:var(--amber)"></div><div class="tl-t">05-25 14:10</div><div class="tl-e">마케팅 동의 변경</div></div>
+          <div class="tl-i"><div class="tl-d" style="background:var(--mint)"></div><div class="tl-t">05-24 09:30</div><div class="tl-e">${Object.keys(m.svcs)[0]?SVCS[Object.keys(m.svcs)[0]]+' 이용':'활동 없음'}</div></div>
+          <div class="tl-i"><div class="tl-d" style="background:var(--txt3)"></div><div class="tl-t">05-20 11:00</div><div class="tl-e">비밀번호 변경</div></div>
+        </div>
+      </div></div>
+    </div>
+  </div>`;
+}
+
+// ═══════════════ CONSENT ═══════════════
+function renderConsent(ct){
+  ct.innerHTML=`<div class="scr on">
+    <div class="sg">
+      <div class="sc" style="--sc-c:var(--mint)"><div class="sc-l">전체 동의율</div><div class="sc-v">87.3%</div><div class="sc-d up">▲ 2.1%</div></div>
+      <div class="sc" style="--sc-c:var(--amber)"><div class="sc-l">마케팅 동의율</div><div class="sc-v">62.1%</div><div class="sc-d dn">▼ 1.3%</div></div>
+      <div class="sc" style="--sc-c:var(--acc)"><div class="sc-l">이번달 동의 변경</div><div class="sc-v">342건</div><div class="sc-d up">▲ 15건</div></div>
+      <div class="sc" style="--sc-c:var(--txt)"><div class="sc-l">약관 버전</div><div class="sc-v" style="color:var(--txt)">v3.2</div><div class="sc-d nt">2026-05-01 개정</div></div>
+    </div>
+    <div class="cd" style="margin-bottom:12px"><div class="cd-h"><div class="cd-t">약관·동의 항목</div><button class="btn btn-p" onclick="toast('약관 추가 화면')">+ 약관 추가</button></div>
+    <div class="cd-b" style="padding:0;overflow-x:auto">
+      <table class="dt"><thead><tr><th>항목명</th><th>버전</th><th>필수여부</th><th>동의율</th><th>최종수정</th><th>상태</th></tr></thead>
+      <tbody>${consentItems.map(c=>{
+        const rc=c.req==='필수'?'bd-pri':'bd-mu';
+        const sc2=c.status==='활성'?'bd-mt':'bd-mu';
+        const barC=c.rate>80?'var(--mint)':c.rate>50?'var(--amber)':c.rate>0?'var(--coral)':'var(--txt4)';
+        return `<tr><td style="font-weight:500">${c.name}</td>
+          <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--txt3)">${c.ver}</td>
+          <td><span class="bd ${rc}">${c.req}</span></td>
+          <td><div style="display:flex;align-items:center;gap:8px"><div class="pb"><div class="pf" style="width:${c.rate}%;background:${barC}"></div></div><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:${barC}">${c.rate>0?c.rate+'%':'—'}</span></div></td>
+          <td style="color:var(--txt3);font-family:'JetBrains Mono',monospace;font-size:11px">${c.date}</td>
+          <td><span class="bd ${sc2}">${c.status}</span></td></tr>`;
+      }).join('')}</tbody></table>
+    </div></div>
+    <div class="dg">
+      <div class="cd"><div class="cd-h"><div class="cd-t">최근 동의 변경</div></div><div class="cd-b" style="padding:8px 16px">
+        <div class="ar"><div class="ar-t">10:23</div><div class="ar-e"><strong>김서연</strong> <span style="color:var(--mint)">마케팅 동의 → 동의</span></div></div>
+        <div class="ar"><div class="ar-t">09:45</div><div class="ar-e"><strong>이준호</strong> <span style="color:var(--coral)">제3자 제공 → 미동의</span></div></div>
+        <div class="ar"><div class="ar-t">09:12</div><div class="ar-e"><strong>박민지</strong> <span style="color:var(--mint)">위치정보 → 동의</span></div></div>
+        <div class="ar"><div class="ar-t">08:30</div><div class="ar-e"><strong>정우진</strong> <span style="color:var(--coral)">마케팅 → 미동의</span></div></div>
+      </div></div>
+      <div class="cd"><div class="cd-h"><div class="cd-t">약관 버전 이력</div></div><div class="cd-b" style="padding:8px 16px">
+        <div class="vr"><span class="vt">v3.2</span><span style="color:var(--txt3);font-size:11px;width:80px">2026-05-01</span><span>개인정보 처리방침 개정</span><span class="bd bd-mt" style="margin-left:auto">현행</span></div>
+        <div class="vr"><span class="vt">v3.1</span><span style="color:var(--txt3);font-size:11px;width:80px">2026-03-15</span><span>마케팅 동의 문구 수정</span><span class="bd bd-mu" style="margin-left:auto">만료</span></div>
+        <div class="vr"><span class="vt">v3.0</span><span style="color:var(--txt3);font-size:11px;width:80px">2026-01-01</span><span>통합회원 전환 적용</span><span class="bd bd-mu" style="margin-left:auto">만료</span></div>
+      </div></div>
+    </div>
+  </div>`;
+}
+
+// ═══════════════ UTILS ═══════════════
+function getFiltered(list){
+  let d=[...list];
+  if(S.search){const q=S.search.toLowerCase();d=d.filter(m=>m.name.includes(q)||m.email.toLowerCase().includes(q));}
+  if(S.filter!=='all')d=d.filter(m=>m.type===S.filter);
+  if(S.tagFilter)d=d.filter(m=>m.tags.includes(S.tagFilter));
+  return d;
+}
+function pagHtml(total){
+  if(total<=1)return '';
+  let h='<div class="pag">';
+  for(let i=1;i<=total;i++){
+    if(total>7&&i>3&&i<total-1){if(i===4)h+='<div class="pg" style="cursor:default">…</div>';continue;}
+    h+=`<div class="pg ${i===S.page?'on':''}" onclick="S.page=${i};render()">${i}</div>`;
+  }
+  return h+'</div>';
+}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
+
+// Init
+render();
+</script>
+</body>
+</html>
