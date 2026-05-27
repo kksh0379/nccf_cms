@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NC문화재단 — 통합회원 데모</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Noto+Serif+KR:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --br:#6B4C3B;--br-d:#5A3E30;--br-dd:#4A3228;--br-l:#8B6B5A;--br-ll:#A68B7A;
+  --cr:#F7F3EF;--cr-d:#EDE6DE;--cr-dd:#DDD4C9;
+  --wh:#FFFFFF;--bk:#1A1A1A;
+  --tx:#333;--tx2:#666;--tx3:#999;
+  --ok:#4CAF50;--er:#E53935;
+  --r:8px;--rl:12px;--rxl:16px;
+  --tr:.22s cubic-bezier(.4,0,.2,1);
+  --sh:0 4px 24px rgba(107,76,59,.12);--sh-l:0 12px 48px rgba(107,76,59,.2);
+}
+html{font-size:15px}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--cr);color:var(--tx);min-height:100vh}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:var(--cr-dd);border-radius:3px}
+
+/* ══ BANNER ══ */
+.banner{position:fixed;top:0;left:0;right:0;z-index:1000;background:linear-gradient(135deg,var(--br-dd),var(--br));height:48px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(0,0,0,.15)}
+.banner-in{display:flex;align-items:center;gap:10px;max-width:1100px;width:100%;padding:0 20px}
+.banner-label{font-size:11px;color:rgba(255,255,255,.65);margin-right:auto;display:flex;align-items:center;gap:6px}
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--ok);animation:pu 2s infinite}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:.3}}
+.bb{padding:7px 15px;border-radius:18px;font-family:inherit;font-size:11px;font-weight:600;border:none;cursor:pointer;transition:all var(--tr);display:flex;align-items:center;gap:4px;white-space:nowrap}
+.bb svg{width:13px;height:13px}
+.bb-w{background:var(--wh);color:var(--br-d)}.bb-w:hover{background:var(--cr)}
+.bb-o{background:rgba(255,255,255,.12);color:var(--wh);border:1px solid rgba(255,255,255,.22)}.bb-o:hover{background:rgba(255,255,255,.2)}
+.bb-user{background:rgba(255,255,255,.15);color:var(--wh);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:5px 14px 5px 5px;gap:7px}
+.bb-user .av{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+
+/* ══ SITE ══ */
+.site-hd{margin-top:48px;background:var(--wh);border-bottom:1px solid var(--cr-dd)}
+.site-hd-in{display:flex;align-items:center;justify-content:space-between;max-width:1100px;margin:0 auto;padding:14px 20px}
+.logo{font-family:'Noto Serif KR',serif;font-size:17px;font-weight:900;color:var(--br);display:flex;align-items:center;gap:7px}
+.logo-m{width:30px;height:30px;background:var(--br);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'Noto Sans KR';font-size:10px;font-weight:800;color:var(--wh)}
+.snav{display:flex;gap:28px}
+.snav a{font-size:12px;color:var(--tx2);text-decoration:none;font-weight:500;transition:color var(--tr)}.snav a:hover{color:var(--br)}.snav a.on{color:var(--br);font-weight:700}
+
+.hero{background:linear-gradient(135deg,#e8ddd4,#d4c4b5);padding:52px 20px;text-align:center;position:relative}
+.hero-badge{display:inline-flex;align-items:center;gap:5px;padding:5px 14px;border-radius:18px;background:rgba(107,76,59,.1);color:var(--br);font-size:10px;font-weight:600;margin-bottom:14px}
+.hero h1{font-family:'Noto Serif KR',serif;font-size:34px;font-weight:900;color:var(--br-dd);margin-bottom:6px}
+.hero p{font-size:13px;color:var(--br-l);line-height:1.7;max-width:560px;margin:0 auto}
+
+.site-ct{max-width:1100px;margin:0 auto;padding:40px 20px}
+.sub-nav{display:flex;gap:22px;justify-content:center;margin-bottom:36px;border-bottom:1px solid var(--cr-dd);padding-bottom:10px}
+.sub-nav a{font-size:12px;color:var(--tx3);text-decoration:none;padding-bottom:10px;border-bottom:2px solid transparent;transition:all var(--tr)}.sub-nav a.on{color:var(--br);font-weight:700;border-bottom-color:var(--br)}
+.mdesc{text-align:center;color:var(--tx2);font-size:13px;line-height:1.8;margin-bottom:40px}
+.brand-bl{display:flex;align-items:center;justify-content:center;gap:40px;margin:40px 0}
+.brand-t{font-family:'Noto Serif KR',serif;font-size:26px;font-weight:700;color:var(--br)}
+.brand-c{width:160px;height:160px;border:2px solid var(--br-l);display:flex;align-items:center;justify-content:center;font-family:'Noto Serif KR',serif;font-size:50px;font-weight:900;color:var(--br);line-height:1.1;text-align:center;position:relative}
+.brand-c::before{content:'';position:absolute;inset:-6px;border:1px dashed var(--br-ll)}
+.info-sec{margin-top:52px;display:flex;gap:40px;align-items:flex-start}
+.info-title{font-family:'Noto Serif KR',serif;font-size:24px;font-weight:700;color:var(--br);line-height:1.4;min-width:260px}
+.info-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.info-list li{font-size:12px;color:var(--tx2);line-height:1.7;padding-left:14px;position:relative}.info-list li::before{content:'•';position:absolute;left:0;color:var(--br)}
+.site-ft{background:var(--br-dd);color:rgba(255,255,255,.45);padding:36px 20px;text-align:center;font-size:10px;line-height:1.8;margin-top:52px}
+
+/* ══ OVERLAY / MODAL ══ */
+.ov{position:fixed;inset:0;z-index:2000;background:rgba(26,26,26,.5);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.ov.open{opacity:1;pointer-events:auto}
+.modal{background:var(--wh);border-radius:var(--rxl);width:460px;max-width:calc(100vw - 24px);max-height:calc(100vh - 48px);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--sh-l);transform:translateY(20px) scale(.97);transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.ov.open .modal{transform:translateY(0) scale(1)}
+/* wide modal for mypage */
+.modal.wide{width:560px}
+
+.mh{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:var(--br);color:var(--wh);position:relative}
+.mh-btn{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.1);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--wh);transition:background var(--tr)}.mh-btn:hover{background:rgba(255,255,255,.2)}.mh-btn svg{width:15px;height:15px}
+.mh-t{font-size:14px;font-weight:700;position:absolute;left:50%;transform:translateX(-50%)}
+
+.steps{display:flex;align-items:center;justify-content:center;gap:5px;padding:12px 20px;background:var(--cr);border-bottom:1px solid var(--cr-dd)}
+.sd{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;background:var(--cr-dd);color:var(--tx3);transition:all var(--tr)}
+.sd.on{background:var(--br);color:var(--wh)}.sd.ok{background:var(--ok);color:var(--wh)}
+.sl{width:24px;height:2px;background:var(--cr-dd);transition:background var(--tr)}.sl.ok{background:var(--ok)}
+
+.mb{flex:1;overflow-y:auto;padding:20px}
+.mf{padding:14px 20px;border-top:1px solid var(--cr-dd);display:flex;gap:7px}
+.btn{flex:1;padding:12px;border-radius:var(--r);font-family:inherit;font-size:13px;font-weight:700;border:none;cursor:pointer;transition:all var(--tr);text-align:center}
+.btn-p{background:var(--br);color:var(--wh)}.btn-p:hover{background:var(--br-d)}.btn-p:active{transform:scale(.98)}
+.btn-s{background:var(--cr);color:var(--tx2);border:1px solid var(--cr-dd)}.btn-s:hover{background:var(--cr-d)}
+.btn-dis{opacity:.35;pointer-events:none}
+
+/* ══ FORM ══ */
+.st{font-size:13px;font-weight:700;color:var(--br);margin-bottom:3px;display:flex;align-items:center;gap:5px}
+.sdesc{font-size:10px;color:var(--tx3);margin-bottom:14px;line-height:1.5}
+.sinfo{padding:10px 12px;border-radius:var(--r);background:rgba(107,76,59,.04);border-left:3px solid var(--br);font-size:11px;color:var(--br-l);line-height:1.6;margin-bottom:16px}
+.fg{margin-bottom:14px}
+.fl{display:block;font-size:10px;font-weight:600;color:var(--tx);margin-bottom:4px}
+.fl .rq{color:var(--er);margin-left:2px}
+.fi{width:100%;padding:10px 12px;border:1px solid var(--cr-dd);border-radius:var(--r);font-family:inherit;font-size:12px;color:var(--tx);background:var(--wh);transition:border-color var(--tr);outline:none}
+.fi:focus{border-color:var(--br)}.fi::placeholder{color:var(--tx3)}.fi:disabled{background:var(--cr);color:var(--tx3)}
+select.fi{cursor:pointer;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:28px}
+.fi-row{display:flex;gap:7px}.fi-row .fg{flex:1}
+
+.rg{display:flex;flex-direction:column;gap:7px}
+.ri{display:flex;align-items:center;gap:9px;padding:11px 12px;border-radius:var(--r);border:1px solid var(--cr-dd);cursor:pointer;transition:all var(--tr)}
+.ri:hover{border-color:var(--br-ll)}.ri.sel{border-color:var(--br);background:rgba(107,76,59,.03)}
+.rc{width:18px;height:18px;border-radius:50%;border:2px solid var(--cr-dd);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all var(--tr)}
+.ri.sel .rc{border-color:var(--br)}.ri.sel .rc::after{content:'';width:9px;height:9px;border-radius:50%;background:var(--br)}
+.rl{font-size:12px;font-weight:500}.rd{font-size:9px;color:var(--tx3);margin-top:1px}
+
+.cg{display:flex;flex-direction:column;gap:5px}
+.ci{display:flex;align-items:flex-start;gap:7px;padding:6px 0;cursor:pointer}
+.cb{width:16px;height:16px;border-radius:3px;border:1.5px solid var(--cr-dd);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all var(--tr)}
+.ci.ck .cb{background:var(--br);border-color:var(--br)}.ci.ck .cb::after{content:'✓';color:var(--wh);font-size:10px;font-weight:700}
+.cl{font-size:11px;color:var(--tx)}.cl.b{font-weight:600}
+
+.svc-chips{display:flex;flex-direction:column;gap:7px}
+.sc2{display:flex;align-items:center;justify-content:space-between;padding:11px 12px;border-radius:var(--r);border:1px solid var(--cr-dd);cursor:pointer;transition:all var(--tr)}
+.sc2:hover{border-color:var(--br-ll)}.sc2.on{border-color:var(--br);background:rgba(107,76,59,.04)}
+.sc2-l{display:flex;align-items:center;gap:9px}
+.sc2-i{width:32px;height:32px;border-radius:50%;background:var(--cr);display:flex;align-items:center;justify-content:center;font-size:13px;transition:all var(--tr)}
+.sc2.on .sc2-i{background:var(--br);color:var(--wh)}
+.sc2-n{font-size:12px;font-weight:600}.sc2-d{font-size:9px;color:var(--tx3);margin-top:1px}
+.sc2-ck{width:20px;height:20px;border-radius:50%;border:2px solid var(--cr-dd);display:flex;align-items:center;justify-content:center;transition:all var(--tr);font-size:11px}
+.sc2.on .sc2-ck{background:var(--br);border-color:var(--br);color:var(--wh)}
+
+.ag{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:10px}
+.ab{padding:11px 6px;border-radius:var(--r);border:1px solid var(--cr-dd);background:var(--wh);font-family:inherit;font-size:12px;font-weight:600;color:var(--tx);cursor:pointer;transition:all var(--tr);text-align:center}
+.ab:hover{border-color:var(--br-ll)}.ab.on{background:var(--br);color:var(--wh);border-color:var(--br)}
+
+.ptags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}
+.pt{padding:5px 12px;border-radius:18px;border:1px solid var(--cr-dd);background:var(--wh);font-family:inherit;font-size:10px;font-weight:500;color:var(--tx2);cursor:pointer;transition:all var(--tr)}
+.pt:hover{border-color:var(--br-ll)}.pt.on{background:var(--br);color:var(--wh);border-color:var(--br)}
+
+.vf{display:inline-flex;align-items:center;gap:3px;padding:3px 9px;border-radius:10px;background:rgba(76,175,80,.08);color:var(--ok);font-size:10px;font-weight:600}
+
+.sum{border:1px solid var(--cr-dd);border-radius:var(--rl);overflow:hidden;margin-bottom:14px}
+.sum-h{padding:12px 14px;background:var(--cr);font-size:12px;font-weight:700;color:var(--br)}
+.sum-b{padding:14px}
+.sum-r{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--cr);font-size:11px}
+.sum-r:last-child{border-bottom:none}
+.sum-r .lb{color:var(--tx3)}.sum-r .vl{font-weight:600;color:var(--tx)}
+.sum-t{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:var(--br);color:var(--wh);font-size:13px;font-weight:700}
+
+.pay-tabs{display:flex;gap:3px;background:var(--cr);border-radius:var(--r);padding:3px;margin-bottom:14px}
+.ptab{flex:1;padding:8px;border-radius:5px;font-family:inherit;font-size:11px;font-weight:500;background:transparent;border:none;color:var(--tx3);cursor:pointer;transition:all var(--tr);text-align:center}
+.ptab.on{background:var(--wh);color:var(--br);font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+
+.rtypes{display:flex;gap:7px;margin-bottom:14px}
+.rt{flex:1;padding:12px;border-radius:var(--r);border:1px solid var(--cr-dd);background:var(--wh);text-align:center;cursor:pointer;transition:all var(--tr)}
+.rt:hover{border-color:var(--br-ll)}.rt.on{border-color:var(--br);background:rgba(107,76,59,.03)}
+.rt-i{font-size:18px;margin-bottom:3px}.rt-l{font-size:11px;font-weight:600}
+
+.divider{height:1px;background:var(--cr-dd);margin:18px 0}
+
+.succ{text-align:center;padding:28px 0}
+.succ-i{width:64px;height:64px;border-radius:50%;background:rgba(76,175,80,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:32px;animation:popIn .4s cubic-bezier(.16,1,.3,1)}
+@keyframes popIn{from{transform:scale(0)}to{transform:scale(1)}}
+.succ-t{font-size:18px;font-weight:700;color:var(--tx);margin-bottom:5px}
+.succ-d{font-size:12px;color:var(--tx2);line-height:1.6}
+
+.step-c{animation:si .3s ease}
+@keyframes si{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:translateX(0)}}
+
+/* ══ MYPAGE tabs ══ */
+.mp-tabs{display:flex;border-bottom:1px solid var(--cr-dd);margin-bottom:16px}
+.mp-tab{flex:1;padding:10px;text-align:center;font-size:11px;font-weight:500;color:var(--tx3);cursor:pointer;border-bottom:2px solid transparent;transition:all var(--tr)}
+.mp-tab:hover{color:var(--tx)}.mp-tab.on{color:var(--br);font-weight:700;border-bottom-color:var(--br)}
+
+.mp-card{background:var(--cr);border-radius:var(--r);padding:14px;margin-bottom:12px}
+.mp-card-t{font-size:11px;font-weight:700;color:var(--br);margin-bottom:8px}
+.mp-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(0,0,0,.04);font-size:11px}
+.mp-row:last-child{border-bottom:none}
+.mp-row .k{color:var(--tx3)}.mp-row .v{font-weight:500}
+
+.mp-svc{display:flex;align-items:center;gap:10px;padding:10px;border-radius:var(--r);background:var(--cr);margin-bottom:7px}
+.mp-svc-i{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px}
+.mp-svc-n{font-size:12px;font-weight:600;flex:1}
+.mp-svc-s{font-size:9px;font-weight:600;padding:3px 8px;border-radius:10px}
+.mp-svc-s.on{background:rgba(76,175,80,.08);color:var(--ok)}.mp-svc-s.off{background:rgba(153,153,153,.08);color:var(--tx3)}
+
+.mp-don{padding:10px;border-radius:var(--r);background:var(--cr);margin-bottom:7px;display:flex;justify-content:space-between;align-items:center}
+.mp-don-l{font-size:11px;color:var(--tx2)}.mp-don-d{font-size:9px;color:var(--tx3);margin-top:2px}
+.mp-don-a{font-size:13px;font-weight:700;color:var(--br)}
+
+.mp-consent{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(0,0,0,.04);font-size:11px}
+.mp-consent:last-child{border-bottom:none}
+.mp-badge{padding:2px 8px;border-radius:10px;font-size:9px;font-weight:600}
+.mp-badge.y{background:rgba(76,175,80,.08);color:var(--ok)}.mp-badge.n{background:rgba(229,57,53,.08);color:var(--er)}
+
+.toast-w{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:3000}
+.toast-m{background:var(--br-dd);color:var(--wh);padding:10px 22px;border-radius:var(--rl);font-size:12px;font-weight:500;box-shadow:var(--sh-l);opacity:0;transform:translateY(14px);transition:all .3s}.toast-m.show{opacity:1;transform:translateY(0)}
+
+@media(max-width:600px){.brand-bl{flex-direction:column;gap:20px}.info-sec{flex-direction:column}.ag{grid-template-columns:repeat(2,1fr)}.snav{gap:14px;font-size:11px}.modal{border-radius:var(--rxl) var(--rxl) 0 0;max-height:92vh;align-self:flex-end}}
+
+
+/* ===== v27: NC Foundation main page tone override ===== */
+:root{--nc-blue:#0047ba;--black:#111;--gray:#f6f6f6;--line:#e8e8e8;--text:#111;--sub:#555}
+html{font-size:15px}body{background:#fff;color:#111;font-family:'Noto Sans KR',sans-serif;overflow:auto}.banner{height:46px;background:#111;box-shadow:none;border-bottom:1px solid rgba(255,255,255,.08)}.banner-in{max-width:1440px;padding:0 44px}.banner-label{font-size:13px;color:#d8d8d8}.bb{border-radius:0;height:30px;padding:0 16px;font-size:13px;font-weight:700}.bb-w{background:#fff;color:#111}.bb-o{background:#222;border-color:#555;color:#fff}.bb-user{border-radius:0;background:#222;color:#fff;padding:3px 14px 3px 5px}.site-hd{margin-top:46px;position:absolute;top:0;left:0;right:0;z-index:20;background:transparent;border:0}.site-hd-in{max-width:100%;height:84px;padding:0 46px;display:flex;align-items:center;justify-content:space-between}.logo{font-family:'Noto Sans KR',sans-serif;color:#fff;font-weight:900;font-size:0;gap:0}.logo::before{content:'NC문화재단';display:block;font-size:22px;letter-spacing:-1.6px;color:#fff;font-weight:900}.logo-m{display:none}.snav{gap:76px;align-items:center}.snav a{color:#fff;font-size:17px;font-weight:800;text-decoration:none;letter-spacing:-.4px}.snav a:hover,.snav a.on{color:#fff}.snav::after{content:'EN';width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.75);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;margin-left:10px}.main-hero{height:calc(100vh - 46px);min-height:720px;position:relative;margin-top:46px;overflow:hidden;background:#171717}.main-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.70) 0%,rgba(0,0,0,.32) 44%,rgba(0,0,0,.38) 100%), radial-gradient(circle at 76% 35%,rgba(255,255,255,.18),transparent 18%), linear-gradient(135deg,#363b34 0%,#6a6f68 34%,#2a302f 66%,#181818 100%);transform:scale(1.02)}.main-hero::after{content:'';position:absolute;right:9%;top:18%;width:540px;height:520px;background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.02));border-radius:40px;filter:blur(.2px);opacity:.52}.kv-inner{position:relative;z-index:2;height:100%;display:flex;align-items:center;max-width:1440px;margin:0 auto;padding:0 74px}.kv-copy{margin-top:34px;color:#fff}.kv-copy h1{font-size:48px;line-height:1.52;letter-spacing:-2.8px;font-weight:900}.kv-control{display:flex;align-items:center;gap:22px;margin-top:62px}.kv-line{width:250px;height:2px;background:rgba(255,255,255,.82)}.kv-arr{display:flex;align-items:center;gap:18px;color:#fff;font-size:24px;font-weight:800}.scroll-down{position:absolute;left:50%;bottom:36px;z-index:3;color:#fff;font-size:32px;transform:translateX(-50%)}.section-inner{max-width:1240px;margin:0 auto;padding:120px 44px}.title-text{font-size:42px;font-weight:900;letter-spacing:-2px;margin-bottom:46px}.business-list,.news-items{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}.business-item,.news-item .item-inner{background:#fff;border:1px solid #eee;min-height:340px}.business-thumb,.news-thumb{height:210px;background:#ddd;position:relative;overflow:hidden}.business-thumb::before,.news-thumb::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#cfcfcf,#777)}.business-text,.desc-box{padding:26px}.business-text h4{font-size:30px;font-weight:900;margin-bottom:12px}.business-text p,.news-date{font-size:16px;color:#666;line-height:1.6}.button.line,.btn-more{display:inline-flex;margin-top:34px;border:1px solid #111;padding:14px 38px;color:#111;text-decoration:none;font-weight:800}.news-items{grid-template-columns:repeat(4,1fr)}.news-title{font-size:20px;line-height:1.45;letter-spacing:-.8px;min-height:88px}.box-item{display:inline-block;font-size:13px;font-weight:800;margin-bottom:12px;color:#111}.site-ft{background:#111;color:#aaa;text-align:left;margin:0;padding:46px 44px;font-size:13px}.site-ft-inner{max-width:1440px;margin:0 auto}.demo-content-note{position:absolute;left:-9999px}.sub-nav,.hero,.site-ct .mdesc,.brand-bl,.info-sec{display:none!important}@media(max-width:900px){.snav{display:none}.site-hd-in{padding:0 24px}.kv-inner{padding:0 30px}.kv-copy h1{font-size:34px}.business-list,.news-items{grid-template-columns:1fr}.main-hero{min-height:620px}.banner-in{padding:0 16px}.banner-label{display:none}.bb{font-size:12px;padding:0 10px}}
+
+
+
+/* === v28: NC Foundation tone refinement for demo controls and modals === */
+:root{
+  --br:#111111;--br-d:#000000;--br-dd:#000000;--br-l:#444444;--br-ll:#777777;
+  --cr:#f7f7f7;--cr-d:#eeeeee;--cr-dd:#dddddd;
+  --tx:#111111;--tx2:#555555;--tx3:#888888;
+  --sh:0 8px 30px rgba(0,0,0,.10);--sh-l:0 28px 90px rgba(0,0,0,.28);
+}
+.banner{height:58px;background:#fff;border-bottom:1px solid #e5e5e5;box-shadow:0 2px 18px rgba(0,0,0,.05)}
+.banner-in{max-width:none;width:100%;padding:0 52px;gap:12px;justify-content:flex-end}
+.banner-label{margin-right:auto;color:#111;font-size:14px;font-weight:700;letter-spacing:-.3px;padding-left:2px}
+.pulse{background:#111;width:6px;height:6px}
+.bb{height:38px;border-radius:0;padding:0 20px;font-size:14px;font-weight:800;letter-spacing:-.4px;border:1px solid #111;min-width:96px;justify-content:center;background:#fff;color:#111}
+.bb svg{width:15px;height:15px}
+.bb-w{background:#111;color:#fff;border-color:#111}.bb-w:hover{background:#333}
+.bb-o{background:#fff;color:#111;border-color:#111}.bb-o:hover{background:#111;color:#fff}
+.bb-user{height:38px;border-radius:0;background:#111;color:#fff;border-color:#111;padding:0 18px 0 8px;min-width:130px}
+.bb-user .av{background:#fff;color:#111;width:26px;height:26px;border-radius:50%;font-size:11px}
+.site-hd{margin-top:58px}.main-hero{height:calc(100vh - 58px);margin-top:58px}
+.ov{background:rgba(0,0,0,.56);backdrop-filter:blur(2px)}
+.modal{width:520px;border-radius:0;background:#fff;box-shadow:0 34px 100px rgba(0,0,0,.36);border:1px solid #111;max-height:calc(100vh - 72px)}
+.modal.wide{width:680px}
+.mh{height:68px;background:#fff;color:#111;border-bottom:2px solid #111;padding:0 28px}
+.mh-t{font-size:22px;font-weight:900;letter-spacing:-1px;color:#111}
+.mh-btn{width:36px;height:36px;border-radius:0;background:#fff;color:#111;border:1px solid #111}.mh-btn:hover{background:#111;color:#fff}.mh-btn svg{width:18px;height:18px}
+.steps{padding:18px 28px;background:#fff;border-bottom:1px solid #e5e5e5;gap:8px}
+.sd{width:32px;height:32px;background:#f2f2f2;color:#999;font-size:13px}.sd.on{background:#111;color:#fff}.sd.ok{background:#111;color:#fff}.sl{width:34px;background:#ddd}.sl.ok{background:#111}
+.mb{padding:30px 32px}.mf{padding:20px 32px;border-top:1px solid #e5e5e5;gap:10px;background:#fafafa}
+.btn{border-radius:0;padding:15px 18px;font-size:15px;font-weight:900;letter-spacing:-.4px}.btn-p{background:#111;color:#fff}.btn-p:hover{background:#333}.btn-s{background:#fff;color:#111;border:1px solid #111}.btn-s:hover{background:#111;color:#fff}
+.st{font-size:18px;font-weight:900;color:#111;letter-spacing:-.7px;margin-bottom:8px}.sdesc{font-size:13px;color:#777;line-height:1.7;margin-bottom:20px}.sinfo{background:#f7f7f7;border-left:4px solid #111;color:#333;font-size:14px;line-height:1.7;padding:16px 18px;border-radius:0}
+.fg{margin-bottom:18px}.fl{font-size:13px;font-weight:800;color:#111;margin-bottom:8px}.fi{height:48px;border-radius:0;border:1px solid #d5d5d5;font-size:15px;padding:0 15px}.fi:focus{border-color:#111;box-shadow:0 0 0 2px rgba(0,0,0,.06)}
+.ri,.sc2,.rt,.ab,.pt{border-radius:0}.ri{padding:16px;border-color:#ddd}.ri.sel{border-color:#111;background:#fafafa}.rc{border-color:#bbb}.ri.sel .rc{border-color:#111}.ri.sel .rc::after{background:#111}.rl{font-size:15px;font-weight:800}.rd{font-size:12px;line-height:1.5}.ci{padding:9px 0}.cb{width:19px;height:19px;border-radius:0}.ci.ck .cb{background:#111;border-color:#111}.cl{font-size:14px}.sc2{padding:16px;border-color:#ddd}.sc2.on{border-color:#111;background:#fafafa}.sc2-i{border-radius:0;background:#f2f2f2}.sc2.on .sc2-i{background:#111;color:#fff}.sc2-n{font-size:15px}.sc2-d{font-size:12px}.sc2-ck{border-radius:0}.sc2.on .sc2-ck{background:#111;border-color:#111}
+.ag{gap:9px}.ab{height:46px;font-size:14px;border-color:#ddd}.ab.on{background:#111;border-color:#111;color:#fff}.pt{font-size:13px;border-color:#ddd;padding:8px 14px}.pt.on{background:#111;border-color:#111;color:#fff}.vf{background:#f2f2f2;color:#111;border-radius:0;font-size:12px;padding:5px 10px}.sum{border-radius:0;border-color:#ddd}.sum-h{background:#f7f7f7;color:#111;font-size:15px;padding:16px 18px}.sum-b{padding:18px}.sum-r{font-size:14px;padding:10px 0}.sum-t{background:#111;color:#fff;font-size:16px;padding:16px 18px}.pay-tabs{border-radius:0;background:#eee;padding:4px}.ptab{border-radius:0;font-size:14px;padding:11px}.ptab.on{color:#111}.succ-i{background:#f4f4f4;border-radius:50%;color:#111}.succ-t{font-size:22px;font-weight:900}.succ-d{font-size:15px;color:#555}.mp-tabs{margin-bottom:22px}.mp-tab{font-size:14px;padding:14px 8px}.mp-tab.on{color:#111;border-bottom-color:#111}.mp-card,.mp-svc,.mp-don{border-radius:0;background:#f7f7f7}.mp-card{padding:18px}.mp-card-t{font-size:15px;color:#111}.mp-row,.mp-consent{font-size:14px;padding:9px 0}.mp-svc-n{font-size:15px}.mp-svc-s,.mp-badge{border-radius:0;font-size:12px}.mp-don-l{font-size:14px}.mp-don-a{font-size:16px;color:#111}.toast-m{border-radius:0;background:#111;font-size:14px;padding:14px 26px}
+@media(max-width:900px){.banner{height:auto;min-height:58px}.banner-in{padding:10px 18px;flex-wrap:wrap;justify-content:flex-end}.banner-label{width:100%;margin:0 0 4px 0}.bb{height:36px;min-width:auto;padding:0 12px}.site-hd{margin-top:90px}.main-hero{margin-top:90px;height:calc(100vh - 90px)}}
+</style>
+</head>
+<body>
+
+<!-- ══ BANNER ══ -->
+<div class="banner" id="banner"></div>
+
+
+<!-- ══ SITE: NC Foundation main style with demo bar preserved ══ -->
+<header class="site-hd">
+  <div class="site-hd-in">
+    <div class="logo"><div class="logo-m">NC</div>NC문화재단</div>
+    <nav class="snav"><a href="#">재단소개</a><a href="#">재단사업</a><a href="#">재단소식</a><a href="#">제안 및 문의</a></nav>
+  </div>
+</header>
+<section class="main-hero">
+  <div class="kv-inner">
+    <div class="kv-copy">
+      <h1>우리 사회의 질적 도약을 위한<br>창의적이고 포용적인<br>문화 생태계를 조성합니다</h1>
+      <div class="kv-control"><div class="kv-line"></div><div class="kv-arr"><span>‹</span><span style="font-size:18px">Ⅱ</span><span>›</span></div></div>
+    </div>
+  </div>
+  <div class="scroll-down">↓</div>
+</section>
+<section class="section-inner">
+  <h3 class="title-text">사업소개</h3>
+  <div class="business-list">
+    <div class="business-item"><div class="business-thumb"></div><div class="business-text"><h4>프로젝토리</h4><p>누구나 자신의 창의성을 발현할 수 있는 세상</p><a href="#" class="button line">자세히보기</a></div></div>
+    <div class="business-item"><div class="business-thumb"></div><div class="business-text"><h4>AAC</h4><p>기술이 여는 자유롭고 평등한 소통</p><a href="#" class="button line">자세히보기</a></div></div>
+    <div class="business-item"><div class="business-thumb"></div><div class="business-text"><h4>AI 윤리</h4><p>인간과 AI의 균형있는 공존</p><a href="#" class="button line">자세히보기</a></div></div>
+  </div>
+</section>
+<section class="section-inner">
+  <h3 class="title-text">재단소식</h3>
+  <div class="news-items">
+    <div class="news-item"><div class="item-inner"><div class="news-thumb"></div><div class="desc-box"><div class="box-item">공지사항</div><h4 class="news-title">2026 STAGE 100 9월 연극제 최종 선정팀 발표</h4><div class="news-date">2026-05-26</div></div></div></div>
+    <div class="news-item"><div class="item-inner"><div class="news-thumb"></div><div class="desc-box"><div class="box-item">공지사항</div><h4 class="news-title">2026 STAGE 100 9월 연극제 서류심사 선정팀 발표</h4><div class="news-date">2026-05-18</div></div></div></div>
+    <div class="news-item"><div class="item-inner"><div class="news-thumb"></div><div class="desc-box"><div class="box-item">공지사항</div><h4 class="news-title">2026 STAGE 100 6월 공연 TICKET OPEN</h4><div class="news-date">2026-05-15</div></div></div></div>
+    <div class="news-item"><div class="item-inner"><div class="news-thumb"></div><div class="desc-box"><div class="box-item">공지사항</div><h4 class="news-title">프로젝토리 오픈 워크숍 참가 신청 모집</h4><div class="news-date">2026-05-06</div></div></div></div>
+  </div>
+  <a href="#" class="button line btn-more">더 보기</a>
+</section>
+<footer class="site-ft"><div class="site-ft-inner">재단법인 엔씨문화재단 ㅣ 사업자 등록번호 120-82-10773 ㅣ 대표 박명진<br>Copyright ⓒ NC Cultural Foundation. All Rights Reserved.</div></footer>
+
+
+<div class="ov" id="ov" onclick="if(event.target===this)closeM()"><div class="modal" id="modal"></div></div>
+<div class="toast-w"><div class="toast-m" id="toastEl"></div></div>
+
+<script>
+// ═══ STATE ═══
+let loggedIn = false;
+const USER = {name:'김상화',email:'sanghwa@ncfoundation.or.kr',phone:'010-0000-0000',birth:'1990-05-15',auth:'NICE',
+  svcs:{home:true,fair:true,proj:false,aac:true},
+  donations:[{date:'2026-05',type:'정기기부',target:'나의AAC',amount:30000},{date:'2026-04',type:'정기기부',target:'나의AAC',amount:30000},{date:'2026-03',type:'일시기부',target:'프로젝토리',amount:50000}],
+  consents:{terms:true,privacy:true,marketing:true,thirdParty:false,location:false}
+};
+let MS={mode:null,step:1,data:{},mpTab:'info'};
+
+// ═══ BANNER RENDER ═══
+function renderBanner(){
+  const b=document.getElementById('banner');
+  if(!loggedIn){
+    b.innerHTML=`<div class="banner-in">
+      <div class="banner-label"><div class="pulse"></div>통합회원 서비스 데모</div>
+      <button class="bb bb-w" onclick="openM('signup')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg>회원가입</button>
+      <button class="bb bb-w" onclick="openM('login')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>로그인</button>
+    </div>`;
+  } else {
+    b.innerHTML=`<div class="banner-in">
+      <div class="banner-label"><div class="pulse"></div>통합회원 서비스 데모</div>
+      <button class="bb bb-o" onclick="openM('donate')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>기부신청</button>
+      <button class="bb bb-o" onclick="openM('receipt')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>영수증</button>
+      <button class="bb bb-o" onclick="openM('mypage')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>마이페이지</button>
+      <button class="bb bb-user" onclick="doLogout()"><div class="av">${USER.name[0]}</div>${USER.name}님 ▾</button>
+    </div>`;
+  }
+}
+
+// ═══ MODAL ═══
+function openM(mode){MS={mode,step:1,data:{},mpTab:'info'};renderM();document.getElementById('ov').classList.add('open');document.body.style.overflow='hidden';
+  if(mode==='mypage')document.getElementById('modal').classList.add('wide');
+  else document.getElementById('modal').classList.remove('wide');
+}
+function closeM(){document.getElementById('ov').classList.remove('open');document.body.style.overflow=''}
+function renderM(){
+  const m=document.getElementById('modal');
+  if(MS.mode==='login')renderLogin(m);
+  else if(MS.mode==='signup')renderSignup(m);
+  else if(MS.mode==='donate')renderDonate(m);
+  else if(MS.mode==='receipt')renderReceipt(m);
+  else if(MS.mode==='mypage')renderMypage(m);
+}
+
+// ═══ LOGIN ═══
+function renderLogin(m){
+  m.innerHTML=`${mHead('로그인',false)}
+  <div class="mb"><div class="step-c">
+    <div style="text-align:center;margin-bottom:20px">
+      <div style="width:56px;height:56px;border-radius:50%;background:var(--cr);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:24px">🔐</div>
+      <div style="font-size:14px;font-weight:700">통합회원 로그인</div>
+      <div style="font-size:11px;color:var(--tx3);margin-top:3px">하나의 계정으로 모든 서비스를 이용하세요</div>
+    </div>
+    <div class="fg"><label class="fl">이메일<span class="rq">*</span></label><input class="fi" id="loginEmail" placeholder="이메일 주소" value="sanghwa@ncfoundation.or.kr"></div>
+    <div class="fg"><label class="fl">비밀번호<span class="rq">*</span></label><input class="fi" type="password" id="loginPw" placeholder="비밀번호 입력" value="••••••••"></div>
+    <div class="cg" style="margin-bottom:14px">
+      <div class="ci ck"><div class="cb"></div><span class="cl">로그인 상태 유지</span></div>
+    </div>
+    <div style="display:flex;justify-content:center;gap:16px;margin-top:16px">
+      <a href="#" style="font-size:11px;color:var(--tx3);text-decoration:none" onclick="event.preventDefault();toast('아이디 찾기 기능 준비 중')">아이디 찾기</a>
+      <span style="color:var(--cr-dd)">|</span>
+      <a href="#" style="font-size:11px;color:var(--tx3);text-decoration:none" onclick="event.preventDefault();toast('비밀번호 찾기 기능 준비 중')">비밀번호 찾기</a>
+      <span style="color:var(--cr-dd)">|</span>
+      <a href="#" style="font-size:11px;color:var(--br);text-decoration:none;font-weight:600" onclick="event.preventDefault();closeM();setTimeout(()=>openM('signup'),300)">회원가입</a>
+    </div>
+  </div></div>
+  <div class="mf"><button class="btn btn-p" onclick="doLogin()">로그인</button></div>`;
+}
+
+function doLogin(){
+  loggedIn=true;
+  closeM();
+  renderBanner();
+  toast(USER.name+'님 환영합니다!');
+}
+function doLogout(){
+  loggedIn=false;
+  renderBanner();
+  toast('로그아웃 되었습니다');
+}
+
+// ═══ MYPAGE ═══
+function renderMypage(m){
+  const tab=MS.mpTab;
+  let body='';
+
+  // Profile header
+  const profHtml=`<div style="display:flex;align-items:center;gap:14px;margin-bottom:16px">
+    <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--br),var(--br-l));display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:var(--wh);flex-shrink:0">${USER.name[0]}</div>
+    <div style="flex:1">
+      <div style="font-size:16px;font-weight:700;display:flex;align-items:center;gap:6px">${USER.name} <span class="vf">✓ 인증완료</span></div>
+      <div style="font-size:11px;color:var(--tx2);margin-top:2px">${USER.email}</div>
+      <div style="font-size:10px;color:var(--tx3);margin-top:1px;font-family:monospace">ID: USR-20260412-0847</div>
+    </div>
+    <button class="bb bb-o" style="border-color:var(--cr-dd);color:var(--tx2);font-size:10px;padding:5px 10px" onclick="toast('프로필 편집 기능 준비 중')">편집</button>
+  </div>`;
+
+  const tabsHtml=`<div class="mp-tabs">
+    <div class="mp-tab ${tab==='info'?'on':''}" onclick="MS.mpTab='info';renderM()">회원정보</div>
+    <div class="mp-tab ${tab==='svc'?'on':''}" onclick="MS.mpTab='svc';renderM()">연동서비스</div>
+    <div class="mp-tab ${tab==='don'?'on':''}" onclick="MS.mpTab='don';renderM()">기부이력</div>
+    <div class="mp-tab ${tab==='consent'?'on':''}" onclick="MS.mpTab='consent';renderM()">동의관리</div>
+  </div>`;
+
+  if(tab==='info'){
+    body=`${profHtml}${tabsHtml}<div class="step-c">
+      <div class="mp-card"><div class="mp-card-t">기본정보</div>
+        <div class="mp-row"><span class="k">이름</span><span class="v">${USER.name}</span></div>
+        <div class="mp-row"><span class="k">이메일</span><span class="v">${USER.email}</span></div>
+        <div class="mp-row"><span class="k">연락처</span><span class="v">${USER.phone}</span></div>
+        <div class="mp-row"><span class="k">생년월일</span><span class="v">${USER.birth}</span></div>
+        <div class="mp-row"><span class="k">본인인증</span><span class="v"><span class="vf">✓ ${USER.auth} 인증</span></span></div>
+      </div>
+      <div class="mp-card"><div class="mp-card-t">마케팅 태그</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px">
+          ${['AI 관심','기부 가능성 높음','뉴스레터 반응 높음','AAC 관심'].map(t=>`<span style="display:inline-flex;padding:3px 9px;border-radius:12px;font-size:9px;font-weight:500;background:rgba(107,76,59,.06);color:var(--br)">${t}</span>`).join('')}
+        </div>
+      </div>
+      <div style="display:flex;gap:7px;margin-top:8px">
+        <button class="btn btn-s" style="font-size:11px" onclick="toast('비밀번호 변경 기능 준비 중')">비밀번호 변경</button>
+        <button class="btn btn-s" style="font-size:11px;color:var(--er)" onclick="toast('회원 탈퇴 기능 준비 중')">회원탈퇴</button>
+      </div>
+    </div>`;
+  } else if(tab==='svc'){
+    const svcs=[
+      {k:'home',name:'대표 홈페이지',icon:'🌐',desc:'재단 소식, 멤버십, 기부'},
+      {k:'fair',name:'FAIR AI',icon:'🤖',desc:'AI 교육, 캠페인 참여'},
+      {k:'proj',name:'프로젝토리',icon:'🔬',desc:'프로젝트 참여, 멤버십'},
+      {k:'aac',name:'나의AAC',icon:'📱',desc:'AAC 소통 서비스'},
+    ];
+    body=`${profHtml}${tabsHtml}<div class="step-c">
+      <div class="sdesc">연동된 서비스에서 별도 가입 없이 로그인하여 이용할 수 있습니다.</div>
+      ${svcs.map(s=>{
+        const on=USER.svcs[s.k];
+        return `<div class="mp-svc">
+          <div class="mp-svc-i" style="background:${on?'var(--br)':'var(--cr)'};color:${on?'var(--wh)':'var(--tx3)'}">${s.icon}</div>
+          <div style="flex:1"><div class="mp-svc-n">${s.name}</div><div style="font-size:9px;color:var(--tx3)">${s.desc}</div></div>
+          <span class="mp-svc-s ${on?'on':'off'}">${on?'✓ 연동':'미연동'}</span>
+          ${!on?`<button style="font-size:9px;padding:4px 8px;border-radius:4px;border:1px solid var(--br);background:none;color:var(--br);cursor:pointer;font-family:inherit;font-weight:600" onclick="USER.svcs['${s.k}']=true;renderM();toast('${s.name} 연동 완료')">연동하기</button>`:''}
+        </div>`;
+      }).join('')}
+    </div>`;
+  } else if(tab==='don'){
+    const total=USER.donations.reduce((a,d)=>a+d.amount,0);
+    body=`${profHtml}${tabsHtml}<div class="step-c">
+      <div class="mp-card"><div class="mp-card-t">기부 요약</div>
+        <div class="mp-row"><span class="k">총 기부 횟수</span><span class="v">${USER.donations.length}회</span></div>
+        <div class="mp-row"><span class="k">총 기부 금액</span><span class="v" style="color:var(--br);font-weight:700">${total.toLocaleString()}원</span></div>
+        <div class="mp-row"><span class="k">기부 방식</span><span class="v">정기기부 진행 중</span></div>
+      </div>
+      <div style="font-size:11px;font-weight:700;color:var(--br);margin-bottom:8px">기부 내역</div>
+      ${USER.donations.map(d=>`<div class="mp-don">
+        <div><div class="mp-don-l">${d.type} · ${d.target}</div><div class="mp-don-d">${d.date}</div></div>
+        <div class="mp-don-a">${d.amount.toLocaleString()}원</div>
+      </div>`).join('')}
+      <div style="display:flex;gap:7px;margin-top:12px">
+        <button class="btn btn-p" style="font-size:11px" onclick="closeM();setTimeout(()=>openM('donate'),300)">추가 기부하기</button>
+        <button class="btn btn-s" style="font-size:11px" onclick="closeM();setTimeout(()=>openM('receipt'),300)">영수증 신청</button>
+      </div>
+    </div>`;
+  } else if(tab==='consent'){
+    const items=[
+      {k:'terms',l:'서비스 이용약관',req:true},
+      {k:'privacy',l:'개인정보 수집·이용',req:true},
+      {k:'marketing',l:'마케팅 정보 수신',req:false},
+      {k:'thirdParty',l:'제3자 정보 제공',req:false},
+      {k:'location',l:'위치정보 수집',req:false},
+    ];
+    body=`${profHtml}${tabsHtml}<div class="step-c">
+      <div class="sdesc">동의 현황을 확인하고, 선택 동의 항목을 변경할 수 있습니다.</div>
+      <div class="mp-card">
+        ${items.map(c=>{
+          const v=USER.consents[c.k];
+          return `<div class="mp-consent">
+            <span>${c.l} ${c.req?'<span style="color:var(--er);font-size:9px">(필수)</span>':'<span style="color:var(--tx3);font-size:9px">(선택)</span>'}</span>
+            ${c.req ? `<span class="mp-badge y">동의</span>` :
+              `<span class="mp-badge ${v?'y':'n'}" style="cursor:pointer" onclick="USER.consents['${c.k}']=!USER.consents['${c.k}'];renderM();toast('동의 상태가 변경되었습니다')">${v?'동의':'미동의'} ✎</span>`
+            }
+          </div>`;
+        }).join('')}
+      </div>
+      <div class="sinfo" style="margin-top:8px">선택 동의 항목은 클릭하여 변경할 수 있습니다. 필수 동의 항목은 서비스 이용을 위해 철회가 불가합니다.</div>
+    </div>`;
+  }
+
+  m.innerHTML=`${mHead('마이페이지',false)}<div class="mb">${body}</div>`;
+}
+
+// ═══ SIGNUP ═══
+function renderSignup(m){
+  const s=MS.step;
+  let body='';
+  if(s===1){
+    body=`<div class="step-c">
+      <div class="sinfo">하나의 계정으로 이용 가능한 서비스<br>대표 홈페이지 · FAIR AI · 프로젝토리 · 나의AAC</div>
+      <div class="st">본인확인</div><div class="sdesc">가입을 위해 본인확인 절차를 진행합니다.</div>
+      <div class="rg">
+        <div class="ri ${MS.data.at==='phone'?'sel':''}" onclick="MS.data.at='phone';renderM()"><div class="rc"></div><div><div class="rl">📱 휴대폰 본인인증</div><div class="rd">NICE 인증을 통한 본인확인</div></div></div>
+        <div class="ri ${MS.data.at==='minor'?'sel':''}" onclick="MS.data.at='minor';renderM()"><div class="rc"></div><div><div class="rl">👶 14세 미만 가입</div><div class="rd">법정대리인 동의가 필요합니다</div></div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="st">약관동의</div>
+      <div class="cg">
+        <div class="ci ${MS.data.aa?'ck':''}" onclick="tgAll()"><div class="cb"></div><span class="cl b">필수 약관 전체 동의</span></div>
+        <div style="padding-left:23px">
+          <div class="ci ${MS.data.a1?'ck':''}" onclick="MS.data.a1=!MS.data.a1;syncA();renderM()"><div class="cb"></div><span class="cl">서비스 이용약관 <span style="color:var(--er)">(필수)</span></span></div>
+          <div class="ci ${MS.data.a2?'ck':''}" onclick="MS.data.a2=!MS.data.a2;syncA();renderM()"><div class="cb"></div><span class="cl">개인정보 수집·이용 <span style="color:var(--er)">(필수)</span></span></div>
+          <div class="ci ${MS.data.a3?'ck':''}" onclick="MS.data.a3=!MS.data.a3;renderM()"><div class="cb"></div><span class="cl">마케팅 정보 수신 <span style="color:var(--tx3)">(선택)</span></span></div>
+        </div>
+      </div>
+    </div>`;
+  } else if(s===2){
+    body=`<div class="step-c">
+      <div class="st">계정정보</div><div class="sdesc">통합 회원 계정 정보를 입력해 주세요.</div>
+      <div class="fg"><label class="fl">아이디<span class="rq">*</span></label><input class="fi" placeholder="이메일 주소" value="${MS.data.em||''}" oninput="MS.data.em=this.value"></div>
+      <div class="fg"><label class="fl">비밀번호<span class="rq">*</span></label><input class="fi" type="password" placeholder="비밀번호 (8자 이상)"></div>
+      <div class="fg"><label class="fl">비밀번호 확인<span class="rq">*</span></label><input class="fi" type="password" placeholder="비밀번호 재입력"></div>
+      <div class="divider"></div>
+      <div class="st">인증된 기본정보</div>
+      <div style="margin-bottom:12px"><span class="vf">✓ NICE 인증 완료</span></div>
+      <div class="fi-row">
+        <div class="fg"><label class="fl">이름</label><input class="fi" value="김상화" disabled></div>
+        <div class="fg"><label class="fl">연락처</label><input class="fi" value="010-0000-0000" disabled></div>
+      </div>
+      <div class="divider"></div>
+      <div class="st">관심 서비스</div><div class="sdesc">이용하고 싶은 서비스를 선택하세요.</div>
+      <div class="svc-chips">
+        ${[['home','대표 홈페이지','재단 소식, 멤버십, 기부','🌐'],['aac','나의AAC','AAC로 더 넓은 소통','📱'],['proj','프로젝토리','프로젝트 참여·멤버십','🔬'],['fair','FAIR AI','AI 교육·캠페인','🤖']].map(([k,n,d,i])=>{
+          const on=(MS.data.sv||{})[k];
+          return `<div class="sc2 ${on?'on':''}" onclick="if(!MS.data.sv)MS.data.sv={};MS.data.sv['${k}']=!MS.data.sv['${k}'];renderM()"><div class="sc2-l"><div class="sc2-i">${i}</div><div><div class="sc2-n">${n}</div><div class="sc2-d">${d}</div></div></div><div class="sc2-ck">${on?'✓':''}</div></div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  } else {
+    body=`<div class="step-c"><div class="succ"><div class="succ-i">🎉</div><div class="succ-t">가입 완료!</div><div class="succ-d">NC문화재단 통합회원이 되신 것을 환영합니다.</div></div>
+      <div class="sum"><div class="sum-h">가입 정보</div><div class="sum-b">
+        <div class="sum-r"><span class="lb">아이디</span><span class="vl">${MS.data.em||'sanghwa@ncfoundation.or.kr'}</span></div>
+        <div class="sum-r"><span class="lb">이름</span><span class="vl">김상화</span></div>
+        <div class="sum-r"><span class="lb">인증</span><span class="vl"><span class="vf">✓ 완료</span></span></div>
+        <div class="sum-r"><span class="lb">관심 서비스</span><span class="vl">${Object.entries(MS.data.sv||{}).filter(([,v])=>v).map(([k])=>({home:'대표홈',aac:'나의AAC',proj:'프로젝토리',fair:'FAIR AI'}[k])).join(', ')||'미선택'}</span></div>
+      </div></div>
+    </div>`;
+  }
+  const ok=s===1?(MS.data.at&&MS.data.a1&&MS.data.a2):true;
+  m.innerHTML=`${mHead('통합회원 가입',s>1&&s<3)}${stepsHtml(3,s)}<div class="mb">${body}</div>
+    <div class="mf">${s<3?`${s>1?'<button class="btn btn-s" onclick="MS.step--;renderM()">이전</button>':''}
+      <button class="btn btn-p ${ok?'':'btn-dis'}" onclick="MS.step++;renderM()">${s===1?'본인인증 후 다음':'가입 완료'}</button>`
+      :`<button class="btn btn-p" onclick="loggedIn=true;renderBanner();closeM();toast('가입 완료! 자동 로그인되었습니다')">로그인하고 시작하기</button>`}</div>`;
+}
+
+// ═══ DONATE ═══
+function renderDonate(m){
+  const s=MS.step;let body='';
+  if(s===1){
+    body=`<div class="step-c">
+      <div class="st">1. 기부방법 선택</div>
+      <label class="fl">기부방식</label>
+      <div style="display:flex;gap:7px;margin-bottom:14px">
+        <button class="ab ${MS.data.dt==='regular'?'on':''}" style="flex:1" onclick="MS.data.dt='regular';renderM()">정기기부</button>
+        <button class="ab ${MS.data.dt==='once'?'on':''}" style="flex:1" onclick="MS.data.dt='once';renderM()">일시기부</button>
+      </div>
+      <label class="fl">사업분야</label>
+      <div class="ptags">${['나의AAC','프로젝토리','문화예술','교육','전체 사업'].map(t=>`<span class="pt ${(MS.data.pp||[]).includes(t)?'on':''}" onclick="tgP('${t}')">${t}</span>`).join('')}</div>
+      <label class="fl">기부금액</label>
+      <div class="ag">${[10000,20000,30000,50000,100000].map(a=>`<button class="ab ${MS.data.am===a?'on':''}" onclick="MS.data.am=${a};renderM()">${(a/10000)}만원</button>`).join('')}<button class="ab ${MS.data.am==='c'?'on':''}" onclick="MS.data.am='c';renderM()">직접입력</button></div>
+      ${MS.data.am==='c'?'<div class="fg"><input class="fi" placeholder="금액 입력 (원)" oninput="MS.data.ca=this.value"></div>':''}
+      <div class="sinfo">✻ 5,000원 이상 기부 시 세금감면 혜택이 적용됩니다.</div>
+    </div>`;
+  } else if(s===2){
+    body=`<div class="step-c">
+      <div class="st">2. 결제정보 입력</div>
+      <div class="fi-row"><div class="fg"><label class="fl">이름</label><input class="fi" value="${USER.name}" disabled></div><div class="fg"><label class="fl">연락처</label><input class="fi" value="${USER.phone}" disabled></div></div>
+      <div class="fg"><label class="fl">이메일</label><input class="fi" value="${USER.email}" disabled></div>
+      <div class="divider"></div>
+      <label class="fl">결제수단</label>
+      <div class="pay-tabs"><button class="ptab ${!MS.data.pm||MS.data.pm==='card'?'on':''}" onclick="MS.data.pm='card';renderM()">신용카드</button><button class="ptab ${MS.data.pm==='bank'?'on':''}" onclick="MS.data.pm='bank';renderM()">계좌이체</button><button class="ptab ${MS.data.pm==='hp'?'on':''}" onclick="MS.data.pm='hp';renderM()">휴대폰</button></div>
+      ${(!MS.data.pm||MS.data.pm==='card')?`<div class="fg"><label class="fl">카드사</label><select class="fi"><option>카드사 선택</option><option>삼성카드</option><option>현대카드</option><option>KB국민</option></select></div><div class="fg"><label class="fl">카드번호</label><input class="fi" placeholder="카드번호 입력"></div><div class="fi-row"><div class="fg"><label class="fl">유효기간</label><input class="fi" placeholder="MM / YY"></div><div class="fg"><label class="fl">CVC</label><input class="fi" placeholder="3자리"></div></div>`:MS.data.pm==='bank'?`<div class="fg"><label class="fl">은행</label><select class="fi"><option>은행 선택</option><option>KB국민</option><option>신한</option><option>하나</option></select></div><div class="fg"><label class="fl">계좌번호</label><input class="fi" placeholder="계좌번호"></div>`:`<div class="fg"><label class="fl">통신사</label><select class="fi"><option>선택</option><option>SKT</option><option>KT</option><option>LG U+</option></select></div><div class="fg"><label class="fl">번호</label><input class="fi" placeholder="010-0000-0000"></div>`}
+      <div class="cg" style="margin-top:8px"><div class="ci ${MS.data.pa?'ck':''}" onclick="MS.data.pa=!MS.data.pa;renderM()"><div class="cb"></div><span class="cl">결제정보 수집·이용 동의 <span style="color:var(--er)">(필수)</span></span></div></div>
+    </div>`;
+  } else if(s===3){
+    const amt=MS.data.am==='c'?(MS.data.ca||'10,000'):(MS.data.am||10000).toLocaleString();
+    body=`<div class="step-c">
+      <div class="st">3. 기부 내용 확인</div>
+      <div class="sum"><div class="sum-h">기부 내역</div><div class="sum-b">
+        <div class="sum-r"><span class="lb">기부방식</span><span class="vl">${MS.data.dt==='regular'?'정기기부':'일시기부'}</span></div>
+        <div class="sum-r"><span class="lb">사업분야</span><span class="vl">${(MS.data.pp||['나의AAC']).join(', ')}</span></div>
+        <div class="sum-r"><span class="lb">결제수단</span><span class="vl">${{card:'신용카드',bank:'계좌이체',hp:'휴대폰'}[MS.data.pm||'card']}</span></div>
+      </div><div class="sum-t"><span>총 기부금액</span><span>${amt}원</span></div></div>
+      <div class="cg"><div class="ci ${MS.data.fa?'ck':''}" onclick="MS.data.fa=!MS.data.fa;renderM()"><div class="cb"></div><span class="cl b">위 내용을 확인하였으며, 기부에 동의합니다.</span></div></div>
+    </div>`;
+  } else {
+    const amt=MS.data.am==='c'?(MS.data.ca||'10,000'):(MS.data.am||10000).toLocaleString();
+    body=`<div class="step-c"><div class="succ"><div class="succ-i">❤️</div><div class="succ-t">기부 신청 완료</div><div class="succ-d">소중한 나눔에 감사드립니다.<br><strong>${amt}원</strong>이 기부됩니다.</div></div></div>`;
+  }
+  const ok=s===1?(MS.data.dt&&MS.data.am):s===2?MS.data.pa:s===3?MS.data.fa:false;
+  m.innerHTML=`${mHead('기부신청',s>1&&s<=3)}${s<=3?stepsHtml(3,Math.min(s,3)):''}<div class="mb">${body}</div>
+    <div class="mf">${s<=3?`${s>1?'<button class="btn btn-s" onclick="MS.step--;renderM()">이전</button>':''}
+      <button class="btn btn-p ${ok?'':'btn-dis'}" onclick="MS.step++;renderM()">${s===3?'기부하기':'다음'}</button>`
+      :`<button class="btn btn-p" onclick="closeM();toast('기부 신청 완료! 감사합니다')">확인</button>`}</div>`;
+}
+
+// ═══ RECEIPT ═══
+function renderReceipt(m){
+  const s=MS.step;let body='';
+  if(s===1){
+    body=`<div class="step-c">
+      <div class="st">기부금영수증 발급</div><div class="sdesc">발급에 필요한 정보를 확인해주세요.</div>
+      <div class="fi-row"><div class="fg"><label class="fl">이름</label><input class="fi" value="${USER.name}" disabled></div><div class="fg"><label class="fl">연락처</label><input class="fi" value="${USER.phone}" disabled></div></div>
+      <div class="fg"><label class="fl">이메일</label><input class="fi" value="${USER.email}" disabled></div>
+      <div class="divider"></div>
+      <div class="st">발급 정보</div>
+      <label class="fl">발급구분</label>
+      <div class="rtypes">
+        <div class="rt ${!MS.data.rtp||MS.data.rtp==='p'?'on':''}" onclick="MS.data.rtp='p';renderM()"><div class="rt-i">👤</div><div class="rt-l">개인</div></div>
+        <div class="rt ${MS.data.rtp==='c'?'on':''}" onclick="MS.data.rtp='c';renderM()"><div class="rt-i">🏢</div><div class="rt-l">사업자</div></div>
+      </div>
+      ${(!MS.data.rtp||MS.data.rtp==='p')?`<div class="fg"><label class="fl">주민등록번호<span class="rq">*</span></label><input class="fi" placeholder="주민등록번호 13자리"></div>`:`<div class="fg"><label class="fl">사업자등록번호<span class="rq">*</span></label><input class="fi" placeholder="사업자등록번호"></div><div class="fg"><label class="fl">상호명<span class="rq">*</span></label><input class="fi" placeholder="상호명"></div>`}
+      <div class="divider"></div>
+      <div class="sum"><div class="sum-b">
+        <div class="sum-r"><span class="lb">정기기부 (2026년)</span><span class="vl">60,000원</span></div>
+        <div class="sum-r"><span class="lb">일시기부 (2026년)</span><span class="vl">50,000원</span></div>
+      </div><div class="sum-t"><span>총 기부 금액</span><span>110,000원</span></div></div>
+      <div class="cg"><div class="ci ${MS.data.ra?'ck':''}" onclick="MS.data.ra=!MS.data.ra;renderM()"><div class="cb"></div><span class="cl">개인정보 수집·이용 동의 <span style="color:var(--er)">(필수)</span></span></div></div>
+    </div>`;
+  } else {
+    body=`<div class="step-c"><div class="succ"><div class="succ-i">📄</div><div class="succ-t">영수증 신청 완료</div><div class="succ-d">이메일로 발송됩니다.<br>국세청 연말정산 간소화 서비스에도 자동 반영됩니다.</div></div>
+      <div class="sum"><div class="sum-h">발급 정보</div><div class="sum-b">
+        <div class="sum-r"><span class="lb">신청자</span><span class="vl">${USER.name}</span></div>
+        <div class="sum-r"><span class="lb">발급금액</span><span class="vl" style="color:var(--br);font-weight:700">110,000원</span></div>
+        <div class="sum-r"><span class="lb">발송</span><span class="vl">${USER.email}</span></div>
+      </div></div>
+    </div>`;
+  }
+  m.innerHTML=`${mHead('기부금영수증',false)}<div class="mb">${body}</div>
+    <div class="mf">${s===1?`<button class="btn btn-p ${MS.data.ra?'':'btn-dis'}" onclick="MS.step=2;renderM()">영수증 신청하기</button>`:`<button class="btn btn-p" onclick="closeM();toast('영수증 발급 신청 완료')">확인</button>`}</div>`;
+}
+
+// ═══ HELPERS ═══
+function mHead(t,back){
+  return `<div class="mh">${back?`<button class="mh-btn" onclick="MS.step--;renderM()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>`:'<div style="width:30px"></div>'}
+    <div class="mh-t">${t}</div>
+    <button class="mh-btn" onclick="closeM()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>`;
+}
+function stepsHtml(n,c){let h='<div class="steps">';for(let i=1;i<=n;i++){h+=`<div class="sd ${i<c?'ok':i===c?'on':''}">${i<c?'✓':i}</div>`;if(i<n)h+=`<div class="sl ${i<c?'ok':''}"></div>`;}return h+'</div>';}
+function tgAll(){const v=!MS.data.aa;MS.data.aa=v;MS.data.a1=v;MS.data.a2=v;MS.data.a3=v;renderM();}
+function syncA(){MS.data.aa=MS.data.a1&&MS.data.a2&&MS.data.a3;}
+function tgP(t){if(!MS.data.pp)MS.data.pp=[];const i=MS.data.pp.indexOf(t);if(i>=0)MS.data.pp.splice(i,1);else MS.data.pp.push(t);renderM();}
+function toast(msg){const t=document.getElementById('toastEl');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800);}
+
+// ═══ INIT ═══
+renderBanner();
+</script>
+</body>
+</html>
