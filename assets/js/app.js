@@ -1029,7 +1029,6 @@ function scrollToTop(){
 // ═══ INIT ═══
 renderBanner();
 
-
 function updateSignupConsentFooter(){
   const modal=document.getElementById('modal');
   if(!modal || !MS || MS.mode!=='signup' || MS.step!==1) return;
@@ -1204,6 +1203,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeBenefit
 })();
 
 ;
+
 (function(){
   window.toggleSupportPop=function(ev){
     if(ev) ev.stopPropagation();
@@ -1227,15 +1227,15 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeBenefit
 })();
 
 ;
+
 (function(){
   function closeSupportPop(){ const pop=document.getElementById('supportPop'); if(pop) pop.classList.remove('open'); }
   function updateFloatLabel(text){
     const label=document.getElementById('floatLabelText');
     if(!label) return;
-    const nextLabel=text || '멤버십 소개';
-    label.textContent=nextLabel;
+    label.textContent=text || '멤버십 소개';
     const button=label.closest('.support-float');
-    if(button) button.setAttribute('aria-label',nextLabel);
+    if(button) button.setAttribute('aria-label',label.textContent);
   }
   window.showMainHome=function(push){
     document.body.classList.remove('membership-on','value-page');
@@ -1287,7 +1287,63 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeBenefit
   else window.showMainHome(false);
 })();
 
+(function(){
+  const tabs=Array.from(document.querySelectorAll('.mem-benefit-tab'));
+  const panel=document.getElementById('benefitVisual');
+  const image=document.getElementById('benefitVisualImage');
+  const mobileTitle=document.querySelector('.mem-benefit-mobile-title');
+  const mobileCount=document.querySelector('.mem-benefit-mobile-count');
+  const prevButton=document.querySelector('.mem-benefit-prev');
+  const nextButton=document.querySelector('.mem-benefit-next');
+  if(!tabs.length || !panel || !image) return;
+  const altTexts=[
+    '재단 정기 뉴스레터 및 주요 사업 정보 혜택 이미지',
+    "대학로 STAGE 100 연극제 할인 혜택 이미지",
+    '재단 주관 공연·전시·행사 우선 등록 및 할인 혜택 이미지',
+    '프로젝토리 공간 투어 초대 혜택 이미지',
+    '재단 간행물·보고서·교육 자료 제공 혜택 이미지',
+    '재단 공연 및 전시 공간 대관 할인 혜택 이미지'
+  ];
+  function selectTab(tab){
+    const index=tabs.indexOf(tab);
+    tabs.forEach(function(item){
+      const active=item===tab;
+      item.classList.toggle('is-active',active);
+      item.setAttribute('aria-selected',String(active));
+      item.tabIndex=active?0:-1;
+    });
+    image.src=tab.dataset.benefitImage;
+    image.alt=altTexts[index];
+    panel.setAttribute('aria-labelledby',tab.id);
+    if(mobileTitle) mobileTitle.textContent=tab.textContent.replace(/^\d{2}/,'').trim();
+    if(mobileCount) mobileCount.textContent=(index+1)+' / '+tabs.length;
+  }
+  tabs.forEach(function(tab,index){
+    tab.addEventListener('click',function(){ selectTab(tab); });
+    tab.addEventListener('keydown',function(event){
+      if(!['ArrowDown','ArrowUp','ArrowRight','ArrowLeft','Home','End'].includes(event.key)) return;
+      event.preventDefault();
+      let next=index;
+      if(event.key==='Home') next=0;
+      else if(event.key==='End') next=tabs.length-1;
+      else if(event.key==='ArrowDown' || event.key==='ArrowRight') next=(index+1)%tabs.length;
+      else next=(index-1+tabs.length)%tabs.length;
+      selectTab(tabs[next]);
+      tabs[next].focus();
+    });
+  });
+  if(prevButton) prevButton.addEventListener('click',function(){
+    const current=tabs.findIndex(function(tab){ return tab.classList.contains('is-active'); });
+    selectTab(tabs[(current-1+tabs.length)%tabs.length]);
+  });
+  if(nextButton) nextButton.addEventListener('click',function(){
+    const current=tabs.findIndex(function(tab){ return tab.classList.contains('is-active'); });
+    selectTab(tabs[(current+1)%tabs.length]);
+  });
+})();
+
 ;
+
 document.addEventListener('keydown', function(e){
   const card=e.target && e.target.closest ? e.target.closest('.ms-benefits li[role="button"][data-benefit]') : null;
   if(!card) return;
@@ -1441,7 +1497,6 @@ document.addEventListener('keydown',function(e){
 ;
 
 (function(){
-  
   const OLD_LOCK_KEY='nccfLoginLockState';
   const LOCK_KEY='nccfLoginLockState_v59_37';
   const MAX_FAILURES=20;
@@ -1449,7 +1504,6 @@ document.addEventListener('keydown',function(e){
   const VALID_IDS=['nccfmember','sanghwa@ncfoundation.or.kr'];
   const VALID_PASSWORDS=['password','••••••••'];
 
-  
   try{localStorage.removeItem(OLD_LOCK_KEY);}catch(e){}
 
   function readState(){
@@ -1483,7 +1537,7 @@ document.addEventListener('keydown',function(e){
     return VALID_IDS.includes(String(id||'').trim())&&VALID_PASSWORDS.includes(String(pw||''));
   }
   function notify(message){
-    
+    /* 잠금/실패 결과는 로그인 버튼 클릭 이벤트 직후 alert로만 안내 */
     window.alert(message);
   }
   function registerFailure(){
@@ -1571,57 +1625,66 @@ document.addEventListener('keydown',function(e){
     if(pendingAction){const next=pendingAction;pendingAction=null;setTimeout(()=>openM(next),320);}
   };
 
-  
+  /* 개발/시연 중 잠금 상태를 수동 초기화할 수 있는 콘솔용 함수 */
   window.resetNccfLoginLock=function(){clearState();return '로그인 실패 횟수와 잠금 상태가 초기화되었습니다.';};
 })();
 
-
-
 ;
 
-
 (function(){
-  const tabs=[...document.querySelectorAll('.mem-benefit-tab')];
-  const panel=document.getElementById('benefitPreviewPanel');
-  const image=document.getElementById('benefitPreviewImage');
-  const number=document.getElementById('benefitPreviewNumber');
-  const text=document.getElementById('benefitPreviewText');
-  if(!tabs.length||!panel||!image||!number||!text) return;
-
-  function activate(tab, moveFocus){
-    tabs.forEach(item=>{
-      const active=item===tab;
-      item.classList.toggle('is-active',active);
-      item.setAttribute('aria-selected',String(active));
-      item.tabIndex=active?0:-1;
-    });
-    panel.setAttribute('aria-labelledby',tab.id);
-    image.classList.add('is-changing');
-    window.setTimeout(()=>{
-      image.src=tab.dataset.benefitImage;
-      image.alt=tab.dataset.benefitAlt;
-      number.textContent=tab.dataset.benefitNumber;
-      text.textContent=tab.dataset.benefitText;
-      image.classList.remove('is-changing');
-    },120);
-    if(moveFocus) tab.focus();
-  }
-
-  tabs.forEach((tab,index)=>{
-    tab.tabIndex=tab.classList.contains('is-active')?0:-1;
-    tab.addEventListener('click',()=>activate(tab,false));
-    tab.addEventListener('keydown',event=>{
-      if(!['ArrowDown','ArrowUp','ArrowRight','ArrowLeft','Home','End'].includes(event.key)) return;
-      event.preventDefault();
-      let next=index;
-      if(event.key==='Home') next=0;
-      else if(event.key==='End') next=tabs.length-1;
-      else if(event.key==='ArrowDown'||event.key==='ArrowRight') next=(index+1)%tabs.length;
-      else next=(index-1+tabs.length)%tabs.length;
-      activate(tabs[next],true);
-    });
+  const root=document.querySelector('.value-flip-carousel');
+  if(!root) return;
+  const cards=[...root.querySelectorAll('.vfc-card')];
+  const dotsWrap=root.querySelector('.vfc-dots');
+  const count=root.querySelector('.vfc-count strong');
+  const pauseBtn=root.querySelector('.vfc-pause');
+  let current=0, timer=null, paused=false;
+  cards.forEach((_,i)=>{
+    const b=document.createElement('button');
+    b.type='button'; b.className='vfc-dot'; b.setAttribute('aria-label',(i+1)+'번 이미지 보기');
+    b.addEventListener('click',()=>{current=i; render(); restart();});
+    dotsWrap.appendChild(b);
   });
+  const dots=[...dotsWrap.children];
+  function relation(i){
+    const n=cards.length;
+    let d=(i-current+n)%n;
+    if(d>n/2) d-=n;
+    return d;
+  }
+  function render(){
+    cards.forEach((c,i)=>{
+      c.className='vfc-card'+(c.dataset.variant==='new'?' vfc-new':'');
+      const d=relation(i);
+      if(d===0)c.classList.add('is-active');
+      else if(d===-1)c.classList.add('is-prev');
+      else if(d===1)c.classList.add('is-next');
+      else if(d===-2)c.classList.add('is-far-prev');
+      else if(d===2)c.classList.add('is-far-next');
+    });
+    dots.forEach((d,i)=>d.classList.toggle('is-active',i===current));
+    count.textContent=String(current+1);
+  }
+  function next(){current=(current+1)%cards.length;render();}
+  function prev(){current=(current-1+cards.length)%cards.length;render();}
+  function start(){if(paused)return;clearInterval(timer);timer=setInterval(next,3000);}
+  function restart(){clearInterval(timer);start();}
+  root.querySelector('.vfc-next').addEventListener('click',()=>{next();restart();});
+  root.querySelector('.vfc-prev').addEventListener('click',()=>{prev();restart();});
+  pauseBtn.addEventListener('click',()=>{
+    paused=!paused;
+    pauseBtn.textContent=paused?'▶':'Ⅱ';
+    pauseBtn.setAttribute('aria-label',paused?'자동 롤링 재생':'자동 롤링 일시정지');
+    paused?clearInterval(timer):start();
+  });
+  root.addEventListener('mouseenter',()=>clearInterval(timer));
+  root.addEventListener('mouseleave',()=>start());
+  root.addEventListener('focusin',()=>clearInterval(timer));
+  root.addEventListener('focusout',()=>start());
+  render();start();
 })();
+
+;
 
 (function(){
   function getLang(){
@@ -1717,6 +1780,8 @@ document.addEventListener('keydown',function(e){
     else {const md=USER.consents.marketing?t('동의일시','Agreed'):t('철회일시','Withdrawn'),mv=USER.consents.marketing?USER.consentDates.marketingAgreedAt:(USER.consentDates.marketingWithdrawnAt||'-');body=`${tabs}<div class="step-c"><div class="sdesc">${t('회원가입 및 회원정보 변경 화면에서 처리한 동의 여부와 처리일시를 확인할 수 있습니다.','Review your consent status and processing dates from sign-up and profile changes.')}</div><div class="mp-card consent-history-card"><div class="mp-consent consent-history-row"><div><div class="consent-history-title">${t('(필수) 멤버십 이용약관','(Required) Membership Terms of Use')}</div><div class="consent-history-date">${t('동의일시','Agreed')} ${USER.consentDates.termsAgreedAt}</div></div><span class="mp-badge y">${t('동의','Agreed')}</span></div><div class="mp-consent consent-history-row"><div><div class="consent-history-title">${t('(필수) 개인정보 수집 및 이용','(Required) Collection and Use of Personal Information')}</div><div class="consent-history-date">${t('동의일시','Agreed')} ${USER.consentDates.privacyAgreedAt}</div></div><span class="mp-badge ${USER.consents.privacy?'y':'n'}">${USER.consents.privacy?t('동의','Agreed'):t('미동의','Not Agreed')}</span></div><div class="mp-consent consent-history-row"><div><div class="consent-history-title">${t('(선택) 광고 및 마케팅 목적 활용','(Optional) Advertising and Marketing Use')}</div><div class="consent-history-date">${md} ${mv}</div></div><div class="consent-history-actions"><span class="mp-badge ${USER.consents.marketing?'y':'n'}">${USER.consents.marketing?t('동의','Agreed'):t('철회','Withdrawn')}</span><button type="button" class="consent-withdraw-btn" onclick="requestMarketingConsentChange()">${USER.consents.marketing?t('동의 철회','Withdraw Consent'):t('동의하기','Agree')}</button></div></div></div><div class="sinfo" style="margin-top:8px;color:#E53935;border-left-color:#E53935;background:rgba(229,57,53,.05)">${t('※ 동의 철회 시 이벤트 및 혜택 안내가 제한됩니다.','※ Withdrawing consent will limit event and benefit notifications.')}</div></div>`;}
     m.innerHTML=`${mHead(t('마이페이지','My Page'),false)}<div class="mb">${body}</div>`;
   };
+
+  // Repaint current entry using the stored language after all legacy scripts finish loading.
   if(document.body.classList.contains('membership-on')) setTimeout(function(){loggedIn?showMembershipMypage():showMembershipLogin();},0);
 })();
 
@@ -1726,7 +1791,6 @@ document.addEventListener('keydown',function(e){
   const isEnglish=()=>typeof getMembershipLang==='function'&&getMembershipLang()==='en';
   const tr=(ko,en)=>isEnglish()?en:ko;
 
-  
   const previousShowMembershipLogin=window.showMembershipLogin;
   window.showMembershipLogin=function(){
     previousShowMembershipLogin.apply(this,arguments);
@@ -1839,7 +1903,6 @@ document.addEventListener('keydown',function(e){
     );
   };
 
-  
   if(document.body.classList.contains('membership-on')&&!loggedIn){
     setTimeout(()=>showMembershipLogin(),0);
   }
@@ -1979,7 +2042,7 @@ document.addEventListener('keydown',function(e){
   window.field=field;
   window.setPage=setPage;
   window.codeRow=codeRow;
-  
+  /* Account recovery helpers are used by later consolidated recovery renderers. */
   window.stopVerifyTimer=stopVerifyTimer;
   window.startVerifyTimer=startVerifyTimer;
   window.isVerifyValid=isVerifyValid;
@@ -2158,6 +2221,7 @@ document.addEventListener('keydown',function(e){
     if(!resetMode&&cur===pw){alert('현재 비밀번호와 다른 비밀번호를 입력해 주세요.');moveFocus('signupPassword');return;}
     openSuccessLayer();
   };
+  // Capture the button click even if an older inline handler is shadowed by another script.
   document.addEventListener('click',function(e){
     const btn=e.target.closest('button');
     if(!btn||btn.textContent.trim()!=='비밀번호 변경')return;
@@ -2253,10 +2317,10 @@ document.addEventListener('keydown',function(e){
     const button=event.target.closest('button');
     if(!button) return;
 
-    
+    /* Final confirmation-layer buttons retain their own handlers. */
     if(button.closest('#withdrawConfirmLayer')) return;
 
-    
+    /* Only intercept the actual submit button inside the rendered withdrawal form. */
     const isWithdrawalSubmit=
       button.classList.contains('account-danger-btn') &&
       button.textContent.trim()==='회원탈퇴' &&
@@ -2375,6 +2439,7 @@ document.addEventListener('keydown',function(e){
   window.verifyFindPw=function(){
     const code=(document.getElementById('findPwCode')?.value||'').trim();
     if(typeof originalVerifyFindPw==='function'){
+      // Reimplement the final branch so reset authorization is one-time only.
       const timer=document.getElementById('findPwTimer');
       if(timer?.classList.contains('expired')){alert(tr('인증번호 유효시간이 만료되었습니다. 다시 발송해 주세요.','The verification code has expired. Please request a new code.'));return;}
       if(code!=='123456'){alert(tr('인증번호가 일치하지 않습니다.','The verification code is incorrect.'));return;}
@@ -2401,6 +2466,8 @@ document.addEventListener('keydown',function(e){
     ));
     setTimeout(()=>window.updateAccountPasswordUI?.(),0);
   };
+
+  // Normal account entry always starts a fresh, logged-in change flow.
   document.addEventListener('click',function(e){
     const b=e.target.closest('button');
     if(!b)return;
@@ -2828,7 +2895,7 @@ document.addEventListener('keydown',function(e){
     showChangePassword(true);
   };
 
-  
+  /* Restore Korean public content after language switching/navigation only. */
   function schedulePublicRestore() {
     setTimeout(restorePublicKorean, 0);
     setTimeout(restorePublicKorean, 80);
