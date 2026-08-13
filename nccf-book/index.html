@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="여섯 명의 직원이 각자의 자리에서 기록한 『NC문화재단에서 일한다는 것』 책 소개. AI 윤리, 공간, 조직문화, 첫 직장, 아이와 창의성, 숫자와 운영에 관한 여섯 편의 글.">
-  <meta name="theme-color" content="#f4f0e6">
+  <meta name="theme-color" content="#f7f3ee">
   <meta property="og:type" content="book">
   <meta property="og:title" content="NC문화재단에서 일한다는 것">
   <meta property="og:description" content="하나의 조직, 여섯 개의 자리, 여섯 가지 일의 기록.">
@@ -25,24 +25,24 @@
       ],
       "inLanguage": "ko",
       "numberOfPages": 160,
-      "publisher": {"@type":"Organization","name":"주식회사 부크크"},
       "description": "한 조직에서 일하는 여섯 사람이 각자의 일과 삶을 기록한 공동 저작"
     }
   </script>
   <script>document.documentElement.classList.add('js');</script>
   <style>
     :root {
-      --paper: #f4f0e6;
-      --paper-light: #fffdf7;
-      --ink: #161616;
-      --muted: #65615a;
-      --rule: #252525;
-      --red: #e85a3f;
-      --orange: #f1a434;
-      --green: #5d9b72;
-      --blue: #4b79c6;
-      --violet: #8c68ad;
-      --teal: #3d9993;
+      --paper: #f7f3ee;
+      --paper-light: #fffdfa;
+      --ink: #302d2b;
+      --muted: #746e68;
+      --rule: #4c4743;
+      --soft-rule: #d8d0c8;
+      --red: #d9acad;
+      --orange: #e5c7a7;
+      --green: #bacbb8;
+      --blue: #b3c9da;
+      --violet: #c9bdd8;
+      --teal: #b2d0c8;
       --sans: "Pretendard", "SUIT", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
       --serif: "Noto Serif KR", "Nanum Myeongjo", "AppleMyungjo", "Batang", serif;
       --max: 1180px;
@@ -94,7 +94,7 @@
       z-index: 1000;
       inset: 0 auto auto 0;
       width: 0;
-      height: 4px;
+      height: 3px;
       background: linear-gradient(90deg, var(--red), var(--orange), var(--green), var(--blue), var(--violet), var(--teal));
     }
 
@@ -107,8 +107,8 @@
       position: sticky;
       z-index: 100;
       top: 0;
-      border-bottom: 2px solid var(--rule);
-      background: rgba(244, 240, 230, .94);
+      border-bottom: 1px solid var(--soft-rule);
+      background: rgba(247, 243, 238, .94);
       backdrop-filter: blur(12px);
     }
 
@@ -170,7 +170,7 @@
       display: grid;
       align-items: center;
       padding: clamp(64px, 8vw, 108px) 0 clamp(78px, 9vw, 120px);
-      border-bottom: 2px solid var(--rule);
+      border-bottom: 1px solid var(--soft-rule);
     }
 
     .hero-grid {
@@ -233,7 +233,7 @@
     .hero-lead {
       max-width: 650px;
       margin: 30px 0 0;
-      color: #45413b;
+      color: #5d5752;
       font-size: clamp(18px, 1.8vw, 21px);
       line-height: 1.85;
     }
@@ -258,7 +258,8 @@
       align-items: center;
       justify-content: center;
       padding: 12px 21px;
-      border: 2px solid var(--ink);
+      border: 1px solid var(--ink);
+      border-radius: 2px;
       color: var(--paper-light);
       background: var(--ink);
       font-size: 15px;
@@ -267,8 +268,8 @@
       transition: transform .2s ease, box-shadow .2s ease;
     }
 
-    .button.alt { color: var(--ink); background: transparent; }
-    .button:hover { transform: translate(-3px, -3px); box-shadow: 5px 5px 0 var(--orange); }
+    .button.alt { color: var(--ink); background: rgba(255, 253, 250, .55); }
+    .button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(48, 45, 43, .14); }
 
     .folio {
       position: relative;
@@ -277,9 +278,10 @@
       aspect-ratio: 4 / 5.45;
       margin-inline: auto;
       padding: clamp(28px, 4vw, 46px);
-      border: 3px solid var(--ink);
-      background: var(--paper-light);
-      box-shadow: 16px 16px 0 var(--ink);
+      border: 1px solid rgba(76, 71, 67, .28);
+      border-radius: 3px;
+      background: linear-gradient(145deg, #fffdfa 0%, #f3ece5 100%);
+      box-shadow: 0 28px 70px rgba(62, 54, 49, .18);
     }
 
     .folio::before,
@@ -288,15 +290,16 @@
       position: absolute;
       z-index: -1;
       inset: -16px 20px 16px -20px;
-      border: 2px solid var(--ink);
+      border: 1px solid rgba(76, 71, 67, .16);
+      border-radius: 4px;
       background: var(--orange);
-      transform: rotate(-3deg);
+      transform: rotate(-2.2deg);
     }
 
     .folio::after {
       inset: 14px -17px -14px 20px;
       background: var(--blue);
-      transform: rotate(2deg);
+      transform: rotate(1.7deg);
     }
 
     .folio-label {
@@ -325,13 +328,13 @@
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       height: 21%;
-      border-top: 3px solid var(--ink);
+      border-top: 1px solid rgba(76, 71, 67, .36);
     }
 
     .voice-stack span {
       display: grid;
       place-items: center;
-      border-right: 2px solid var(--ink);
+      border-right: 1px solid rgba(76, 71, 67, .32);
       font-size: 11px;
       font-weight: 900;
       writing-mode: vertical-rl;
@@ -350,8 +353,10 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       margin-top: clamp(58px, 7vw, 84px);
-      border: 2px solid var(--rule);
+      border: 1px solid var(--soft-rule);
+      border-radius: 3px;
       background: var(--paper-light);
+      box-shadow: 0 18px 48px rgba(62, 54, 49, .07);
     }
 
     .stat {
@@ -359,7 +364,7 @@
       text-align: center;
     }
 
-    .stat + .stat { border-left: 2px solid var(--rule); }
+    .stat + .stat { border-left: 1px solid var(--soft-rule); }
 
     .stat strong {
       display: block;
@@ -405,7 +410,7 @@
       line-height: 1.95;
     }
 
-    .about { background: var(--ink); color: var(--paper-light); }
+    .about { background: #373330; color: var(--paper-light); }
 
     .about-grid {
       display: grid;
@@ -415,11 +420,11 @@
     }
 
     .about .section-tag span { color: var(--ink); background: var(--orange); }
-    .about .section-lead { color: #c9c2b4; }
+    .about .section-lead { color: #d4ccc3; }
 
     .about-copy p {
       margin-bottom: 22px;
-      color: #d8d2c6;
+      color: #e0d9d1;
       font-size: 18px;
       line-height: 2;
     }
@@ -429,7 +434,8 @@
     .about-quote {
       margin: 40px 0 0;
       padding: 30px;
-      border: 2px solid #777268;
+      border: 1px solid rgba(255, 253, 250, .3);
+      background: rgba(255, 253, 250, .035);
       color: white;
       font-family: var(--serif);
       font-size: clamp(23px, 2.6vw, 32px);
@@ -440,14 +446,14 @@
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       margin-top: 68px;
-      border: 2px solid white;
+      border: 1px solid rgba(255, 255, 255, .5);
     }
 
     .six-words span {
       min-height: 112px;
       display: grid;
       place-items: center;
-      border-right: 2px solid white;
+      border-right: 1px solid rgba(255, 255, 255, .5);
       color: var(--ink);
       font-size: 18px;
       font-weight: 950;
@@ -482,9 +488,12 @@
       display: flex;
       flex-direction: column;
       min-height: 510px;
-      border: 2px solid var(--rule);
+      overflow: hidden;
+      border: 1px solid var(--soft-rule);
+      border-top: 6px solid var(--accent);
+      border-radius: 4px;
       background: var(--paper-light);
-      box-shadow: 8px 8px 0 var(--accent);
+      box-shadow: 0 16px 42px rgba(62, 54, 49, .09);
     }
 
     .voice-card:nth-child(2) { --accent: var(--orange); }
@@ -496,13 +505,13 @@
     .voice-top {
       display: grid;
       grid-template-columns: 72px 1fr;
-      border-bottom: 2px solid var(--rule);
+      border-bottom: 1px solid var(--soft-rule);
     }
 
     .voice-number {
       display: grid;
       place-items: center;
-      border-right: 2px solid var(--rule);
+      border-right: 1px solid var(--soft-rule);
       background: var(--accent);
       font-size: 20px;
       font-weight: 950;
@@ -539,14 +548,14 @@
     .voice-quote {
       margin: auto 0 24px;
       padding: 20px 0 0;
-      border-top: 2px solid var(--rule);
+      border-top: 1px solid var(--soft-rule);
       font-family: var(--serif);
       font-size: 19px;
       font-weight: 700;
       line-height: 1.7;
     }
 
-    details { border-top: 1.5px solid #aca69a; }
+    details { border-top: 1px solid var(--soft-rule); }
 
     summary {
       min-height: 48px;
@@ -578,22 +587,23 @@
       line-height: 1.65;
     }
 
-    .moments { background: var(--paper-light); border-block: 2px solid var(--rule); }
+    .moments { background: var(--paper-light); border-block: 1px solid var(--soft-rule); }
 
     .moment-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       margin-top: 58px;
-      border-top: 2px solid var(--rule);
-      border-left: 2px solid var(--rule);
+      overflow: hidden;
+      border: 1px solid var(--soft-rule);
+      border-radius: 4px;
     }
 
     .moment {
       position: relative;
       min-height: 300px;
       padding: 32px;
-      border-right: 2px solid var(--rule);
-      border-bottom: 2px solid var(--rule);
+      border-right: 1px solid rgba(76, 71, 67, .16);
+      border-bottom: 1px solid rgba(76, 71, 67, .16);
     }
 
     .moment::before {
@@ -629,9 +639,11 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       aspect-ratio: 1;
-      border: 3px solid var(--rule);
-      background: var(--ink);
-      gap: 3px;
+      overflow: hidden;
+      border: 1px solid var(--soft-rule);
+      border-radius: 5px;
+      background: var(--paper-light);
+      gap: 1px;
     }
 
     .mosaic span {
@@ -654,34 +666,34 @@
     .big-quote {
       margin: 38px 0 0;
       padding-left: 27px;
-      border-left: 9px solid var(--orange);
+      border-left: 6px solid var(--orange);
       font-family: var(--serif);
       font-size: clamp(25px, 3.1vw, 39px);
       font-weight: 700;
       line-height: 1.6;
     }
 
-    .readers { color: white; background: var(--ink); }
+    .readers { color: white; background: #373330; }
     .readers .section-tag span { color: var(--ink); background: var(--teal); }
-    .readers .section-lead { color: #c8c2b7; }
+    .readers .section-lead { color: #d4ccc3; }
 
     .reader-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 3px;
+      gap: 1px;
       margin-top: 55px;
-      padding: 3px;
-      background: white;
+      padding: 1px;
+      background: rgba(255, 253, 250, .34);
     }
 
     .reader {
       min-height: 190px;
       padding: 34px;
-      background: var(--ink);
+      background: #373330;
     }
 
     .reader strong { display: block; margin-bottom: 12px; font-size: 23px; }
-    .reader p { margin-bottom: 0; color: #c8c2b7; font-size: 16px; line-height: 1.85; }
+    .reader p { margin-bottom: 0; color: #d4ccc3; font-size: 16px; line-height: 1.85; }
 
     .book-info-grid {
       display: grid;
@@ -698,40 +710,32 @@
       justify-content: space-between;
       margin: 0 auto;
       padding: 28px;
-      border: 3px solid var(--ink);
-      background: var(--paper-light);
-      box-shadow: 11px 11px 0 var(--violet);
+      border: 1px solid rgba(76, 71, 67, .22);
+      border-radius: 3px;
+      background: linear-gradient(150deg, var(--paper-light), #eee7ef);
+      box-shadow: 0 22px 55px rgba(62, 54, 49, .14);
     }
 
     .mini-folio strong { font-size: 31px; line-height: 1.18; letter-spacing: -.05em; }
     .mini-folio span { font-size: 12px; font-weight: 900; line-height: 1.7; }
 
-    .info-table { margin-top: 38px; border-top: 2px solid var(--rule); }
+    .info-table { margin-top: 38px; border-top: 1px solid var(--rule); }
 
     .info-row {
       display: grid;
       grid-template-columns: 105px 1fr;
       gap: 22px;
       padding: 18px 0;
-      border-bottom: 1.5px solid #aaa398;
+      border-bottom: 1px solid var(--soft-rule);
       font-size: 16px;
     }
 
     .info-row dt { color: var(--muted); }
     .info-row dd { margin: 0; font-weight: 800; }
 
-    .page-note {
-      margin: 30px 0 0;
-      padding: 22px 24px;
-      border: 2px solid var(--rule);
-      background: var(--orange);
-      font-size: 15px;
-      font-weight: 800;
-    }
-
     footer {
       padding: 36px 0 42px;
-      border-top: 2px solid var(--rule);
+      border-top: 1px solid var(--soft-rule);
       font-size: 13px;
     }
 
@@ -774,11 +778,11 @@
       .hero-lead { font-size: 17px; }
       .hero-actions .button { flex: 1 1 180px; }
       .stats { grid-template-columns: 1fr; }
-      .stat + .stat { border-left: 0; border-top: 2px solid var(--rule); }
+      .stat + .stat { border-left: 0; border-top: 1px solid var(--soft-rule); }
       .section { padding: 78px 0; }
       .about-copy p { font-size: 17px; }
       .six-words { grid-template-columns: repeat(3, 1fr); }
-      .six-words span { min-height: 86px; border-bottom: 2px solid white; }
+      .six-words span { min-height: 86px; border-bottom: 1px solid rgba(255, 255, 255, .5); }
       .six-words span:nth-child(3) { border-right: 0; }
       .six-words span:nth-child(n+4) { border-bottom: 0; }
       .voice-grid { grid-template-columns: 1fr; }
@@ -803,7 +807,7 @@
       .authors-inline { margin-top: 18px; font-size: 13px; line-height: 1.75; }
       .hero-actions { margin-top: 25px; }
       .button { min-height: 48px; flex-basis: 100%; padding: 11px 14px; font-size: 14px; }
-      .folio { width: min(78vw, 266px); margin-top: 34px; padding: 25px; box-shadow: 10px 10px 0 var(--ink); }
+      .folio { width: min(78vw, 266px); margin-top: 34px; padding: 25px; box-shadow: 0 20px 48px rgba(62, 54, 49, .18); }
       .folio::before { inset: -10px 14px 10px -13px; }
       .folio::after { inset: 10px -11px -10px 14px; }
       .folio-title { font-size: 29px; }
@@ -845,7 +849,6 @@
       .mini-folio strong { font-size: 27px; }
       .info-table { margin-top: 29px; }
       .info-row { grid-template-columns: 74px 1fr; gap: 10px; padding: 15px 0; font-size: 14px; }
-      .page-note { padding: 19px; font-size: 14px; }
       footer { padding: 28px 0 34px; }
     }
 
@@ -907,7 +910,7 @@
         <div class="stats reveal" aria-label="책 구성 요약">
           <div class="stat"><strong>6명</strong><span>각자의 자리에서 쓴 사람들</span></div>
           <div class="stat"><strong>6편</strong><span>서로 다른 주제와 문체의 원고</span></div>
-          <div class="stat"><strong>160쪽</strong><span>2면 조판 80면을 환산한 책 분량</span></div>
+          <div class="stat"><strong>160쪽</strong><span>책 한 권의 전체 분량</span></div>
         </div>
       </div>
     </section>
@@ -1061,10 +1064,9 @@
             <div class="info-row"><dt>저자</dt><dd>디케이, 라라, 바비, 아이네, 잭, 조이</dd></div>
             <div class="info-row"><dt>구성</dt><dd>6인 공동 저작 · 6편의 독립 원고</dd></div>
             <div class="info-row"><dt>분량</dt><dd>160쪽</dd></div>
-            <div class="info-row"><dt>발행</dt><dd>2026년 8월 12일</dd></div>
-            <div class="info-row"><dt>펴낸곳</dt><dd>주식회사 부크크</dd></div>
+            <div class="info-row"><dt>발행일</dt><dd>미정</dd></div>
+            <div class="info-row"><dt>펴낸곳</dt><dd>미정</dd></div>
           </dl>
-          <p class="page-note">분량은 첨부된 인쇄용 PDF 80면을 기준으로 계산했습니다. 한 PDF 화면에 책 2쪽이 배치된 2면 조판이므로 실제 책 분량은 160쪽입니다.</p>
         </div>
       </div>
     </section>
