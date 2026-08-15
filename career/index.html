@@ -3,1378 +3,313 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="실무를 이해하고 팀의 판단과 실행을 연결하는 IT 서비스 PM·기획 리드 김상화의 경력과 대표 서비스입니다.">
-  <meta name="theme-color" content="#111827">
-  <title>김상화 | IT 서비스 PM·기획 리드</title>
+  <meta name="description" content="서비스 기획과 프로젝트 관리, 조직 IT 운영을 연결하는 김상화의 경력 포트폴리오">
+  <title>김상화 | 서비스 기획·프로젝트 리드</title>
   <style>
     :root {
-      --ink: #111827;
-      --ink-soft: #354052;
-      --muted: #667085;
-      --line: #dce1e8;
-      --surface: #ffffff;
-      --surface-soft: #f5f7fa;
-      --surface-blue: #eef4ff;
-      --blue: #2457e6;
-      --blue-dark: #173aa1;
-      --cyan: #56c7e8;
-      --lime: #c8f05a;
-      --max: 1200px;
-      --radius: 18px;
+      --ink:#172536; --ink-2:#536477; --paper:#f3f6f9; --white:#fff;
+      --mist:#e8eef4; --line:#ced8e3; --navy:#163451; --navy-2:#091f35;
+      --lime:#9ebbd0; --lime-soft:#e7eff6; --blue:#315f8c; --warm:#e9eef4;
+      --mocha:#9b795f; --mocha-soft:#f1ebe6;
+      --radius:20px; --shadow:0 16px 44px rgba(9,31,53,.10);
+      --max:1180px; --header:76px;
     }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; font-size: 17px; }
-    body {
-      margin: 0;
-      color: var(--ink);
-      background: var(--surface);
-      font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-      line-height: 1.65;
-      word-break: keep-all;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
+    *{box-sizing:border-box}
+    html{font-size:18px;scroll-behavior:smooth;scroll-padding-top:calc(var(--header) + 18px)}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;font-size:1rem;line-height:1.7;word-break:keep-all}
+    body.modal-open{overflow:hidden}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit;color:inherit}
+    img{display:block;max-width:100%}
+    button,a,summary{touch-action:manipulation}
+    :focus-visible{outline:3px solid #6f9bc0;outline-offset:3px}
+    .skip{position:fixed;left:16px;top:-80px;z-index:1000;background:#111;color:#fff;padding:12px 18px;border-radius:10px}.skip:focus{top:12px}
+    .progress{position:fixed;inset:0 auto auto 0;z-index:1001;width:0;height:4px;background:var(--lime)}
+    .wrap{width:min(calc(100% - 48px),var(--max));margin-inline:auto}
+    .site-header{position:fixed;inset:0 0 auto;z-index:100;height:var(--header);background:rgba(247,249,251,.95);border-bottom:1px solid rgba(23,37,54,.12);backdrop-filter:blur(16px)}
+    .header-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:-.04em;white-space:nowrap}
+    .brand-mark{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:var(--navy-2);color:#d8e7f2;font-size:.94rem}
+    .brand small{display:block;color:var(--ink-2);font-size:.94rem;font-weight:600;letter-spacing:0;line-height:1.1}
+    .nav{display:flex;align-items:center;gap:4px}.nav a{min-height:48px;padding:11px 13px;border-radius:12px;color:var(--ink-2);font-size:.94rem;font-weight:750}.nav a:hover,.nav a.active{background:var(--navy);color:#fff}
+    .menu-btn{display:none;align-items:center;justify-content:center;width:48px;height:48px;border:1px solid var(--line);border-radius:12px;background:#fff;font-size:1.35rem}
+    main{overflow:hidden}
+    section{position:relative;padding:112px 0}
+    .hero{min-height:760px;padding:calc(var(--header) + 86px) 0 90px;background:linear-gradient(135deg,var(--navy-2) 0%,var(--navy) 62%,#234d70 100%);color:#fff}
+    .hero:after{content:"";position:absolute;width:520px;height:520px;right:-190px;bottom:-260px;border:90px solid rgba(158,187,208,.16);border-radius:50%}
+    .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(320px,.75fr);gap:76px;align-items:center}
+    .eyebrow,.section-kicker{display:inline-flex;align-items:center;gap:10px;margin:0 0 22px;font-size:.94rem;font-weight:900;letter-spacing:.02em}
+    .eyebrow:before,.section-kicker:before{content:"";width:28px;height:4px;border-radius:9px;background:var(--lime)}
+    h1,h2,h3,p{margin-top:0}h1{max-width:820px;margin-bottom:28px;font-size:clamp(3rem,6vw,5.6rem);line-height:1.04;letter-spacing:-.07em}h2{margin-bottom:20px;font-size:clamp(2.25rem,4vw,3.8rem);line-height:1.12;letter-spacing:-.055em}h3{font-size:1.45rem;line-height:1.35;letter-spacing:-.035em}
+    .hero-lead{max-width:720px;margin-bottom:34px;color:#dfe8eb;font-size:1.22rem;line-height:1.75}
+    .hero-actions,.project-links,.contact-links{display:flex;flex-wrap:wrap;gap:12px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:13px 20px;border:1px solid transparent;border-radius:14px;background:var(--lime);color:var(--navy-2);font-weight:900;cursor:pointer}.btn:hover{transform:translateY(-2px)}.btn.ghost{border-color:rgba(255,255,255,.48);background:transparent;color:#fff}.btn.dark{background:var(--navy);color:#fff}.btn.line{border-color:var(--line);background:#fff;color:var(--ink)}
+    .hero-card{padding:32px;border:1px solid rgba(255,255,255,.2);border-radius:var(--radius);background:rgba(255,255,255,.09);box-shadow:var(--shadow)}
+    .hero-card-title{margin-bottom:18px;color:var(--lime);font-weight:900}.hero-card ol{margin:0;padding:0;list-style:none;counter-reset:item}.hero-card li{position:relative;padding:18px 0 18px 52px;border-top:1px solid rgba(255,255,255,.15);font-size:1.02rem}.hero-card li:before{counter-increment:item;content:"0" counter(item);position:absolute;left:0;color:var(--lime);font-weight:900}.hero-card small{display:block;margin-top:24px;color:#bfd0d5;font-size:.94rem}
+    .facts{position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);margin-top:76px;border-top:1px solid rgba(255,255,255,.2);border-bottom:1px solid rgba(255,255,255,.2)}.fact{padding:22px 18px;border-right:1px solid rgba(255,255,255,.2)}.fact:last-child{border-right:0}.fact strong{display:block;color:var(--lime);font-size:1.45rem;line-height:1.25}.fact span{display:block;margin-top:6px;color:#dfe8eb;font-size:.94rem}
+    .section-head{display:grid;grid-template-columns:150px minmax(0,1fr);gap:38px;margin-bottom:54px}.section-number{font-size:1rem;font-weight:900;color:var(--navy)}.section-number span{color:#87949d}.section-copy{max-width:780px;color:var(--ink-2);font-size:1.08rem}
+    .summary{background:var(--paper)}.bento{display:grid;grid-template-columns:1.35fr 1fr 1fr;grid-auto-rows:minmax(190px,auto);gap:18px}.bento-card{position:relative;overflow:hidden;padding:28px;border:1px solid var(--line);border-radius:var(--radius);background:#fff}.bento-card.large{grid-row:span 2;background:var(--navy);color:#fff}.bento-card.wide{grid-column:span 2;background:var(--lime-soft)}.bento-card h3{margin-bottom:14px}.bento-card p{margin-bottom:0;color:var(--ink-2)}.bento-card.large p{color:#d8e4e8}.bento-card .label{display:block;margin-bottom:30px;color:#6b7a83;font-size:.94rem;font-weight:900}.bento-card.large .label{color:var(--lime)}.bento-card ul{margin:22px 0 0;padding-left:1.2em}.bento-card li+li{margin-top:10px}.bento-card .big{font-size:2.3rem;font-weight:950;letter-spacing:-.06em}.bento-card .arrow{position:absolute;right:24px;bottom:18px;font-size:2rem;color:rgba(21,32,43,.25)}
+    .work{background:#f0eee8;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.work-showcase{display:grid;grid-template-columns:220px minmax(0,1fr);gap:38px}.tabs{display:flex;flex-direction:column;align-self:start;margin:0;border-top:1px solid var(--line)}.tab{position:relative;display:grid;grid-template-columns:38px 1fr;align-items:center;gap:10px;min-height:72px;padding:14px 8px;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--ink-2);text-align:left;font-weight:850;cursor:pointer}.tab:before{content:attr(data-index);color:#929da1;font-size:.94rem;font-weight:900}.tab:after{content:"";position:absolute;right:0;bottom:-1px;width:0;height:3px;background:var(--lime);transition:width .25s ease}.tab[aria-selected="true"]{color:var(--ink)}.tab[aria-selected="true"]:before{color:var(--navy)}.tab[aria-selected="true"]:after{width:100%}.panel-stack{min-width:0}.project-panel[hidden]{display:none}.project-panel{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(320px,.88fr);min-height:520px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);animation:caseIn .3s ease}
+    .project-visual{position:relative;display:block;min-height:500px;padding:0 28px 0 0;background:transparent}.visual-card{position:relative;min-width:0;aspect-ratio:16/9;padding:0;overflow:hidden;border:1px solid #c7cecb;border-radius:12px;background:#dde2e2;box-shadow:0 12px 28px rgba(31,48,57,.08);cursor:zoom-in}.project-visual .visual-card:first-child{width:88%;margin-top:72px}.project-visual .visual-card:nth-child(2){position:absolute;top:210px;right:28px;width:62%;box-shadow:0 20px 42px rgba(31,48,57,.18)}.visual-card picture{display:block;width:100%;height:100%}.visual-card img{width:100%;height:100%;object-fit:cover;object-position:center;transform:scale(1.04);transition:transform .3s ease}.visual-card:hover img{transform:scale(1.08)}.visual-card.focus-top img{object-position:center top;transform:scale(1.08)}.visual-label{position:absolute;left:10px;bottom:10px;min-height:38px;padding:6px 12px;border-radius:99px;background:rgba(29,49,57,.92);color:#fff;font-size:.95rem;font-weight:850}.visual-label.more:after{content:" · 더보기";color:#bfe0dc}.project-info{display:flex;flex-direction:column;justify-content:center;padding:32px 0 32px 34px;border-left:1px solid var(--line)}.project-info h3{margin-bottom:12px;font-size:2rem}.project-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}.tag{display:inline-flex;align-items:center;min-height:36px;padding:6px 11px;border-radius:99px;background:#e4ebe8;color:#40545a;font-size:.94rem;font-weight:800}.project-info .year{color:var(--teal,var(--lime));font-weight:900}.project-info p{color:var(--ink-2)}.project-points{margin:18px 0 24px;padding:0;list-style:none}.project-points li{padding:12px 0;border-top:1px solid var(--line)}.project-points strong{display:block;color:var(--navy)}
+    #panel-desk .project-visual .visual-card:first-child{width:92%;margin-top:52px}#panel-desk .project-visual .visual-card:nth-child(2){top:138px;right:18px;width:31%;aspect-ratio:9/16;background:#fff}#panel-desk .project-visual .visual-card:nth-child(2) img{object-fit:contain;transform:none}#panel-desk .project-visual .visual-card:nth-child(2):hover img{transform:none}
+    .library-callout{display:flex;align-items:center;justify-content:space-between;gap:30px;margin-top:30px;padding:22px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--ink)}.library-callout p{margin:4px 0 0;color:var(--ink-2)}.library-callout .btn{flex:0 0 auto;border-color:var(--line);background:transparent;color:var(--ink)}
+    .career{background:#fff}.career-layout{display:grid;grid-template-columns:320px minmax(0,1fr);gap:42px}.career-summary{position:sticky;top:calc(var(--header) + 28px);align-self:start;padding:30px;border-radius:var(--radius);background:var(--warm)}.career-summary strong{display:block;margin-bottom:10px;font-size:2.6rem;line-height:1}.career-summary p{margin:0;color:var(--ink-2)}.career-list{border-top:2px solid var(--ink)}.career-item{border-bottom:1px solid var(--line)}.career-item summary{display:grid;grid-template-columns:150px 1fr 44px;gap:20px;align-items:center;min-height:102px;padding:22px 4px;cursor:pointer;list-style:none}.career-item summary::-webkit-details-marker{display:none}.career-item .period{color:var(--blue);font-size:.94rem;font-weight:900}.career-item .company{display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:1.24rem;font-weight:900}.org-type{display:inline-flex;align-items:center;min-height:34px;padding:5px 10px;border:1px solid #bac5c0;border-radius:99px;background:#f3f5f3;color:#50605b;font-size:.94rem;font-weight:800}.career-item .role{display:block;margin-top:4px;color:var(--ink-2);font-size:.94rem;font-weight:650}.career-item .plus{display:grid;place-items:center;width:42px;height:42px;border:1px solid var(--line);border-radius:50%;font-size:1.4rem;transition:.2s}.career-item[open] .plus{transform:rotate(45deg);background:var(--navy);color:#fff}.career-detail{padding:0 64px 28px 170px;color:var(--ink-2)}.career-detail p{margin-bottom:16px}.career-detail .tag{margin:4px 4px 0 0}.career-path{margin:0 0 18px;padding:8px 0 8px 18px;border-left:3px solid var(--blue)}.career-path p{margin:0;padding:6px 0}.career-path strong{display:block;color:var(--ink)}
+    .fit{background:var(--navy);color:#fff}.fit .section-number,.fit .section-kicker{color:var(--lime)}.fit .section-copy{color:#c9d8dc}.cap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.cap-card{min-height:280px;padding:26px;border:1px solid rgba(255,255,255,.2);border-radius:22px;background:rgba(255,255,255,.07)}.cap-no{color:var(--lime);font-weight:900}.cap-card h3{margin:36px 0 12px}.cap-card p{margin:0;color:#ccdade}.radar-card{display:grid;grid-template-columns:minmax(360px,.9fr) minmax(0,1.1fr);gap:46px;align-items:center;margin-top:24px;padding:34px;border:1px solid rgba(255,255,255,.2);border-radius:22px;background:rgba(255,255,255,.07)}.radar-copy h3{margin-bottom:8px;font-size:1.9rem}.radar-copy>p{margin-bottom:22px;color:#c9d8dc}.radar-chart{width:100%;max-width:460px;margin-inline:auto}.radar-chart svg{display:block;width:100%;height:auto}.radar-grid{fill:none;stroke:rgba(255,255,255,.25);stroke-width:1.5}.radar-axis{stroke:rgba(255,255,255,.22);stroke-width:1.3}.radar-area{fill:rgba(91,180,169,.42);stroke:#8dd1c9;stroke-width:3}.radar-point{fill:#f0c7a5;stroke:var(--navy-2);stroke-width:2}.radar-legend{display:grid;grid-template-columns:1fr 1fr;gap:0 22px;margin:0;padding:0;list-style:none}.radar-legend li{padding:12px 0;border-top:1px solid rgba(255,255,255,.18)}.radar-legend strong{display:block;color:#fff}.radar-legend span{color:#c9d8dc;font-size:.94rem}.self-card{display:grid;grid-template-columns:.7fr 1.3fr;gap:42px;margin-top:24px;padding:38px;border-radius:22px;background:var(--lime-soft);color:var(--navy-2)}.self-card h3{font-size:2rem}.self-list{margin:0;padding:0;list-style:none}.self-list li{padding:16px 0;border-top:1px solid rgba(15,45,57,.2)}.self-list strong{display:block}.self-list span{color:#465960}
+    .skill-stack{margin-top:24px;border-top:1px solid rgba(255,255,255,.25)}.skill-item{border-bottom:1px solid rgba(255,255,255,.25)}.skill-item summary{display:grid;grid-template-columns:56px 1fr 44px;gap:16px;align-items:center;min-height:90px;cursor:pointer;list-style:none}.skill-item summary::-webkit-details-marker{display:none}.skill-item .skill-no{color:var(--lime);font-weight:900}.skill-item .skill-title{font-size:1.2rem;font-weight:900}.skill-item .skill-plus{font-size:1.5rem}.skill-detail{padding:0 0 28px 72px;color:#d2dfe2}.skill-detail strong{color:#fff}
+    .proof{background:var(--paper)}.proof-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:24px}.quote-card,.evidence-card,.book-card{border:1px solid var(--line);border-radius:var(--radius);background:#fff}.quote-card{padding:38px}.quote-mark{color:var(--blue);font-size:4rem;line-height:1}.quote-card blockquote{margin:10px 0 24px;font-size:1.55rem;font-weight:800;line-height:1.55;letter-spacing:-.035em}.quote-card cite{color:var(--ink-2);font-style:normal}.evidence-card{padding:30px}.evidence-card ul{margin:0;padding:0;list-style:none}.evidence-card li{display:grid;grid-template-columns:72px 1fr;gap:16px;padding:13px 0;border-top:1px solid var(--line)}.evidence-card li:first-child{border-top:0}.evidence-card strong{color:var(--blue)}.book-card{grid-column:1/-1;display:grid;grid-template-columns:280px minmax(0,1fr);gap:48px;align-items:center;padding:38px;border-left:6px solid var(--mocha);background:var(--mocha-soft)}.book-card .section-kicker:before{background:var(--mocha)}.book-cover{position:relative;align-self:center}.book-cover img{width:100%;aspect-ratio:3/4;object-fit:contain;border:1px solid #d4d8d4;border-radius:3px;background:#fff;filter:drop-shadow(0 18px 18px rgba(21,32,43,.16))}.book-card p{color:var(--ink-2)}
+    .contact{padding:86px 0;background:var(--warm);color:var(--navy-2);border-top:1px solid var(--line)}.contact-grid{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end}.contact h2{max-width:780px;margin-bottom:16px}.contact p{margin-bottom:0}.contact .btn.dark{min-width:210px}
+    footer{padding:28px 0;background:var(--navy-2);color:#b9c9ce;font-size:.94rem}.footer-inner{display:flex;justify-content:space-between;gap:30px}
+    dialog{width:min(calc(100% - 32px),1120px);max-height:calc(100vh - 40px);padding:0;border:0;border-radius:26px;background:#fff;color:var(--ink);box-shadow:0 30px 100px rgba(0,0,0,.35)}dialog::backdrop{background:rgba(9,20,27,.78);backdrop-filter:blur(4px)}.dialog-head{position:sticky;top:0;z-index:3;display:flex;justify-content:space-between;gap:20px;padding:24px 28px;border-bottom:1px solid var(--line);background:#fff}.dialog-head h2{margin:0;font-size:1.8rem}.close-btn{display:grid;place-items:center;flex:0 0 auto;width:50px;height:50px;border:1px solid var(--line);border-radius:14px;background:#fff;font-size:1.5rem;cursor:pointer}.dialog-body{padding:28px}.filter-row{display:flex;gap:10px;margin-bottom:24px;overflow:auto}.filter{flex:0 0 auto;min-height:48px;padding:10px 16px;border:1px solid var(--line);border-radius:99px;background:#fff;font-weight:850;cursor:pointer}.filter.active{background:var(--navy);color:#fff}.library-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.library-card{overflow:hidden;border:1px solid var(--line);border-radius:18px;background:#fff}.library-card[hidden]{display:none}.library-card button{display:block;width:100%;padding:0;border:0;background:#eaf0f2;cursor:zoom-in}.library-card img{width:100%;height:190px;object-fit:cover}.library-card .card-copy{padding:18px}.library-card h3{margin-bottom:6px;font-size:1.12rem}.library-card p{margin:0;color:var(--ink-2);font-size:.94rem}.library-card.text-only{padding:20px;background:var(--mist)}
+    #imageDialog{width:min(calc(100% - 24px),1280px);background:#10181c;color:#fff}.image-stage{position:relative;display:grid;place-items:center;min-height:72vh;padding:68px 70px 28px}.image-stage img{max-width:100%;max-height:74vh;object-fit:contain}.image-close{position:absolute;right:16px;top:16px;border-color:#607078;background:#17252b;color:#fff}.image-nav{position:absolute;top:50%;display:grid;place-items:center;width:52px;height:64px;border:1px solid #607078;border-radius:14px;background:rgba(15,28,34,.85);color:#fff;font-size:1.8rem;cursor:pointer}.image-prev{left:12px}.image-next{right:12px}.image-caption{padding:0 24px 24px;text-align:center;color:#d8e3e6;font-size:1rem}
+    .back-top{position:fixed;right:20px;bottom:20px;z-index:70;display:none;place-items:center;width:54px;height:54px;border:0;border-radius:50%;background:var(--navy);color:#fff;box-shadow:var(--shadow);font-size:1.4rem;cursor:pointer}.back-top.show{display:grid}
+    .reveal{opacity:0;transform:translateY(18px);transition:.55s ease}.reveal.visible{opacity:1;transform:none}@keyframes caseIn{from{opacity:.35;transform:translateY(8px)}to{opacity:1;transform:none}}
+    /* Revision 19 · navy editorial system */
+    .work{background:#eef2f6}
+    .hero-lead{color:#e2eaf2}.hero-card-title{color:#dceaf4}.hero-card li:before{color:#b7d0e2}.hero-card small{color:#cad8e4}.fact strong{color:#c5dae9}.fact span{color:#e1e9f0}
+    .work-showcase{grid-template-columns:190px minmax(0,1fr);gap:28px}.project-panel{grid-template-columns:minmax(0,1.45fr) minmax(300px,.55fr)}
+    .project-visual{display:grid;grid-template-columns:minmax(0,1.62fr) minmax(170px,.68fr);gap:14px;align-items:center;min-height:0;padding:44px 22px 44px 0}
+    .project-visual .visual-card:first-child,.project-visual .visual-card:nth-child(2){position:relative;top:auto;right:auto;width:auto;margin-top:0;box-shadow:0 14px 34px rgba(9,31,53,.11)}
+    .visual-card{height:390px;min-height:0;aspect-ratio:auto;border-color:#c7d3de;border-radius:16px;background:#dfe7ee}
+    .visual-card img{transform:none}.visual-card:hover img{transform:scale(1.025)}.visual-card.static{cursor:default}.visual-card.static:hover img{transform:none}.visual-card.focus-top img{object-position:center top;transform:none}
+    .visual-label{left:12px;bottom:12px;min-height:40px;padding:7px 13px;background:rgba(9,31,53,.92)}.visual-label.more:after{color:#c9deed}
+    .tag{background:#e2eaf2;color:#3f5468}.project-info .year{color:var(--blue)}
+    #panel-value .project-visual .visual-card:first-child img{object-position:center 22%}#panel-value .project-visual .visual-card:nth-child(2) img{object-position:left top}
+    #panel-desk .project-visual{grid-template-columns:minmax(0,1.7fr) minmax(160px,.55fr)}#panel-desk .project-visual .visual-card:first-child,#panel-desk .project-visual .visual-card:nth-child(2){position:relative;top:auto;right:auto;width:auto;margin-top:0}#panel-desk .project-visual .visual-card:nth-child(2){aspect-ratio:auto}#panel-desk .project-visual .visual-card:nth-child(2) img{object-fit:contain;object-position:center top}
+    .career-layout{grid-template-columns:340px minmax(0,1fr)}.career-summary>strong{color:var(--navy)}
+    .career-signals{display:grid;gap:10px;margin:24px 0 0;padding:20px 0 0;border-top:1px solid #cbd6e0}.career-signals span{display:grid;grid-template-columns:84px 1fr;gap:10px;color:var(--ink-2)}.career-signals b{color:var(--navy)}
+    .contribution-map{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:24px;padding:42px 0 0}.contribution-map:before{content:"먼저 찾는 동료";position:absolute;inset:0 0 auto;display:grid;place-items:center;height:36px;border-radius:99px;background:var(--navy);color:#fff;font-size:.94rem;font-weight:900}.contribution-map span{display:grid;place-items:center;min-height:54px;padding:8px;border:1px solid #c4d1dc;border-radius:12px;background:#fff;color:var(--navy);font-size:.94rem;font-weight:850;text-align:center}
+    .career-item summary{grid-template-columns:190px 1fr 44px;min-height:112px}.career-item .tenure{display:flex;width:max-content;margin-top:7px;padding:4px 8px;border-radius:99px;background:var(--lime-soft);color:var(--navy);font-size:.9rem}.org-type{border-color:#bac8d5;background:#f3f6f9;color:#4c6074}.career-detail{padding-left:210px}.career-strength{padding:14px 16px;border-left:4px solid var(--blue);border-radius:0 12px 12px 0;background:var(--mist);color:var(--ink)!important;font-weight:780}
+    .fit{background:linear-gradient(145deg,var(--navy-2),var(--navy))}.fit .section-number{color:#c3d8e8}.fit .section-kicker{color:#fff}.fit .section-copy{color:#d2dee9}.cap-no{color:#b7d1e4}.cap-card p{color:#d3dfe9}
+    .radar-card{padding:38px;background:rgba(255,255,255,.065)}.radar-copy .section-kicker{margin-bottom:16px;padding:8px 12px;border:1px solid rgba(255,255,255,.23);border-radius:99px;background:rgba(255,255,255,.11);color:#fff;font-size:1rem;letter-spacing:0}.radar-copy .section-kicker:before{width:18px;background:#bad1e3}.radar-copy h3{max-width:520px;margin-bottom:12px;font-size:2rem;line-height:1.28}.radar-copy>p{margin-bottom:24px;color:#d7e2ec;font-size:1.08rem}.radar-area{fill:rgba(94,146,190,.43);stroke:#a9c8df}.radar-point{fill:#d8b99d}.radar-legend span{color:#cbd9e5}.self-list span{color:#465c70}
+    @media(max-width:980px){
+      .nav{position:absolute;left:24px;right:24px;top:calc(var(--header) - 4px);display:none;flex-direction:column;align-items:stretch;padding:14px;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:var(--shadow)}.nav.open{display:flex}.nav a{padding:13px 16px}.menu-btn{display:flex}
+      .hero-grid{grid-template-columns:1fr;gap:44px}.hero{min-height:0}.hero-card{max-width:700px}.facts{grid-template-columns:repeat(2,1fr)}.fact:nth-child(2){border-right:0}.fact:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.2)}
+      .bento{grid-template-columns:1fr 1fr}.bento-card.large{grid-row:span 1;grid-column:span 2}.work-showcase{grid-template-columns:1fr;gap:22px}.tabs{flex-direction:row;overflow:auto;border-top:0;border-bottom:1px solid var(--line);scrollbar-width:thin}.tab{display:block;flex:0 0 auto;min-height:54px;padding:12px 16px;border-bottom:3px solid transparent;white-space:nowrap}.tab:before,.tab:after{display:none}.tab[aria-selected="true"]{border-bottom-color:var(--lime)}.project-panel{grid-template-columns:1fr;border-top:0}.project-visual{display:flex;gap:14px;min-height:0;padding:0 0 8px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin}.project-visual .visual-card:first-child,.project-visual .visual-card:nth-child(2){position:relative;top:auto;right:auto;width:auto;margin-top:0;box-shadow:0 12px 28px rgba(31,48,57,.08)}.visual-card{flex:0 0 80%;height:auto;min-height:0;aspect-ratio:16/10;scroll-snap-align:center}.project-info{padding:30px 0 0;border-left:0}#panel-desk .project-visual .visual-card:first-child{width:auto;margin-top:0;flex-basis:88%}#panel-desk .project-visual .visual-card:nth-child(2){top:auto;right:auto;width:auto;flex-basis:56%;aspect-ratio:9/16}.career-layout{grid-template-columns:1fr}.career-summary{position:static}.cap-grid{grid-template-columns:1fr 1fr}.radar-card{grid-template-columns:minmax(310px,.9fr) minmax(0,1.1fr);gap:28px}.self-card{grid-template-columns:1fr}.proof-grid{grid-template-columns:1fr}.book-card{grid-template-columns:230px 1fr}.library-grid{grid-template-columns:1fr 1fr}
     }
-    body.menu-open, body.lightbox-open { overflow: hidden; }
-    a { color: inherit; }
-    button, a { -webkit-tap-highlight-color: transparent; }
-    :focus-visible { outline: 3px solid var(--cyan); outline-offset: 4px; }
-    ::selection { color: white; background: var(--blue); }
-
-    .skip-link {
-      position: fixed;
-      z-index: 1000;
-      top: -80px;
-      left: 16px;
-      padding: 10px 16px;
-      color: white;
-      background: var(--ink);
-      border-radius: 999px;
-      transition: top .2s ease;
+    @media(max-width:680px){
+      :root{--header:68px}.wrap{width:min(calc(100% - 32px),var(--max))}html{font-size:18px}body{line-height:1.66}section{padding:68px 0}.brand small{display:none}.brand-mark,.eyebrow,.section-kicker,.radar-legend span,footer{font-size:1rem}
+      .site-header{background:rgba(247,249,251,.96)}.header-inner{gap:14px}.brand{gap:10px}.brand-mark{width:44px;height:44px}.menu-btn{width:48px;height:48px}.nav{left:16px;right:16px;top:calc(var(--header) - 2px)}
+      .hero{padding-top:calc(var(--header) + 54px);padding-bottom:58px}.hero-grid{gap:36px}.hero h1{font-size:clamp(2.5rem,11.8vw,3.45rem);line-height:1.08}.hero-lead{margin-bottom:28px;font-size:1.08rem;line-height:1.72}.hero-actions .btn{width:100%}.hero-card{padding:24px}.hero-card li{padding:16px 0 16px 46px}.hero-card small{font-size:1rem}.facts{margin-top:42px}.fact{padding:17px 10px}.fact strong{font-size:1.2rem}.fact span{font-size:1rem;line-height:1.45}
+      .section-head{grid-template-columns:1fr;gap:10px;margin-bottom:32px}.section-number{font-size:1.04rem}.section-copy{font-size:1.04rem;line-height:1.68}.section-kicker{margin-bottom:10px}.bento{grid-template-columns:1fr;gap:14px}.bento-card.large,.bento-card.wide{grid-column:auto}.bento-card{padding:24px}.bento-card .label{font-size:1rem}.bento-card .big{font-size:1.9rem}
+      .tabs{margin-right:-16px;padding-right:16px}.tab{min-height:58px;padding:13px 16px;font-size:1rem}.project-visual{display:flex;gap:12px;padding-bottom:8px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin}.visual-card{flex:0 0 86%;aspect-ratio:4/3;scroll-snap-align:center}.visual-card.focus-top{order:-1}.visual-label{left:12px;bottom:12px;min-height:40px;padding:7px 13px;font-size:1rem}.project-info{padding:24px 0 0}.project-info h3{font-size:1.72rem}.project-info p{font-size:1.02rem}.tag{font-size:1rem}.project-points{margin-top:16px}.project-points li{padding:13px 0}.library-callout{align-items:flex-start;flex-direction:column;padding:22px 0}.library-callout .btn{width:100%}
+      .career-summary{padding:24px}.career-summary strong{font-size:2.25rem}.career-item summary{grid-template-columns:1fr 48px;gap:12px;min-height:112px;padding:22px 0}.career-item .period{grid-column:1/-1;font-size:1rem}.career-item .tenure{font-size:1rem}.career-item .company{font-size:1.18rem}.career-item .role,.org-type{font-size:1rem}.career-detail{padding:0 0 26px}.cap-grid{grid-template-columns:1fr}.cap-card{min-height:0;padding:24px}.radar-card{grid-template-columns:1fr;gap:18px;padding:24px}.radar-chart{max-width:340px}.radar-copy h3{font-size:1.55rem}.radar-legend{grid-template-columns:1fr}.radar-legend li{padding:11px 0}.self-card{padding:24px}.skill-item summary{grid-template-columns:42px 1fr 32px;min-height:96px}.skill-detail{padding-left:0}
+      .quote-card,.evidence-card{padding:26px 22px}.quote-card blockquote{font-size:1.3rem}.evidence-card li{grid-template-columns:56px 1fr;gap:12px}.book-card{grid-template-columns:1fr;padding:26px 22px 28px;gap:24px}.book-cover{width:min(68%,230px);margin-inline:auto}.book-card h3{font-size:1.45rem}.book-card .btn{width:100%}
+      .contact-grid{grid-template-columns:1fr;gap:28px}.contact .btn.dark{width:100%}.footer-inner{flex-direction:column;gap:8px}.library-grid{grid-template-columns:1fr}.library-card img{height:220px}.library-card p{font-size:1rem}.dialog-head{padding:18px}.dialog-body{padding:18px}.image-stage{min-height:66vh;padding:68px 12px 24px}.image-nav{top:auto;bottom:16px}.image-caption{padding:0 16px 92px;font-size:1rem}.back-top{right:14px;bottom:14px;width:52px;height:52px}
     }
-    .skip-link:focus { top: 16px; }
-
-    .container { width: min(calc(100% - 48px), var(--max)); margin: 0 auto; }
-    .section { padding: clamp(80px, 8vw, 120px) 0; scroll-margin-top: 72px; }
-
-    .site-header {
-      position: fixed;
-      z-index: 100;
-      inset: 0 0 auto;
-      background: rgba(255, 255, 255, .9);
-      border-bottom: 1px solid rgba(220, 225, 232, .9);
-      backdrop-filter: blur(16px);
-    }
-    .nav {
-      height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 2rem;
-    }
-    .brand { display: flex; align-items: center; gap: .8rem; text-decoration: none; }
-    .brand-symbol {
-      width: 34px;
-      height: 34px;
-      display: grid;
-      place-items: center;
-      color: white;
-      background: var(--ink);
-      border-radius: 9px;
-      font-size: .78rem;
-      font-weight: 900;
-      letter-spacing: -.05em;
-    }
-    .brand-text { display: grid; line-height: 1.15; }
-    .brand-text strong { font-size: .9rem; letter-spacing: .04em; }
-      .brand-text span { margin-top: 3px; color: var(--muted); font-size: .67rem; letter-spacing: .02em; }
-    .nav-links { display: flex; align-items: center; gap: 1.45rem; }
-    .nav-links a {
-      position: relative;
-      text-decoration: none;
-      color: #485466;
-      font-size: .84rem;
-      font-weight: 750;
-    }
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -.45rem;
-      width: 100%;
-      height: 2px;
-      background: var(--blue);
-      transform: scaleX(0);
-      transition: transform .2s ease;
-    }
-    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
-    .nav-links .contact-link { padding: .55rem .9rem; color: white; background: var(--ink); border-radius: 9px; }
-    .nav-links .contact-link::after { display: none; }
-    .menu-toggle {
-      display: none;
-      width: 42px;
-      height: 42px;
-      padding: 0;
-      border: 0;
-      border-radius: 10px;
-      background: var(--surface-soft);
-      color: var(--ink);
-      font: inherit;
-      font-size: 1.1rem;
-      cursor: pointer;
-    }
-
-    .hero {
-      position: relative;
-      overflow: hidden;
-      min-height: 770px;
-      padding: 148px 0 78px;
-      color: white;
-      background: var(--ink);
-    }
-    .hero::before {
-      content: "";
-      position: absolute;
-      top: -220px;
-      right: -110px;
-      width: 650px;
-      height: 650px;
-      background: var(--blue);
-      border-radius: 50%;
-      filter: blur(4px);
-      opacity: .9;
-    }
-    .hero::after {
-      content: "";
-      position: absolute;
-      right: 12%;
-      bottom: -160px;
-      width: 360px;
-      height: 360px;
-      border: 90px solid rgba(86, 199, 232, .42);
-      border-radius: 50%;
-    }
-    .hero-grid {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: clamp(3rem, 7vw, 7rem);
-      align-items: end;
-    }
-    .hero-role {
-      display: inline-flex;
-      align-items: center;
-      gap: .7rem;
-      margin-bottom: 1.7rem;
-      color: var(--lime);
-      font-size: .78rem;
-      font-weight: 850;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-    }
-    .hero-role::before { content: ""; width: 34px; height: 2px; background: currentColor; }
-    .hero h1 {
-      max-width: 800px;
-      margin: 0;
-      font-size: clamp(3.2rem, 6.8vw, 7.1rem);
-      line-height: .99;
-      letter-spacing: -.075em;
-      font-weight: 850;
-    }
-    .hero h1 span { color: var(--cyan); }
-    .hero-intro {
-      max-width: 720px;
-      margin: 2rem 0 0;
-      color: #d0d6df;
-      font-size: clamp(1rem, 1.55vw, 1.22rem);
-    }
-    .hero-intro strong { color: white; }
-    .hero-tags { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: 1.8rem; }
-    .hero-tags span { padding: .36rem .68rem; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; color: #e8ecf1; font-size: .72rem; }
-    .hero-action { margin-top: 2.1rem; }
-    .button {
-      min-height: 50px;
-      padding: .75rem 1.15rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: .7rem;
-      border: 1px solid currentColor;
-      border-radius: 10px;
-      text-decoration: none;
-      font-size: .88rem;
-      font-weight: 800;
-      transition: transform .2s ease, background .2s ease;
-    }
-    .button:hover { transform: translateY(-2px); }
-    .button.lime { color: var(--ink); background: var(--lime); border-color: var(--lime); }
-    .button.blue { color: white; background: var(--blue); border-color: var(--blue); }
-    .button.ghost { color: var(--ink); background: transparent; }
-    .arrow { transition: transform .2s ease; }
-    .button:hover .arrow { transform: translateX(4px); }
-
-    .recruiter-card {
-      padding: 1.8rem;
-      background: rgba(255,255,255,.96);
-      color: var(--ink);
-      border-radius: var(--radius);
-      box-shadow: 0 24px 70px rgba(0,0,0,.28);
-    }
-    .recruiter-card-label { color: var(--blue); font-size: .7rem; font-weight: 850; letter-spacing: .13em; }
-    .recruiter-card h2 { margin: .65rem 0 1.4rem; font-size: 1.55rem; line-height: 1.3; letter-spacing: -.04em; }
-    .snapshot-list { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
-    .snapshot-list li { display: grid; grid-template-columns: 32px 1fr; gap: .8rem; padding: 1rem 0; border-top: 1px solid var(--line); color: var(--ink-soft); font-size: .88rem; }
-    .snapshot-list strong { color: var(--ink); }
-    .snapshot-number { color: var(--blue); font-weight: 900; }
-
-    .metrics { position: relative; z-index: 2; margin-top: 4.7rem; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(255,255,255,.2); border-left: 1px solid rgba(255,255,255,.2); }
-    .metric { min-height: 132px; padding: 1.4rem; border-right: 1px solid rgba(255,255,255,.2); border-bottom: 1px solid rgba(255,255,255,.2); }
-    .metric strong { display: block; color: white; font-size: clamp(1.1rem, 1.7vw, 1.4rem); line-height: 1.25; letter-spacing: -.03em; }
-    .metric span { display: block; margin-top: .65rem; color: #aeb8c7; font-size: .78rem; line-height: 1.5; }
-
-    .section-kicker { margin: 0 0 1rem; color: var(--blue); font-size: .75rem; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
-    .section-title { max-width: 880px; margin: 0; font-size: clamp(2.35rem, 4.7vw, 4.8rem); line-height: 1.12; letter-spacing: -.06em; }
-    .section-lead { max-width: 760px; margin: 1.3rem 0 0; color: var(--muted); font-size: clamp(1rem, 1.35vw, 1.14rem); }
-
-    .role-grid { margin-top: 3.8rem; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
-    .role-card { min-height: 360px; padding: 1.8rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--surface); }
-    .role-card:nth-child(2), .role-card:nth-child(4) { background: var(--surface-soft); }
-    .role-index { color: var(--blue); font-size: .72rem; font-weight: 900; }
-    .role-card h3 { margin: 3.7rem 0 1rem; font-size: 1.55rem; line-height: 1.25; letter-spacing: -.04em; }
-    .role-card p { margin: 0; color: var(--muted); font-size: .9rem; }
-    .role-card ul { margin: 1.2rem 0 0; padding: 1rem 0 0 1.05rem; border-top: 1px solid var(--line); color: var(--ink-soft); font-size: .8rem; }
-    .role-card li + li { margin-top: .35rem; }
-
-    .balance-section { background: var(--surface-soft); }
-    .balance-layout { margin-top: 3.8rem; display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(2rem, 6vw, 6rem); }
-    .capability-map { padding: 1.6rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
-    .capability-map h3 { margin: 0; font-size: 1.2rem; }
-    .capability-map > p { margin: .55rem 0 1.5rem; color: var(--muted); font-size: .8rem; }
-    .capability-row { display: grid; grid-template-columns: 135px 1fr 76px; gap: .8rem; align-items: center; padding: .72rem 0; border-top: 1px solid var(--line); }
-    .capability-row strong { font-size: .8rem; }
-    .capability-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
-    .capability-track i { height: 7px; background: #dbe1ea; border-radius: 2px; }
-    .capability-track i.on { background: var(--blue); }
-    .capability-level { color: var(--muted); font-size: .7rem; text-align: right; }
-    .level-legend { display: flex; justify-content: flex-end; gap: .7rem; margin-top: 1rem; color: var(--muted); font-size: .66rem; }
-    .tradeoffs { border-top: 1px solid #cfd6df; }
-    .tradeoff { display: grid; grid-template-columns: 1fr 1.15fr; gap: 1.4rem; padding: 1.35rem 0; border-bottom: 1px solid #cfd6df; }
-    .tradeoff h3 { margin: 0; font-size: 1rem; }
-    .tradeoff h3 span { display: block; margin-top: .35rem; color: var(--muted); font-size: .75rem; font-weight: 600; }
-    .tradeoff p { margin: 0; color: var(--ink-soft); font-size: .82rem; }
-    .tradeoff p strong { color: var(--blue); }
-
-    .impact-section { color: var(--ink); background: var(--surface); }
-    .impact-section .section-kicker { color: var(--blue); }
-    .impact-section .section-lead { color: var(--muted); }
-    .impact-list { margin-top: 3.6rem; border-top: 1px solid var(--line); }
-    .impact-row { display: grid; grid-template-columns: 180px 1fr 1fr; gap: 2.2rem; padding: 2rem 0; border-bottom: 1px solid var(--line); align-items: start; }
-    .impact-value { font-size: clamp(1.65rem, 3vw, 2.75rem); line-height: 1; letter-spacing: -.05em; font-weight: 850; color: var(--blue); }
-    .impact-row h3 { margin: .2rem 0 .6rem; font-size: 1.2rem; }
-    .impact-row p { margin: 0; color: var(--muted); font-size: .88rem; }
-    .impact-source { color: var(--ink-soft); font-size: .8rem; }
-    .impact-source strong { display: block; margin-bottom: .4rem; color: var(--ink); font-size: .72rem; letter-spacing: .06em; }
-
-    .case-stack { margin-top: 4rem; display: grid; gap: 1.2rem; }
-    .case {
-      display: grid;
-      grid-template-columns: .72fr 1.28fr;
-      gap: clamp(2rem, 5vw, 5rem);
-      padding: clamp(2rem, 4vw, 3.5rem);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      background: var(--surface);
-    }
-    .case.primary { color: white; background: var(--ink); border-color: var(--ink); }
-    .case-side { display: flex; flex-direction: column; align-items: flex-start; }
-    .case-period { color: var(--blue); font-size: .72rem; font-weight: 900; letter-spacing: .1em; }
-    .case.primary .case-period { color: var(--lime); }
-    .case h3 { margin: 1rem 0 .7rem; font-size: clamp(2rem, 4vw, 4rem); line-height: 1.05; letter-spacing: -.06em; }
-    .case-role { margin: 0; color: var(--muted); font-size: .86rem; font-weight: 700; }
-    .case.primary .case-role { color: #b9c2cf; }
-    .case-badge { margin-top: auto; padding: .36rem .65rem; color: var(--blue); background: var(--surface-blue); border-radius: 999px; font-size: .68rem; font-weight: 850; }
-    .case.primary .case-badge { color: var(--ink); background: var(--lime); }
-    .case-summary { margin: 0; color: var(--ink-soft); font-size: 1rem; }
-    .case.primary .case-summary { color: #d5dbe4; }
-    .case-columns { margin-top: 1.6rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: .7rem; }
-    .case-column { padding-top: 1rem; border-top: 2px solid var(--line); }
-    .case.primary .case-column { border-color: #3a4557; }
-    .case-column h4 { margin: 0 0 .65rem; color: var(--blue); font-size: .75rem; letter-spacing: .05em; }
-    .case.primary .case-column h4 { color: var(--cyan); }
-    .case-column p, .case-column ul { margin: 0; color: var(--muted); font-size: .8rem; }
-    .case.primary .case-column p, .case.primary .case-column ul { color: #b9c2cf; }
-    .case-column ul { padding-left: 1rem; }
-    .case-column li + li { margin-top: .32rem; }
-
-    .project-rail { margin-top: 1.2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: .8rem; }
-    .project-mini { min-height: 250px; padding: 1.4rem; background: var(--surface-soft); border-radius: var(--radius); }
-    .project-mini span { color: var(--blue); font-size: .7rem; font-weight: 900; }
-    .project-mini h3 { margin: 2.7rem 0 .8rem; font-size: 1.2rem; line-height: 1.3; }
-    .project-mini p { margin: 0; color: var(--muted); font-size: .8rem; }
-
-    .leadership-principles { padding: 1.7rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
-    .leadership-principles h3 { margin: 0; font-size: 1.25rem; }
-    .leadership-principles > p { margin: .55rem 0 1.4rem; color: var(--muted); font-size: .82rem; }
-    .principle-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
-    .principle-list li { display: grid; grid-template-columns: 34px 1fr; gap: .8rem; padding: 1rem 0; border-bottom: 1px solid var(--line); }
-    .principle-list span { color: var(--blue); font-size: .75rem; font-weight: 900; }
-    .principle-list strong { display: block; font-size: .9rem; }
-    .principle-list p { margin: .2rem 0 0; color: var(--muted); font-size: .76rem; }
-
-    .service-grid { margin-top: 3.8rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-    .service-card { overflow: hidden; display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 20px; background: var(--surface); }
-    .service-visual { position: relative; aspect-ratio: 16 / 9; margin: 0; overflow: hidden; background: #e9edf3; border-bottom: 1px solid var(--line); }
-    .service-visual img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: top center; transition: transform .35s ease; }
-    .service-visual.show-full img { object-fit: contain; background: #f6f8fc; }
-    .service-card:hover .service-visual img { transform: scale(1.015); }
-    .service-visual.collage img:first-child { object-position: top center; }
-    .service-visual.collage .screen-inset {
-      position: absolute;
-      left: .85rem;
-      bottom: .85rem;
-      width: 27%;
-      height: 56%;
-      object-fit: cover;
-      object-position: top center;
-      border: 4px solid white;
-      border-radius: 10px;
-      box-shadow: 0 16px 36px rgba(17, 24, 39, .25);
-    }
-    .service-visual figcaption { position: absolute; top: .8rem; right: .8rem; padding: .34rem .58rem; color: white; background: rgba(17, 24, 39, .82); border-radius: 999px; font-size: .65rem; font-weight: 800; }
-    .service-body { flex: 1; padding: 1.5rem; display: flex; flex-direction: column; }
-    .service-meta { display: flex; flex-wrap: wrap; gap: .4rem .8rem; color: var(--blue); font-size: .7rem; font-weight: 850; }
-    .service-card h3 { margin: .7rem 0 .3rem; font-size: clamp(1.55rem, 2.8vw, 2.4rem); line-height: 1.15; letter-spacing: -.045em; }
-    .service-role { margin: 0; color: var(--ink-soft); font-size: .82rem; font-weight: 750; }
-    .service-summary { margin: 1rem 0 0; color: var(--muted); font-size: .86rem; }
-    .service-decisions { margin: 1.1rem 0 0; padding: 1rem 0 0 1.05rem; border-top: 1px solid var(--line); color: var(--ink-soft); font-size: .78rem; }
-    .service-decisions li + li { margin-top: .38rem; }
-    .service-link { margin-top: auto; padding-top: 1.25rem; display: inline-flex; align-items: center; gap: .45rem; color: var(--blue); font-size: .8rem; font-weight: 850; text-underline-offset: 4px; }
-    .service-gallery-button {
-      min-height: 46px;
-      margin-top: .65rem;
-      padding: .7rem .9rem;
-      align-self: flex-start;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--ink);
-      background: var(--surface-soft);
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      font: inherit;
-      font-size: .86rem;
-      font-weight: 800;
-      cursor: pointer;
-    }
-    .service-gallery-button:hover { border-color: #aab4c2; background: white; }
-
-    .operations-case { margin-top: 1rem; padding: clamp(2rem, 4vw, 3.4rem); display: grid; grid-template-columns: .7fr 1.3fr; gap: clamp(2rem, 5vw, 5rem); color: white; background: var(--ink); border-radius: 20px; }
-    .operations-case .case-period { color: var(--lime); }
-    .operations-case h3 { margin: .85rem 0 .6rem; font-size: clamp(2rem, 4vw, 4rem); line-height: 1.05; letter-spacing: -.055em; }
-    .operations-case .service-role { color: #b8c1cf; }
-    .operations-copy { margin: 0; color: #d0d6df; font-size: .95rem; }
-    .operations-points { margin-top: 1.4rem; display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid #3b4658; border-left: 1px solid #3b4658; }
-    .operations-points div { padding: 1rem; border-right: 1px solid #3b4658; border-bottom: 1px solid #3b4658; color: #c7cfda; font-size: .78rem; }
-    .operations-points strong { display: block; margin-bottom: .35rem; color: var(--cyan); }
-
-    .archive-heading { margin-top: 4.5rem; display: flex; align-items: end; justify-content: space-between; gap: 2rem; }
-    .archive-heading h3 { margin: 0; font-size: clamp(1.65rem, 3vw, 2.8rem); letter-spacing: -.045em; }
-    .archive-heading p { max-width: 560px; margin: 0; color: var(--muted); font-size: .84rem; }
-    .archive-grid { margin-top: 1.5rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-    .archive-card { overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: var(--surface-soft); }
-    .archive-visual { position: relative; margin: 0; overflow: hidden; background: #e9edf3; border-bottom: 1px solid var(--line); }
-    .archive-card img { width: 100%; aspect-ratio: 16 / 10; display: block; object-fit: cover; object-position: top center; transition: transform .35s ease; }
-    .archive-card:hover img { transform: scale(1.012); }
-    .archive-label { position: absolute; top: .75rem; right: .75rem; padding: .34rem .6rem; color: white; background: rgba(17,24,39,.84); border-radius: 999px; font-size: .67rem; font-weight: 850; }
-    .archive-card-body { padding: 1.3rem; }
-    .archive-card-body > span { color: var(--blue); font-size: .72rem; font-weight: 900; }
-    .archive-card h4 { margin: .48rem 0 .58rem; font-size: 1.2rem; line-height: 1.3; }
-    .archive-card p { margin: 0; color: var(--muted); font-size: .82rem; }
-    .archive-card a { min-height: 44px; display: inline-flex; align-items: center; margin-top: .7rem; color: var(--ink); font-size: .78rem; font-weight: 800; text-underline-offset: 3px; }
-    .archive-visual.contain img { object-fit: contain; background: white; }
-    .archive-visual.mobile-focus img { object-fit: contain; padding: .75rem; background: #10151e; }
-    .archive-visual.natural-ratio img { height: auto; aspect-ratio: auto; object-fit: contain; background: white; }
-    .archive-details { margin-top: 1rem; }
-    .archive-details summary {
-      min-height: 52px;
-      padding: .8rem 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: .7rem;
-      color: var(--ink);
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      font-size: .84rem;
-      font-weight: 850;
-      cursor: pointer;
-      list-style: none;
-    }
-    .archive-details summary::-webkit-details-marker { display: none; }
-    .archive-details summary:hover { border-color: #aab4c2; background: var(--surface-soft); }
-    .archive-plus { width: 24px; height: 24px; display: grid; place-items: center; color: white; background: var(--blue); border-radius: 50%; font-size: 1.15rem; line-height: 1; transition: transform .2s ease; }
-    .archive-details[open] .archive-plus { transform: rotate(45deg); }
-    .archive-details[open] summary { margin-bottom: .25rem; }
-    .selected-projects { margin-top: 4.5rem; }
-    .selected-projects-head { display: grid; grid-template-columns: .8fr 1.2fr; gap: 2rem; align-items: end; }
-    .selected-projects-head h3 { margin: 0; font-size: clamp(1.65rem, 3vw, 2.8rem); line-height: 1.2; letter-spacing: -.045em; }
-    .selected-projects-head p { max-width: 620px; margin: 0; color: var(--muted); font-size: .95rem; }
-    .selected-project-grid { margin-top: 1.5rem; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
-    .selected-project { min-height: 225px; padding: 1.4rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .selected-project span { color: var(--blue); font-size: .82rem; font-weight: 900; }
-    .selected-project h4 { margin: 1.7rem 0 .6rem; font-size: 1.18rem; line-height: 1.35; }
-    .selected-project p { margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.7; }
-
-    .career-section { background: var(--surface-soft); }
-    .career-layout { margin-top: 3.8rem; display: grid; grid-template-columns: 300px 1fr; gap: clamp(2.5rem, 7vw, 7rem); }
-    .career-aside { align-self: start; position: sticky; top: 105px; }
-    .career-aside h3 { margin: 0; font-size: 1.5rem; line-height: 1.35; }
-    .career-aside p { color: var(--muted); font-size: .88rem; }
-    .career-list { border-top: 1px solid #cfd6df; }
-    .career-item { display: grid; grid-template-columns: 150px 1fr; gap: 2rem; padding: 2rem 0; border-bottom: 1px solid #cfd6df; }
-    .career-period { color: var(--blue); font-size: .75rem; font-weight: 850; }
-    .career-item h3 { margin: 0; font-size: 1.3rem; }
-    .career-item .position { margin: .2rem 0 .8rem; color: var(--muted); font-size: .82rem; font-weight: 700; }
-    .career-item .affiliation { margin: .3rem 0 .15rem; color: var(--blue); font-size: .85rem; font-weight: 850; }
-    .career-item p { margin: 0; color: var(--ink-soft); font-size: .9rem; }
-    .career-projects { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1rem; }
-    .career-projects span { padding: .3rem .55rem; background: var(--surface); border: 1px solid #d6dce4; border-radius: 6px; color: #4e5c6e; font-size: .7rem; }
-
-    .skills-layout { margin-top: 3.8rem; display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
-    .skill-group { min-height: 260px; padding: 1.7rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .skill-group h3 { margin: 0 0 1rem; display: flex; align-items: center; gap: .7rem; font-size: 1.15rem; }
-    .skill-dot { width: 10px; height: 10px; border-radius: 3px; background: var(--blue); transform: rotate(45deg); }
-    .skill-list { display: flex; flex-wrap: wrap; gap: .45rem; }
-    .skill-list span { padding: .42rem .62rem; color: #445166; background: var(--surface-soft); border-radius: 7px; font-size: .75rem; font-weight: 650; }
-    .skill-note { margin: 1rem 0 0; color: var(--muted); font-size: .8rem; }
-    .profile-strip { margin-top: 1rem; display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: .8rem; }
-    .profile-detail { padding: 1.35rem; background: var(--surface-blue); border-radius: 14px; }
-    .profile-detail span { color: var(--blue); font-size: .68rem; font-weight: 900; letter-spacing: .08em; }
-    .profile-detail strong { display: block; margin-top: .65rem; font-size: 1rem; line-height: 1.45; }
-    .profile-detail p { margin: .5rem 0 0; color: var(--muted); font-size: .78rem; }
-
-    .proof-section { color: white; background: var(--ink); }
-    .proof-section .section-kicker { color: var(--lime); }
-    .proof-layout { margin-top: 3.5rem; display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(2rem, 6vw, 6rem); }
-    .quote { margin: 0; font-size: clamp(1.6rem, 3vw, 3rem); line-height: 1.42; letter-spacing: -.035em; }
-    .quote strong { color: var(--cyan); }
-    .quote-source { margin-top: 1.2rem; color: #9ca7b6; font-size: .78rem; }
-    .recognition-list { display: grid; border-top: 1px solid #384355; }
-    .recognition { display: grid; grid-template-columns: 76px 1fr; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid #384355; }
-    .recognition-year { color: var(--lime); font-size: .75rem; font-weight: 850; }
-    .recognition strong { display: block; font-size: .9rem; }
-    .recognition span { display: block; margin-top: .15rem; color: #9ca7b6; font-size: .74rem; }
-    .field-note { margin-top: 4rem; padding: clamp(2rem, 4.5vw, 4rem); display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(2rem, 5vw, 5rem); background: #202a3a; border-radius: 20px; }
-    .field-note-label { color: var(--lime); font-size: .7rem; font-weight: 900; letter-spacing: .12em; }
-    .field-note h3 { margin: .85rem 0 0; font-size: clamp(1.65rem, 3.4vw, 3.3rem); line-height: 1.18; letter-spacing: -.05em; }
-    .field-note-copy { margin: 0; color: #c2cad5; font-size: .9rem; }
-    .field-note-points { margin: 1.3rem 0 0; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid #465164; border-left: 1px solid #465164; }
-    .field-note-point { padding: 1rem; border-right: 1px solid #465164; border-bottom: 1px solid #465164; color: #d7dde5; font-size: .76rem; }
-    .field-note-point strong { display: block; margin-bottom: .35rem; color: var(--cyan); }
-    .field-note a { margin-top: 1.4rem; display: inline-flex; color: white; font-size: .82rem; font-weight: 800; text-underline-offset: 4px; }
-
-    .book-section { background: #f1f5fa; }
-    .book-layout { margin-top: 2.3rem; display: grid; grid-template-columns: minmax(260px, .68fr) 1.32fr; gap: clamp(2.5rem, 7vw, 7rem); align-items: center; }
-    .book-cover {
-      display: block;
-      width: min(100%, 380px);
-      margin: 0 auto;
-      overflow: hidden;
-      border-radius: 14px;
-      box-shadow: 0 22px 48px rgba(28, 46, 78, .16);
-      transition: transform .25s ease, box-shadow .25s ease;
-    }
-    .book-cover:hover { transform: translateY(-4px); box-shadow: 0 28px 56px rgba(28, 46, 78, .2); }
-    .book-cover img { width: 100%; height: auto; display: block; object-fit: contain; }
-    .book-meta { color: var(--blue); font-size: .72rem; font-weight: 900; letter-spacing: .08em; }
-    .book-content h2 { max-width: 760px; margin: .8rem 0 1.5rem; font-size: clamp(2.5rem, 5vw, 5.1rem); line-height: 1.06; letter-spacing: -.06em; }
-    .book-content h3 { margin: 0; font-size: clamp(1.2rem, 2vw, 1.7rem); line-height: 1.4; }
-    .book-copy { max-width: 760px; margin: 1rem 0 0; color: var(--muted); font-size: .9rem; }
-    .book-points { margin-top: 1.5rem; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid #cad4e1; border-left: 1px solid #cad4e1; }
-    .book-points div { padding: 1rem; border-right: 1px solid #cad4e1; border-bottom: 1px solid #cad4e1; }
-    .book-points strong { display: block; color: var(--ink); font-size: .8rem; }
-    .book-points span { display: block; margin-top: .4rem; color: var(--muted); font-size: .72rem; }
-    .book-quote { margin: 1.35rem 0 0; padding-left: 1rem; color: var(--blue-dark); border-left: 3px solid var(--blue); font-size: clamp(1.05rem, 1.8vw, 1.35rem); font-weight: 800; }
-    .book-content .button { margin-top: 1.5rem; }
-    .book-teaser {
-      position: relative;
-      min-height: 245px;
-      margin-top: 1.5rem;
-      overflow: hidden;
-      display: grid;
-      align-items: end;
-      color: white;
-      background: #14223a;
-      border-radius: 16px;
-      text-decoration: none;
-      box-shadow: 0 18px 38px rgba(28, 46, 78, .16);
-    }
-    .book-teaser img {
-      position: absolute;
-      inset: -8% 0 0 auto;
-      width: 62%;
-      height: 120%;
-      object-fit: cover;
-      object-position: top center;
-      filter: blur(3.2px);
-      opacity: .55;
-      transform: rotate(3deg) scale(1.05);
-    }
-    .book-teaser::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #14223a 30%, rgba(20,34,58,.84) 58%, rgba(20,34,58,.25)); }
-    .book-teaser-content { position: relative; z-index: 1; max-width: 72%; padding: 1.55rem; }
-    .book-teaser-label { color: var(--lime); font-size: .82rem; font-weight: 900; letter-spacing: .08em; }
-    .book-teaser blockquote { margin: .75rem 0 .55rem; font-size: clamp(1.25rem, 2.4vw, 2rem); line-height: 1.4; font-weight: 850; letter-spacing: -.035em; }
-    .book-teaser p { margin: 0; color: #cbd5e4; font-size: .9rem; }
-
-    .zoomable { cursor: zoom-in; }
-    .zoomable::after {
-      content: "크게 보기";
-      position: absolute;
-      left: .75rem;
-      bottom: .75rem;
-      z-index: 3;
-      padding: .42rem .7rem;
-      color: white;
-      background: rgba(17, 24, 39, .86);
-      border: 1px solid rgba(255,255,255,.25);
-      border-radius: 999px;
-      font-size: .78rem;
-      font-weight: 850;
-      pointer-events: none;
-    }
-    .zoomable:focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; }
-    .lightbox[hidden] { display: none; }
-    .lightbox {
-      position: fixed;
-      z-index: 1000;
-      inset: 0;
-      padding: clamp(14px, 3vw, 42px);
-      display: grid;
-      place-items: center;
-      background: rgba(8, 13, 24, .94);
-      backdrop-filter: blur(12px);
-    }
-    .lightbox-panel { width: min(1360px, 100%); height: min(900px, calc(100svh - 28px)); display: grid; grid-template-rows: auto 1fr auto; gap: .8rem; }
-    .lightbox-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; color: white; }
-    .lightbox-title { font-size: .95rem; font-weight: 800; }
-    .lightbox-close, .lightbox-nav {
-      min-width: 48px;
-      min-height: 48px;
-      display: grid;
-      place-items: center;
-      color: white;
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.24);
-      border-radius: 50%;
-      font: inherit;
-      font-size: 1.45rem;
-      cursor: pointer;
-    }
-    .lightbox-stage { position: relative; min-height: 0; display: grid; grid-template-columns: 1fr; align-items: center; }
-    .lightbox-prev, .lightbox-next { position: absolute; z-index: 2; top: 50%; transform: translateY(-50%); }
-    .lightbox-prev { left: .45rem; }
-    .lightbox-next { right: .45rem; }
-    .lightbox-image-wrap { min-width: 0; min-height: 0; height: 100%; display: grid; place-items: center; overflow: auto; }
-    .lightbox-image { max-width: 100%; max-height: 100%; width: auto; height: auto; display: block; object-fit: contain; border-radius: 10px; box-shadow: 0 24px 70px rgba(0,0,0,.4); }
-    .lightbox-caption { min-height: 1.6rem; margin: 0; color: #cbd5e4; font-size: .9rem; text-align: center; }
-
-    /* 채용자가 오래 읽어도 피로하지 않도록 작은 보조 문구의 하한을 높입니다. */
-    .brand-text strong { font-size: .96rem; }
-    .brand-text span, .hero-tags span, .recruiter-card-label, .role-index, .case-period,
-    .case-badge, .project-mini span, .service-visual figcaption, .archive-label,
-    .profile-detail span, .field-note-label, .book-meta { font-size: .84rem; }
-    .nav-links a, .section-kicker, .service-meta, .archive-card-body > span,
-    .career-period, .recognition-year { font-size: .84rem; }
-    .role-card p, .role-card ul, .capability-map > p, .capability-row strong,
-    .tradeoff p, .impact-row p, .impact-source, .case-role, .case-column p,
-    .case-column ul, .project-mini p, .leadership-principles > p, .principle-list p,
-    .service-role, .service-summary, .service-decisions, .service-link,
-    .operations-points div, .archive-heading p, .archive-card p, .archive-card a,
-    .archive-details summary, .career-aside p, .career-item .position,
-    .career-item p, .career-projects span, .skill-list span, .skill-note,
-    .profile-detail p, .quote-source, .recognition span, .field-note-copy,
-    .field-note-point, .field-note a, .book-copy, .book-points strong,
-    .book-points span, footer { font-size: .9rem; line-height: 1.7; }
-    .snapshot-list li, .metric span, .case-summary, .operations-copy { font-size: .96rem; line-height: 1.72; }
-
-    .contact-section { padding-bottom: 58px; }
-    .contact-panel { position: relative; overflow: hidden; padding: clamp(2.5rem, 6vw, 5.5rem); color: white; background: var(--blue); border-radius: 24px; }
-    .contact-panel::after { content: "KS"; position: absolute; right: -1rem; bottom: -4.8rem; color: rgba(255,255,255,.1); font-size: 18rem; font-weight: 900; line-height: 1; letter-spacing: -.1em; }
-    .contact-panel > * { position: relative; z-index: 1; }
-    .contact-panel h2 { max-width: 900px; margin: 0; font-size: clamp(2.5rem, 5.8vw, 5.8rem); line-height: 1.05; letter-spacing: -.065em; }
-    .contact-panel p { max-width: 720px; margin: 1.3rem 0 0; color: #dce5ff; }
-    .contact-panel .button { margin-top: 2rem; color: var(--ink); background: var(--lime); border-color: var(--lime); }
-
-    footer { padding: 1.4rem 0 2.3rem; color: var(--muted); font-size: .76rem; }
-    .footer-row { display: flex; justify-content: space-between; gap: 1rem; }
-    .footer-row a { color: var(--ink); text-decoration: none; font-weight: 800; }
-
-    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s ease; }
-    .reveal.visible { opacity: 1; transform: none; }
-
-    @media (max-width: 980px) {
-      .menu-toggle { display: grid; place-items: center; }
-      .nav-links {
-        position: fixed;
-        top: 72px;
-        left: 0;
-        width: 100%;
-        height: calc(100svh - 72px);
-        padding: 1.5rem 20px;
-        display: none;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0;
-        background: white;
-      }
-      .nav-links.open { display: flex; }
-      .nav-links a { padding: 1rem 0; border-bottom: 1px solid var(--line); font-size: 1rem; }
-      .nav-links .contact-link { margin-top: .8rem; text-align: center; }
-      .hero-grid { grid-template-columns: 1fr; align-items: start; }
-      .recruiter-card { max-width: 650px; }
-      .metrics { grid-template-columns: repeat(2, 1fr); }
-      .role-grid { grid-template-columns: repeat(2, 1fr); }
-      .balance-layout { grid-template-columns: 1fr; }
-      .impact-row { grid-template-columns: 150px 1fr; }
-      .impact-source { grid-column: 2; }
-      .case { grid-template-columns: 1fr; }
-      .case-badge { margin-top: 1.1rem; }
-      .project-rail { grid-template-columns: repeat(2, 1fr); }
-      .operations-case { grid-template-columns: 1fr; }
-      .archive-grid { grid-template-columns: repeat(2, 1fr); }
-      .career-layout { grid-template-columns: 1fr; }
-      .career-aside { position: static; display: grid; grid-template-columns: 1fr 180px; gap: 1rem; }
-      .proof-layout { grid-template-columns: 1fr; }
-      .profile-strip { grid-template-columns: 1fr 1fr; }
-      .field-note { grid-template-columns: 1fr; }
-      .book-layout { grid-template-columns: 260px 1fr; gap: 2.5rem; }
-      .book-points { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 680px) {
-      html { font-size: 16px; }
-      .container { width: min(calc(100% - 28px), var(--max)); }
-      .section { padding: 72px 0; scroll-margin-top: 66px; }
-      .nav { height: 66px; }
-      .nav-links { top: 66px; height: calc(100svh - 66px); padding-left: 14px; padding-right: 14px; }
-      .brand-text span { display: none; }
-      .brand, .menu-toggle { min-height: 44px; }
-      .menu-toggle { width: 44px; height: 44px; }
-      .hero { min-height: 0; padding: 112px 0 64px; }
-      .hero::before { width: 420px; height: 420px; top: -190px; right: -180px; }
-      .hero::after { display: none; }
-      .hero h1 { font-size: clamp(2.85rem, 13vw, 3.75rem); line-height: 1.01; }
-      .hero-role { margin-bottom: 1.35rem; font-size: .76rem; letter-spacing: .09em; }
-      .hero-intro { margin-top: 1.6rem; font-size: 1rem; line-height: 1.72; }
-      .hero-tags { margin-top: 1.35rem; }
-      .hero-tags span { padding: .4rem .7rem; font-size: .75rem; }
-      .hero-action { margin-top: 1.7rem; }
-      .recruiter-card { padding: 1.35rem; }
-      .recruiter-card-label { font-size: .75rem; }
-      .recruiter-card h2 { margin-bottom: 1rem; font-size: 1.35rem; }
-      .snapshot-list li { font-size: .9rem; }
-      .metrics { grid-template-columns: repeat(2, 1fr); }
-      .metric { min-height: 118px; padding: 1.1rem; }
-      .metric span { font-size: .8rem; }
-      .section-kicker { margin-bottom: .75rem; font-size: .76rem; letter-spacing: .1em; }
-      .section-title { font-size: clamp(2.15rem, 10.7vw, 3rem); line-height: 1.15; }
-      .section-lead { margin-top: 1rem; font-size: .98rem; }
-      .role-grid { grid-template-columns: 1fr; }
-      .role-grid, .balance-layout, .service-grid, .career-layout, .skills-layout { margin-top: 2.5rem; }
-      .role-card { min-height: 0; padding: 1.4rem; }
-      .role-index, .case-period { font-size: .75rem; }
-      .role-card h3 { margin-top: 2.2rem; font-size: 1.4rem; }
-      .role-card p { font-size: .92rem; }
-      .role-card ul { font-size: .84rem; }
-      .capability-row { grid-template-columns: 112px 1fr 68px; }
-      .capability-map, .leadership-principles { padding: 1.25rem; }
-      .capability-map > p, .leadership-principles > p { font-size: .84rem; }
-      .capability-row strong { font-size: .82rem; }
-      .capability-level { font-size: .74rem; }
-      .level-legend { font-size: .72rem; }
-      .tradeoff { grid-template-columns: 1fr; gap: .6rem; }
-      .tradeoff h3 { font-size: 1.05rem; }
-      .tradeoff h3 span { font-size: .8rem; }
-      .tradeoff p { font-size: .88rem; }
-      .impact-row { grid-template-columns: 1fr; gap: .9rem; }
-      .impact-source { grid-column: auto; }
-      .impact-row p { font-size: .9rem; }
-      .impact-source { font-size: .84rem; }
-      .case { padding: 1.4rem; border-radius: 18px; }
-      .case h3 { font-size: 2.25rem; }
-      .case-role { font-size: .88rem; }
-      .case-summary { font-size: .95rem; }
-      .case-columns { grid-template-columns: 1fr; }
-      .case-column p, .case-column ul { font-size: .86rem; }
-      .project-rail { grid-template-columns: 1fr; }
-      .project-mini { min-height: 210px; }
-      .project-mini p { font-size: .86rem; }
-      .service-grid { grid-template-columns: 1fr; }
-      .service-visual { aspect-ratio: 16 / 10; }
-      .service-visual.collage .screen-inset { left: .55rem; bottom: .55rem; width: 25%; height: 54%; border-width: 3px; }
-      .service-visual figcaption { top: .6rem; right: .6rem; font-size: .69rem; }
-      .service-body { padding: 1.25rem; }
-      .service-meta { font-size: .76rem; }
-      .service-card h3 { font-size: 1.8rem; }
-      .service-role { font-size: .88rem; }
-      .service-summary { font-size: .92rem; }
-      .service-decisions { font-size: .84rem; }
-      .service-link { min-height: 48px; align-items: center; font-size: .86rem; }
-      .operations-case { padding: 1.4rem; border-radius: 18px; }
-      .operations-case h3 { font-size: 2.3rem; }
-      .operations-copy { font-size: .92rem; }
-      .operations-points { grid-template-columns: 1fr; }
-      .operations-points div { font-size: .84rem; }
-      .archive-heading { align-items: start; flex-direction: column; gap: .7rem; }
-      .archive-heading { margin-top: 3.2rem; }
-      .archive-heading p { font-size: .9rem; }
-      .archive-grid { grid-template-columns: 1fr; }
-      .archive-card-body { padding: 1.2rem; }
-      .archive-card-body > span { font-size: .76rem; }
-      .archive-card h4 { font-size: 1.28rem; }
-      .archive-card p { font-size: .88rem; }
-      .archive-label { font-size: .7rem; }
-      .archive-details summary { min-height: 56px; font-size: .88rem; }
-      .selected-projects { margin-top: 3.2rem; }
-      .selected-projects-head { grid-template-columns: 1fr; gap: .7rem; }
-      .selected-projects-head p { font-size: .92rem; }
-      .selected-project-grid { grid-template-columns: 1fr; }
-      .selected-project { min-height: 0; padding: 1.25rem; }
-      .selected-project h4 { margin-top: 1rem; font-size: 1.2rem; }
-      .selected-project p { font-size: .9rem; }
-      .career-aside { grid-template-columns: 1fr; }
-      .career-item { grid-template-columns: 1fr; gap: .7rem; }
-      .career-period { font-size: .8rem; }
-      .career-item h3 { font-size: 1.35rem; }
-      .career-item .position { font-size: .88rem; }
-      .career-item p { font-size: .92rem; }
-      .career-projects span { font-size: .75rem; }
-      .skills-layout { grid-template-columns: 1fr; }
-      .skill-group { min-height: 0; }
-      .skill-group { padding: 1.35rem; }
-      .skill-list span { font-size: .78rem; }
-      .skill-note { font-size: .86rem; }
-      .profile-strip { grid-template-columns: 1fr; }
-      .profile-detail span { font-size: .75rem; }
-      .profile-detail p { font-size: .84rem; }
-      .quote-source, .recognition-year, .recognition span { font-size: .8rem; }
-      .field-note-points { grid-template-columns: 1fr; }
-      .book-layout { grid-template-columns: 1fr; }
-      .book-cover { width: min(82%, 360px); margin: 0 auto; }
-      .book-meta { font-size: .78rem; }
-      .book-content h2 { font-size: clamp(2.35rem, 11vw, 3.15rem); }
-      .book-copy { font-size: .92rem; }
-      .book-points strong { font-size: .86rem; }
-      .book-points span { font-size: .8rem; }
-      .book-teaser { min-height: 280px; }
-      .book-teaser img { width: 82%; opacity: .42; }
-      .book-teaser-content { max-width: 100%; padding: 1.25rem; }
-      .book-teaser p { font-size: .88rem; }
-      .contact-panel { border-radius: 16px; }
-      .contact-panel h2 { font-size: clamp(2.25rem, 11vw, 3.25rem); }
-      .contact-panel p { font-size: .94rem; }
-      .footer-row { flex-direction: column; }
-      footer { font-size: .8rem; }
-      .footer-row a { min-height: 44px; display: inline-flex; align-items: center; }
-      .hero-role, .hero-tags span, .recruiter-card-label, .role-index, .case-period,
-      .service-meta, .service-visual figcaption, .archive-card-body > span,
-      .archive-label, .career-period, .career-projects span, .profile-detail span,
-      .book-meta, .recognition-year, .recognition span { font-size: .875rem; }
-      .role-card ul, .case-column p, .case-column ul, .service-decisions,
-      .operations-points div, .archive-card p, .skill-list span, .profile-detail p,
-      .book-points span { font-size: .9rem; line-height: 1.68; }
-      .service-gallery-button { width: 100%; justify-content: center; font-size: .92rem; }
-      .zoomable::after { left: .6rem; bottom: .6rem; font-size: .8rem; }
-      .lightbox { padding: 10px; }
-      .lightbox-panel { height: calc(100svh - 20px); }
-      .lightbox-stage { grid-template-columns: 1fr; }
-      .lightbox-prev { left: .25rem; }
-      .lightbox-next { right: .25rem; }
-      .lightbox-nav, .lightbox-close { min-width: 46px; min-height: 46px; }
-      .lightbox-title, .lightbox-caption { font-size: .88rem; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
-      .reveal { opacity: 1; transform: none; }
-    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">본문으로 바로가기</a>
-
+  <a class="skip" href="#main">본문 바로가기</a><div class="progress" aria-hidden="true"></div>
   <header class="site-header">
-    <div class="container nav">
-      <a class="brand" href="#top" aria-label="김상화 경력 페이지 처음으로">
-        <span class="brand-symbol" aria-hidden="true">KS</span>
-        <span class="brand-text"><strong>김상화</strong><span>IT 서비스 PM · 기획 리드</span></span>
-      </a>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu" aria-label="메뉴 열기">☰</button>
-      <nav class="nav-links" id="primary-menu" aria-label="주요 메뉴">
-        <a href="#expertise">핵심 역량</a>
-        <a href="#balance">업무 방식</a>
-        <a href="#portfolio">프로젝트</a>
-        <a href="#career">경력</a>
-        <a href="#skills">업무 기반</a>
-        <a href="#book">책·회고</a>
-        <a class="contact-link" href="#contact">연락하기</a>
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="처음으로"><span class="brand-mark">KS</span><span>김상화<small>서비스 기획 · 프로젝트 리드</small></span></a>
+      <nav class="nav" aria-label="주요 메뉴">
+        <a href="#summary">핵심 역량</a><a href="#work">대표 사례</a><a href="#career">경력</a><a href="#fit">업무 방식</a><a href="#proof">검증·회고</a><a href="#contact">연락</a>
       </nav>
+      <button class="menu-btn" type="button" aria-label="메뉴 열기" aria-expanded="false">☰</button>
     </div>
   </header>
 
   <main id="main">
-    <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="container">
+    <section class="hero" id="top">
+      <div class="wrap">
         <div class="hero-grid">
           <div>
-            <p class="hero-role">IT 서비스 PM · 기획·운영 리드</p>
-            <h1 id="hero-title">복잡한 과제를 정리해,<br><span>팀이 실행할 기준으로</span><br>만듭니다.</h1>
-            <p class="hero-intro">
-              직접 설계할 수 있는 실무 감각을 바탕으로 <strong>사용자·사업·개발·운영의 판단을 정렬하고, 팀이 같은 목표로 움직이게 하는 역할</strong>을 해왔습니다. 서비스 구축뿐 아니라 출시 이후 운영과 책임까지 연결합니다.
-            </p>
-            <div class="hero-tags" aria-label="주요 전문 영역">
-              <span>15년+ IT 경력</span><span>서비스 방향 수립</span><span>프로젝트 실행</span><span>조직 간 조율</span><span>IT 운영 체계</span><span>보안·개인정보</span>
-            </div>
-            <div class="hero-action"><a class="button lime" href="#portfolio">대표 프로젝트 확인 <span class="arrow" aria-hidden="true">→</span></a></div>
+            <p class="eyebrow">IT 서비스 PM · 기획·운영 리드</p>
+            <h1>실무에서 시작해,<br>팀이 끝까지 실행하는<br>구조를 만듭니다.</h1>
+            <p class="hero-lead">서비스 기획, 프로젝트 관리, 조직 IT 운영을 함께 경험했습니다. 사용자와 운영 부서의 필요를 기능·정책·일정으로 정리하고, 개발·보안·협력사가 같은 기준으로 실행하도록 조율합니다.</p>
+            <div class="hero-actions"><a class="btn" href="#summary">핵심 역량</a><a class="btn ghost" href="#work">대표 사례</a></div>
           </div>
-          <aside class="recruiter-card" aria-label="채용자를 위한 핵심 요약">
-            <span class="recruiter-card-label">업무 특징</span>
-            <h2>함께 일할 때<br>기대할 수 있는 방식</h2>
-            <ol class="snapshot-list">
-              <li><span class="snapshot-number">01</span><span><strong>방향을 기준으로</strong><br>흩어진 요구를 우선순위와 의사결정 기준으로 정리</span></li>
-              <li><span class="snapshot-number">02</span><span><strong>사람을 실행 구조로</strong><br>역할과 결정권을 나누고 협업의 병목을 조율</span></li>
-              <li><span class="snapshot-number">03</span><span><strong>출시를 운영 책임으로</strong><br>품질·보안·유지보수와 운영 인계까지 연결</span></li>
-            </ol>
+          <aside class="hero-card" aria-label="면접관을 위한 핵심 정보">
+            <div class="hero-card-title">업무의 중심</div>
+            <ol><li>사용자와 운영 부서의 요청을 기능·정책·일정으로 정리합니다.</li><li>기획·개발·운영·보안 사이의 의사결정 기준을 맞춥니다.</li><li>출시 이후 권한·문의·장애·개선까지 운영 조건을 준비합니다.</li></ol>
           </aside>
         </div>
-
-        <div class="metrics" aria-label="입사 후 기여 영역">
-          <div class="metric"><strong>우선순위와 범위 결정</strong><span>무엇을 왜 먼저 할지 팀이 공유할 기준 수립</span></div>
-          <div class="metric"><strong>역할과 의사결정 정렬</strong><span>내부 조직·협력사·전문가의 책임과 결정권 조율</span></div>
-          <div class="metric"><strong>위험을 초기에 드러냄</strong><span>일정·품질·기술·운영 쟁점을 조기에 확인</span></div>
-          <div class="metric"><strong>지속 가능한 운영 설계</strong><span>담당자·문서·대응 기준이 남는 구조 마련</span></div>
+        <div class="facts" aria-label="핵심 경력 요약">
+          <div class="fact"><strong>15년+</strong><span>IT 경력</span></div><div class="fact"><strong>서비스 기획·PM</strong><span>문제 정의부터 운영까지</span></div><div class="fact"><strong>조직 IT·보안</strong><span>인프라와 개인정보보호</span></div><div class="fact"><strong>리더 포지션</strong><span>실무 기반의 판단과 조율</span></div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="expertise" aria-labelledby="expertise-title">
-      <div class="container">
-        <p class="section-kicker">01 · 리더로서의 기여</p>
-        <h2 class="section-title" id="expertise-title">실무를 아는 리더가<br>조직에 더하는 네 가지.</h2>
-        <p class="section-lead">직접 산출물을 만들 수 있지만, 더 중요한 역할은 팀이 판단하고 실행할 수 있는 구조를 만드는 것입니다.</p>
-
-        <div class="role-grid">
-          <article class="role-card reveal">
-            <span class="role-index">01 · 방향 설정</span>
-            <h3>모호한 요구를<br>공통의 목표로</h3>
-            <p>사용자, 사업, 운영자의 요구를 하나의 문제 정의로 묶고 우선순위와 성공 기준을 명확히 합니다.</p>
-            <ul><li>문제·대상 사용자·핵심 가치 정의</li><li>범위와 우선순위 합의</li><li>결정 근거와 제외 범위 기록</li></ul>
-          </article>
-          <article class="role-card reveal">
-            <span class="role-index">02 · 실행 구조</span>
-            <h3>계획을 팀의<br>운영 방식으로</h3>
-            <p>역할, 결정권과 점검 주기를 정해 여러 조직과 협력사가 같은 목표를 향해 움직이게 합니다.</p>
-            <ul><li>역할·책임·의사결정권 정리</li><li>일정·쟁점·리스크 점검 체계</li><li>다직군·외부 협력사 조율</li></ul>
-          </article>
-          <article class="role-card reveal">
-            <span class="role-index">03 · 판단과 품질</span>
-            <h3>기술 쟁점을<br>사업 판단으로</h3>
-            <p>전문가의 기술 판단을 사용 흐름, 비용, 일정과 운영 위험의 언어로 바꾸고 선택 가능한 대안을 만듭니다.</p>
-            <ul><li>연동·데이터 흐름·예외 조건 정리</li><li>품질 기준과 검증 시나리오 합의</li><li>기술 조직과 의사결정 조율</li></ul>
-          </article>
-          <article class="role-card reveal">
-            <span class="role-index">04 · 운영 책임</span>
-            <h3>출시를 지속 가능한<br>조직 역량으로</h3>
-            <p>서비스가 특정 개인에게 의존하지 않도록 담당자, 문서, 권한과 대응 기준을 운영 체계로 남깁니다.</p>
-            <ul><li>유지보수·응답·사고 대응 기준</li><li>보안·개인정보 운영 원칙</li><li>운영 인계와 기록 체계</li></ul>
-          </article>
+    <section class="summary" id="summary">
+      <div class="wrap">
+        <div class="section-head reveal"><div class="section-number">01 <span>/ 05</span></div><div><p class="section-kicker">핵심 역량</p><h2>서비스가 실제 운영될 때까지<br>업무를 연결합니다</h2><p class="section-copy">사용자와 운영 조직의 필요를 서비스 구조로 정리하고, 일정·협력사·보안·운영 조건을 함께 관리해 결과를 만듭니다.</p></div></div>
+        <div class="bento">
+          <article class="bento-card large reveal"><span class="label">핵심 기여</span><h3 class="big">필요를 구체화하고,<br>담당자를 연결하고,<br>운영 가능한 결과로 만듭니다.</h3><p>화면 설계와 함께 범위·일정·협력사·운영 정책·보안 조건을 관리해 프로젝트가 실제 서비스로 이어지게 합니다.</p></article>
+          <article class="bento-card reveal"><span class="label">현재 역할</span><h3>서비스와 조직 IT를 함께 봅니다</h3><p>가치지음 멤버십 기능을 추진하며 서버·네트워크·정보보안·개인정보보호 업무도 담당하고 있습니다.</p><span class="arrow">↗</span></article>
+          <article class="bento-card reveal"><span class="label">일하는 범위</span><h3>기획 → 개발 → 운영</h3><p>요구사항과 정책을 정리하고, 이해관계자를 조율하며, 실제 운영에서 생기는 예외까지 확인합니다.</p><span class="arrow">↗</span></article>
+          <article class="bento-card wide reveal"><span class="label">리더십 방향</span><h3>정답을 독점하기보다 팀이 판단할 기준을 만듭니다</h3><p>초기에는 직접 문제를 풀되, 이후에는 담당자·의사결정권·검토 시점을 명확히 나눠 팀이 지속해서 실행할 수 있도록 합니다.</p></article>
         </div>
       </div>
     </section>
 
-    <section class="section balance-section" id="balance" aria-labelledby="balance-title">
-      <div class="container">
-        <p class="section-kicker">02 · 리더십과 자기인식</p>
-        <h2 class="section-title" id="balance-title">답을 대신 내리기보다<br>팀이 판단할 기준을 만듭니다.</h2>
-        <p class="section-lead">리더의 역할은 모든 일을 직접 하는 것이 아니라, 중요한 문제와 책임이 보이게 만드는 것이라 생각합니다.</p>
-
-        <div class="balance-layout">
-          <div class="leadership-principles reveal" aria-label="리더십 원칙">
-            <h3>일을 이끄는 네 가지 원칙</h3>
-            <p>프로젝트 규모보다 실제로 팀이 움직이는 방식을 중요하게 봅니다.</p>
-            <ol class="principle-list">
-              <li><span>01</span><div><strong>결정 기준을 먼저 합의합니다.</strong><p>목표, 우선순위, 수용 기준과 제외 범위를 초기에 분명히 합니다.</p></div></li>
-              <li><span>02</span><div><strong>쟁점을 숨기지 않습니다.</strong><p>일정·품질·기술·운영 위험을 조기에 드러내 선택 가능한 대안으로 만듭니다.</p></div></li>
-              <li><span>03</span><div><strong>역할과 책임을 분리합니다.</strong><p>누가 검토하고 결정하며 운영할지를 문서와 회의 구조에 반영합니다.</p></div></li>
-              <li><span>04</span><div><strong>팀에 기준을 남깁니다.</strong><p>프로젝트가 끝난 뒤에도 담당자가 이어갈 수 있는 기록과 운영 원칙을 남깁니다.</p></div></li>
-            </ol>
-          </div>
-
-          <div class="tradeoffs">
-            <article class="tradeoff reveal"><h3>완성도와 논리성을 높게 잡는 편<span>결정이 늦어질 위험</span></h3><p>필수·권장·후순위로 범위를 나누고 결정 시한과 마일스톤을 먼저 합의합니다. 세부 완성도는 한 번에 끝내기보다 반복 개선으로 가져갑니다.</p></article>
-            <article class="tradeoff reveal"><h3>문제가 생기면 직접 들어가 해결하는 편<span>리더에게 일이 집중될 위험</span></h3><p>초기 대응 후 담당자와 결정권을 다시 나누고, 같은 문제가 반복되지 않도록 기준과 점검 방식을 남깁니다.</p></article>
-            <article class="tradeoff reveal"><h3>공익·기업 내부 서비스 경험이 중심<span>대규모 소비자 성장 지표 경험은 상대적으로 제한적</span></h3><p>절대 트래픽보다 활성·이탈·사용 맥락을 분석해왔습니다. 커머스·보험 프로젝트 경험을 바탕으로 전환과 재사용 관점의 지표 설계를 강화하고 있습니다.</p></article>
-            <article class="tradeoff reveal"><h3>기술을 이해하고 구조화하는 PM<span>직접 구현하는 개발자는 아님</span></h3><p>연동 조건, 데이터 흐름, 예외와 검증 시나리오를 정리하고 담당 엔지니어의 검토를 거쳐 판단의 정확도를 높입니다.</p></article>
-          </div>
+    <section class="work" id="work">
+      <div class="wrap">
+        <div class="section-head reveal"><div class="section-number">02 <span>/ 05</span></div><div><p class="section-kicker">대표 사례</p><h2>기획의 결과를<br>화면과 운영으로 남겼습니다</h2><p class="section-copy">신규 서비스 총괄, 관리자 기능, 조직 IT 운영까지 서로 다른 환경에서 맡아온 역할입니다.</p></div></div>
+        <div class="work-showcase">
+        <div class="tabs" role="tablist" aria-label="대표 프로젝트 선택">
+          <button class="tab" id="tab-value" role="tab" aria-controls="panel-value" aria-selected="true" data-index="01">가치지음</button>
+          <button class="tab" id="tab-aac" role="tab" aria-controls="panel-aac" aria-selected="false" tabindex="-1" data-index="02">나의AAC</button>
+          <button class="tab" id="tab-it" role="tab" aria-controls="panel-it" aria-selected="false" tabindex="-1" data-index="03">조직 IT·보안</button>
+          <button class="tab" id="tab-desk" role="tab" aria-controls="panel-desk" aria-selected="false" tabindex="-1" data-index="04">서비스데스크 2.0</button>
         </div>
-      </div>
-    </section>
+        <div class="panel-stack">
 
-    <section class="section" id="portfolio" aria-labelledby="portfolio-title">
-      <div class="container">
-        <p class="section-kicker">03 · 대표 서비스와 책임</p>
-        <h2 class="section-title" id="portfolio-title">화면 뒤에서 맡았던<br>판단과 조율의 책임.</h2>
-        <p class="section-lead">기능을 만드는 데서 멈추지 않고 방향과 역할을 정리하고, 위험을 낮추며, 출시 이후 운영 기준까지 연결해왔습니다.</p>
-
-        <div class="service-grid">
-          <article class="service-card reveal">
-            <figure class="service-visual show-full zoomable" tabindex="0" role="button" aria-label="가치지음 관리자 화면 크게 보기"
-              data-gallery="assets/services/reconstructed/valuejiuem-admin-reconstructed.png|assets/services/valuejiuem-signup.png"
-              data-captions="회원 현황·검색·분류와 개인정보 마스킹을 반영한 관리자 화면|가치지음 회원가입 화면">
-              <img src="assets/services/reconstructed/valuejiuem-admin-reconstructed.png" alt="가치지음 회원 현황과 상세 정보를 함께 보는 재구성 관리자 화면" loading="lazy">
-              <figcaption>관리자 CMS · 개인정보 제거 재구성</figcaption>
-            </figure>
-            <div class="service-body">
-              <div class="service-meta"><span>2026 · 진행 중</span><span>가치지음 TF 겸직</span><span>회원·관리자 기능</span></div>
-              <h3>가치지음 멤버십</h3>
-              <p class="service-role">회원가입 개발·관리자 CMS 기능 주도</p>
-              <p class="service-summary">회원과 운영자가 만나는 핵심 흐름을 정의하고, 개발 범위와 우선순위부터 품질 검증과 운영 인계까지 이끌고 있습니다.</p>
-              <ul class="service-decisions"><li>가입·동의·예외·상태별 처리 기준 설계</li><li>운영 업무와 권한을 반영한 관리자 기능 정의</li><li>개발 우선순위·쟁점·품질 검증 관리</li></ul>
-              <button class="service-gallery-button" type="button" data-gallery-trigger>관리자·회원 화면 크게 보기</button>
-              <a class="service-link" href="https://www.ncfoundation.or.kr/info/membership" target="_blank" rel="noopener noreferrer">현재 멤버십 소개 보기 <span aria-hidden="true">↗</span></a>
-            </div>
-          </article>
-
-          <article class="service-card reveal">
-            <figure class="service-visual show-full zoomable" tabindex="0" role="button" aria-label="나의AAC 앱 화면 크게 보기"
-              data-gallery="assets/services/myaac-gallery/Tablet01-1.png|assets/services/myaac-gallery/Mobile01-2.png|assets/services/myaac-gallery/Mobile02.png|assets/services/myaac-gallery/Mobile03.png"
-              data-captions="나의AAC 태블릿 서비스 화면|나의AAC 모바일 상징판 화면|나의AAC 인공지능 음성 설정 화면|나의AAC 사용자·상황판 공유 화면">
-              <img src="assets/services/myaac-gallery/Tablet01-1.png" alt="나의AAC 태블릿 상징판 편집과 의사소통 화면" loading="lazy">
-              <figcaption>공식 고해상도 앱 화면 · 4장</figcaption>
-            </figure>
-            <div class="service-body">
-              <div class="service-meta"><span>2021.10 · 구축 시작</span><span>2024.03.10 · 출시</span></div>
-              <h3>나의AAC</h3>
-              <p class="service-role">총괄 PM · 신규 구축과 출시 후 품질·운영 책임</p>
-              <p class="service-summary">연구 결과, 사용자 요구, 접근성, 개발과 운영 조건을 하나의 서비스 기준으로 정리하고 여러 전문조직의 결정을 조율했습니다.</p>
-              <ul class="service-decisions"><li>연구진·수행사·내부 기술조직의 상충 요구 정리</li><li>접근성·개인정보·운영 조건을 품질 기준에 포함</li><li>앱·커뮤니티·연계 시스템의 품질과 운영 관리</li></ul>
-              <button class="service-gallery-button" type="button" data-gallery-trigger>앱 화면 4장 크게 보기</button>
-              <a class="service-link" href="https://play.google.com/store/apps/details?id=kr.or.myaac.app&amp;hl=ko" target="_blank" rel="noopener noreferrer">구글 플레이에서 앱 보기 <span aria-hidden="true">↗</span></a>
-            </div>
-          </article>
-
-          <article class="service-card reveal">
-            <figure class="service-visual zoomable" tabindex="0" role="button" aria-label="FAIR AI 서비스 화면 크게 보기"><img src="assets/services/fairai.png" alt="FAIR AI 공개 서비스 화면" loading="lazy"><figcaption>공개 서비스 화면</figcaption></figure>
-            <div class="service-body">
-              <div class="service-meta"><span>2023.04 — 2024.05</span><span>AI 윤리 정보 플랫폼</span></div>
-              <h3>FAIR AI</h3>
-              <p class="service-role">총괄 PM · 서비스와 콘텐츠 운영 구조 기획</p>
-              <p class="service-summary">출처와 형식이 다른 뉴스·논문·보고서·행사를 하나의 탐색 경험과 지속 가능한 운영 흐름으로 묶었습니다.</p>
-              <ul class="service-decisions"><li>콘텐츠 분류·검색·갱신 원칙 수립</li><li>자동 수집과 관리자 운영의 역할 구분</li><li>구축 범위·일정·위험·수행사 관리</li></ul>
-              <a class="service-link" href="https://fairai.or.kr/" target="_blank" rel="noopener noreferrer">서비스 보기 <span aria-hidden="true">↗</span></a>
-            </div>
-          </article>
-
-          <article class="service-card reveal">
-            <figure class="service-visual zoomable" tabindex="0" role="button" aria-label="프로젝토리 서비스 화면 크게 보기"><img src="assets/services/projectory.png" alt="프로젝토리 공개 서비스 화면" loading="lazy"><figcaption>공개 서비스 화면</figcaption></figure>
-            <div class="service-body">
-              <div class="service-meta"><span>2022</span><span>멤버십 플랫폼 고도화</span></div>
-              <h3>프로젝토리</h3>
-              <p class="service-role">서비스 기획 · 개발 범위와 수행 관리</p>
-              <p class="service-summary">회원 경험과 관리자 운영 요구를 함께 정리하고, 기능 범위와 개발 쟁점을 관리해 서비스 고도화를 진행했습니다.</p>
-              <ul class="service-decisions"><li>회원·운영자 요구를 하나의 흐름으로 정리</li><li>멤버십과 관리자 기능 범위 정의</li><li>개발 쟁점과 일정 조율</li></ul>
-              <a class="service-link" href="https://www.projectory.or.kr/main" target="_blank" rel="noopener noreferrer">서비스 보기 <span aria-hidden="true">↗</span></a>
-            </div>
-          </article>
-        </div>
-
-        <article class="operations-case reveal">
-          <div>
-            <span class="case-period">2025 — 현재</span>
-            <h3>조직 차원의<br>IT 운영 체계</h3>
-            <p class="service-role">서비스·인프라·업무 시스템·정보보안·개인정보보호 담당</p>
+        <article class="project-panel" id="panel-value" role="tabpanel" aria-labelledby="tab-value">
+          <div class="project-visual">
+            <button class="visual-card zoomable focus-top" type="button" aria-label="가치지음 회원가입 흐름 확대 보기" data-src="assets/services/valuejiuem-gallery/signup-email-pc.png|assets/services/valuejiuem-gallery/signup-consent-pc.png|assets/services/valuejiuem-gallery/signup-email-mobile.png" data-caption="가치지음 회원가입 · 이메일 인증|가치지음 회원가입 · 동의 기준|가치지음 회원가입 · 모바일 이메일 인증" data-src-mobile="assets/services/valuejiuem-gallery/signup-email-mobile.png|assets/services/valuejiuem-gallery/signup-consent-mobile.png|assets/services/valuejiuem-gallery/signup-email-pc.png" data-caption-mobile="가치지음 회원가입 · 모바일 이메일 인증|가치지음 회원가입 · 모바일 동의 기준|가치지음 회원가입 · 이메일 인증"><img src="assets/services/valuejiuem-gallery/signup-email-pc.png" alt="가치지음 회원가입 이메일 인증 화면"><span class="visual-label more">가입 흐름</span></button>
+            <div class="visual-card static" aria-label="가치지음 회원 관리 화면 일부"><img src="assets/services/reconstructed/valuejiuem-admin-reconstructed.png" alt="가치지음 회원 관리 화면 상단 일부"><span class="visual-label">회원 운영</span></div>
           </div>
-          <div>
-            <p class="operations-copy">대외 서비스만 관리하는 PM이 아니라, 재단의 가상·물리 서버와 사업장 네트워크, 업무용 소프트웨어와 전산장비, 출입통제, 정보보안·개인정보보호 법령 이행까지 담당합니다. 서비스 개발과 조직 IT 운영을 분리하지 않고 같은 위험과 책임의 구조로 관리하고 있습니다.</p>
-            <div class="operations-points">
-              <div><strong>개인정보·정보보안</strong>규정과 지침을 새로 세우고, 개인정보 흐름도·점검·사고 대응 절차로 연결</div>
-              <div><strong>서버·네트워크</strong>가상·물리 서버, 클라우드 자원과 서울·판교 등 사업장 유·무선 환경 관리</div>
-              <div><strong>단말·출입 보안</strong>PC·노트북·공용자산, 출입카드·CCTV, 방화벽·매체제어·침해 방지 운영</div>
-              <div><strong>서비스 품질</strong>나의AAC를 비롯한 앱·웹·관리자·연계 시스템의 장애와 품질, 유지보수 관리</div>
-              <div><strong>도구·계약</strong>업무용 소프트웨어와 외주 계약의 범위, 응답 기준, 수행사 책임을 일관되게 정리</div>
-              <div><strong>기술 자문</strong>사업 부서의 대외 서비스에 기술 조건과 운영 위험을 설명하고 실행 가능한 대안을 제시</div>
-            </div>
-          </div>
+          <div class="project-info"><div class="project-meta"><span class="tag">회원 기능</span><span class="tag">관리자 CMS</span><span class="tag">진행 중</span></div><span class="year">2026</span><h3>가치지음 멤버십</h3><p>회원가입과 관리자 CMS를 실제 운영할 수 있도록 정책·화면·개발 협업을 주도하고 있습니다.</p><ul class="project-points"><li><strong>맡은 범위</strong>회원가입 정책과 화면, 회원 관리·검색·분류 기능 기획</li><li><strong>핵심 판단</strong>회원 동의·상태·권한·개인정보 처리 기준을 기능보다 먼저 정리</li><li><strong>기여 역량</strong>신규 기능을 개발 일정뿐 아니라 운영과 보안 조건까지 연결</li></ul><div class="project-links"><a class="btn dark" href="https://www.ncfoundation.or.kr/info/membership" target="_blank" rel="noreferrer">서비스 보기</a></div></div>
         </article>
 
-        <div class="archive-heading">
-          <h3>실무에서 출발한<br>리더십의 기반</h3>
-          <p>초기 경력에는 현장을 직접 이해하고 화면과 업무 흐름을 설계했습니다. 이 경험이 현재 일정표만 관리하지 않고 실무 쟁점을 함께 판단하는 기반이 되었습니다.</p>
+        <article class="project-panel" id="panel-aac" role="tabpanel" aria-labelledby="tab-aac" hidden>
+          <div class="project-visual">
+            <button class="visual-card zoomable" type="button" aria-label="나의AAC 앱 주요 화면 확대 보기" data-src="assets/services/reconstructed/myaac-app-screen-v2.png|assets/services/reconstructed/myaac-voice-screen-v2.png|assets/services/myaac-gallery/Tablet03.png|assets/services/myaac-gallery/Tablet04.png|assets/services/myaac-gallery/Mobile03.png" data-caption="나의AAC 앱 사용 화면 · 원본 자료 기반 재구성|나의AAC 음성 설정 화면 · 원본 자료 기반 재구성|상징판 편집 화면|상황판 공유 화면|사용자 공유 화면 · 모바일"><img src="assets/services/reconstructed/myaac-app-screen-v2.png" alt="나의AAC 앱 사용 화면 재구성"><span class="visual-label">앱 사용 화면</span></button>
+            <button class="visual-card zoomable" type="button" aria-label="나의AAC 설정과 공유 화면 확대 보기" data-src="assets/services/reconstructed/myaac-voice-screen-v2.png|assets/services/myaac-gallery/Tablet03.png|assets/services/myaac-gallery/Tablet04.png|assets/services/myaac-gallery/Mobile03.png|assets/services/reconstructed/myaac-app-screen-v2.png" data-caption="나의AAC 음성 설정 화면 · 원본 자료 기반 재구성|상징판 편집 화면|상황판 공유 화면|사용자 공유 화면 · 모바일|나의AAC 앱 사용 화면 · 원본 자료 기반 재구성"><img src="assets/services/reconstructed/myaac-voice-screen-v2.png" alt="나의AAC 음성 설정 화면 재구성"><span class="visual-label more">음성·편집·공유</span></button>
+          </div>
+          <div class="project-info"><div class="project-meta"><span class="tag">공익 서비스</span><span class="tag">웹·앱</span><span class="tag">총괄 PM</span></div><span class="year">2021.10–2024.03</span><h3>나의AAC</h3><p>신규 서비스의 기획부터 개발·검수·출시·운영 준비까지 총괄했습니다. 2024년 3월 10일 출시했습니다.</p><ul class="project-points"><li><strong>맡은 범위</strong>프로젝트 범위·일정·협력사·검수·출시 조건 총괄</li><li><strong>핵심 판단</strong>사용자의 조작 부담과 접근성 기준을 개발 우선순위에 반영</li><li><strong>기여 역량</strong>장기 프로젝트의 쟁점과 의사결정·검수 기준을 끝까지 관리</li></ul><div class="project-links"><a class="btn dark" href="https://play.google.com/store/apps/details?id=kr.or.myaac.app&amp;hl=ko" target="_blank" rel="noreferrer">앱 보기</a></div></div>
+        </article>
+
+        <article class="project-panel" id="panel-it" role="tabpanel" aria-labelledby="tab-it" hidden>
+          <div class="project-visual">
+            <button class="visual-card zoomable" type="button" data-src="assets/services/reconstructed/rfid-reconstructed.png|assets/services/reconstructed/inventory-reconstructed.png" data-caption="출입·권한 관리 화면 · 자료 기반 재구성|IT 자산 관리 화면 · 자료 기반 재구성"><img src="assets/services/reconstructed/rfid-reconstructed.png" alt="출입 권한 관리 화면 재구성"><span class="visual-label">출입·권한</span></button>
+            <button class="visual-card zoomable" type="button" data-src="assets/services/reconstructed/inventory-reconstructed.png|assets/services/reconstructed/rfid-reconstructed.png" data-caption="IT 자산 관리 화면 · 자료 기반 재구성|출입·권한 관리 화면 · 자료 기반 재구성"><img src="assets/services/reconstructed/inventory-reconstructed.png" alt="IT 자산 관리 화면 재구성"><span class="visual-label">IT 자산</span></button>
+          </div>
+          <div class="project-info"><div class="project-meta"><span class="tag">인프라</span><span class="tag">정보보안</span><span class="tag">개인정보보호</span></div><span class="year">2021.10–현재</span><h3>조직 IT·보안 운영</h3><p>서비스 운영 기반이 되는 서버·네트워크·업무 도구·보안·개인정보보호를 담당합니다.</p><ul class="project-points"><li><strong>맡은 범위</strong>서버·네트워크·클라우드·업무 소프트웨어·전산 장비 운영</li><li><strong>핵심 판단</strong>서비스 편의와 계정·권한·로그·법적 준수 조건을 함께 검토</li><li><strong>기여 역량</strong>기획과 IT 운영을 분리하지 않고 기술·보안 위험을 초기에 반영</li></ul></div>
+        </article>
+
+        <article class="project-panel" id="panel-desk" role="tabpanel" aria-labelledby="tab-desk" hidden>
+          <div class="project-visual">
+            <button class="visual-card zoomable" type="button" data-src="assets/services/portfolio-241215/servicedesk-desktop-private.png|assets/services/portfolio-241215/servicedesk-mobile-list-private.png|assets/services/portfolio-241215/servicedesk-mobile-detail-private.png" data-caption="서비스데스크 2.0 PC 요청 현황 · 개인정보 비식별 처리|서비스데스크 모바일 요청 목록 · 개인정보 비식별 처리|서비스데스크 모바일 처리 상세 · 개인정보 비식별 처리"><img src="assets/services/portfolio-241215/servicedesk-desktop-private.png" alt="개인정보를 비식별 처리한 서비스데스크 2.0 PC 요청 현황 화면"><span class="visual-label">PC 요청 현황</span></button>
+            <button class="visual-card zoomable" type="button" data-src="assets/services/portfolio-241215/servicedesk-mobile-list-private.png|assets/services/portfolio-241215/servicedesk-mobile-detail-private.png|assets/services/portfolio-241215/servicedesk-desktop-private.png" data-caption="서비스데스크 모바일 요청 목록 · 개인정보 비식별 처리|서비스데스크 모바일 처리 상세 · 개인정보 비식별 처리|서비스데스크 2.0 PC 요청 현황 · 개인정보 비식별 처리"><img src="assets/services/portfolio-241215/servicedesk-mobile-list-private.png" alt="개인정보를 비식별 처리한 서비스데스크 모바일 요청 목록 화면"><span class="visual-label">모바일 요청 목록</span></button>
+          </div>
+          <div class="project-info"><div class="project-meta"><span class="tag">사내 서비스</span><span class="tag">업무 흐름</span><span class="tag">운영자 도구</span></div><span class="year">2018</span><h3>서비스데스크 2.0</h3><p>요청자와 처리자의 실제 업무를 분석해 접수·배정·처리·통계 구조를 다시 설계했습니다.</p><ul class="project-points"><li><strong>맡은 범위</strong>사용자 조사, 업무 흐름, 요청 유형·상태·알림·통계 기획</li><li><strong>핵심 판단</strong>반복 문의와 처리 지연의 원인을 화면이 아닌 업무 절차에서 해결</li><li><strong>기여 역량</strong>운영자가 개발 요청 없이 업무 항목을 조정할 수 있는 구조 설계</li></ul></div>
+        </article>
         </div>
-        <div class="archive-grid" aria-label="이전 주요 프로젝트">
-          <article class="archive-card reveal">
-            <figure class="archive-visual zoomable" tabindex="0" role="button" aria-label="서비스데스크 2.0 화면 크게 보기"><img src="assets/services/reconstructed/servicedesk-reconstructed.png" alt="서비스데스크의 요청 현황과 처리 추이를 보여주는 재구성 관리자 화면" loading="lazy"><figcaption class="archive-label">자료 기반 재구성</figcaption></figure>
-            <div class="archive-card-body"><span>2018 · 사내 IT 서비스</span><h4>서비스데스크 2.0</h4><p>사용자 조사에서 시작해 요청·처리·통계 흐름을 다시 설계하고, 이후 변경을 운영자가 설정할 수 있는 구조로 개편했습니다.</p></div>
-          </article>
-          <article class="archive-card reveal">
-            <figure class="archive-visual contain zoomable" tabindex="0" role="button" aria-label="법인차량관리 재구성 모바일 화면 크게 보기">
-              <img src="assets/services/reconstructed/fleet-mobile-reconstructed-v2.png" alt="운행 이력 조회와 운행 기록 입력을 함께 보여주는 법인차량관리 재구성 모바일 화면" loading="lazy"><figcaption class="archive-label">자료 기반 재구성</figcaption></figure>
-            <div class="archive-card-body"><span>2018—2019 · 업무 시스템</span><h4>법인차량관리</h4><p>중단된 프로젝트에 투입돼 현업 불만과 누락된 흐름을 다시 정리했습니다. 특히 모바일 운행 기록부를 중심으로 현장에서 기록하고 관리자가 확인하는 구조를 연결했습니다.</p></div>
-          </article>
-          <article class="archive-card reveal">
-            <figure class="archive-visual natural-ratio zoomable" tabindex="0" role="button" aria-label="무인승차권 키오스크 대표 화면과 전체 발권 흐름 크게 보기"
-              data-gallery="assets/services/reconstructed/kiosk-two-screen-touch-v2.png|assets/services/kiosk-flow.png"
-              data-captions="목적지 선택과 발권 확인을 두 화면으로 재구성하고 터치 조작을 표현한 대표 화면|목적지·날짜·왕복·결제로 이어지는 전체 발권 흐름 설계">
-              <img src="assets/services/reconstructed/kiosk-two-screen-touch-v2.png" alt="목적지 선택과 발권 확인 화면, 손가락 터치 동작을 함께 표현한 무인승차권 키오스크 재구성 화면" loading="lazy"><figcaption class="archive-label">자료 기반 재구성</figcaption></figure>
-            <div class="archive-card-body"><span>2018 · 현장형 서비스</span><h4>무인승차권 키오스크</h4><p>기존 키오스크의 사용성 문제를 분석하고, 선택 과정을 단순화해 목적지·날짜·결제까지 이어지는 발권 흐름을 다시 설계했습니다.</p></div>
-          </article>
-          <article class="archive-card reveal">
-            <figure class="archive-visual zoomable" tabindex="0" role="button" aria-label="한살림 장보기 화면 크게 보기"><img src="assets/services/hansalim.png" alt="한살림 장보기 현재 공개 서비스 화면" loading="lazy"><figcaption class="archive-label">공개 서비스 화면</figcaption></figure>
-            <div class="archive-card-body"><span>2021 · 이커머스 개편 참여</span><h4>한살림 장보기</h4><p>회원가입·탈퇴, 상품조회와 공통 화면을 설계했습니다. 해당 개편 서비스는 웹어워드 생활쇼핑몰 부문 최우수상을 수상했습니다.</p><a href="https://shop.hansalim.or.kr/shopping/spMain.do" target="_blank" rel="noopener noreferrer">현재 서비스 보기 ↗</a></div>
-          </article>
         </div>
 
-        <details class="archive-details">
-          <summary><span class="archive-plus" aria-hidden="true">+</span><span>참여 서비스 더 보기</span></summary>
-          <div class="archive-grid" aria-label="추가 참여 프로젝트">
-            <article class="archive-card">
-              <figure class="archive-visual natural-ratio zoomable" tabindex="0" role="button" aria-label="온라인 보험 앱 재구성 화면 크게 보기"><img src="assets/services/reconstructed/online-insurance-reconstructed-v2.png" alt="내 보험 조회와 보장 분석, 맞춤 추천을 보여주는 온라인 보험 앱 재구성 화면" loading="lazy"><figcaption class="archive-label">자료 기반 재구성</figcaption></figure>
-              <div class="archive-card-body"><span>2021 · 보험 앱 구축 참여</span><h4>온라인 보험 앱</h4><p>보험 조회, 보장 분석·추천, 전문가 상담을 포함한 서비스에서 관리자 화면, 고객센터와 일부 사용자 화면을 기획했습니다.</p></div>
-            </article>
-            <article class="archive-card">
-              <figure class="archive-visual natural-ratio zoomable" tabindex="0" role="button" aria-label="RFID 자산통제 화면 크게 보기"><img src="assets/services/reconstructed/rfid-reconstructed.png" alt="자산 현황과 반출입, 경보를 보여주는 RFID 자산통제 재구성 관리자 화면" loading="lazy"><figcaption class="archive-label">자료 기반 재구성</figcaption></figure>
-              <div class="archive-card-body"><span>2015 · 자산·보안 시스템</span><h4>RFID 자산통제</h4><p>Active RFID를 부착한 보안자산의 반입·반출과 지정 구역 이탈을 모니터링하는 사용자·관리자 화면을 설계했습니다.</p></div>
-            </article>
-            <article class="archive-card">
-              <figure class="archive-visual zoomable" tabindex="0" role="button" aria-label="엔씨아이티에스 홈페이지 화면 크게 보기"><img src="assets/services/ncits-website.png" alt="엔씨아이티에스 과거 공식 홈페이지 공개 화면" loading="lazy"><figcaption class="archive-label">과거 공개 화면</figcaption></figure>
-              <div class="archive-card-body"><span>2016 · 기업 웹사이트</span><h4>엔씨아이티에스 공식 홈페이지</h4><p>사업과 기술 역량을 외부 방문자가 이해할 수 있도록 정보 구조와 주요 콘텐츠를 정리해 공식 홈페이지 구축을 진행했습니다.</p></div>
-            </article>
-            <article class="archive-card">
-              <figure class="archive-visual zoomable" tabindex="0" role="button" aria-label="면접관 교육영상 관리 화면 크게 보기"><img src="assets/services/reconstructed/interviewer-training-reconstructed.png" alt="면접관 교육영상 시청과 이수 상태를 보여주는 재구성 화면" loading="lazy"><figcaption class="archive-label">자료 기반 재구성</figcaption></figure>
-              <div class="archive-card-body"><span>2017—2018 · 교육 운영</span><h4>면접관 교육영상 시청·관리</h4><p>영상 시청과 이수 판정, 예외 처리, 관리자 확인 흐름을 설계하고 버퍼링·동시 접속 등 실제 운영 조건을 개발 범위에 반영했습니다.</p></div>
-            </article>
-            <article class="archive-card">
-              <figure class="archive-visual zoomable" tabindex="0" role="button" aria-label="현대캐피탈 배구단 전력분석 화면 크게 보기"><img src="assets/services/reconstructed/volleyball-analysis-reconstructed.png" alt="경기 영상과 선수·전술 데이터를 함께 보는 배구 전력분석 재구성 화면" loading="lazy"><figcaption class="archive-label">자료 기반 재구성</figcaption></figure>
-              <div class="archive-card-body"><span>2015 · 스포츠 분석 · 일부 참여</span><h4>현대캐피탈 배구단 전력분석</h4><p>경기 영상과 분석 데이터를 앱에서 탐색하는 사용자·관리자 화면을 기획하고, 서비스에 필요한 보안 솔루션을 검토했습니다.</p></div>
-            </article>
-            <article class="archive-card">
-              <figure class="archive-visual contain zoomable" tabindex="0" role="button" aria-label="상품 라인업 사이트 화면 크게 보기"><img src="assets/services/product-lineup.png" alt="제품 분류와 상세 정보를 보여주는 상품 라인업 사이트 과거 화면" loading="lazy"><figcaption class="archive-label">과거 공개 화면</figcaption></figure>
-              <div class="archive-card-body"><span>2014 · 제품 정보 서비스</span><h4>상품 라인업 사이트</h4><p>제품군별 탐색과 문의, 맞춤 정보 제공, 운영자의 콘텐츠 갱신 흐름을 함께 고려해 사용자·관리자 화면을 설계했습니다.</p></div>
-            </article>
-            <article class="archive-card">
-              <figure class="archive-visual zoomable" tabindex="0" role="button" aria-label="IT 문의 A/S 연동과 해피콜 화면 크게 보기"><img src="assets/services/reconstructed/helpdesk-happycall-reconstructed.png" alt="IT 문의와 A/S 처리, 해피콜 만족도를 연결한 재구성 화면" loading="lazy"><figcaption class="archive-label">자료 기반 재구성</figcaption></figure>
-              <div class="archive-card-body"><span>2013 · 문의 처리 개선</span><h4>IT 문의·A/S 연동 및 해피콜</h4><p>분리돼 있던 헬프데스크와 A/S 흐름을 연결하고, 처리 결과와 만족도 통계를 같은 운영 체계에서 확인하도록 개선했습니다.</p></div>
-            </article>
-            <article class="archive-card">
-              <figure class="archive-visual zoomable" tabindex="0" role="button" aria-label="재고자산관리 화면 크게 보기"><img src="assets/services/reconstructed/inventory-reconstructed.png" alt="자산 현황, 사용자, 위치와 이동 이력을 보여주는 재구성 화면" loading="lazy"><figcaption class="archive-label">자료 기반 재구성</figcaption></figure>
-              <div class="archive-card-body"><span>2012—2013 · 자산관리</span><h4>재고자산관리 시스템</h4><p>엑셀 중심 관리를 시스템으로 전환하고 ERP 연계, 자산 상태·현재 사용자·입출고와 이동 이력을 조회하는 흐름을 설계했습니다.</p></div>
-            </article>
-            <article class="archive-card">
-              <figure class="archive-visual zoomable" tabindex="0" role="button" aria-label="IT 헬프데스크 문의처리 화면 크게 보기"><img src="assets/services/reconstructed/helpdesk-reconstructed.png" alt="문의 목록, 요청자 장비와 처리 이력을 함께 보는 재구성 헬프데스크 화면" loading="lazy"><figcaption class="archive-label">자료 기반 재구성</figcaption></figure>
-              <div class="archive-card-body"><span>2011—2013 · 운영 개선</span><h4>IT 헬프데스크 문의처리</h4><p>현업에서 쓰던 엑셀 기록과 ERP의 장비·사용자 정보를 연결해, 반복 문의를 이력과 데이터로 관리하는 기획의 출발점이 됐습니다.</p></div>
-            </article>
-          </div>
-        </details>
-
-        <div class="selected-projects">
-          <div class="selected-projects-head">
-            <h3>화면보다 역할로 남은<br>선별 프로젝트</h3>
-            <p>협업 도구, 금융, 공공 환경, 대중교통, 기업 업무와 스포츠 운영까지 서로 다른 현장에서 요구를 구조화하고 개발·운영의 접점을 정리해왔습니다.</p>
-          </div>
-          <div class="selected-project-grid" aria-label="이미지 없이 정리한 선별 프로젝트">
-            <article class="selected-project reveal"><span>2020—2021 · 협업 도구</span><h4>LG U+ 그룹웨어 상품 경쟁력 강화</h4><p>그룹웨어 상품 경쟁력 강화 프로젝트에서 서비스 기획을 이끌었습니다.</p></article>
-            <article class="selected-project reveal"><span>2021 · 사내 복지</span><h4>임직원 메디컬센터 모바일 웹</h4><p>임직원이 모바일에서 의료 지원 서비스를 이용할 수 있도록 신규 화면과 기능을 기획했습니다.</p></article>
-            <article class="selected-project reveal"><span>2019—2020 · 공공 환경</span><h4>미세먼지 앱 서비스</h4><p>미세먼지 정보를 모바일에서 확인하는 앱 서비스의 화면과 사용 흐름을 기획했습니다.</p></article>
-            <article class="selected-project reveal"><span>2020 · 대중교통</span><h4>버스정보시스템 차내단말기 고도화</h4><p>버스 차내단말기 프로그램 고도화 기획에 참여했습니다.</p></article>
-            <article class="selected-project reveal"><span>2013—2019 · 기업 업무</span><h4>전자결재·평가·연말정산·메디컬센터</h4><p>인사·복지·결재 등 서로 다른 규칙을 가진 사내 시스템에서 사용자 화면, 관리자 정책과 예외 처리를 설계했습니다.</p></article>
-            <article class="selected-project reveal"><span>2013—2019 · 스포츠 운영</span><h4>NC 다이노스 티켓 추첨·선수정보 시스템</h4><p>임직원 티켓 추첨과 선수정보 시스템의 신규 개발을 기획했습니다.</p></article>
-          </div>
-        </div>
+        <div class="library-callout reveal"><div><strong>기타 참여 프로젝트</strong><p>공익 서비스 · 조직 시스템 · 현장·모바일</p></div><button class="btn" type="button" id="openLibrary">전체 사례 보기</button></div>
       </div>
     </section>
 
-    <section class="section career-section" id="career" aria-labelledby="career-title">
-      <div class="container">
-        <p class="section-kicker">04 · 경력</p>
-        <h2 class="section-title" id="career-title">운영 실무에서 시작해<br>조직의 실행을 이끄는 역할로.</h2>
-
+    <section class="career" id="career">
+      <div class="wrap">
+        <div class="section-head reveal"><div class="section-number">03 <span>/ 05</span></div><div><p class="section-kicker">경력</p><h2>IT 운영에서 시작해<br>서비스와 프로젝트를 책임해 왔습니다</h2><p class="section-copy">조직 내부 운영을 이해한 뒤 서비스 기획과 프로젝트 관리로 역할을 확장했고, 현재는 조직 IT·보안까지 함께 담당합니다.</p></div></div>
         <div class="career-layout">
-          <aside class="career-aside">
-            <div><h3>실무자에서 PM,<br>서비스·IT 운영 리드까지.</h3><p>2011년 화면과 업무 흐름을 설계하는 기획자로 시작해, 프로젝트의 범위와 일정, 협력사, 출시 이후 운영까지 책임지는 PM으로 역할을 넓혀왔습니다.</p></div>
-          </aside>
-
+          <aside class="career-summary reveal"><strong>15년+</strong><p>한 조직에서는 깊이를 쌓고, 서로 다른 환경에서는 새로운 문제를 빠르게 익혔습니다.</p><div class="career-signals"><span><b>8년 7개월</b>동일 근무지 장기 근속</span><span><b>4가지 환경</b>그룹 IT·개발사·에이전시·비영리</span><span><b>역할 확장</b>운영 → 기획·PM → IT·보안</span></div><div class="contribution-map" aria-label="현장에서 동료들이 찾는 네 가지 기여 영역"><span>서비스 판단</span><span>조직 IT 자문</span><span>보안·개인정보</span><span>장비·현장 지원</span></div></aside>
           <div class="career-list">
-            <article class="career-item reveal">
-              <span class="career-period">2021.10 — 현재</span>
-              <div><h3>재단법인 엔씨문화재단</h3><p class="position">경영지원팀 매니저 · IT 서비스·인프라·보안 운영</p><p>나의AAC 신규 구축과 출시 후 운영, FAIR AI·프로젝토리·대표 홈페이지의 품질과 연계 시스템을 담당했습니다. 현재는 가상·물리 서버와 사업장 네트워크, 업무용 소프트웨어와 전산장비, 출입통제, 정보보안·개인정보보호 법령 이행과 사고 대응 체계까지 맡고 있습니다. 2026년부터 가치지음 TF를 겸직하며 회원가입 개발과 관리자 CMS 기능의 기획·개발 관리·품질 검증을 주도하고 있습니다.</p><div class="career-projects"><span>나의AAC</span><span>가치지음 TF</span><span>FAIR AI</span><span>프로젝토리</span><span>서버·네트워크</span><span>업무용 소프트웨어</span><span>전산장비·출입통제</span><span>정보보안·개인정보보호</span></div></div>
-            </article>
-            <article class="career-item reveal">
-              <span class="career-period">2020.12 — 2021.10</span>
-              <div><h3>주식회사 프레임아웃</h3><p class="position">인사이트·기획팀 매니저(과장) · 서비스 기획</p><p>LG U+ 그룹웨어 상품 경쟁력 강화, 키움에셋 온라인 보험 앱, 한살림 장보기 개편에서 앱·웹·관리자 서비스의 정책과 화면을 기획했습니다.</p><div class="career-projects"><span>LG U+ 그룹웨어</span><span>온라인 보험</span><span>한살림 장보기</span></div></div>
-            </article>
-            <article class="career-item reveal">
-              <span class="career-period">2019.12 — 2020.08</span>
-              <div><h3>주식회사 아라소프트</h3><p class="position">개발팀 과장 · 모바일·웹 서비스 기획</p><p>미세먼지 앱 서비스와 버스정보시스템 차내단말기 프로그램 고도화 등 공공·교통 영역의 모바일·웹 기획을 수행했습니다.</p><div class="career-projects"><span>미세먼지 앱 서비스</span><span>버스정보시스템 차내단말기</span></div></div>
-            </article>
-            <article class="career-item reveal">
-              <span class="career-period">2013.01 — 2019.12</span>
-              <div><h3>주식회사 엔씨아이티에스</h3><p class="position">개발실 기획팀 과장 · 사내 시스템 PM</p><p>주식회사 엔씨와 관계사의 서비스데스크, 전자결재, 평가, 연말정산, 자산, 출입통제, 메디컬센터, 임직원 티켓 추첨·선수정보 등 다양한 업무 시스템을 기획·구축·운영했습니다. 운영 요청을 처리하는 역할에서 출발해 프로젝트 방향과 일정, 화면·데이터 구조를 책임지는 역할로 성장했습니다.</p><div class="career-projects"><span>서비스데스크</span><span>업무 시스템</span><span>평가·인사</span><span>자산·보안</span><span>NC 다이노스</span></div></div>
-            </article>
-            <article class="career-item reveal">
-              <span class="career-period">2011.04 — 2013.01</span>
-              <div><h3>주식회사 그린맨파워</h3><p class="position">엔씨아이티에스 파견 · 운영팀 주임</p><p>자산관리, IT 헬프데스크와 A/S 연동 시스템을 운영하며 사용자 문의를 분석하고 기능 개선으로 연결했습니다. 현장의 반복 문제를 시스템으로 바꾸는 기획 경력의 출발점이었습니다.</p><div class="career-projects"><span>IT 헬프데스크</span><span>자산관리</span><span>A/S 연동</span></div></div>
-            </article>
+            <details class="career-item"><summary><span class="period">2021.10.05–현재<span class="tenure">4년 10개월</span></span><span><span class="company">재단법인 엔씨문화재단 <span class="org-type">비영리재단</span></span><span class="role">경영지원팀 · 매니저</span></span><span class="plus">+</span></summary><div class="career-detail"><p>나의AAC 총괄 PM, 가치지음 멤버십 기능 추진, 재단 웹서비스 운영과 함께 서버·네트워크·업무 도구·정보보안·개인정보보호를 담당합니다.</p><p class="career-strength">서비스 의사결정부터 노트북·계정·네트워크 문제와 보안 자문까지, IT와 관련된 일이 생기면 동료들이 먼저 찾는 역할을 해왔습니다.</p><span class="tag">서비스 PM</span><span class="tag">조직 IT</span><span class="tag">정보보안</span><span class="tag">개인정보보호</span></div></details>
+            <details class="career-item"><summary><span class="period">2020.12.23–2021.10.01<span class="tenure">9개월</span></span><span><span class="company">(주)프레임아웃 <span class="org-type">디지털 에이전시</span></span><span class="role">Insight &amp; Planning Team · 매니저(과장)</span></span><span class="plus">+</span></summary><div class="career-detail"><p>LG U+ 관련 서비스, 온라인 보험, 한살림 장보기·생활쇼핑 등 여러 고객사의 디지털 서비스에서 요구사항·정책·화면·운영 흐름을 기획했습니다.</p><p class="career-strength">서로 다른 산업의 고객·사용자·개발 조건을 짧은 시간 안에 이해하고, 화면과 정책 문서로 구체화했습니다.</p><span class="tag">웹·모바일 기획</span><span class="tag">고객 협의</span><span class="tag">화면 설계</span></div></details>
+            <details class="career-item"><summary><span class="period">2019.12.02–2020.08.01<span class="tenure">8개월</span></span><span><span class="company">(주)아라소프트 <span class="org-type">소프트웨어 개발사</span></span><span class="role">개발3팀 · 과장</span></span><span class="plus">+</span></summary><div class="career-detail"><p>미세먼지 앱 서비스와 버스터미널 안내 프로그램 개선 등 모바일·현장 서비스의 요구사항과 화면, 개발 협업을 담당했습니다.</p><p class="career-strength">모바일 앱과 키오스크처럼 사용 환경이 분명한 서비스에서 기획과 개발 사이의 실행 조건을 조율했습니다.</p><span class="tag">앱 서비스</span><span class="tag">현장 서비스</span><span class="tag">개발 협업</span></div></details>
+            <details class="career-item"><summary><span class="period">2011.04.11–2019.12.01<span class="tenure">8년 7개월</span></span><span><span class="company">엔씨아이티에스 근무 <span class="org-type">그룹 IT 서비스</span></span><span class="role">운영팀 주임 → 개발실 기획팀 과장</span></span><span class="plus">+</span></summary><div class="career-detail"><div class="career-path"><p><strong>2011.04.11–2012.12.31</strong>(주)그린맨파워 소속 · 엔씨아이티에스 파견 · 운영팀 주임</p><p><strong>2013.01.01–2019.12.01</strong>(주)엔씨아이티에스 · 개발실 기획팀 과장</p></div><p>같은 근무지에서 사내 IT 서비스 운영으로 시작해 프로젝트 관리로 역할을 확장했습니다. 서비스데스크, 전자결재, 평가, 연말정산, 자산, 출입통제, 의료원 모바일 웹, 프로야구단 관련 서비스 등을 담당했습니다.</p><p class="career-strength">8년 7개월 동안 같은 현장의 업무와 사람을 깊이 이해하며 운영자에서 프로젝트 기획·관리 책임자로 성장했습니다.</p><span class="tag">IT 운영</span><span class="tag">프로젝트 관리</span><span class="tag">사내 시스템</span><span class="tag">협력사 관리</span></div></details>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="skills" aria-labelledby="skills-title">
-      <div class="container">
-        <p class="section-kicker">05 · 리더의 실무 기반</p>
-        <h2 class="section-title" id="skills-title">실무를 이해하기 때문에<br>판단과 위임이 구체적입니다.</h2>
-        <p class="section-lead">기술 자체를 과장하기보다, 각 전문조직과 대화하고 품질과 운영 기준을 결정하는 데 활용해온 기반을 정리했습니다.</p>
-
-        <div class="skills-layout">
-          <article class="skill-group reveal"><h3><span class="skill-dot"></span>문제 정의와 설계</h3><div class="skill-list"><span>정보구조</span><span>요구사항</span><span>정책</span><span>화면 설계</span><span>업무 흐름</span><span>관리자 기능</span><span>접근성</span></div><p class="skill-note">사용자와 운영자의 요구를 개발자가 구현하고 검증 담당자가 확인할 수 있는 기준으로 만듭니다.</p></article>
-          <article class="skill-group reveal"><h3><span class="skill-dot"></span>프로젝트 운영</h3><div class="skill-list"><span>일정·범위</span><span>제안요청서</span><span>서비스수준협약</span><span>예산·계약</span><span>리스크</span><span>협력사 관리</span><span>쟁점 추적</span></div><p class="skill-note">기획부터 계약, 개발, 검수와 운영까지 전체 연결 관계와 의사결정을 관리합니다.</p></article>
-          <article class="skill-group reveal"><h3><span class="skill-dot"></span>데이터 활용·기술 협업</h3><div class="skill-list"><span>사용자 행동 데이터</span><span>서비스 로그</span><span>연동 조건</span><span>데이터 흐름</span><span>예외 정의</span><span>검증 시나리오</span></div><p class="skill-note">세부 구현을 직접 주장하기보다 데이터를 판단 근거로 쓰고 엔지니어와 기술 선택의 조건을 합의합니다.</p></article>
-          <article class="skill-group reveal"><h3><span class="skill-dot"></span>인프라·조직 IT 운영</h3><div class="skill-list"><span>가상·물리 서버</span><span>클라우드</span><span>사업장 네트워크</span><span>업무용 소프트웨어</span><span>전산장비</span><span>모니터링</span><span>장애 대응</span><span>기술 자문</span></div><p class="skill-note">서비스 출시 이후의 가용성과 비용뿐 아니라 조직 구성원이 매일 쓰는 기반 환경까지 운영 책임에 포함합니다.</p></article>
-          <article class="skill-group reveal"><h3><span class="skill-dot"></span>정보보안·개인정보보호</h3><div class="skill-list"><span>관련 법령 이행</span><span>규정·지침 제정</span><span>개인정보 흐름도</span><span>권한·접근제어</span><span>단말 보안</span><span>출입통제·CCTV</span><span>방화벽·매체제어</span><span>점검·사고 대응</span><span>사업장 기준 표준화</span></div><p class="skill-note">법적 요구를 문서로만 남기지 않고 계정·단말·시설·서비스의 실제 권한과 점검·대응 절차로 연결합니다.</p></article>
-          <article class="skill-group reveal"><h3><span class="skill-dot"></span>협업과 기록</h3><div class="skill-list"><span>Figma</span><span>Jira</span><span>Confluence</span><span>Redmine</span><span>GitLab</span><span>Notion</span><span>Excel</span><span>PowerPoint</span></div><p class="skill-note">도구 자체보다 누가 무엇을 기록하고 언제 확인할지를 협업 규칙으로 정합니다.</p></article>
+    <section class="fit" id="fit">
+      <div class="wrap">
+        <div class="section-head reveal"><div class="section-number">04 <span>/ 05</span></div><div><p class="section-kicker">업무 방식</p><h2>판단을 내리고,<br>필요한 일은 직접 움직입니다</h2><p class="section-copy">연차나 직책보다 문제 해결을 먼저 봅니다. 기준을 세워 팀의 방향을 맞추고, 현장에 빈틈이 생기면 직접 메우며 끝까지 운영 가능한 상태를 만듭니다.</p></div></div>
+        <div class="cap-grid">
+          <article class="cap-card reveal"><span class="cap-no">01</span><h3>판단</h3><p>무엇을 먼저 해결해야 하는지, 지금 결정할 것과 검증할 것을 구분합니다.</p></article>
+          <article class="cap-card reveal"><span class="cap-no">02</span><h3>설계</h3><p>사용자 흐름뿐 아니라 정책·데이터·예외·관리자 운영까지 한 구조로 봅니다.</p></article>
+          <article class="cap-card reveal"><span class="cap-no">03</span><h3>조율</h3><p>기획·개발·운영·보안·외부 협력사의 언어를 실행 가능한 기준으로 맞춥니다.</p></article>
+          <article class="cap-card reveal"><span class="cap-no">04</span><h3>운영</h3><p>출시를 끝으로 보지 않고 권한·문의·장애·개선 요청이 이어지는 조건을 준비합니다.</p></article>
         </div>
-        <div class="profile-strip" aria-label="업무 스타일과 학력 정보">
-          <article class="profile-detail reveal"><span>리더십 방식</span><strong>방향과 결정 기준은 분명히, 실행 방법은 담당자의 전문성을 존중합니다.</strong><p>진행 상황보다 막힌 결정과 위험을 먼저 확인하고 필요한 지원을 연결합니다.</p></article>
-          <article class="profile-detail reveal"><span>경험 분야</span><strong>기업 시스템 · 공공 · 비영리 · 커머스 · 보험 · 교통</strong><p>도메인보다 문제와 운영 구조를 이해하는 능력을 중심으로 경력을 확장했습니다.</p></article>
-          <article class="profile-detail reveal"><span>학력</span><strong>경영학 학사 · 컴퓨터공학 전공 이력</strong><p>학점은행제 경영학 전공 졸업 · 수원과학대학교 컴퓨터공학 전공(중퇴)</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section proof-section" aria-labelledby="proof-title">
-      <div class="container">
-        <p class="section-kicker">06 · 동료와 외부의 검증</p>
-        <h2 class="section-title" id="proof-title">혼자 잘한 결과보다<br>함께 완성한 증거.</h2>
-
-        <div class="proof-layout">
-          <div>
-            <blockquote class="quote">“다양한 협력 기관과의 소통을 원활히 관장하고, <strong>복잡한 일정과 리스크 관리</strong>에 힘써 높은 완성도의 서비스 구축에 기여했습니다.”</blockquote>
-            <p class="quote-source">— 2022년 성과관리 리더 피드백 요약</p>
+        <div class="radar-card reveal">
+          <div class="radar-chart">
+            <svg viewBox="0 0 420 400" role="img" aria-labelledby="radarTitle radarDesc">
+              <title id="radarTitle">경력 전반의 업무 비중</title><desc id="radarDesc">프로젝트 관리, 서비스 기획 설계, 리더십 협업, 제품 관리 운영, 정보보안 개인정보보호, 기술 이해 개발 협업의 상대 비중</desc>
+              <polygon class="radar-grid" points="210,170 236,185 236,215 210,230 184,215 184,185"/><polygon class="radar-grid" points="210,140 262,170 262,230 210,260 158,230 158,170"/><polygon class="radar-grid" points="210,110 288,155 288,245 210,290 132,245 132,155"/><polygon class="radar-grid" points="210,80 314,140 314,260 210,320 106,260 106,140"/><polygon class="radar-grid" points="210,50 340,125 340,275 210,350 80,275 80,125"/>
+              <line class="radar-axis" x1="210" y1="200" x2="210" y2="50"/><line class="radar-axis" x1="210" y1="200" x2="340" y2="125"/><line class="radar-axis" x1="210" y1="200" x2="340" y2="275"/><line class="radar-axis" x1="210" y1="200" x2="210" y2="350"/><line class="radar-axis" x1="210" y1="200" x2="80" y2="275"/><line class="radar-axis" x1="210" y1="200" x2="80" y2="125"/>
+              <polygon class="radar-area" points="210,58 327,133 327,268 210,329 114,256 109,142"/><circle class="radar-point" cx="210" cy="58" r="5"/><circle class="radar-point" cx="327" cy="133" r="5"/><circle class="radar-point" cx="327" cy="268" r="5"/><circle class="radar-point" cx="210" cy="329" r="5"/><circle class="radar-point" cx="114" cy="256" r="5"/><circle class="radar-point" cx="109" cy="142" r="5"/>
+            </svg>
           </div>
-          <div>
-            <div class="recognition-list" aria-label="수상 및 인증">
-              <div class="recognition"><span class="recognition-year">2025</span><div><strong>iF Design Award</strong><span>Communication 부문 · 나의AAC</span></div></div>
-              <div class="recognition"><span class="recognition-year">2024</span><div><strong>스마트앱 어워드 대상</strong><span>공공 부문 비영리기관 분야 · 나의AAC</span></div></div>
-              <div class="recognition"><span class="recognition-year">2024</span><div><strong>인터넷에코어워드 대상</strong><span>사회적약자지원 분야 · 나의AAC</span></div></div>
-              <div class="recognition"><span class="recognition-year">2024</span><div><strong>모바일 접근성(MA) 인증</strong><span>나의AAC</span></div></div>
-              <div class="recognition"><span class="recognition-year">2021</span><div><strong>웹어워드 최우수상</strong><span>생활쇼핑몰 부문 · 한살림 장보기 개편 참여</span></div></div>
-            </div>
-          </div>
+          <div class="radar-copy"><p class="section-kicker">역량의 균형</p><h3>화면을 설계하는 기획자에서,<br>실행을 끝까지 책임지는 리더로</h3><p>프로젝트 관리와 서비스 기획을 중심으로 운영·보안·기술 협업까지 역할을 넓혀 왔습니다.</p><ul class="radar-legend"><li><strong>프로젝트 관리</strong><span>범위·일정·협력사·위험</span></li><li><strong>서비스 기획·설계</strong><span>정책·화면·관리자·예외</span></li><li><strong>리더십·협업</strong><span>의사결정 기준과 조율</span></li><li><strong>제품 관리·운영</strong><span>출시 이후 권한·장애·개선</span></li><li><strong>정보보안·개인정보보호</strong><span>현재 담당 업무와 서비스 반영</span></li><li><strong>기술 이해·개발 협업</strong><span>연동·데이터·검증 조건</span></li></ul></div>
         </div>
-
-      </div>
-    </section>
-
-    <section class="section book-section" id="book" aria-labelledby="book-title">
-      <div class="container">
-        <p class="section-kicker">07 · 책과 프로젝트 회고</p>
-        <div class="book-layout">
-          <a class="book-cover reveal" href="https://kksh0379.github.io/nccf_cms/book/#about" target="_blank" rel="noopener noreferrer" aria-label="책 소개 사이트 열기">
-            <img src="assets/services/book-cover-mockup-v2.png" alt="IT 경험이 없는 조직에서 서비스를 만든다는 것 책을 정면에서 보여주는 제품 이미지" loading="lazy">
-          </a>
-          <div class="book-content">
-            <span class="book-meta">2026 · 175쪽 · 출간 준비 중</span>
-            <h2 id="book-title">한 번의 완주를,<br>다음 조직이 활용할 지식으로.</h2>
-            <h3>《IT 경험이 없는 조직에서 서비스를 만든다는 것》</h3>
-            <p class="book-copy">나의AAC를 구축한 2년 반 동안 서비스 기획, 개발, 접근성, 보안과 개인정보, 계약과 출시 이후 운영을 함께 책임하며 겪은 판단과 시행착오를 정리한 프로젝트 회고입니다. 결과를 포장하기보다 왜 결정이 늦어졌고 역할과 책임이 어디에서 흔들렸는지 기록했습니다.</p>
-            <div class="book-points">
-              <div><strong>범위를 정의하는 힘</strong><span>‘고도화’와 ‘신규 구축’의 차이가 예산·일정·역할에 미친 영향</span></div>
-              <div><strong>리더와 PM의 책임</strong><span>권한은 불분명하지만 결과는 책임져야 했던 구조와 의사결정</span></div>
-              <div><strong>출시 이후의 운영</strong><span>기능 뒤에 남는 보안·개인정보·계약·유지보수의 책임</span></div>
-            </div>
-            <a class="book-teaser" href="https://kksh0379.github.io/nccf_cms/book/#about" target="_blank" rel="noopener noreferrer" aria-label="책 본문 미리보기와 소개 사이트 열기">
-              <img src="assets/services/book-preview-page.png" alt="흐리게 처리한 책 본문 일부" loading="lazy">
-              <div class="book-teaser-content">
-                <span class="book-teaser-label">본문 일부 · 이어서 읽기</span>
-                <blockquote>“일을 잘한다는 것은 가장 많은 일을 떠안는 것이 아니다.”</blockquote>
-                <p>판단의 근거와 책임의 구조를 기록한 대목입니다. 나머지 문장은 책 소개 페이지에서 이어집니다. ↗</p>
-              </div>
-            </a>
-            <blockquote class="book-quote">“좋은 결과는 건강한 과정을 증명하지 않는다.”</blockquote>
-            <a class="button blue" href="https://kksh0379.github.io/nccf_cms/book/#about" target="_blank" rel="noopener noreferrer">책 소개 사이트에서 목차와 에피소드 보기 <span class="arrow" aria-hidden="true">↗</span></a>
-          </div>
+        <div class="self-card reveal"><div><p class="section-kicker">강점과 경계</p><h3>잘하는 방식의 부작용까지 관리합니다</h3></div><ul class="self-list"><li><strong>문제가 생기면 직접 파고드는 편</strong><span>초기 대응 뒤에는 담당과 의사결정권을 다시 나눠 병목을 줄입니다.</span></li><li><strong>공익·사내 서비스 경험이 중심</strong><span>대규모 소비자 지표보다 활성화·이탈·운영 맥락으로 성과를 해석합니다.</span></li><li><strong>기술을 이해하지만 개발자는 아님</strong><span>연동·데이터·예외·검증 조건을 구조화하고 기술 판단은 개발자와 교차 검토합니다.</span></li><li><strong>결과가 달라도 일의 기준은 흔들지 않음</strong><span>성과는 과장하지 않고, 실패의 원인은 다음 프로젝트의 판단 기준으로 남깁니다.</span></li></ul></div>
+        <div class="skill-stack" aria-label="실무 기반 상세">
+          <details class="skill-item"><summary><span class="skill-no">01</span><span class="skill-title">서비스·프로젝트 기획</span><span class="skill-plus">+</span></summary><div class="skill-detail"><strong>정보 구조, 요구사항, 정책, 화면, 업무 흐름, 관리자 기능</strong>을 설계하고 범위·제안요청서·계약·일정·위험·협력사 관리를 연결합니다.</div></details>
+          <details class="skill-item"><summary><span class="skill-no">02</span><span class="skill-title">인프라·조직 IT 운영</span><span class="skill-plus">+</span></summary><div class="skill-detail"><strong>서버, 네트워크, 클라우드, 업무 소프트웨어, 자산, 출입통제</strong>를 운영하고 대외 서비스의 기술 의사결정을 지원합니다.</div></details>
+          <details class="skill-item"><summary><span class="skill-no">03</span><span class="skill-title">정보보안·개인정보보호</span><span class="skill-plus">+</span></summary><div class="skill-detail"><strong>법령 준수, 개인정보 처리 흐름, 위탁, 권한, 로그, 사고 대응</strong> 조건을 서비스와 운영 과정에 반영합니다.</div></details>
+          <details class="skill-item"><summary><span class="skill-no">04</span><span class="skill-title">협업 도구와 문서화</span><span class="skill-plus">+</span></summary><div class="skill-detail"><strong>Figma, Jira, Confluence, Redmine, GitLab, Notion, Excel, PowerPoint</strong>를 프로젝트 상황에 맞춰 사용합니다. 학력은 경영학 학사이며 컴퓨터공학을 공부했습니다.</div></details>
         </div>
       </div>
     </section>
 
-    <section class="section contact-section" id="contact" aria-labelledby="contact-title">
-      <div class="container">
-        <div class="contact-panel">
-          <h2 id="contact-title">실무를 이해하며 팀의 실행을<br>이끌 리더가 필요하다면.</h2>
-          <p>서비스 기획과 프로젝트 리드, 여러 조직 사이의 조율, 출시 이후 IT 운영 체계를 함께 책임질 수 있습니다.</p>
-          <a class="button" href="mailto:kksh0378@naver.com">kksh0378@naver.com <span class="arrow" aria-hidden="true">→</span></a>
+    <section class="proof" id="proof">
+      <div class="wrap">
+        <div class="section-head reveal"><div class="section-number">05 <span>/ 05</span></div><div><p class="section-kicker">검증과 기록</p><h2>동료의 평가와 외부 수상,<br>프로젝트 기록</h2><p class="section-copy">업무 피드백과 수상 이력, 책으로 정리한 프로젝트 경험을 통해 일하는 방식과 결과를 함께 확인할 수 있습니다.</p></div></div>
+        <div class="proof-grid">
+          <article class="quote-card reveal"><div class="quote-mark">“</div><blockquote>주어진 역할을 넘어 필요한 일을 찾아 추진하고, 관계자와의 소통을 통해 끝까지 결과를 만들어 내는 사람.</blockquote><cite>2022년 업무 피드백 요약</cite></article>
+          <article class="evidence-card reveal"><h3>외부 검증</h3><ul><li><strong>2025</strong><span>iF 디자인 어워드</span></li><li><strong>2024</strong><span>스마트앱어워드 · 인터넷에코어워드</span></li><li><strong>2024</strong><span>모바일 접근성 관련 인증</span></li><li><strong>2021</strong><span>웹어워드 코리아 · 한살림</span></li></ul></article>
+          <article class="book-card reveal"><div class="book-cover"><img src="assets/services/book-cover.png" alt="IT 경험이 없는 조직에서 서비스를 만든다는 것 책 표지"></div><div><p class="section-kicker">프로젝트 기록</p><h3>IT 경험이 없는 조직에서 서비스를 만든다는 것</h3><p>비영리 조직에서 신규 서비스를 기획하고 출시·운영하기까지, 프로젝트 관리 과정에서 내린 판단과 시행착오를 한 권의 기록으로 정리했습니다.</p><a class="btn dark" href="https://kksh0379.github.io/nccf_cms/book/#about" target="_blank" rel="noreferrer">책 소개 보기</a></div></article>
         </div>
       </div>
     </section>
+
+    <section class="contact" id="contact"><div class="wrap contact-grid"><div><p class="section-kicker">다음 대화</p><h2>실무를 이해하는 리더가 필요한 팀과 이야기하고 싶습니다.</h2><p>서비스 기획, 프로젝트 운영, 조직 IT 사이의 복잡한 문제를 함께 풀겠습니다.</p></div><a class="btn dark" href="mailto:kksh0378@naver.com">이메일 보내기</a></div></section>
   </main>
 
-  <div class="lightbox" id="image-lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" hidden>
-    <div class="lightbox-panel">
-      <div class="lightbox-top">
-        <span class="lightbox-title" id="lightbox-title">서비스 화면 크게 보기</span>
-        <button class="lightbox-close" type="button" aria-label="확대 화면 닫기">×</button>
-      </div>
-      <div class="lightbox-stage">
-        <button class="lightbox-nav lightbox-prev" type="button" aria-label="이전 화면">‹</button>
-        <div class="lightbox-image-wrap"><img class="lightbox-image" src="" alt=""></div>
-        <button class="lightbox-nav lightbox-next" type="button" aria-label="다음 화면">›</button>
-      </div>
-      <p class="lightbox-caption" aria-live="polite"></p>
-    </div>
-  </div>
+  <footer><div class="wrap footer-inner"><span>© 김상화. Career Portfolio.</span><span>이 페이지는 경력 자료를 바탕으로 구성했습니다.</span></div></footer>
+  <button class="back-top" type="button" aria-label="맨 위로">↑</button>
 
-  <footer>
-    <div class="container footer-row"><span>© 2026 김상화. 모든 권리 보유.</span><a href="#top">처음으로 ↑</a></div>
-  </footer>
+  <dialog id="libraryDialog" aria-labelledby="libraryTitle">
+    <div class="dialog-head"><div><p class="section-kicker">참여 프로젝트</p><h2 id="libraryTitle">프로젝트 전체 사례</h2></div><button class="close-btn" type="button" data-close="libraryDialog" aria-label="닫기">×</button></div>
+    <div class="dialog-body">
+      <div class="filter-row" aria-label="프로젝트 유형"><button class="filter active" type="button" data-filter="all">전체</button><button class="filter" type="button" data-filter="public">공익 서비스</button><button class="filter" type="button" data-filter="system">조직 시스템</button><button class="filter" type="button" data-filter="field">현장·모바일</button></div>
+      <div class="library-grid">
+        <article class="library-card" data-category="public"><button class="zoomable" type="button" data-src="assets/services/fairai.png" data-caption="FAIR AI 서비스"><img src="assets/services/fairai.png" alt="FAIR AI 화면"></button><div class="card-copy"><h3>FAIR AI</h3><p>AI 윤리 관련 공익 정보 서비스</p></div></article>
+        <article class="library-card" data-category="public"><button class="zoomable" type="button" data-src="assets/services/projectory.png" data-caption="프로젝토리 서비스"><img src="assets/services/projectory.png" alt="프로젝토리 화면"></button><div class="card-copy"><h3>프로젝토리</h3><p>프로젝트 참여와 커뮤니티 서비스</p></div></article>
+        <article class="library-card" data-category="public"><button class="zoomable" type="button" data-src="assets/services/portfolio-241215/hansalim-desktop.png|assets/services/portfolio-241215/hansalim-composite.png" data-caption="한살림 장보기 PC 화면 · 2021년 당시 서비스|한살림 장보기 PC·모바일 화면 · 2021년 당시 서비스"><img src="assets/services/portfolio-241215/hansalim-desktop.png" alt="한살림 장보기 PC 화면"></button><div class="card-copy"><h3>한살림</h3><p>장보기·생활쇼핑 웹·앱 기획</p></div></article>
+        <article class="library-card" data-category="system"><button class="zoomable" type="button" data-src="assets/services/reconstructed/online-insurance-reconstructed-v2.png" data-caption="온라인 보험 서비스 — 자료 기반 재구성"><img src="assets/services/reconstructed/online-insurance-reconstructed-v2.png" alt="온라인 보험 화면 재구성"></button><div class="card-copy"><h3>온라인 보험</h3><p>가입과 운영 흐름 설계</p></div></article>
+        <article class="library-card" data-category="field"><button class="zoomable" type="button" data-src="assets/services/reconstructed/kiosk-two-screen-touch-v2.png|assets/services/kiosk-flow.png" data-caption="무인 승차권 키오스크 대표 화면|발권 흐름"><img src="assets/services/reconstructed/kiosk-two-screen-touch-v2.png" alt="무인 승차권 키오스크 대표 화면"></button><div class="card-copy"><h3>무인 승차권 키오스크</h3><p>터치 기반 발권 흐름과 대표 화면</p></div></article>
+        <article class="library-card" data-category="field"><button class="zoomable" type="button" data-src="assets/services/reconstructed/fleet-mobile-reconstructed-v2.png" data-caption="법인차량 모바일 운행 기록 — 자료 기반 재구성"><img src="assets/services/reconstructed/fleet-mobile-reconstructed-v2.png" alt="법인차량 모바일 화면 재구성"></button><div class="card-copy"><h3>법인차량</h3><p>모바일 운행 기록과 관리 흐름</p></div></article>
+        <article class="library-card" data-category="system"><button class="zoomable" type="button" data-src="assets/services/reconstructed/rfid-reconstructed.png" data-caption="RFID 출입·권한 관리 — 자료 기반 재구성"><img src="assets/services/reconstructed/rfid-reconstructed.png" alt="RFID 관리 화면 재구성"></button><div class="card-copy"><h3>RFID 출입 관리</h3><p>권한과 현장 운영 화면</p></div></article>
+        <article class="library-card" data-category="system"><button class="zoomable" type="button" data-src="assets/services/reconstructed/volleyball-analysis-reconstructed.png" data-caption="배구 분석 서비스 — 자료 기반 재구성"><img src="assets/services/reconstructed/volleyball-analysis-reconstructed.png" alt="배구 분석 화면 재구성"></button><div class="card-copy"><h3>배구 분석</h3><p>경기 기록과 분석 정보 구조</p></div></article>
+        <article class="library-card" data-category="system"><button class="zoomable" type="button" data-src="assets/services/reconstructed/interviewer-training-reconstructed.png" data-caption="면접관 교육 서비스 — 자료 기반 재구성"><img src="assets/services/reconstructed/interviewer-training-reconstructed.png" alt="면접관 교육 화면 재구성"></button><div class="card-copy"><h3>면접관 교육</h3><p>교육 콘텐츠와 학습 흐름</p></div></article>
+        <article class="library-card text-only" data-category="system"><div class="card-copy"><h3>그 밖의 조직 시스템</h3><p>전자결재, 평가, 연말정산, 자산, 재고, 출입통제, 의료원 모바일 웹, 프로야구단 티켓·선수 정보 등</p></div></article>
+        <article class="library-card text-only" data-category="field"><div class="card-copy"><h3>그 밖의 모바일·현장 서비스</h3><p>LG U+ 관련 서비스, 미세먼지 앱, 버스터미널 안내 프로그램 개선 등</p></div></article>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="imageDialog" aria-labelledby="imageCaption">
+    <div class="image-stage"><button class="close-btn image-close" type="button" data-close="imageDialog" aria-label="이미지 닫기">×</button><button class="image-nav image-prev" type="button" aria-label="이전 이미지">‹</button><img id="viewerImage" alt="확대 이미지"><button class="image-nav image-next" type="button" aria-label="다음 이미지">›</button></div><div class="image-caption" id="imageCaption"></div>
+  </dialog>
 
   <script>
-    const toggle = document.querySelector('.menu-toggle');
-    const menu = document.querySelector('.nav-links');
-    const links = [...menu.querySelectorAll('a')];
+    const body=document.body, menuBtn=document.querySelector('.menu-btn'), nav=document.querySelector('.nav');
+    menuBtn.addEventListener('click',()=>{const open=nav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',String(open));menuBtn.textContent=open?'×':'☰'});
+    nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menuBtn.textContent='☰'}));
 
-    function closeMenu() {
-      menu.classList.remove('open');
-      document.body.classList.remove('menu-open');
-      toggle.setAttribute('aria-expanded', 'false');
-      toggle.setAttribute('aria-label', '메뉴 열기');
-      toggle.textContent = '☰';
-    }
+    const progress=document.querySelector('.progress'), backTop=document.querySelector('.back-top');
+    function onScroll(){const max=document.documentElement.scrollHeight-innerHeight;progress.style.width=(max?scrollY/max*100:0)+'%';backTop.classList.toggle('show',scrollY>700)}
+    addEventListener('scroll',onScroll,{passive:true});onScroll();backTop.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
 
-    toggle.addEventListener('click', () => {
-      const open = menu.classList.toggle('open');
-      document.body.classList.toggle('menu-open', open);
-      toggle.setAttribute('aria-expanded', String(open));
-      toggle.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
-      toggle.textContent = open ? '×' : '☰';
-    });
-    links.forEach(link => link.addEventListener('click', closeMenu));
-    window.addEventListener('resize', () => { if (window.innerWidth > 980) closeMenu(); });
+    const sections=[...document.querySelectorAll('main section[id]')], navLinks=[...nav.querySelectorAll('a')];
+    const navObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id))})},{rootMargin:'-35% 0px -55%'});sections.forEach(s=>navObserver.observe(s));
 
-    const archiveDetails = document.querySelector('.archive-details');
-    if (archiveDetails) {
-      const archiveToggleText = archiveDetails.querySelector('summary span:last-child');
-      archiveDetails.addEventListener('toggle', () => {
-        archiveToggleText.textContent = archiveDetails.open ? '추가 참여 서비스 접기' : '참여 서비스 더 보기';
-      });
-    }
+    const tabs=[...document.querySelectorAll('[role="tab"]')];
+    function activateTab(tab,focus=true){tabs.forEach(t=>{const active=t===tab;t.setAttribute('aria-selected',String(active));t.tabIndex=active?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=!active});if(focus)tab.focus()}
+    tabs.forEach((tab,i)=>{tab.addEventListener('click',()=>activateTab(tab,false));tab.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'].includes(e.key))return;e.preventDefault();let forward=e.key==='ArrowRight'||e.key==='ArrowDown';let n=e.key==='Home'?0:e.key==='End'?tabs.length-1:forward?(i+1)%tabs.length:(i-1+tabs.length)%tabs.length;activateTab(tabs[n])})});
 
-    const lightbox = document.querySelector('#image-lightbox');
-    const lightboxImage = lightbox.querySelector('.lightbox-image');
-    const lightboxCaption = lightbox.querySelector('.lightbox-caption');
-    const lightboxClose = lightbox.querySelector('.lightbox-close');
-    const lightboxPrev = lightbox.querySelector('.lightbox-prev');
-    const lightboxNext = lightbox.querySelector('.lightbox-next');
-    let activeGallery = [];
-    let activeCaptions = [];
-    let activeIndex = 0;
-    let lightboxReturnFocus = null;
+    const library=document.getElementById('libraryDialog'), imageDialog=document.getElementById('imageDialog');
+    const syncModal=()=>body.classList.toggle('modal-open',library.open||imageDialog.open);
+    document.getElementById('openLibrary').addEventListener('click',()=>{library.showModal();syncModal()});
+    document.querySelectorAll('[data-close]').forEach(btn=>btn.addEventListener('click',()=>{document.getElementById(btn.dataset.close).close();syncModal()}));
+    [library,imageDialog].forEach(d=>{d.addEventListener('close',syncModal);d.addEventListener('click',e=>{if(e.target===d){d.close();syncModal()}})});
+    document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.filter').forEach(b=>b.classList.toggle('active',b===btn));document.querySelectorAll('.library-card').forEach(card=>card.hidden=btn.dataset.filter!=='all'&&card.dataset.category!==btn.dataset.filter)}));
 
-    function galleryFrom(element) {
-      const image = element.querySelector('img');
-      const paths = element.dataset.gallery ? element.dataset.gallery.split('|') : [image.getAttribute('src')];
-      const defaultCaption = element.querySelector('figcaption')?.textContent.trim() || image.getAttribute('alt') || '서비스 화면';
-      const captions = element.dataset.captions
-        ? element.dataset.captions.split('|')
-        : paths.map((_, index) => index === 0 ? defaultCaption : `${defaultCaption} · 화면 ${index + 1}`);
-      return { paths, captions };
-    }
+    let gallery=[],captions=[],current=0;const viewer=document.getElementById('viewerImage'), caption=document.getElementById('imageCaption');
+    function renderImage(){viewer.src=gallery[current];viewer.alt=captions[current]||'프로젝트 화면 확대';caption.textContent=(captions[current]||'프로젝트 화면')+(gallery.length>1?` · ${current+1}/${gallery.length}`:'');document.querySelector('.image-prev').hidden=gallery.length<2;document.querySelector('.image-next').hidden=gallery.length<2}
+    function openImages(btn){const isMobile=matchMedia('(max-width:680px)').matches;const src=isMobile&&btn.dataset.srcMobile?btn.dataset.srcMobile:btn.dataset.src;const copy=isMobile&&btn.dataset.captionMobile?btn.dataset.captionMobile:btn.dataset.caption;gallery=src.split('|');captions=(copy||'').split('|');while(captions.length<gallery.length)captions.push(captions[0]||'프로젝트 화면');current=0;renderImage();imageDialog.showModal();syncModal()}
+    document.querySelectorAll('.zoomable').forEach(btn=>btn.addEventListener('click',()=>openImages(btn)));
+    document.querySelector('.image-prev').addEventListener('click',()=>{current=(current-1+gallery.length)%gallery.length;renderImage()});document.querySelector('.image-next').addEventListener('click',()=>{current=(current+1)%gallery.length;renderImage()});
+    imageDialog.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')document.querySelector('.image-prev').click();if(e.key==='ArrowRight')document.querySelector('.image-next').click()});
 
-    function renderLightbox() {
-      lightboxImage.src = activeGallery[activeIndex];
-      lightboxImage.alt = activeCaptions[activeIndex] || '서비스 확대 화면';
-      lightboxCaption.textContent = `${activeIndex + 1} / ${activeGallery.length} · ${activeCaptions[activeIndex] || ''}`;
-      const hasMultiple = activeGallery.length > 1;
-      lightboxPrev.hidden = !hasMultiple;
-      lightboxNext.hidden = !hasMultiple;
-    }
-
-    function openLightbox(source, returnFocus = source) {
-      const gallery = galleryFrom(source);
-      activeGallery = gallery.paths;
-      activeCaptions = gallery.captions;
-      activeIndex = 0;
-      lightboxReturnFocus = returnFocus;
-      renderLightbox();
-      lightbox.hidden = false;
-      document.body.classList.add('lightbox-open');
-      lightboxClose.focus();
-    }
-
-    function closeLightbox() {
-      lightbox.hidden = true;
-      document.body.classList.remove('lightbox-open');
-      lightboxImage.src = '';
-      lightboxReturnFocus?.focus();
-    }
-
-    function moveLightbox(step) {
-      activeIndex = (activeIndex + step + activeGallery.length) % activeGallery.length;
-      renderLightbox();
-    }
-
-    document.querySelectorAll('.zoomable').forEach(visual => {
-      visual.addEventListener('click', () => openLightbox(visual));
-      visual.addEventListener('keydown', event => {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          openLightbox(visual);
-        }
-      });
-    });
-    document.querySelectorAll('[data-gallery-trigger]').forEach(button => {
-      button.addEventListener('click', () => {
-        const visual = button.closest('.service-card').querySelector('.zoomable');
-        openLightbox(visual, button);
-      });
-    });
-    lightboxClose.addEventListener('click', closeLightbox);
-    lightboxPrev.addEventListener('click', () => moveLightbox(-1));
-    lightboxNext.addEventListener('click', () => moveLightbox(1));
-    lightbox.addEventListener('click', event => { if (event.target === lightbox) closeLightbox(); });
-    document.addEventListener('keydown', event => {
-      if (lightbox.hidden) return;
-      if (event.key === 'Escape') closeLightbox();
-      if (event.key === 'ArrowLeft' && activeGallery.length > 1) moveLightbox(-1);
-      if (event.key === 'ArrowRight' && activeGallery.length > 1) moveLightbox(1);
-    });
-
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const revealItems = document.querySelectorAll('.reveal');
-    if (reducedMotion) {
-      revealItems.forEach(item => item.classList.add('visible'));
-    } else {
-      const revealObserver = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: .1 });
-      revealItems.forEach(item => revealObserver.observe(item));
-    }
-
-    const sections = [...document.querySelectorAll('main section[id]')];
-    const navObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`));
-      });
-    }, { rootMargin: '-35% 0px -55% 0px' });
-    sections.forEach(section => navObserver.observe(section));
+    const revealObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealObserver.unobserve(e.target)}}),{threshold:.08});document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
   </script>
 </body>
 </html>
