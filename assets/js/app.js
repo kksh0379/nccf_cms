@@ -3230,3 +3230,13 @@ document.addEventListener('keydown',function(e){
     init();
   }
 })();
+
+/* My Page 회원탈퇴 / Delete Account entry -> language-aware withdrawal flow.
+   renderMypage() wires this button to showDeleteAccount(), which was never
+   defined, so the flow only launched in Korean (via a Korean-text rewiring).
+   Alias it to the tr()-based showWithdrawMember so English works too. */
+(function(){
+  window.showDeleteAccount=function(){
+    if(typeof window.showWithdrawMember==='function') return window.showWithdrawMember();
+  };
+})();
