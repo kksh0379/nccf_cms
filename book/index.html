@@ -328,39 +328,10 @@
       perspective: 1400px;
     }
 
-    .cover-stage::before {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      inset: 10% -8% -5% 12%;
-      border-radius: 4px 4px 40% 4px;
-      background: var(--blue-pale);
-      transform: rotate(5deg);
-    }
-
-    .cover-stage::after {
-      content: "";
-      position: absolute;
-      z-index: 2;
-      right: -11%;
-      top: 18%;
-      width: 76px;
-      height: 1px;
-      background: var(--blue-soft);
-      box-shadow: 61px 138px 0 var(--blue-soft);
-    }
-
+    .cover-stage::before,
+    .cover-stage::after,
     .cover-stage .dot-a,
-    .cover-stage .dot-b {
-      position: absolute;
-      z-index: 3;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-
-    .cover-stage .dot-a { right: -12%; top: calc(18% - 4px); background: var(--navy); }
-    .cover-stage .dot-b { right: -25%; top: calc(18% + 134px); border: 2px solid var(--blue); background: var(--paper); }
+    .cover-stage .dot-b { display: none; }
 
     .book-cover {
       width: 100%;
@@ -368,9 +339,8 @@
       object-fit: cover;
       border: 1px solid rgba(7, 63, 118, .15);
       background: var(--white);
-      box-shadow: var(--shadow), -11px 11px 0 #eef4f8;
-      transform: rotateY(-5deg) rotateZ(1deg);
-      transform-origin: left center;
+      box-shadow: 0 26px 54px -18px rgba(7, 63, 118, .34);
+      transform: none;
     }
 
     .cover-art {
@@ -1153,7 +1123,7 @@
         <div class="hero-meta reveal" aria-label="책 구성 요약">
           <div class="meta-item"><strong>4개의 PART</strong>프로젝트의 전제부터 오픈까지</div>
           <div class="meta-item"><strong>15개의 장면</strong>00부터 14까지 이어지는 기록</div>
-          <div class="meta-item"><strong>175쪽</strong>한 권에 담은 프로젝트의 전 과정</div>
+          <div class="meta-item"><strong>187쪽</strong>한 권에 담은 프로젝트의 전 과정</div>
           <div class="meta-item"><strong>하나의 완주</strong>나의AAC를 만든 2년 반의 여정</div>
         </div>
       </div>
@@ -1346,7 +1316,7 @@
             <div class="info-row"><dt>제목</dt><dd>서비스는 어디서 망가질 수 있는가</dd></div>
             <div class="info-row"><dt>설명</dt><dd>비영리 조직에서 서비스 기획부터 운영까지, 하나의 프로젝트를 완주한 기록</dd></div>
             <div class="info-row"><dt>저자</dt><dd>김상화</dd></div>
-            <div class="info-row"><dt>분량</dt><dd>175쪽</dd></div>
+            <div class="info-row"><dt>분량</dt><dd>187쪽</dd></div>
             <div class="info-row"><dt>발행</dt><dd>2026년 · 출간 준비 중</dd></div>
             <div class="info-row"><dt>ISBN</dt><dd>발급 예정</dd></div>
           </dl>
