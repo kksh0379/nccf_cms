@@ -1103,7 +1103,7 @@
     .inside-quote { max-width: 760px; margin: 34px 0 0; padding: 26px 30px; border: 0; border-left: 4px solid var(--blue); border-radius: 0 14px 14px 0; background: var(--blue-pale); font-family: var(--serif); font-size: clamp(18px, 2.1vw, 23px); line-height: 1.6; color: var(--navy); font-weight: 600; }
     .inside-note { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 20px; margin-top: 34px; padding-top: 28px; border-top: 1px solid var(--line); }
     .inside-note p { margin: 0; color: var(--muted); font-size: 15px; }
-    #book-info .book-info-grid { margin-top: clamp(34px, 4vw, 52px); }
+    #book-info .book-info-grid, #message .message-wrap { margin-top: clamp(34px, 4vw, 52px); }
   </style>
 </head>
 <body id="top">
@@ -1290,7 +1290,12 @@
     </section>
 
     <section class="section" id="message" aria-labelledby="message-title">
-      <div class="container message-wrap">
+      <div class="container">
+        <div class="reveal">
+          <p class="section-label"><span class="number">04</span> Core message</p>
+          <h2 class="section-title" id="message-title">좋은 결과는<br>건강한 과정을 증명하지 않는다</h2>
+        </div>
+        <div class="message-wrap">
         <div class="message-orbit reveal" aria-label="서비스를 중심으로 연결되는 다섯 가지 요소">
           <div class="orbit-core">하나의<br>서비스</div>
           <span class="orbit-dot">목적</span>
@@ -1301,8 +1306,6 @@
         </div>
 
         <div class="message-copy reveal">
-          <p class="section-label"><span class="number">04</span> Core message</p>
-          <h2 class="section-title" id="message-title">좋은 결과는<br>건강한 과정을 증명하지 않는다</h2>
           <p class="section-lead">나의AAC는 완성되었고 국내외 어워드에서도 공공성, 접근성, 사용자 경험의 성과를 인정받았습니다. 그러나 성과가 과정의 무리와 사람의 소모까지 정당화해서는 안 됩니다.</p>
           <blockquote>“좋은 목적은 좋은 과정을 보장하지 않는다. 책임감은 구조를 대신할 수 없다.”</blockquote>
           <div class="principles" aria-label="책이 제안하는 세 가지 일의 방식">
@@ -1311,6 +1314,7 @@
             <div class="principle">요구를 구체화하기</div>
           </div>
         </div>
+      </div>
       </div>
     </section>
 
