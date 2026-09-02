@@ -1091,18 +1091,19 @@
       .js .reveal { opacity: 1; transform: none; }
     }
     /* inside-the-book preview */
-    .inside .container { max-width: 940px; }
-    .inside-badge { display: inline-block; margin-bottom: 20px; padding: 6px 14px; border: 1px solid var(--line); border-radius: 99px; background: var(--blue-pale); color: var(--blue); font-size: 12px; font-weight: 800; letter-spacing: .08em; }
-    .inside-page { margin-top: 16px; padding: clamp(28px, 5vw, 58px); border: 1px solid var(--line); border-radius: 22px; background: var(--white); box-shadow: var(--shadow); }
-    .inside-lead { margin: 0; font-family: var(--serif); font-size: clamp(20px, 2.4vw, 26px); line-height: 1.95; color: var(--ink); }
-    .inside-lead .dc { float: left; margin: 8px 14px 0 0; font-family: var(--serif); font-size: clamp(58px, 9vw, 88px); line-height: .74; font-weight: 700; color: var(--blue); }
-    .inside-scene { margin-top: 34px; padding-top: 30px; border-top: 1px solid var(--line); }
-    .inside-scene .sc { display: block; margin-bottom: 12px; color: var(--blue); font-size: 13px; font-weight: 800; letter-spacing: .14em; }
-    .inside-scene h3 { margin: 0 0 14px; font-size: clamp(20px, 2.6vw, 27px); line-height: 1.4; color: var(--navy); }
-    .inside-scene p { margin: 0; font-family: var(--serif); font-size: clamp(17px, 1.9vw, 20px); line-height: 1.95; color: #2a3f52; }
-    .inside-quote { margin: 38px 0 0; padding: 26px 30px; border: 0; border-left: 4px solid var(--blue); border-radius: 0 14px 14px 0; background: var(--blue-pale); font-family: var(--serif); font-size: clamp(18px, 2.2vw, 23px); line-height: 1.6; color: var(--navy); font-weight: 600; }
-    .inside-note { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 20px; margin-top: 30px; }
+    .inside .section-lead { max-width: 620px; }
+    .inside-page { margin-top: clamp(34px, 4vw, 52px); padding: clamp(30px, 5vw, 62px); border: 1px solid var(--line); border-radius: 22px; background: var(--white); box-shadow: var(--shadow); }
+    .inside-head { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .inside-badge { display: inline-block; padding: 6px 14px; border: 1px solid var(--line); border-radius: 99px; background: var(--blue-pale); color: var(--blue); font-size: 12px; font-weight: 800; letter-spacing: .08em; }
+    .inside-ch { color: var(--muted); font-size: 13px; font-weight: 700; letter-spacing: .04em; }
+    .inside-title-x { margin: 0 0 28px; font-size: clamp(24px, 3vw, 34px); line-height: 1.35; color: var(--navy); letter-spacing: -.02em; }
+    .inside-lead { max-width: 760px; margin: 0; font-family: var(--serif); font-size: clamp(20px, 2.3vw, 25px); line-height: 1.95; color: var(--ink); }
+    .inside-lead .dc { float: left; margin: 10px 14px 0 0; font-family: var(--serif); font-size: clamp(56px, 8.5vw, 84px); line-height: .74; font-weight: 700; color: var(--blue); }
+    .inside-body { max-width: 760px; margin: 22px 0 0; font-family: var(--serif); font-size: clamp(17px, 1.9vw, 20px); line-height: 1.95; color: #2a3f52; }
+    .inside-quote { max-width: 760px; margin: 34px 0 0; padding: 26px 30px; border: 0; border-left: 4px solid var(--blue); border-radius: 0 14px 14px 0; background: var(--blue-pale); font-family: var(--serif); font-size: clamp(18px, 2.1vw, 23px); line-height: 1.6; color: var(--navy); font-weight: 600; }
+    .inside-note { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 20px; margin-top: 34px; padding-top: 28px; border-top: 1px solid var(--line); }
     .inside-note p { margin: 0; color: var(--muted); font-size: 15px; }
+    #book-info .book-info-grid { margin-top: clamp(34px, 4vw, 52px); }
   </style>
 </head>
 <body id="top">
@@ -1335,16 +1336,17 @@
         <h2 class="section-title" id="inside-title">책 속으로<br>미리 들어가 보기</h2>
         <p class="section-lead">완성된 결론이 아니라, 결정이 미뤄지고 역할이 겹치던 실제 장면들. 책의 목소리를 일부 미리 만나 보세요.</p>
         <div class="inside-page reveal">
-          <span class="inside-badge">미리보기 · 발췌</span>
-          <p class="inside-lead"><span class="dc">책</span>은 성공담을 매끈하게 정리하지 않습니다. 결정이 미뤄지고 역할이 겹치며, 아이디어가 계약과 운영의 언어로 바뀌는 구체적인 순간을 보여줍니다.</p>
-          <div class="inside-scene">
-            <span class="sc">SCENE 02</span>
-            <h3>권한은 없는데 책임은 있는 PM</h3>
-            <p>조직과 개발사 사이에서 일정, 범위, 요구 사항, 리스크를 조율하지만 정작 역할의 이름과 결정 권한은 불분명했습니다. 갈등처럼 보였던 것은 구조의 문제였습니다.</p>
+          <div class="inside-head">
+            <span class="inside-badge">미리보기 · 발췌</span>
+            <span class="inside-ch">PART 4 · 14장</span>
           </div>
+          <h3 class="inside-title-x">서비스는 한 번에 망가지지 않는다</h3>
+          <p class="inside-lead"><span class="dc">접</span>근성, 개인정보의 수집과 파기, 관리자 권한, 보안 점검, 장애 대응과 유지 보수. 앞에서 미룬 질문들은 오픈을 앞두고 되돌리기 어려운 결정으로 돌아왔습니다.</p>
+          <p class="inside-body">동화책과 AI 음성을 ‘이야기 만들기’에 넣은 뒤에도 디지털 사용 권리, 새 콘텐츠의 갱신, 계약 변화와 운영 책임이 남았습니다. 구현은 끝이 아니라 시작이었습니다.</p>
+          <p class="inside-body">나의AAC는 완성되었고 국내외 어워드에서도 공공성, 접근성, 사용자 경험의 성과를 인정받았습니다. 그러나 성과가 과정의 무리와 사람의 소모까지 정당화해서는 안 됩니다.</p>
           <blockquote class="inside-quote">“좋은 목적은 좋은 과정을 보장하지 않는다. 책임감은 구조를 대신할 수 없다.”</blockquote>
           <div class="inside-note">
-            <p>여기 담긴 건 열다섯 장면 중 일부입니다. 전체 이야기는 한 권으로 이어집니다.</p>
+            <p>이 장면은 열다섯 장 가운데 하나입니다. 전체 이야기는 한 권으로 이어집니다.</p>
             <a class="button secondary" href="#contents">목차 전체 보기</a>
           </div>
         </div>
@@ -1352,11 +1354,14 @@
     </section>
 
     <section class="section" id="book-info" aria-labelledby="book-info-title">
-      <div class="container book-info-grid">
-        <div class="mini-cover cover-art reveal" role="img" aria-label="서비스는 어디서 망가질 수 있는가 책 표지 축소 이미지"></div>
+      <div class="container">
         <div class="reveal">
           <p class="section-label"><span class="number">07</span> Book information</p>
           <h2 class="section-title" id="book-info-title">책 정보</h2>
+        </div>
+        <div class="book-info-grid">
+        <div class="mini-cover cover-art reveal" role="img" aria-label="서비스는 어디서 망가질 수 있는가 책 표지 축소 이미지"></div>
+        <div class="reveal">
           <blockquote class="book-quote">“기술보다 중요한 것은 함께 만드는 방식이었다.”</blockquote>
           <p class="book-blurb">비영리 조직에서 프로젝트의 시작부터 종료까지, 다양한 분야를 아우르며 조직이 안정적으로 운영될 수 있도록 <strong>보안, 개인정보보호, 시스템 구축과 운영, 인프라 관리, 서비스 운영 지원</strong> 등 전반을 담당해왔습니다. 이 책은 그 과정에서 마주한 현실적인 고민과 실제 경험을 기반으로, 작고 느린 조직의 성장을 위한 실무 에세이입니다.</p>
           <dl class="info-table">
@@ -1369,6 +1374,7 @@
           </dl>
           <p class="final-note">좋은 결과를 만들면서도 사람과 조직이 함께 지속될 수 있는 일의 방식은 무엇인가.</p>
         </div>
+      </div>
       </div>
     </section>
   </main>
