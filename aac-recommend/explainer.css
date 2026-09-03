@@ -1850,3 +1850,44 @@
     margin-left: 0;
   }
 }
+
+/* ---------- readability patch (design QA) ---------- */
+/* 1) data-sources row: button matches card height + larger, clearer type */
+.data-sources{align-items:stretch;gap:10px}
+.data-sources>div{padding:12px 14px;row-gap:2px}
+.data-sources svg{width:20px}
+.data-sources span{font-size:12px;color:#5f6b7d}
+.data-sources b{font-size:14px}
+.data-sources small{font-size:11.5px}
+.data-sources>strong{display:grid;place-items:center;text-align:center;font-size:13.5px;font-weight:800;line-height:1.4;padding:12px 18px}
+/* 2) live-persistence mini flow (visible first screen) */
+.live-save-flow>div>i{font-size:11px}
+.live-save-flow span{font-size:11px}
+.moving-record small{font-size:8px}
+.live-row .row-badge{font-size:11px}
+.live-row small{font-size:11px}
+.live-row b,.live-row strong,.live-row em{font-size:11px}
+.recent-memory>span{font-size:11px}
+.recent-memory i,.recent-memory small{font-size:11px}
+.recent-memory b,.recent-memory strong{font-size:11px}
+.live-persistence>p{font-size:11px}
+.symbol-categories button small{font-size:11px}
+/* 3) dense explainer labels raised to a readable floor */
+.tf-summary span{font-size:11px}
+.tf-summary small{font-size:11px}
+.event-log b,.event-log span{font-size:11px}
+.input-ledger span{font-size:11px}
+.tag-matrix b,.tag-matrix span{font-size:10.5px}
+.trace-grid>div>span,.trace-grid p,.trace-grid p>b,.trace-grid p>strong{font-size:11px}
+.candidate-detail header span{font-size:11px}
+.candidate-row>div:first-child>em{font-size:11px}
+.result-cell>em{font-size:11px}
+.merge-flow span{font-size:11px}
+.filter-flow span,.filter-flow b,.filter-flow strong{font-size:11px}
+.weight-grid em{font-size:11px}
+.profile-copy span,.profile-copy small{font-size:11px}
+.tiny-chips span{font-size:11px}
+.stage-title p{font-size:11px}
+.bonus-rule>span{font-size:11px}
+.rule-ledger span{font-size:11px}
+.table-head{font-size:11px}
