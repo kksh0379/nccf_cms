@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>프로젝토리 모바일 활동예약</title>
+<style>
+  * { box-sizing: border-box; }
+  :root {
+    --green:#138a47;
+    --green2:#20a75a;
+    --line:#dedede;
+    --muted:#777;
+    --disabled:#e6e6e6;
+  }
+  html,body{
+    margin:0;
+    padding:0;
+    background:#ececec;
+    font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",Arial,sans-serif;
+    color:#222;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  button{font:inherit}
+  .phone{
+    width:100%;
+    max-width:390px;
+    min-height:100vh;
+    margin:0 auto;
+    background:#fff;
+    position:relative;
+    overflow:hidden;
+  }
+
+  /* =========================
+     캘린더 화면
+  ========================= */
+  .header{
+    height:48px;
+    padding:0 10px;
+    border-bottom:1px solid #ededed;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .logo{
+    color:#09954e;
+    font-size:15px;
+    font-weight:700;
+  }
+  .header-icons{
+    display:flex;
+    gap:11px;
+    align-items:center;
+    font-size:17px;
+  }
+  .calendar-page{
+    padding:25px 9px 69px;
+  }
+  .page-title{
+    margin:0 0 8px;
+    text-align:center;
+    font-size:16px;
+    font-weight:700;
+  }
+  .page-desc{
+    margin:0 auto 18px;
+    text-align:center;
+    font-size:10px;
+    line-height:1.45;
+    color:#555;
+  }
+
+  .region-tabs{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    border-bottom:1px solid #999;
+    margin-bottom:14px;
+  }
+  .region-tab{
+    height:38px;
+    border:1px solid #ddd;
+    border-bottom:0;
+    background:#f7f7f7;
+    color:#555;
+    font-size:12px;
+    font-weight:600;
+  }
+  .region-tab + .region-tab{border-left:0}
+  .region-tab.active{
+    color:var(--green);
+    background:#fff;
+    border:2px solid var(--green);
+    border-bottom:2px solid #fff;
+    margin-bottom:-1px;
+  }
+  .calendar-rule{
+    border-top:1px solid #222;
+    margin:17px 0 13px;
+  }
+  .month-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:7px;
+    font-size:11px;
+    font-weight:600;
+  }
+  .month-row .possible{
+    margin-left:5px;
+    color:#24a65d;
+    font-size:9px;
+    font-weight:500;
+  }
+  .month-nav{color:#c2c2c2;letter-spacing:7px;font-size:15px}
+
+  .calendar{
+    width:100%;
+    table-layout:fixed;
+    border-collapse:collapse;
+    font-size:9px;
+  }
+  .calendar th{
+    height:28px;
+    font-weight:600;
+    border-bottom:1px solid #eee;
+  }
+  .calendar td{
+    height:39px;
+    text-align:center;
+    color:#999;
+    border-bottom:1px solid #f5f5f5;
+    cursor:pointer;
+  }
+  .calendar td.available{color:#777}
+  .calendar td.selected{
+    color:#fff;
+    background:#11934e;
+    font-weight:700;
+  }
+  .calendar td.other{
+    color:#d5d5d5;
+    background:#fafafa;
+    cursor:default;
+  }
+
+  .calendar-footer{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height:58px;
+    border-top:1px solid #ddd;
+    background:#fff;
+    padding:7px 9px;
+    display:grid;
+    grid-template-columns:55px 1fr 1fr;
+    gap:6px;
+    align-items:center;
+  }
+  .count{font-size:10px;font-weight:700}
+  .count b{color:var(--green)}
+  .footer-btn{
+    height:38px;
+    border:1px solid #5bad7a;
+    background:#fff;
+    color:#34935c;
+    font-size:10px;
+  }
+  .footer-btn.disabled{
+    background:#ddd;
+    border-color:#ddd;
+    color:#aaa;
+  }
+
+  /* =========================
+     활동시간 팝업
+     원안 구조 유지 + 시간 영역만 1열
+  ========================= */
+  .activity-layer{
+    position:absolute;
+    inset:0;
+    z-index:50;
+    background:#fff;
+    overflow-y:auto;
+    display:none;
+  }
+  .activity-layer.open{display:block}
+
+  .activity-content{
+    min-height:100%;
+    padding:17px 9px 12px;
+    position:relative;
+  }
+
+  .close-x{
+    position:absolute;
+    top:6px;
+    right:5px;
+    width:34px;
+    height:34px;
+    border:0;
+    background:transparent;
+    color:#333;
+    font-size:23px;
+    line-height:1;
+    cursor:pointer;
+  }
+
+  .section-title{
+    margin:0 0 5px;
+    font-size:13px;
+    font-weight:700;
+  }
+  .intro{
+    margin:0;
+    color:#777;
+    font-size:9px;
+    line-height:1.55;
+  }
+  .green-notice{
+    margin:2px 0 12px;
+    color:#24aa5a;
+    font-size:9px;
+    line-height:1.55;
+    font-weight:500;
+  }
+
+  /* 유일한 구조 변경: 3열 → 1열 */
+  .time-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:4px;
+    margin-bottom:23px;
+  }
+  .time-slot{
+    width:100%;
+    height:41px;
+    border:1px solid #d8d8d8;
+    background:#fff;
+    color:#333;
+    font-size:13px;
+    font-weight:500;
+    letter-spacing:-0.1px;
+    text-align:center;
+    cursor:pointer;
+  }
+  .time-slot.selected{
+    border:2px solid var(--green);
+    background:#f3faf6;
+    color:var(--green);
+    font-weight:700;
+  }
+
+  .event-title{
+    margin:0 0 5px;
+    font-size:13px;
+    font-weight:700;
+  }
+  .event-help{
+    margin:0 0 13px;
+    color:#8a8a8a;
+    font-size:9px;
+    line-height:1.55;
+  }
+  .event-card{
+    min-height:95px;
+    border:1px solid #d8d8d8;
+    padding:12px 10px;
+    margin-bottom:24px;
+  }
+  .event-card strong{
+    display:block;
+    margin-bottom:9px;
+    font-size:10px;
+    font-weight:700;
+  }
+  .event-card p{
+    margin:0 0 10px;
+    color:#8a8a8a;
+    font-size:9px;
+  }
+  .event-card time{
+    color:#b1b1b1;
+    font-size:8px;
+  }
+
+  .close-bottom{
+    width:100%;
+    height:42px;
+    border:0;
+    background:#dedede;
+    color:#fff;
+    font-size:10px;
+    cursor:pointer;
+  }
+
+  @media(min-width:391px){
+    body{padding:14px 0}
+    .phone{min-height:calc(100vh - 28px);border:1px solid #ccc}
+  }
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <!-- 캘린더 원화면 -->
+  <header class="header">
+    <div class="logo">projectory</div>
+    <div class="header-icons"><span>♙</span><span>☰</span></div>
+  </header>
+
+  <main class="calendar-page">
+    <h1 class="page-title">프로젝토리 활동 예약</h1>
+    <p class="page-desc">
+      활동할 지역을 선택한 후 예약 가능한 날짜를 선택해 주세요.<br>
+      지역별 운영 일정에 따라 예약 가능일이 달라질 수 있습니다.
+    </p>
+
+    <div class="region-tabs">
+      <button class="region-tab">서울(혜화)</button>
+      <button class="region-tab active">성남</button>
+    </div>
+
+    <div class="calendar-rule"></div>
+
+    <div class="month-row">
+      <div>2026.09 <span class="possible">※ 예약 가능</span></div>
+      <div class="month-nav">‹ ›</div>
+    </div>
+
+    <table class="calendar">
+      <thead>
+        <tr><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="other">30</td><td class="other">31</td>
+          <td class="available">1</td><td class="available">2</td><td class="available">3</td><td class="available">4</td><td class="available">5</td>
+        </tr>
+        <tr>
+          <td class="available">6</td><td class="available">7</td><td class="available">8</td>
+          <td class="selected" data-open>9</td>
+          <td class="available" data-open>10</td><td class="available" data-open>11</td><td class="available" data-open>12</td>
+        </tr>
+        <tr>
+          <td class="available">13</td><td class="available">14</td><td class="available">15</td><td class="available">16</td><td class="available">17</td><td class="available">18</td><td class="available">19</td>
+        </tr>
+        <tr>
+          <td class="available">20</td><td class="available">21</td><td class="available">22</td><td class="available">23</td><td class="available">24</td><td class="available">25</td><td class="available">26</td>
+        </tr>
+        <tr>
+          <td class="available">27</td><td class="available">28</td><td class="available">29</td><td class="available">30</td>
+          <td class="other">1</td><td class="other">2</td><td class="other">3</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <div class="calendar-footer">
+    <div class="count">총 <b>0일</b></div>
+    <button class="footer-btn">초기화</button>
+    <button class="footer-btn disabled">신청</button>
+  </div>
+
+  <!-- 활동시간 선택 팝업 -->
+  <div class="activity-layer open" id="activityLayer">
+    <div class="activity-content">
+      <button class="close-x" id="closeX" aria-label="닫기">×</button>
+
+      <h2 class="section-title">활동시간 선택</h2>
+      <p class="intro">
+        원하는 활동 시간을 선택해주세요.<br>
+        (활동 예약은 30분 단위로 가능합니다.)
+      </p>
+
+      <div class="green-notice">
+        ※ 첫 활동일에는 OT를 진행합니다.<br>
+        ※ 첫 활동이 평일인 경우 오후 4시 이전으로, 주말은 오전 10시 또는 오후 4시로 예약해 주세요.
+      </div>
+
+      <div class="time-grid">
+        <button class="time-slot">10:00 - 10:30</button>
+        <button class="time-slot">10:30 - 11:00</button>
+        <button class="time-slot">11:00 - 11:30</button>
+        <button class="time-slot">11:30 - 12:00</button>
+        <button class="time-slot">12:00 - 12:30</button>
+        <button class="time-slot">12:30 - 13:00</button>
+        <button class="time-slot">13:00 - 13:30</button>
+        <button class="time-slot">13:30 - 14:00</button>
+        <button class="time-slot">14:00 - 14:30</button>
+        <button class="time-slot">14:30 - 15:00</button>
+        <button class="time-slot">15:00 - 15:30</button>
+        <button class="time-slot">15:30 - 16:00</button>
+        <button class="time-slot">16:00 - 16:30</button>
+        <button class="time-slot">16:30 - 17:00</button>
+        <button class="time-slot">17:00 - 17:30</button>
+        <button class="time-slot">17:30 - 18:00</button>
+      </div>
+
+      <h2 class="event-title">이벤트 선택</h2>
+      <p class="event-help">
+        이벤트 선택 시, 해당 시간대의 활동시간은<br>
+        선택 해제해주세요.
+      </p>
+
+      <div class="event-card">
+        <strong>[성남] 성남 이벤트 테스트 입니다.</strong>
+        <p>성남 이벤트 테스트 입니다</p>
+        <time>2026. 9. 5.(토) 10:00 - 18:00</time>
+      </div>
+
+      <button class="close-bottom" id="closeBottom">닫기</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const layer = document.getElementById('activityLayer');
+  const closeX = document.getElementById('closeX');
+  const closeBottom = document.getElementById('closeBottom');
+
+  function closeLayer(){
+    layer.classList.remove('open');
+  }
+  function openLayer(){
+    layer.classList.add('open');
+  }
+
+  closeX.addEventListener('click', closeLayer);
+  closeBottom.addEventListener('click', closeLayer);
+
+  document.querySelectorAll('[data-open], .calendar td.available').forEach(function(cell){
+    cell.addEventListener('click', openLayer);
+  });
+
+  document.querySelectorAll('.time-slot').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btn.classList.toggle('selected');
+    });
+  });
+</script>
+</body>
+</html>
