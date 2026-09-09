@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>프로젝토리 관리자 - 멤버십 활동 정보</title>
+<style>
+:root{
+  --green:#258b61;
+  --green-dark:#0d694d;
+  --blue:#1d82e7;
+  --text:#2d2d2d;
+  --muted:#8b8b8b;
+  --line:#e6e6e6;
+  --line-dark:#333;
+  --side-select:#dfeaf7;
+}
+*{box-sizing:border-box}
+html,body{
+  margin:0;padding:0;background:#fff;color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+button,select,input{font:inherit}
+.app{min-width:1180px;min-height:100vh;background:#fff}
+
+/* top */
+.topbar{
+  height:62px;background:var(--green);display:flex;align-items:center;
+  justify-content:flex-end;padding:0 26px;color:#fff
+}
+.top-actions{display:flex;align-items:center;gap:28px;font-size:12px}
+.user-box{
+  min-width:94px;height:27px;border:1px solid rgba(255,255,255,.7);
+  border-radius:3px;display:flex;align-items:center;justify-content:center;gap:10px
+}
+.user-dot{
+  width:15px;height:15px;border-radius:50%;background:#f2463d;
+  display:inline-flex;align-items:center;justify-content:center;font-size:9px
+}
+.logout{
+  height:30px;padding:0 15px;border:0;background:#0b654b;color:#fff
+}
+
+/* layout */
+.body{display:flex;min-height:calc(100vh - 62px)}
+.sidebar{
+  width:178px;flex:0 0 178px;border-right:1px solid #ddd;background:#fff
+}
+.remain{
+  height:51px;border-bottom:1px solid #e7e7e7;display:flex;align-items:center;
+  padding:0 10px;color:#666;font-size:10px;line-height:1.25
+}
+.back{width:30px;font-size:22px;color:#777}
+.menu{font-size:12px;color:#4f4f4f;padding-top:5px}
+.menu-row,.sub-row{
+  height:35px;display:flex;align-items:center;gap:10px;padding:0 10px
+}
+.menu-row .ico{width:20px;text-align:center;color:#777;font-size:15px}
+.menu-row.parent-active{color:#167ad8}
+.chev{margin-left:auto}
+.sub-row{height:36px;padding-left:15px;font-size:11.5px}
+.sub-row:before{content:"↳";color:#999}
+.sub-row.selected{background:var(--side-select);color:#2e608c}
+
+.content{
+  flex:1;padding:30px 28px 24px 33px;overflow:auto;background:#fff
+}
+.breadcrumb{color:#aaa;font-size:11px;margin-bottom:28px}
+.breadcrumb .blue{color:#2f8bd3}
+.member-name{
+  color:var(--green);font-size:15px;font-weight:700;margin-bottom:24px
+}
+.tabs{
+  display:grid;grid-template-columns:repeat(5,1fr);height:42px;
+  border-bottom:1px solid #ddd;margin:0 -8px 48px
+}
+.tab{
+  position:relative;display:flex;align-items:center;justify-content:center;
+  gap:8px;color:#8a8a8a;font-size:12px
+}
+.tab .hamb{font-size:14px}
+.tab.active{color:var(--blue)}
+.tab.active:after{
+  content:"";position:absolute;left:18%;right:18%;bottom:-1px;height:2px;background:var(--blue)
+}
+
+.section-title{
+  margin:0 0 10px;font-size:14px;color:var(--green);font-weight:700
+}
+.overall{
+  width:100%;border-collapse:collapse;table-layout:fixed;font-size:12px;margin-bottom:28px
+}
+.overall th,.overall td{
+  height:50px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center
+}
+.overall th{font-weight:700}
+.overall td{font-weight:600}
+
+/* summary header */
+.summary-header{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:9px
+}
+.summary-title-wrap{display:flex;align-items:center;gap:24px}
+.summary-title-wrap .section-title{margin:0}
+.view-switch{
+  display:flex;align-items:center;gap:14px;font-size:12px;color:#555
+}
+.radio-label{
+  display:inline-flex;align-items:center;gap:5px;cursor:pointer;white-space:nowrap
+}
+.radio-label input{
+  appearance:none;-webkit-appearance:none;width:14px;height:14px;border:1px solid #a7a7a7;
+  border-radius:50%;position:relative;margin:0
+}
+.radio-label input:checked{border-color:var(--green)}
+.radio-label input:checked:after{
+  content:"";position:absolute;width:8px;height:8px;border-radius:50%;
+  background:var(--green);top:2px;left:2px
+}
+.period{
+  display:flex;align-items:center;gap:8px;font-size:12px;white-space:nowrap
+}
+.period label{color:var(--green);font-weight:700}
+.period select{
+  width:190px;height:34px;border:1px solid #ddd;background:#fff;
+  padding:0 10px;font-size:11px;color:#333
+}
+
+/* tables */
+.summary-table{
+  width:100%;border-collapse:collapse;table-layout:fixed;font-size:12px;margin-bottom:16px
+}
+.summary-table th,.summary-table td{
+  border:1px solid var(--line);text-align:center;padding:0 8px;height:46px
+}
+.summary-table th{font-weight:700;background:#fff}
+.summary-table td{font-weight:500}
+.summary-table .top-stat th,.summary-table .top-stat td{height:44px}
+.summary-table .sum-row th,.summary-table .sum-row td{font-weight:700}
+.table-panel{display:none}
+.table-panel.active{display:block}
+
+/* integrated */
+.integrated-table .left-label{width:140px}
+.integrated-table .month-col{width:auto}
+.integrated-table .total-col{width:80px}
+
+/* regional */
+.regional-table .metric{width:116px}
+.regional-table .region{width:70px}
+.regional-table .total-col{width:90px}
+
+/* bottom history */
+.excel-wrap{margin:12px 0 10px 10px}
+.excel{
+  height:32px;border:1px solid #777;background:#fff;padding:0 15px;
+  color:#555;font-size:11px;letter-spacing:.3px
+}
+.history{
+  width:100%;border-collapse:collapse;table-layout:fixed;border-top:2px solid #222;font-size:11px
+}
+.history th{
+  height:46px;border-bottom:1px solid var(--line);text-align:center;font-weight:700
+}
+.history td{
+  height:48px;border-bottom:1px solid #ededed;text-align:center
+}
+.history .muted-row td{color:#b8c3cb}
+.table-bottom{
+  display:flex;justify-content:flex-end;margin-top:12px
+}
+.table-meta{
+  display:flex;align-items:center;gap:20px;color:#555;font-size:11px
+}
+.page-count{display:flex;align-items:center;gap:7px}
+.page-count select{
+  width:45px;border:0;border-bottom:1px solid #ddd;background:#fff
+}
+.arrows{display:flex;gap:25px;color:#bbb;font-size:17px}
+.pager{
+  margin-top:34px;display:flex;justify-content:center;gap:5px
+}
+.pager button{
+  width:42px;height:28px;border:1px solid #2e9d70;background:#fff;color:#278b63
+}
+.pager .current{background:#1f8b61;color:#fff;border-color:#1f8b61}
+.list-btn{
+  margin:32px 0 0 10px;height:31px;min-width:88px;border:1px solid #777;
+  background:#fff;color:#555;font-size:11px
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="top-actions">
+      <div class="user-box"><span class="user-dot">●</span><span>휴</span></div>
+      <button class="logout">↪ 로그아웃</button>
+    </div>
+  </header>
+
+  <div class="body">
+    <aside class="sidebar">
+      <div class="remain"><span class="back">←</span><span>로그아웃까지 남은시간 :<br>3시간 54분 25초</span></div>
+      <nav class="menu">
+        <div class="menu-row"><span class="ico">▦</span><span>메인</span></div>
+        <div class="menu-row"><span class="ico">≡</span><span>게시글관리</span></div>
+        <div class="menu-row"><span class="ico">▣</span><span>일정관리</span><span class="chev">⌄</span></div>
+        <div class="menu-row parent-active"><span class="ico">♟</span><span>멤버관리</span><span class="chev">⌃</span></div>
+        <div class="sub-row">전체 회원 정보</div>
+        <div class="sub-row selected">멤버십 현황</div>
+        <div class="sub-row">출결 현황</div>
+        <div class="sub-row">출결 현황(엑셀)</div>
+        <div class="sub-row">옐로카드 현황</div>
+        <div class="sub-row">품절 및 노트</div>
+        <div class="sub-row">노트없는 불참(임시)</div>
+        <div class="sub-row">출입 카드</div>
+        <div class="menu-row"><span class="ico">◧</span><span>크루관리</span><span class="chev">⌄</span></div>
+        <div class="menu-row"><span class="ico">▥</span><span>구매신청 관리</span></div>
+        <div class="menu-row"><span class="ico">◉</span><span>이벤트 관리</span></div>
+        <div class="menu-row"><span class="ico">▣</span><span>뉴스레터 구독 관리</span></div>
+        <div class="menu-row"><span class="ico">▧</span><span>크루 소개 관리</span><span class="chev">⌄</span></div>
+        <div class="menu-row"><span class="ico">▲</span><span>알람</span></div>
+        <div class="menu-row"><span class="ico">⚙</span><span>설정</span><span class="chev">⌄</span></div>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <div class="breadcrumb"><span class="blue">홈</span>　&gt;　<span class="blue">멤버관리</span>　&gt;　상세 정보</div>
+      <div class="member-name">이름 : 정인수 (조이)</div>
+
+      <div class="tabs">
+        <div class="tab"><span class="hamb">☰</span>멤버십 정보</div>
+        <div class="tab active"><span class="hamb">☰</span>활동 정보</div>
+        <div class="tab"><span class="hamb">☰</span>자기평가</div>
+        <div class="tab"><span class="hamb">☰</span>가입 상담</div>
+        <div class="tab"><span class="hamb">☰</span>기본 정보</div>
+      </div>
+
+      <h2 class="section-title">전체 현황</h2>
+      <table class="overall">
+        <colgroup>
+          <col style="width:10%"><col style="width:23%">
+          <col style="width:10%"><col style="width:23%">
+          <col style="width:10%"><col style="width:24%">
+        </colgroup>
+        <tr>
+          <th>누적 활동 개월 수</th><td>18 개월</td>
+          <th>누적 활동 일 수</th><td>62 일</td>
+          <th>누적 활동 시간</th><td>149시간 34분</td>
+        </tr>
+        <tr>
+          <th>월 평균 활동일 수</th><td>3.3 일</td>
+          <th>월 평균 활동시간</th><td>8시간 17분</td>
+          <th>일 평균 활동시간</th><td>2시간 24분</td>
+        </tr>
+      </table>
+
+      <div class="summary-header">
+        <div class="summary-title-wrap">
+          <h2 class="section-title">멤버십 요약 정보 (멤버십 기간 기준)</h2>
+
+          <div class="view-switch" aria-label="요약 정보 조회 방식">
+            <label class="radio-label">
+              <input type="radio" name="summaryView" value="integrated" checked>
+              <span>통합</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="summaryView" value="regional">
+              <span>지역별</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="period">
+          <label>멤버십 기간 :</label>
+          <select>
+            <option>2026-09-01 ~ 2027-02-28</option>
+            <option>2026-03-01 ~ 2026-08-31</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 기본 선택: 통합 / 기존 표 -->
+      <div class="table-panel active" id="integratedPanel">
+        <table class="summary-table integrated-table">
+          <colgroup>
+            <col class="left-label">
+            <col class="month-col"><col class="month-col"><col class="month-col">
+            <col class="month-col"><col class="month-col"><col class="month-col">
+            <col class="total-col">
+          </colgroup>
+
+          <tr class="top-stat">
+            <th colspan="2">누적 무단 불참 수</th>
+            <td colspan="2">0</td>
+            <th colspan="2">누적 옐로카드 수</th>
+            <td colspan="2">0</td>
+          </tr>
+
+          <tr>
+            <th>멤버십 기간 (6개월)</th>
+            <th>2026/09</th>
+            <th>2026/10</th>
+            <th>2026/11</th>
+            <th>2026/12</th>
+            <th>2027/01</th>
+            <th>2027/02</th>
+            <th>합계</th>
+          </tr>
+
+          <tr>
+            <th>월별 참가일 수</th>
+            <td>1일</td><td>0일</td><td>0일</td><td>0일</td><td>0일</td><td>0일</td><td>1일</td>
+          </tr>
+
+          <tr>
+            <th>월별 활동 시간</th>
+            <td>20분</td><td>0분</td><td>0분</td><td>0분</td><td>0분</td><td>0분</td><td>20분</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- 지역별 / 신규 표 -->
+      <div class="table-panel" id="regionalPanel">
+        <table class="summary-table regional-table">
+          <colgroup>
+            <col class="metric">
+            <col class="region">
+            <col><col><col><col><col><col>
+            <col class="total-col">
+          </colgroup>
+
+          <tr class="top-stat">
+            <th colspan="2">누적 무단 불참 수</th>
+            <td colspan="3">0</td>
+            <th colspan="2">누적 옐로카드 수</th>
+            <td colspan="2">0</td>
+          </tr>
+
+          <tr>
+            <th colspan="2">멤버십 기간 (6개월)</th>
+            <th>2026/09</th>
+            <th>2026/10</th>
+            <th>2026/11</th>
+            <th>2026/12</th>
+            <th>2027/01</th>
+            <th>2027/02</th>
+            <th>합계</th>
+          </tr>
+
+          <tr>
+            <th rowspan="3" class="metric">월별 참가일 수</th>
+            <th class="region">서울(혜화)</th>
+            <td>1일</td><td>0일</td><td>0일</td><td>0일</td><td>0일</td><td>0일</td><td>1일</td>
+          </tr>
+          <tr>
+            <th class="region">성남</th>
+            <td>0일</td><td>0일</td><td>0일</td><td>0일</td><td>0일</td><td>0일</td><td>0일</td>
+          </tr>
+          <tr class="sum-row">
+            <th class="region">합계</th>
+            <td>1일</td><td>0일</td><td>0일</td><td>0일</td><td>0일</td><td>0일</td><td>1일</td>
+          </tr>
+
+          <tr>
+            <th rowspan="3" class="metric">월별 활동 시간</th>
+            <th class="region">서울(혜화)</th>
+            <td>20분</td><td>0분</td><td>0분</td><td>0분</td><td>0분</td><td>0분</td><td>20분</td>
+          </tr>
+          <tr>
+            <th class="region">성남</th>
+            <td>0분</td><td>0분</td><td>0분</td><td>0분</td><td>0분</td><td>0분</td><td>0분</td>
+          </tr>
+          <tr class="sum-row">
+            <th class="region">합계 (시간)</th>
+            <td>20분</td><td>0분</td><td>0분</td><td>0분</td><td>0분</td><td>0분</td><td>20분</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="excel-wrap">
+        <button class="excel">▣　EXCEL 파일 다운로드</button>
+      </div>
+
+      <table class="history">
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>예약일</th>
+            <th>예약시간</th>
+            <th>입장 시간</th>
+            <th>퇴장 시간</th>
+            <th>활동 시간</th>
+            <th>무단 불참 여부</th>
+            <th>노트 제출 여부</th>
+            <th>옐로카드 수</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>5</td><td>2026-09-06</td><td>15:30 ~ 16:00 (A)</td>
+            <td>15:29</td><td>15:49</td><td>20분</td><td></td><td>N</td><td>0</td>
+          </tr>
+          <tr class="muted-row">
+            <td>4</td><td>2026-08-29</td><td>13:00 ~ 15:00 (A)</td>
+            <td>12:54</td><td>14:53</td><td>1시간 59분</td><td></td><td>N</td><td>1</td>
+          </tr>
+          <tr class="muted-row">
+            <td>3</td><td>2026-08-22</td><td>14:00 ~ 15:30 (A)</td>
+            <td>14:14</td><td>15:20</td><td>1시간 6분</td><td></td><td>N</td><td>0</td>
+          </tr>
+          <tr class="muted-row">
+            <td>2</td><td>2026-08-16</td><td>15:30 ~ 17:30 (A)</td>
+            <td>15:18</td><td>17:26</td><td>2시간 8분</td><td></td><td>N</td><td>0</td>
+          </tr>
+          <tr class="muted-row">
+            <td>1</td><td>2026-08-08</td><td>14:00 ~ 15:30 (A)</td>
+            <td>13:58</td><td>15:24</td><td>1시간 26분</td><td></td><td>N</td><td>1</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="table-bottom">
+        <div class="table-meta">
+          <div class="page-count">노출개수:
+            <select><option>10</option></select>
+          </div>
+          <div>1-5 of 5</div>
+          <div class="arrows"><span>‹</span><span>›</span></div>
+        </div>
+      </div>
+
+      <div class="pager">
+        <button>≪</button>
+        <button>‹</button>
+        <button class="current">1</button>
+        <button>›</button>
+        <button>≫</button>
+      </div>
+
+      <button class="list-btn">▦　목록</button>
+    </main>
+  </div>
+</div>
+
+<script>
+  const radios = document.querySelectorAll('input[name="summaryView"]');
+  const integrated = document.getElementById('integratedPanel');
+  const regional = document.getElementById('regionalPanel');
+
+  radios.forEach(radio => {
+    radio.addEventListener('change', () => {
+      const isIntegrated = radio.value === 'integrated' && radio.checked;
+
+      integrated.classList.toggle('active', isIntegrated);
+      regional.classList.toggle('active', !isIntegrated);
+    });
+  });
+</script>
+</body>
+</html>
