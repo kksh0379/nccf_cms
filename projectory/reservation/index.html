@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>프로젝토리 모바일 활동예약</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#eee;font-family:Arial,"Noto Sans KR",sans-serif;color:#222}
+button{font:inherit}.device{max-width:390px;min-height:100vh;margin:auto;background:#fff;position:relative;overflow:hidden}
+.header{height:50px;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;padding:0 10px}.logo{color:#078844;font-weight:700}.icons{display:flex;gap:12px}
+.main{padding:22px 10px 80px}.title{text-align:center;font-size:17px;margin:0 0 7px}.desc{text-align:center;font-size:11px;line-height:1.5;color:#555;margin-bottom:16px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #999}.tab{height:40px;border:1px solid #ddd;border-bottom:0;background:#f7f7f7;color:#555;font-weight:700}.tab+.tab{border-left:0}.tab.active{background:#fff;color:#078844;border:2px solid #078844;border-bottom:2px solid #fff;margin-bottom:-1px}
+.guide{margin:12px 0 14px;padding:9px 10px;background:#eef8f2;border:1px solid #dbe9e0;font-size:10px;line-height:1.5;color:#666}.guide strong{color:#078844}
+.line{border-top:1px solid #333;margin:14px 0}.cal-head{display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:8px}.cal-head small{color:#078844;font-weight:400;font-size:9px;margin-left:5px}
+table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:10px}th{height:27px;border-bottom:1px solid #eee}td{height:41px;text-align:center;border-bottom:1px solid #f2f2f2;color:#555;cursor:pointer}td.off{color:#d0d0d0;background:#fafafa;cursor:default}td.selected{background:#078844;color:#fff;font-weight:700}
+.legend{display:flex;gap:9px;font-size:9px;color:#777;margin-top:9px}.lg{display:flex;gap:3px;align-items:center}.box{width:9px;height:9px;border:1px solid #ccc}.box.sel{background:#078844;border-color:#078844}.box.off{background:#eee;border-color:#eee}
+.bottom{position:absolute;bottom:0;left:0;width:100%;height:61px;border-top:1px solid #ddd;background:#fff;display:grid;grid-template-columns:63px 1fr 1.1fr;gap:6px;align-items:center;padding:8px 10px}.total{font-size:10px;font-weight:700}.total span{color:#078844}.bbtn{height:38px;border:1px solid #078844;background:#fff;color:#078844}.bbtn.primary{background:#ddd;border-color:#ddd;color:#aaa}
+.popup{position:absolute;inset:0;z-index:20;background:#fff;display:none;overflow-y:auto}.popup.open{display:block}.popup-inner{padding:0 10px 70px}.popup-head{position:sticky;top:0;background:#fff;border-bottom:1px solid #eee;padding:15px 44px 12px 0;z-index:3}.popup-head h2{font-size:15px;margin:0}.close{position:absolute;right:0;top:7px;width:36px;height:36px;border:0;background:none;font-size:25px;cursor:pointer}
+.info{margin:14px 0 12px;padding:9px 10px;border:1px solid #ddd;background:#fafafa;font-size:10px;line-height:1.6}.info strong{color:#078844}.pdesc{font-size:10px;line-height:1.5;color:#666}.note{font-size:10px;line-height:1.5;color:#16a15a;margin:5px 0 12px}
+.times{display:grid;grid-template-columns:1fr;gap:4px}.time{min-height:41px;border:1px solid #ddd;background:#fff;font-size:13px;font-weight:500;letter-spacing:-0.1px;white-space:nowrap;padding:0 14px}.time.selected{border:2px solid #078844;background:#eef8f2;color:#078844;font-weight:700}
+.event{margin-top:24px}.event h3{font-size:13px;margin:0 0 6px}.event p{font-size:10px;color:#777;line-height:1.5}.card{border:1px solid #ddd;padding:11px;font-size:10px;line-height:1.6;min-height:90px}.card strong{font-size:11px}
+.apply-wrap{position:sticky;bottom:0;background:#fff;border-top:1px solid #ddd;padding:8px 0 10px;margin-top:24px}.apply{width:100%;height:41px;border:0;background:#ddd;color:#aaa}.apply.active{background:#078844;color:#fff}
+</style>
+</head>
+<body>
+<div class="device">
+<header class="header"><div class="logo">projectory</div><div class="icons"><span>♙</span><span>☰</span></div></header>
+
+<main class="main">
+<h1 class="title">프로젝토리 활동 예약</h1>
+<div class="desc">원하는 지역을 선택한 후 활동일을 선택해 주세요.<br>지역별 운영일 및 예약 가능 시간은 다를 수 있습니다.</div>
+
+<div class="tabs">
+<button class="tab active" data-region="서울(혜화)">서울(혜화)</button>
+<button class="tab" data-region="성남">성남</button>
+</div>
+
+<div class="guide" id="guide"><strong>서울(혜화)</strong> 활동 예약입니다.<br>서울(혜화) 지역에서 활동할 날짜를 선택해 주세요.</div>
+
+<div class="line"></div>
+
+<div class="cal-head"><div>2026.09 <small>※ 예약 가능</small></div><div>‹ &nbsp;›</div></div>
+
+<table>
+<thead><tr><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th></tr></thead>
+<tbody>
+<tr><td class="off">30</td><td class="off">31</td><td data-day="1">1</td><td data-day="2">2</td><td data-day="3">3</td><td data-day="4">4</td><td data-day="5">5</td></tr>
+<tr><td data-day="6">6</td><td data-day="7">7</td><td data-day="8">8</td><td class="selected" data-day="9">9</td><td data-day="10">10</td><td data-day="11">11</td><td data-day="12">12</td></tr>
+<tr><td data-day="13">13</td><td data-day="14">14</td><td data-day="15">15</td><td data-day="16">16</td><td data-day="17">17</td><td data-day="18">18</td><td data-day="19">19</td></tr>
+<tr><td data-day="20">20</td><td data-day="21">21</td><td data-day="22">22</td><td data-day="23">23</td><td data-day="24">24</td><td data-day="25">25</td><td data-day="26">26</td></tr>
+<tr><td data-day="27">27</td><td data-day="28">28</td><td data-day="29">29</td><td data-day="30">30</td><td class="off">1</td><td class="off">2</td><td class="off">3</td></tr>
+</tbody>
+</table>
+
+<div class="legend"><div class="lg"><span class="box sel"></span>선택일</div><div class="lg"><span class="box"></span>예약 가능일</div><div class="lg"><span class="box off"></span>예약 불가일</div></div>
+</main>
+
+<div class="bottom"><div class="total">총 <span>0일</span></div><button class="bbtn">초기화</button><button class="bbtn primary" disabled>신청</button></div>
+
+<div class="popup" id="popup" aria-hidden="true">
+<div class="popup-inner">
+<div class="popup-head">
+<h2>활동시간 선택</h2>
+<button class="close" id="close" aria-label="닫기">×</button>
+</div>
+
+<div class="info">선택 지역 : <strong id="selRegion">서울(혜화)</strong><br>선택 날짜 : <strong id="selDate">2026년 9월 9일</strong></div>
+
+<div class="pdesc">선택한 날짜에 예약 가능한 시간을 선택해 주세요.<br>(최대 4시간)</div>
+<div class="note">※ 운영시간은 지역별로 상이할 수 있습니다.<br>※ 운영 상황에 따라 일부 시간은 선택이 제한될 수 있습니다.<br>※ 최대 4시간까지 선택할 수 있습니다.</div>
+
+<div class="times">
+<button class="time">10:00 ~ 10:30</button><button class="time">10:30 ~ 11:00</button><button class="time">11:00 ~ 11:30</button>
+<button class="time">11:30 ~ 12:00</button><button class="time">12:00 ~ 12:30</button><button class="time">12:30 ~ 13:00</button>
+<button class="time">13:00 ~ 13:30</button><button class="time">13:30 ~ 14:00</button><button class="time">14:00 ~ 14:30</button>
+<button class="time">14:30 ~ 15:00</button><button class="time">15:00 ~ 15:30</button><button class="time">15:30 ~ 16:00</button>
+<button class="time">16:00 ~ 16:30</button><button class="time">16:30 ~ 17:00</button><button class="time">17:00 ~ 17:30</button>
+<button class="time">17:30 ~ 18:00</button>
+</div>
+
+<div class="event">
+<h3>이벤트 선택</h3>
+<p>선택한 날짜에 진행되는 이벤트가 있다면 함께 신청해 주세요.</p>
+<div class="card"><strong id="eventName">[9/9] 서울(혜화) 이벤트 테스트입니다.</strong><br>참여 이벤트 테스트 입니다.<br>2026. 9. 9. (수) 10:00 ~ 18:00</div>
+</div>
+
+<div class="apply-wrap"><button class="apply" id="apply" disabled>신청</button></div>
+</div>
+</div>
+</div>
+
+<script>
+const tabs=[...document.querySelectorAll('.tab')];
+const guide=document.getElementById('guide');
+const popup=document.getElementById('popup');
+const closeBtn=document.getElementById('close');
+const selRegion=document.getElementById('selRegion');
+const selDate=document.getElementById('selDate');
+const eventName=document.getElementById('eventName');
+const dateCells=[...document.querySelectorAll('td[data-day]')];
+const times=[...document.querySelectorAll('.time')];
+const apply=document.getElementById('apply');
+let region='서울(혜화)';
+
+tabs.forEach(t=>t.onclick=()=>{
+ tabs.forEach(x=>x.classList.remove('active'));
+ t.classList.add('active');
+ region=t.dataset.region;
+ guide.innerHTML='<strong>'+region+'</strong> 활동 예약입니다.<br>'+region+' 지역에서 활동할 날짜를 선택해 주세요.';
+});
+
+dateCells.forEach(td=>td.onclick=()=>{
+ dateCells.forEach(x=>x.classList.remove('selected'));
+ td.classList.add('selected');
+ selRegion.textContent=region;
+ selDate.textContent='2026년 9월 '+td.dataset.day+'일';
+ eventName.textContent='[9/'+td.dataset.day+'] '+region+' 이벤트 테스트입니다.';
+ popup.classList.add('open');
+ popup.setAttribute('aria-hidden','false');
+});
+
+closeBtn.onclick=()=>{
+ popup.classList.remove('open');
+ popup.setAttribute('aria-hidden','true');
+};
+
+times.forEach(t=>t.onclick=()=>{
+ t.classList.toggle('selected');
+ const on=document.querySelectorAll('.time.selected').length>0;
+ apply.disabled=!on;
+ apply.classList.toggle('active',on);
+});
+</script>
+</body>
+</html>
