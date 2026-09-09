@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>프로젝토리 활동예약</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans KR",sans-serif;color:#222;background:#fff}
+button{font-family:inherit}.header{height:64px;border-bottom:1px solid #eee;display:flex;align-items:center;padding:0 36px}
+.logo{font-size:22px;font-weight:700;color:#009447;width:180px}.gnb{flex:1;display:flex;justify-content:center;gap:32px;font-size:13px}
+.header-right{width:180px;display:flex;justify-content:flex-end;gap:15px;font-size:12px;align-items:center}
+.reserve-btn{border:0;background:#008b43;color:#fff;padding:12px 20px}.container{width:980px;margin:50px auto 120px}
+.page-title{text-align:center;font-size:30px;font-weight:700;margin-bottom:12px}.page-desc{text-align:center;color:#777;font-size:13px;line-height:1.7;margin-bottom:36px}
+.branch-tabs{display:flex;border-bottom:1px solid #aaa;margin-bottom:38px}.branch-tab{width:180px;height:52px;background:#f7f7f7;border:1px solid #ddd;border-bottom:0;color:#555;font-size:15px;font-weight:600;cursor:pointer}
+.branch-tab+.branch-tab{border-left:0}.branch-tab.active{position:relative;background:#fff;color:#008b43;border:2px solid #008b43;border-bottom:2px solid #fff;margin-bottom:-1px;z-index:1}
+.branch-guide{background:#f8faf9;border:1px solid #e1e6e3;padding:16px 20px;margin-bottom:30px;font-size:13px;line-height:1.7}.branch-guide strong{color:#008b43}
+.reservation-area{display:grid;grid-template-columns:1fr 1fr;gap:44px}.section-title{font-size:16px;font-weight:700;margin-bottom:12px}.section-desc{font-size:12px;color:#777;margin-bottom:12px}
+.calendar-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.calendar-month{font-size:17px;font-weight:700}.calendar-nav{color:#888;font-size:18px}
+.calendar{width:100%;border-collapse:collapse;table-layout:fixed;font-size:12px}.calendar th{height:35px;font-weight:500}.calendar td{height:54px;text-align:center;border:1px solid #eee;color:#666}
+.calendar td.selected{background:#008b43;color:#fff;font-weight:700}.calendar td.disabled{background:#f6f6f6;color:#bbb}
+.legend{display:flex;gap:14px;margin-top:14px;font-size:11px;color:#777}.legend-item{display:flex;align-items:center;gap:5px}.box{width:12px;height:12px;border:1px solid #ccc}.box.green{background:#008b43;border-color:#008b43}.box.gray{background:#eee}
+.notice{margin-bottom:14px;font-size:12px;line-height:1.6}.notice .green{color:#00a651}.time-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.time-item{height:43px;border:1px solid #ddd;background:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;color:#444}
+.event-section{margin-top:30px}.event-card{border:1px solid #ddd;padding:16px;min-height:88px;font-size:12px;line-height:1.7}.event-card strong{font-size:14px}
+.bottom-bar{position:fixed;left:0;bottom:0;width:100%;height:72px;background:#fff;border-top:1px solid #ddd}.bottom-inner{width:980px;height:100%;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.total{font-size:14px;font-weight:700}.total span{color:#008b43}.actions{display:flex;gap:8px}.action-btn{width:120px;height:42px;border:1px solid #008b43;background:#fff;color:#008b43}.action-btn.primary{background:#008b43;color:#fff}
+@media(max-width:1050px){.container,.bottom-inner{width:calc(100% - 40px)}.reservation-area{grid-template-columns:1fr}.gnb{gap:16px}}
+</style>
+</head>
+<body>
+<header class="header">
+<div class="logo">projectory</div>
+<nav class="gnb"><span>소개</span><span>활동</span><span>공간</span><span>멤버십</span><span>소식</span></nav>
+<div class="header-right"><span>마이페이지</span><span>로그아웃</span><button class="reserve-btn">활동 예약</button></div>
+</header>
+
+<main class="container">
+<h1 class="page-title">프로젝토리 활동예약</h1>
+<div class="page-desc">활동할 지역을 선택한 후 예약 가능한 날짜와 시간을 확인해 주세요.<br>지역별 운영일 및 예약 가능 시간은 다를 수 있습니다.</div>
+
+<div class="branch-tabs">
+<button type="button" class="branch-tab active" data-branch="seoul">서울(혜화)</button>
+<button type="button" class="branch-tab" data-branch="seongnam">성남</button>
+</div>
+
+<div class="branch-guide" id="branchGuide"><strong>서울(혜화)</strong> 활동 예약 화면입니다.<br>서울(혜화) 지역에서 활동할 날짜와 시간을 선택해 주세요.</div>
+
+<div class="reservation-area">
+<section>
+<div class="calendar-header"><div class="calendar-month">2026.09</div><div class="calendar-nav">‹ &nbsp;&nbsp; ›</div></div>
+<table class="calendar">
+<thead><tr><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th></tr></thead>
+<tbody>
+<tr><td class="disabled">30</td><td class="disabled">31</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+<tr><td>6</td><td>7</td><td>8</td><td class="selected">9</td><td>10</td><td>11</td><td>12</td></tr>
+<tr><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td></tr>
+<tr><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td></tr>
+<tr><td>27</td><td>28</td><td>29</td><td>30</td><td class="disabled">1</td><td class="disabled">2</td><td class="disabled">3</td></tr>
+</tbody>
+</table>
+<div class="legend">
+<div class="legend-item"><span class="box green"></span>선택일</div>
+<div class="legend-item"><span class="box"></span>예약 가능일</div>
+<div class="legend-item"><span class="box gray"></span>예약 불가일</div>
+</div>
+</section>
+
+<section>
+<div class="section-title">활동시간 선택</div>
+<div class="section-desc">선택한 날짜에 예약 가능한 시간을 선택해 주세요. (최대 4시간)</div>
+<div class="notice"><div class="green">※ 운영시간은 지역별로 상이할 수 있습니다.</div><div class="green">※ 운영 상황에 따라 일부 시간은 선택이 제한될 수 있습니다.</div></div>
+<div class="time-grid">
+<div class="time-item">10:00 ~ 10:30</div><div class="time-item">10:30 ~ 11:00</div><div class="time-item">11:00 ~ 11:30</div><div class="time-item">11:30 ~ 12:00</div>
+<div class="time-item">12:00 ~ 12:30</div><div class="time-item">12:30 ~ 13:00</div><div class="time-item">13:00 ~ 13:30</div><div class="time-item">13:30 ~ 14:00</div>
+<div class="time-item">14:00 ~ 14:30</div><div class="time-item">14:30 ~ 15:00</div><div class="time-item">15:00 ~ 15:30</div><div class="time-item">15:30 ~ 16:00</div>
+<div class="time-item">16:00 ~ 16:30</div><div class="time-item">16:30 ~ 17:00</div><div class="time-item">17:00 ~ 17:30</div><div class="time-item">17:30 ~ 18:00</div>
+</div>
+
+<div class="event-section">
+<div class="section-title">이벤트 선택</div>
+<div class="section-desc">선택한 날짜에 진행되는 이벤트가 있다면 함께 신청해 주세요.</div>
+<div class="event-card"><strong id="eventTitle">[9/9] 서울(혜화) 프로그램</strong><br><span id="eventPlace">장소 : 프로젝토리 서울(혜화)</span><br>2026. 9. 9. (수) 10:00 ~ 12:00</div>
+</div>
+</section>
+</div>
+</main>
+
+<div class="bottom-bar">
+<div class="bottom-inner">
+<div class="total">총 <span>1일</span></div>
+<div class="actions"><button class="action-btn">초기화</button><button class="action-btn primary">신청하기</button></div>
+</div>
+</div>
+
+<script>
+const tabs=document.querySelectorAll('.branch-tab');
+const branchGuide=document.getElementById('branchGuide');
+const eventTitle=document.getElementById('eventTitle');
+const eventPlace=document.getElementById('eventPlace');
+
+tabs.forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    tabs.forEach(item=>item.classList.remove('active'));
+    tab.classList.add('active');
+    const branch=tab.dataset.branch;
+
+    if(branch==='seoul'){
+      branchGuide.innerHTML='<strong>서울(혜화)</strong> 활동 예약 화면입니다.<br>서울(혜화) 지역에서 활동할 날짜와 시간을 선택해 주세요.';
+      eventTitle.textContent='[9/9] 서울(혜화) 프로그램';
+      eventPlace.textContent='장소 : 프로젝토리 서울(혜화)';
+    }else{
+      branchGuide.innerHTML='<strong>성남</strong> 활동 예약 화면입니다.<br>성남 지역에서 활동할 날짜와 시간을 선택해 주세요.';
+      eventTitle.textContent='[9/9] 성남 프로그램';
+      eventPlace.textContent='장소 : 프로젝토리 성남';
+    }
+  });
+});
+</script>
+</body>
+</html>
