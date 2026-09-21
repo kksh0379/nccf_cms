@@ -1,0 +1,1421 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="김상화의 책 『서비스는 어디서 망가질 수 있는가』 소개 페이지. 기획부터 운영까지, 하나의 서비스를 완주하며 발견한 것들.">
+  <meta name="theme-color" content="#f8fbfd">
+  <meta property="og:type" content="book">
+  <meta property="og:site_name" content="서비스는 어디서 망가질 수 있는가 · 김상화">
+  <meta property="og:title" content="서비스는 어디서 망가질 수 있는가">
+  <meta property="og:description" content="비영리 조직에서 서비스 기획부터 운영까지, 하나의 프로젝트를 완주한 김상화의 기록.">
+  <meta property="og:url" content="https://kksh0379.github.io/nccf_cms/book/">
+  <meta property="og:image" content="https://kksh0379.github.io/nccf_cms/book/og-book.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="서비스는 어디서 망가질 수 있는가 · 김상화 지음 · 책 표지">
+  <meta property="og:locale" content="ko_KR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="서비스는 어디서 망가질 수 있는가">
+  <meta name="twitter:description" content="비영리 조직에서 서비스 기획부터 운영까지, 하나의 프로젝트를 완주한 김상화의 기록.">
+  <meta name="twitter:image" content="https://kksh0379.github.io/nccf_cms/book/og-book.png">
+  <link rel="canonical" href="https://kksh0379.github.io/nccf_cms/book/">
+  <title>서비스는 어디서 망가질 수 있는가 | 김상화</title>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Book",
+      "name": "서비스는 어디서 망가질 수 있는가",
+      "author": { "@type": "Person", "name": "김상화" },
+      "inLanguage": "ko",
+      "description": "비영리 조직에서 서비스 기획부터 운영까지, 하나의 프로젝트를 완주한 기록"
+    }
+  </script>
+  <script>document.documentElement.classList.add('js');</script>
+  <style>
+    :root {
+      --navy: #073f76;
+      --navy-deep: #062d55;
+      --blue: #2f83c5;
+      --blue-soft: #9dcbe7;
+      --blue-pale: #eaf5fb;
+      --paper: #fbfcfd;
+      --white: #ffffff;
+      --ink: #172d40;
+      --muted: #5e7181;
+      --line: #cce0ed;
+      --shadow: 0 28px 70px rgba(7, 63, 118, .14);
+      --cover-image: url("book-cover.webp");
+      --serif: "Iropke Batang", "Noto Serif KR", "Nanum Myeongjo", "AppleMyungjo", "Batang", serif;
+      --sans: "Pretendard", "SUIT", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 84px;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: var(--sans);
+      font-size: 17px;
+      line-height: 1.8;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: inherit; }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    :focus-visible {
+      outline: 3px solid rgba(47, 131, 197, .42);
+      outline-offset: 4px;
+    }
+
+    .skip-link {
+      position: fixed;
+      left: 16px;
+      top: -100px;
+      z-index: 999;
+      padding: 10px 16px;
+      color: var(--white);
+      background: var(--navy);
+      border-radius: 999px;
+      text-decoration: none;
+      transition: top .2s ease;
+    }
+
+    .skip-link:focus { top: 16px; }
+
+    .scroll-progress {
+      position: fixed;
+      inset: 0 auto auto 0;
+      z-index: 1000;
+      width: 0;
+      height: 3px;
+      background: var(--blue);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(204, 224, 237, .75);
+      background: rgba(251, 252, 253, .9);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      width: min(calc(100% - 40px), var(--max));
+      min-height: 78px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      position: relative;
+      width: 42px;
+      height: 1px;
+      background: var(--blue-soft);
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      transform: translateY(-50%);
+    }
+
+    .brand-mark::before { left: 0; background: var(--navy); }
+    .brand-mark::after { right: 0; border: 1.5px solid var(--blue); background: var(--paper); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(16px, 2.6vw, 34px);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #385568;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .nav-links a:hover { color: var(--navy); }
+
+    main { overflow: hidden; }
+
+    .container {
+      width: min(calc(100% - 40px), var(--max));
+      margin-inline: auto;
+    }
+
+    .hero {
+      position: relative;
+      min-height: calc(100svh - 73px);
+      display: grid;
+      align-items: center;
+      padding: clamp(64px, 8vw, 108px) 0 clamp(82px, 10vw, 132px);
+      isolation: isolate;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 520px;
+      height: 520px;
+      right: -250px;
+      top: 7%;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, .75fr);
+      align-items: center;
+      gap: clamp(46px, 8vw, 110px);
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+      min-width: 0;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 0 0 26px;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .19em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::after {
+      content: "";
+      width: 74px;
+      height: 1px;
+      background: var(--blue-soft);
+    }
+
+    h1, h2, h3, blockquote { font-family: var(--serif); }
+
+    h1 {
+      max-width: 760px;
+      margin: 0;
+      color: var(--navy-deep);
+      font-size: clamp(48px, 5.9vw, 78px);
+      font-weight: 500;
+      line-height: 1.26;
+      letter-spacing: -.045em;
+    }
+
+    h1 .accent {
+      position: relative;
+      display: inline-block;
+      color: var(--navy);
+    }
+
+    .title-line {
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    h1 .accent::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      left: 0;
+      right: 0;
+      bottom: .08em;
+      height: .18em;
+      background: var(--blue-pale);
+    }
+
+    .hero-kicker {
+      max-width: 600px;
+      margin: 28px 0 0;
+      color: #466477;
+      font-size: clamp(18px, 1.75vw, 21px);
+      line-height: 1.85;
+    }
+
+    .author {
+      display: flex;
+      align-items: baseline;
+      gap: 9px;
+      margin-top: 22px;
+      color: var(--navy);
+      font-family: var(--serif);
+      font-size: 24px;
+    }
+
+    .author small {
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 13px;
+      letter-spacing: .14em;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 36px;
+    }
+
+    .button {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 13px 22px;
+      border: 1px solid var(--navy);
+      border-radius: 999px;
+      color: var(--white);
+      background: var(--navy);
+      font-size: 15px;
+      font-weight: 800;
+      text-decoration: none;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(7, 63, 118, .16);
+    }
+
+    .button.secondary { color: var(--navy); background: transparent; }
+
+    .button .arrow { font-size: 17px; line-height: 1; }
+
+    .cover-stage {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 405px);
+      margin-inline: auto;
+      perspective: 1400px;
+    }
+
+    .cover-stage::before,
+    .cover-stage::after,
+    .cover-stage .dot-a,
+    .cover-stage .dot-b { display: none; }
+
+    .book-cover {
+      width: 100%;
+      aspect-ratio: 437 / 612;
+      object-fit: cover;
+      border: 1px solid rgba(7, 63, 118, .15);
+      background: var(--white);
+      box-shadow: 0 26px 54px -18px rgba(7, 63, 118, .34);
+      transform: none;
+    }
+
+    .cover-art {
+      background-color: var(--white);
+      background-image: var(--cover-image);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .hero-meta {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-top: clamp(34px, 5vw, 62px);
+      border-block: 1px solid var(--line);
+    }
+
+    .meta-item {
+      position: relative;
+      padding: 24px clamp(16px, 2.8vw, 32px);
+      color: var(--muted);
+      font-size: 15px;
+      text-align: center;
+    }
+
+    .meta-item + .meta-item { border-left: 1px solid var(--line); }
+
+    .meta-item strong {
+      display: block;
+      margin-bottom: 1px;
+      color: var(--navy);
+      font-family: var(--serif);
+      font-size: clamp(25px, 2.6vw, 31px);
+      font-weight: 600;
+    }
+
+    .section {
+      position: relative;
+      padding: clamp(92px, 10vw, 136px) 0;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 0 0 20px;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+
+    .section-label .number {
+      display: inline-grid;
+      place-items: center;
+      width: 25px;
+      height: 25px;
+      border: 1px solid var(--blue-soft);
+      border-radius: 50%;
+      letter-spacing: 0;
+    }
+
+    .section-title {
+      max-width: 820px;
+      margin: 0;
+      color: var(--navy-deep);
+      font-size: clamp(38px, 4.5vw, 58px);
+      font-weight: 500;
+      line-height: 1.35;
+      letter-spacing: -.035em;
+    }
+
+    .section-lead {
+      max-width: 700px;
+      margin: 24px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.95;
+    }
+
+    .opening {
+      color: var(--white);
+      background: var(--navy-deep);
+    }
+
+    .opening::before,
+    .opening::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(157, 203, 231, .22);
+      border-radius: 50%;
+    }
+
+    .opening::before { width: 440px; height: 440px; left: -260px; top: -140px; }
+    .opening::after { width: 250px; height: 250px; right: -90px; bottom: -90px; }
+
+    .opening-grid {
+      display: grid;
+      grid-template-columns: .7fr 1.3fr;
+      gap: clamp(48px, 8vw, 120px);
+      align-items: start;
+    }
+
+    .opening .section-label { color: #9fd0ed; }
+
+    .opening h2 {
+      margin: 0;
+      color: var(--white);
+      font-size: clamp(42px, 5vw, 66px);
+      font-weight: 500;
+      line-height: 1.42;
+      letter-spacing: -.035em;
+    }
+
+    .opening-copy p {
+      margin: 0 0 22px;
+      color: rgba(255,255,255,.82);
+      font-size: 18px;
+      line-height: 2.05;
+    }
+
+    .opening-copy strong { color: var(--white); font-weight: 700; }
+
+    .opening-quote {
+      position: relative;
+      margin: 42px 0 0;
+      padding: 32px 0 0 36px;
+      border-top: 1px solid rgba(157, 203, 231, .36);
+      color: #cbe7f7;
+      font-family: var(--serif);
+      font-size: clamp(23px, 2.4vw, 31px);
+      line-height: 1.7;
+    }
+
+    .opening-quote::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: -5px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--blue-soft);
+    }
+
+    .project-map {
+      margin-top: 70px;
+      padding: 34px clamp(20px, 4vw, 46px);
+      border: 1px solid rgba(157, 203, 231, .24);
+      border-radius: 18px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .map-title {
+      margin: 0 0 24px;
+      color: rgba(255,255,255,.6);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .map-track {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .map-track::before {
+      content: "";
+      position: absolute;
+      left: 9%;
+      right: 9%;
+      top: 7px;
+      height: 1px;
+      background: rgba(157, 203, 231, .45);
+    }
+
+    .map-track li {
+      position: relative;
+      z-index: 1;
+      padding-top: 26px;
+      color: rgba(255,255,255,.78);
+      font-size: 15px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .map-track li::before {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 50%;
+      width: 10px;
+      height: 10px;
+      border: 1px solid #8fc6e7;
+      border-radius: 50%;
+      background: var(--navy-deep);
+      transform: translateX(-50%);
+    }
+
+    .map-track li:nth-child(3)::before { background: #8fc6e7; }
+
+    .parts-intro {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 40px;
+      margin-bottom: 54px;
+    }
+
+    .parts-intro .section-lead { max-width: 420px; }
+
+    .parts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 26px;
+    }
+
+    .part-card {
+      position: relative;
+      min-height: 470px;
+      display: flex;
+      flex-direction: column;
+      padding: clamp(34px, 4vw, 50px);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--white);
+      overflow: hidden;
+      transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+    }
+
+    .part-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--blue-soft);
+      box-shadow: 0 20px 55px rgba(7, 63, 118, .08);
+    }
+
+    .part-card::after {
+      content: attr(data-part);
+      position: absolute;
+      right: -4px;
+      bottom: -28px;
+      color: rgba(47, 131, 197, .05);
+      font-family: var(--serif);
+      font-size: 150px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .part-number {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .18em;
+    }
+
+    .part-number::after {
+      content: "";
+      width: 70px;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .part-card h3 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(30px, 3.1vw, 40px);
+      font-weight: 500;
+      line-height: 1.35;
+      letter-spacing: -.025em;
+    }
+
+    .part-thesis {
+      min-height: 66px;
+      margin: 16px 0 28px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .chapter-list {
+      position: relative;
+      z-index: 1;
+      list-style: none;
+      margin: auto 0 0;
+      padding: 24px 0 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .chapter-list li {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 10px;
+      padding: 8px 0;
+      color: #486275;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .chapter-list span { color: var(--blue); font-size: 13px; font-weight: 800; letter-spacing: .08em; }
+
+    .stories { background: linear-gradient(180deg, #f3f8fb 0%, #fbfcfd 100%); }
+
+    .stories-head {
+      display: grid;
+      grid-template-columns: 1fr .8fr;
+      align-items: end;
+      gap: 58px;
+      margin-bottom: 62px;
+    }
+
+    .stories-note {
+      margin: 0;
+      padding-left: 28px;
+      border-left: 1px solid var(--blue-soft);
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.9;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+
+    .story {
+      position: relative;
+      min-height: 350px;
+      padding: 40px 36px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.7);
+    }
+
+    .story::before {
+      content: "";
+      position: absolute;
+      left: -5px;
+      top: 43px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--navy);
+    }
+
+    .story-index {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .16em;
+    }
+
+    .story h3 {
+      margin: 20px 0 14px;
+      color: var(--navy);
+      font-size: 27px;
+      font-weight: 600;
+      line-height: 1.46;
+    }
+
+    .story p { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.9; }
+
+    .message-wrap {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: clamp(50px, 9vw, 130px);
+      align-items: center;
+    }
+
+    .message-orbit {
+      position: relative;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+    }
+
+    .message-orbit::before {
+      content: "";
+      position: absolute;
+      inset: 18%;
+      border: 1px dashed var(--blue-soft);
+      border-radius: 50%;
+    }
+
+    .orbit-core {
+      position: relative;
+      z-index: 2;
+      width: 42%;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--white);
+      background: var(--navy);
+      font-family: var(--serif);
+      font-size: clamp(21px, 3vw, 34px);
+      text-align: center;
+      box-shadow: 0 18px 50px rgba(7, 63, 118, .16);
+    }
+
+    .orbit-dot {
+      position: absolute;
+      display: grid;
+      place-items: center;
+      min-width: 72px;
+      min-height: 36px;
+      padding: 8px 15px;
+      border: 1px solid var(--blue-soft);
+      border-radius: 999px;
+      color: var(--navy);
+      background: var(--white);
+      font-size: 13px;
+      font-weight: 800;
+      box-shadow: 0 8px 24px rgba(7, 63, 118, .07);
+    }
+
+    .orbit-dot:nth-of-type(2) { top: 1%; left: 50%; transform: translateX(-50%); }
+    .orbit-dot:nth-of-type(3) { top: 31%; right: -5%; }
+    .orbit-dot:nth-of-type(4) { right: 7%; bottom: 9%; }
+    .orbit-dot:nth-of-type(5) { left: 6%; bottom: 10%; }
+    .orbit-dot:nth-of-type(6) { top: 31%; left: -4%; }
+
+    .message-copy blockquote {
+      margin: 38px 0 0;
+      padding: 28px 0 0;
+      border-top: 1px solid var(--line);
+      color: var(--navy);
+      font-size: clamp(25px, 3.2vw, 40px);
+      line-height: 1.62;
+      letter-spacing: -.025em;
+    }
+
+    .message-copy blockquote::before {
+      content: "";
+      display: block;
+      width: 10px;
+      height: 10px;
+      margin-top: -33px;
+      margin-bottom: 28px;
+      border-radius: 50%;
+      background: var(--navy);
+    }
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 44px;
+    }
+
+    .principle {
+      padding: 22px 20px;
+      border-radius: 13px;
+      background: var(--blue-pale);
+      color: var(--navy);
+      font-size: 15px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .readers {
+      color: var(--white);
+      background: var(--navy);
+    }
+
+    .readers .section-label { color: #a7d3ed; }
+    .readers .section-title { color: var(--white); }
+    .readers .section-lead { color: rgba(255,255,255,.68); }
+
+    .reader-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      margin-top: 58px;
+      border: 1px solid rgba(255,255,255,.17);
+      background: rgba(255,255,255,.17);
+    }
+
+    .reader {
+      min-height: 205px;
+      padding: 38px;
+      background: var(--navy);
+    }
+
+    .reader strong {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--white);
+      font-family: var(--serif);
+      font-size: 25px;
+      font-weight: 500;
+    }
+
+    .reader p { margin: 0; color: rgba(255,255,255,.78); font-size: 16px; line-height: 1.9; }
+
+    .book-info-grid {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: clamp(48px, 9vw, 120px);
+      align-items: start;
+    }
+
+    .mini-cover {
+      width: min(100%, 280px);
+      aspect-ratio: 437 / 612;
+      margin: 0 auto;
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 55px rgba(7, 63, 118, .12);
+    }
+
+    .info-table {
+      margin-top: 42px;
+      border-top: 1px solid var(--line);
+    }
+
+    .info-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 24px;
+      padding: 19px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 16px;
+    }
+
+    .info-row dt { color: var(--muted); }
+    .info-row dd { margin: 0; color: var(--navy); font-weight: 750; }
+
+    .final-note {
+      margin: 38px 0 0;
+      padding: 32px;
+      border-radius: 16px;
+      background: var(--blue-pale);
+      color: var(--navy);
+      font-family: var(--serif);
+      font-size: 25px;
+      line-height: 1.7;
+    }
+
+    .book-quote {
+      margin: 8px 0 22px;
+      padding-left: 20px;
+      border-left: 3px solid var(--line);
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: clamp(20px, 2.1vw, 25px);
+      line-height: 1.62;
+    }
+
+    .book-blurb {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.95;
+    }
+
+    .book-blurb strong { color: var(--ink); font-weight: 750; }
+
+    footer {
+      padding: 38px 0 46px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .back-to-top { color: var(--navy); font-weight: 800; text-decoration: none; }
+
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .75s ease, transform .75s ease;
+    }
+
+    .js .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 1060px) {
+      .hero { min-height: auto; }
+      .hero-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+      }
+      .hero-copy { order: 1; width: 100%; }
+      .cover-stage {
+        order: 2;
+        width: min(78vw, 360px);
+        margin: 58px auto 0;
+        perspective: none;
+      }
+      .book-cover { transform: none; }
+      .hero-meta { order: 3; width: 100%; margin-top: 64px; }
+      .opening-grid, .message-wrap, .book-info-grid { grid-template-columns: 1fr; }
+      .parts-intro { align-items: start; flex-direction: column; }
+      .parts-grid { grid-template-columns: 1fr; }
+      .stories-head { grid-template-columns: 1fr; }
+      .story-grid { grid-template-columns: repeat(2, 1fr); }
+      .message-orbit { width: min(100%, 450px); margin: 0 auto; }
+      .mini-cover { width: min(70vw, 280px); }
+    }
+
+    @media (max-width: 680px) {
+      html { scroll-padding-top: 66px; }
+      .nav { min-height: 64px; width: min(calc(100% - 28px), var(--max)); }
+      .nav-links li:not(:last-child) { display: none; }
+      .nav-links a { display: inline-block; padding: 9px 0; font-size: 14px; }
+      .container { width: min(calc(100% - 32px), var(--max)); }
+      h1 { font-size: clamp(30px, 8vw, 54px); line-height: 1.3; }
+      .hero { padding: 52px 0 88px; }
+      .hero-kicker { font-size: 17px; line-height: 1.9; }
+      .hero-actions .button { flex: 1 1 190px; }
+      .section { padding: 80px 0; }
+      .hero-meta { grid-template-columns: 1fr; }
+      .meta-item + .meta-item { border-left: 0; border-top: 1px solid var(--line); }
+      .opening h2 { font-size: 40px; }
+      .opening-copy p { font-size: 17px; line-height: 1.95; }
+      .map-track { grid-template-columns: 1fr; gap: 12px; }
+      .map-track::before { left: 6px; right: auto; top: 12px; bottom: 12px; width: 1px; height: auto; }
+      .map-track li { min-height: 28px; padding: 0 0 0 28px; text-align: left; }
+      .map-track li::before { left: 6px; top: 7px; }
+      .part-card { min-height: 0; }
+      .story-grid { grid-template-columns: 1fr; }
+      .story { min-height: 0; padding: 34px 28px; }
+      .message-orbit { width: 92%; }
+      .orbit-dot { min-width: 64px; padding-inline: 11px; font-size: 13px; }
+      .principles { grid-template-columns: 1fr; }
+      .reader-grid { grid-template-columns: 1fr; }
+      .reader { min-height: 0; }
+      .info-row { grid-template-columns: 84px 1fr; gap: 14px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+      .cover-stage::before, .cover-stage::after, .cover-stage .dot-a, .cover-stage .dot-b { display: none; }
+    }
+
+    @media (max-width: 380px) {
+      html { scroll-padding-top: 60px; }
+      body { font-size: 16px; }
+      .nav { min-height: 60px; width: calc(100% - 24px); gap: 12px; }
+      .brand { gap: 8px; font-size: 11px; letter-spacing: .12em; }
+      .brand-mark { width: 32px; }
+      .nav-links a { font-size: 13px; }
+      .container { width: calc(100% - 32px); }
+      .hero { padding: 40px 0 72px; }
+      .eyebrow { gap: 10px; margin-bottom: 18px; font-size: 11px; line-height: 1.65; letter-spacing: .13em; }
+      .eyebrow::after { width: 38px; flex: 0 0 38px; }
+      h1 { font-size: 30px; line-height: 1.38; letter-spacing: -.055em; }
+      .hero-kicker { margin-top: 22px; font-size: 16px; line-height: 1.78; }
+      .author { margin-top: 16px; font-size: 22px; }
+      .hero-actions { margin-top: 26px; gap: 10px; }
+      .hero-actions .button { min-height: 48px; flex-basis: 100%; padding: 11px 16px; font-size: 14px; }
+      .cover-stage { width: min(76vw, 274px); margin-top: 48px; }
+      .hero-meta { margin-top: 52px; }
+      .meta-item { padding: 20px 14px; font-size: 14px; }
+      .meta-item strong { font-size: 24px; }
+      .section { padding: 68px 0; }
+      .section-label { margin-bottom: 16px; font-size: 11px; letter-spacing: .15em; }
+      .section-title { font-size: 34px; line-height: 1.38; }
+      .section-lead { margin-top: 18px; font-size: 17px; line-height: 1.85; }
+      .opening-grid { gap: 34px; }
+      .opening h2 { font-size: 36px; line-height: 1.4; }
+      .opening-copy p { margin-bottom: 18px; font-size: 16px; line-height: 1.88; }
+      .opening-quote { margin-top: 32px; padding: 26px 0 0 24px; font-size: 22px; line-height: 1.65; }
+      .project-map { margin-top: 48px; padding: 26px 20px; }
+      .map-title { margin-bottom: 20px; font-size: 11px; }
+      .map-track li { font-size: 15px; }
+      .parts-intro { gap: 22px; margin-bottom: 36px; }
+      .parts-grid { gap: 18px; }
+      .part-card { padding: 28px 24px; border-radius: 16px; }
+      .part-card h3 { font-size: 28px; }
+      .part-thesis { min-height: 0; margin: 14px 0 22px; font-size: 16px; line-height: 1.82; }
+      .chapter-list { padding-top: 18px; }
+      .chapter-list li { grid-template-columns: 30px 1fr; gap: 7px; padding: 7px 0; font-size: 15px; }
+      .stories-head { gap: 24px; margin-bottom: 38px; }
+      .stories-note { padding-left: 20px; font-size: 16px; line-height: 1.8; }
+      .story { padding: 30px 24px; }
+      .story::before { top: 39px; }
+      .story h3 { margin: 16px 0 12px; font-size: 25px; }
+      .story p { font-size: 16px; line-height: 1.85; }
+      .message-wrap { gap: 54px; }
+      .message-orbit { width: 88%; }
+      .orbit-core { font-size: 23px; }
+      .orbit-dot { min-width: 58px; min-height: 34px; padding: 6px 9px; font-size: 12px; }
+      .message-copy blockquote { margin-top: 30px; padding-top: 24px; font-size: 26px; line-height: 1.58; }
+      .message-copy blockquote::before { margin-top: -29px; margin-bottom: 22px; }
+      .principles { margin-top: 32px; }
+      .principle { padding: 18px 14px; font-size: 14px; }
+      .reader-grid { margin-top: 40px; }
+      .reader { padding: 30px 24px; }
+      .reader strong { font-size: 23px; }
+      .reader p { font-size: 16px; line-height: 1.85; }
+      .book-info-grid { gap: 40px; }
+      .mini-cover { width: min(68vw, 238px); }
+      .info-table { margin-top: 30px; }
+      .info-row { grid-template-columns: 70px 1fr; gap: 10px; padding: 16px 0; font-size: 15px; }
+      .final-note { margin-top: 30px; padding: 24px 20px; font-size: 21px; line-height: 1.65; }
+      footer { padding: 30px 0 36px; font-size: 13px; }
+      .footer-inner { gap: 12px; }
+    }
+
+    @media (max-width: 380px) and (max-height: 800px) {
+      .hero { padding-top: 32px; }
+      .hero-kicker { margin-top: 18px; }
+      .hero-actions { margin-top: 22px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      .js .reveal { opacity: 1; transform: none; }
+    }
+
+    @media print {
+      .site-header, .scroll-progress, .hero-actions, .back-to-top { display: none; }
+      .hero { min-height: auto; }
+      .section { break-inside: avoid; padding: 48px 0; }
+      .js .reveal { opacity: 1; transform: none; }
+    }
+    /* inside-the-book preview */
+    .inside .section-lead { max-width: 620px; }
+    .inside-page { margin-top: clamp(34px, 4vw, 52px); padding: clamp(30px, 5vw, 62px); border: 1px solid var(--line); border-radius: 22px; background: var(--white); box-shadow: var(--shadow); }
+    .inside-head { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .inside-badge { display: inline-block; padding: 6px 14px; border: 1px solid var(--line); border-radius: 99px; background: var(--blue-pale); color: var(--blue); font-size: 12px; font-weight: 800; letter-spacing: .08em; }
+    .inside-ch { color: var(--muted); font-size: 13px; font-weight: 700; letter-spacing: .04em; }
+    .inside-title-x { margin: 0 0 28px; font-size: clamp(24px, 3vw, 34px); line-height: 1.35; color: var(--navy); letter-spacing: -.02em; }
+    .inside-lead { max-width: 760px; margin: 0; font-family: var(--serif); font-size: clamp(20px, 2.3vw, 25px); line-height: 1.95; color: var(--ink); }
+    .inside-lead .dc { float: left; margin: 10px 14px 0 0; font-family: var(--serif); font-size: clamp(56px, 8.5vw, 84px); line-height: .74; font-weight: 700; color: var(--blue); }
+    .inside-body { max-width: 760px; margin: 22px 0 0; font-family: var(--serif); font-size: clamp(17px, 1.9vw, 20px); line-height: 1.95; color: #2a3f52; }
+    .inside-quote { max-width: 760px; margin: 34px 0 0; padding: 26px 30px; border: 0; border-left: 4px solid var(--blue); border-radius: 0 14px 14px 0; background: var(--blue-pale); font-family: var(--serif); font-size: clamp(18px, 2.1vw, 23px); line-height: 1.6; color: var(--navy); font-weight: 600; }
+    .inside-note { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 20px; margin-top: 34px; padding-top: 28px; border-top: 1px solid var(--line); }
+    .inside-note p { margin: 0; color: var(--muted); font-size: 15px; }
+    #book-info .book-info-grid, #message .message-wrap { margin-top: clamp(34px, 4vw, 52px); }
+  </style>
+</head>
+<body id="top">
+  <a class="skip-link" href="#main">본문으로 바로가기</a>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="주요 메뉴">
+      <a class="brand" href="#top" aria-label="책 소개 처음으로">
+        <span class="brand-mark" aria-hidden="true"></span>
+        IT × ORGANIZATION
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about">책 소개</a></li>
+        <li><a href="#contents">구성</a></li>
+        <li><a href="#episodes">에피소드</a></li>
+        <li><a href="#inside">미리보기</a></li>
+        <li><a href="#book-info">책 정보</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">기획부터 운영까지, 하나의 서비스를 완주하며 발견한 것들</p>
+          <h1 id="hero-title"><span class="title-line accent">서비스는 어디서</span><br><span class="title-line">망가질 수 있는가</span></h1>
+          <p class="hero-kicker">서비스 기획부터 개발, 보안과 개인정보, 오픈 이후 운영까지. 서로 다른 책임과 언어 사이에서 하나의 프로젝트를 끝까지 완주한 기록입니다.</p>
+          <p class="author">김상화 <small>지음</small></p>
+          <div class="hero-actions">
+            <a class="button" href="#about">이 책은 어떤 책인가 <span class="arrow" aria-hidden="true">↓</span></a>
+            <a class="button secondary" href="#contents">목차 살펴보기</a>
+          </div>
+        </div>
+
+        <div class="cover-stage reveal" aria-label="책 표지">
+          <span class="dot-a" aria-hidden="true"></span>
+          <span class="dot-b" aria-hidden="true"></span>
+          <div class="book-cover cover-art" role="img" aria-label="김상화 지음, 서비스는 어디서 망가질 수 있는가 책 표지"></div>
+        </div>
+
+        <div class="hero-meta reveal" aria-label="책 구성 요약">
+          <div class="meta-item"><strong>4개의 PART</strong>프로젝트의 전제부터 오픈까지</div>
+          <div class="meta-item"><strong>15개의 장면</strong>00부터 14까지 이어지는 기록</div>
+          <div class="meta-item"><strong>187쪽</strong>한 권에 담은 프로젝트의 전 과정</div>
+          <div class="meta-item"><strong>하나의 완주</strong>나의AAC를 만든 2년 반의 여정</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section opening" id="about" aria-labelledby="about-title">
+      <div class="container">
+        <div class="opening-grid">
+          <div class="reveal">
+            <p class="section-label"><span class="number">01</span> About the book</p>
+            <h2 id="about-title">화면 뒤에 있는<br>진짜 일을<br>말하다</h2>
+          </div>
+          <div class="opening-copy reveal">
+            <p>이 책은 비영리 조직에서 서비스 개발 프로젝트를 맡으며 직접 겪은 시행착오와 고민을 정리한 기록입니다. 특히 <strong>IT 경험이 없는 조직에서 기술 프로젝트가 어떤 방식으로 어려워지는지</strong>, 그리고 그 어려움이 왜 개인의 의지만으로 해결되기 어려운지를 돌아봅니다.</p>
+            <p>이야기의 중심에는 보완대체의사소통 앱 <strong>‘나의AAC’</strong>가 있습니다. 약 10년간 운영된 서비스의 이름과 가치는 이어받되, 이용자 흐름과 데이터 구조, 회원 체계, 관리자 기능, 서버, 보안, 개인정보, 배포와 운영의 기반을 처음부터 다시 세워야 했던 프로젝트입니다.</p>
+            <blockquote class="opening-quote">“서비스를 만드는 일은 기능을 구현하는 데서 끝나지 않았다. 서로 다른 책임과 언어를 하나의 서비스로 연결하는 일이었다.”</blockquote>
+          </div>
+        </div>
+
+        <div class="project-map reveal" role="img" aria-label="서비스가 목적, 이용자, 요구 사항, 기술, 운영과 책임을 연결하는 과정">
+          <p class="map-title">A service is a connected system</p>
+          <ol class="map-track">
+            <li>조직의 목적</li>
+            <li>이용자의 요구</li>
+            <li>개발 가능한 문장</li>
+            <li>기술과 정책</li>
+            <li>운영의 책임</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contents" aria-labelledby="contents-title">
+      <div class="container">
+        <div class="parts-intro">
+          <div class="reveal">
+            <p class="section-label"><span class="number">02</span> Contents</p>
+            <h2 class="section-title" id="contents-title">하나의 프로젝트를<br>네 개의 시선으로 읽다</h2>
+          </div>
+          <p class="section-lead reveal">시간순으로만 기록하지 않습니다. 프로젝트를 움직인 전제와 관계, 기능과 운영의 문제를 네 부분으로 나누어 따라갑니다.</p>
+        </div>
+
+        <div class="parts-grid">
+          <article class="part-card reveal" data-part="1">
+            <div class="part-number">PART 1</div>
+            <h3>이름부터 달랐던 프로젝트</h3>
+            <p class="part-thesis">‘고도화’라고 불렀지만 실제로는 새로 구축해야 했던 일. 잘못 붙인 이름이 예산과 일정, 역할에 남긴 영향을 되짚습니다.</p>
+            <ol class="chapter-list">
+              <li><span>00</span>고도화라는 이름의 구축</li>
+              <li><span>01</span>실행보다 검증이 중요했던 시간</li>
+              <li><span>02</span>PM은 리더인가, 전달자인가</li>
+              <li><span>03</span>그래도 도망가지 않은 이유</li>
+            </ol>
+          </article>
+
+          <article class="part-card reveal" data-part="2">
+            <div class="part-number">PART 2</div>
+            <h3>역할과 관계가 흔들릴 때</h3>
+            <p class="part-thesis">역할과 책임이 선명하지 않을 때 갈등은 사람 사이의 문제처럼 보입니다. 관계 뒤에 가려진 구조를 살펴봅니다.</p>
+            <ol class="chapter-list">
+              <li><span>04</span>초석이 늦어지면 건물도 흔들린다.</li>
+              <li><span>05</span>같은 프로젝트, 다른 무게</li>
+              <li><span>06</span>요구 사항은 말이 아니라 계약이 된다.</li>
+            </ol>
+          </article>
+
+          <article class="part-card reveal" data-part="3">
+            <div class="part-number">PART 3</div>
+            <h3>기능을 넣고 이어가는 일</h3>
+            <p class="part-thesis">아이디어가 기준이 되고, 기술과 콘텐츠가 계약과 협업을 지나 실제 서비스에 남는 과정을 따라갑니다.</p>
+            <ol class="chapter-list">
+              <li><span>07</span>“알아서 추천해주세요”로는 만들 수 없다.</li>
+              <li><span>08</span>같은 울타리라고 협업이 쉬운 것은 아니다.</li>
+              <li><span>09</span>기능은 넣는 것보다 이어가는 것이 어렵다.</li>
+              <li><span>10</span>초고속 인터넷, “메가패스~♬”</li>
+              <li><span>11</span>일을 많이 하는 것과 잘하는 것은 다르다.</li>
+            </ol>
+          </article>
+
+          <article class="part-card reveal" data-part="4">
+            <div class="part-number">PART 4</div>
+            <h3>끝이 가까워질수록 보이는 것들</h3>
+            <p class="part-thesis">오픈과 성과의 순간에 드러나는 구조적 문제, 결과 뒤에 남겨야 할 질문을 돌아봅니다.</p>
+            <ol class="chapter-list">
+              <li><span>12</span>오픈이 가까워질수록 문제는 선명해진다.</li>
+              <li><span>13</span>우승하면 안 되는 프로젝트</li>
+              <li><span>14</span>서비스는 한 번에 망가지지 않는다</li>
+              <li><span>—</span>에필로그. 그래도 프로젝트를 끝까지 한다는 것</li>
+            </ol>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section stories" id="episodes" aria-labelledby="episodes-title">
+      <div class="container">
+        <div class="stories-head">
+          <div class="reveal">
+            <p class="section-label"><span class="number">03</span> Episodes</p>
+            <h2 class="section-title" id="episodes-title">기능 하나 뒤에 숨어 있던<br>여섯 개의 현실</h2>
+          </div>
+          <p class="stories-note reveal">책은 성공담을 매끈하게 정리하지 않습니다. 결정이 미뤄지고 역할이 겹치며, 아이디어가 계약과 운영의 언어로 바뀌는 구체적인 순간을 보여줍니다.</p>
+        </div>
+
+        <div class="story-grid">
+          <article class="story reveal">
+            <span class="story-index">SCENE 01</span>
+            <h3>‘고도화’와 ‘구축’은<br>같은 일이 아니다</h3>
+            <p>이미 있는 화면을 고치는 일과 데이터, 회원, 서버, 보안, 운영의 기반을 새로 세우는 일은 다릅니다. 잘못 붙인 이름은 작은 기대를 만들고, 그 부담은 후반부에 커집니다.</p>
+          </article>
+          <article class="story reveal">
+            <span class="story-index">SCENE 02</span>
+            <h3>권한은 없는데<br>책임은 있는 PM</h3>
+            <p>조직과 개발사 사이에서 일정, 범위, 요구 사항, 리스크를 조율하지만 정작 역할의 이름과 결정 권한은 불분명했습니다. 갈등처럼 보였던 것은 구조의 문제였습니다.</p>
+          </article>
+          <article class="story reveal">
+            <span class="story-index">SCENE 03</span>
+            <h3>“알아서 추천”을<br>기준으로 바꾸는 일</h3>
+            <p>나의AAC 상징 추천 기능은 AI라는 말만으로 만들어지지 않았습니다. 사용 기록, 상징의 관계, 추천 순서와 예외를 개발 가능한 규칙으로 직접 정의해야 했습니다.</p>
+          </article>
+          <article class="story reveal">
+            <span class="story-index">SCENE 04</span>
+            <h3>AI 음성을 서비스로<br>가져오기까지</h3>
+            <p>본사의 기술을 연결하는 데에도 가격의 적정성, 거래와 사용 권한, 예상 호출량, API 연동, 장애 대응이 필요했습니다. 기술은 존재하는 것만으로 서비스가 되지 않았습니다.</p>
+          </article>
+          <article class="story reveal">
+            <span class="story-index">SCENE 05</span>
+            <h3>넣는 것보다<br>이어가는 일이 어렵다</h3>
+            <p>동화책과 AI 음성을 ‘이야기 만들기’에 넣은 뒤에도 디지털 사용 권리, 새 콘텐츠의 갱신, 계약 변화와 운영 책임이 남았습니다. 구현은 끝이 아니라 시작이었습니다.</p>
+          </article>
+          <article class="story reveal">
+            <span class="story-index">SCENE 06</span>
+            <h3>오픈 직전,<br>비로소 보이는 것들</h3>
+            <p>접근성, 개인정보의 수집과 파기, 관리자 권한, 보안 점검, 장애 대응과 유지 보수. 앞에서 미룬 질문들은 오픈을 앞두고 되돌리기 어려운 결정으로 돌아왔습니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="message" aria-labelledby="message-title">
+      <div class="container">
+        <div class="reveal">
+          <p class="section-label"><span class="number">04</span> Core message</p>
+          <h2 class="section-title" id="message-title">좋은 결과는<br>건강한 과정을 증명하지 않는다</h2>
+        </div>
+        <div class="message-wrap">
+        <div class="message-orbit reveal" aria-label="서비스를 중심으로 연결되는 다섯 가지 요소">
+          <div class="orbit-core">하나의<br>서비스</div>
+          <span class="orbit-dot">목적</span>
+          <span class="orbit-dot">이용자</span>
+          <span class="orbit-dot">기술</span>
+          <span class="orbit-dot">책임</span>
+          <span class="orbit-dot">운영</span>
+        </div>
+
+        <div class="message-copy reveal">
+          <p class="section-lead">나의AAC는 완성되었고 국내외 어워드에서도 공공성, 접근성, 사용자 경험의 성과를 인정받았습니다. 그러나 성과가 과정의 무리와 사람의 소모까지 정당화해서는 안 됩니다.</p>
+          <blockquote>“좋은 목적은 좋은 과정을 보장하지 않는다. 책임감은 구조를 대신할 수 없다.”</blockquote>
+          <div class="principles" aria-label="책이 제안하는 세 가지 일의 방식">
+            <div class="principle">명확하게 결정하기</div>
+            <div class="principle">운영 책임을 나누기</div>
+            <div class="principle">요구를 구체화하기</div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <section class="section readers" aria-labelledby="readers-title">
+      <div class="container">
+        <div class="reveal">
+          <p class="section-label"><span class="number">05</span> For readers</p>
+          <h2 class="section-title" id="readers-title">이런 사람에게<br>이 기록을 건넵니다</h2>
+          <p class="section-lead">“이 어려움은 나만 겪는 것이 아니구나.” 비슷한 상황에 놓인 누군가가 조금 덜 돌아가는 길을 찾기를 바라는 마음으로 쓴 책입니다.</p>
+        </div>
+        <div class="reader-grid reveal">
+          <article class="reader"><strong>처음 IT 프로젝트를 맡은 사람</strong><p>코딩보다 먼저 조직의 언어를 요구 사항과 결정의 언어로 바꿔야 하는 실무자와 PM에게.</p></article>
+          <article class="reader"><strong>비영리·공익 조직의 리더</strong><p>좋은 목적이 실제 서비스가 되기까지 필요한 예산, 역할, 권한과 책임의 구조를 고민하는 사람에게.</p></article>
+          <article class="reader"><strong>개발사와 협업하는 기획자</strong><p>한 줄의 요청이 범위와 일정, 데이터, 계약이 되는 과정을 이해하고 싶은 사람에게.</p></article>
+          <article class="reader"><strong>성과 뒤의 과정을 돌아보는 사람</strong><p>완주만큼 중요한 것이 지속 가능한 일의 방식이라고 믿는 모든 동료에게.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section inside" id="inside" aria-labelledby="inside-title">
+      <div class="container">
+        <p class="section-label"><span class="number">06</span> Inside the book</p>
+        <h2 class="section-title" id="inside-title">책 속으로<br>미리 들어가 보기</h2>
+        <p class="section-lead">완성된 결론이 아니라, 결정이 미뤄지고 역할이 겹치던 실제 장면들. 책의 목소리를 일부 미리 만나 보세요.</p>
+        <div class="inside-page reveal">
+          <div class="inside-head">
+            <span class="inside-badge">미리보기 · 발췌</span>
+            <span class="inside-ch">PART 4 · 14장</span>
+          </div>
+          <h3 class="inside-title-x">서비스는 한 번에 망가지지 않는다</h3>
+          <p class="inside-lead"><span class="dc">서</span>비스가 오픈한 뒤에도 일은 계속됐다. 사용자는 들어왔고, 문의가 생겼으며, 오류가 발견되면 수정해야 했다. 보안과 개인정보 기준도 계속 확인해야 했고, 실제 운영에서 발견되는 문제를 하나씩 보완해야 했다. 앞선 글에서 이야기했듯, 오픈은 서비스의 결승선이 아니었다. 오히려 운영의 출발선에 가까웠다.</p>
+          <p class="inside-body">그런데 2024년 말, 나의AAC에는 또 하나의 큰 변화가 다가오고 있었다. 서비스를 함께 만들어온 개발사의 운영 및 유지보수 계약이 12월 31일을 끝으로 종료될 예정이었다. 그리고 조직에서는 새로운 개발사를 선정하는 방향으로 일이 진행되기 시작했다.</p>
+          <p class="inside-body">개발사를 바꾸는 것 자체가 잘못된 선택은 아니다. 서비스를 오래 운영하다 보면 계약은 끝날 수 있고, 비용이나 품질, 운영 방향에 따라 새로운 개발사를 선택할 수도 있다. 특정 개발사와 계속 일해야만 서비스가 유지되는 구조라면 그것 역시 건강한 운영 방식이라고 말하기 어렵다. 문제는 왜 바꾸는가보다, 어떻게 바꿀 것인가에 있었다.</p>
+          <p class="inside-body">그동안 함께 개발한 개발사는 그 맥락을 알고 있었다. 요구 사항이 왜 그렇게 정해졌는지, 개발 과정에서 어떤 문제가 있었는지, 어떤 기능은 왜 현재의 방식으로 구현되었는지 알고 있었다. 새로운 개발사는 그렇지 않았다. 소스코드를 전달한다고 해서 서비스에 대한 이해까지 함께 전달되는 것은 아니다. 문서를 넘긴다고 해서 그 문서를 만들면서 있었던 판단과 시행착오까지 저절로 넘어가는 것도 아니다.</p>
+          <blockquote class="inside-quote">“서비스는 한 번에 망가지지 않는다. 눈에 보이지 않는 작은 무리가 반복되고, 사람이 바뀔 때마다 경험이 사라지고, 명확한 기준 없이 운영의 판단이 이어질 때 조금씩 흔들린다.”</blockquote>
+          <div class="inside-note">
+            <p>14장 도입부 일부입니다. 전체 이야기는 한 권으로 이어집니다.</p>
+            <a class="button secondary" href="#contents">목차 전체 보기</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="book-info" aria-labelledby="book-info-title">
+      <div class="container">
+        <div class="reveal">
+          <p class="section-label"><span class="number">07</span> Book information</p>
+          <h2 class="section-title" id="book-info-title">책 정보</h2>
+        </div>
+        <div class="book-info-grid">
+        <div class="mini-cover cover-art reveal" role="img" aria-label="서비스는 어디서 망가질 수 있는가 책 표지 축소 이미지"></div>
+        <div class="reveal">
+          <blockquote class="book-quote">“기술보다 중요한 것은 함께 만드는 방식이었다.”</blockquote>
+          <p class="book-blurb">비영리 조직에서 프로젝트의 시작부터 종료까지, 다양한 분야를 아우르며 조직이 안정적으로 운영될 수 있도록 <strong>보안, 개인정보보호, 시스템 구축과 운영, 인프라 관리, 서비스 운영 지원</strong> 등 전반을 담당해왔습니다. 이 책은 그 과정에서 마주한 현실적인 고민과 실제 경험을 기반으로, 작고 느린 조직의 성장을 위한 실무 에세이입니다.</p>
+          <dl class="info-table">
+            <div class="info-row"><dt>제목</dt><dd>서비스는 어디서 망가질 수 있는가</dd></div>
+            <div class="info-row"><dt>설명</dt><dd>비영리 조직에서 서비스 기획부터 운영까지, 하나의 프로젝트를 완주한 기록</dd></div>
+            <div class="info-row"><dt>저자</dt><dd>김상화</dd></div>
+            <div class="info-row"><dt>분량</dt><dd>187쪽</dd></div>
+            <div class="info-row"><dt>발행</dt><dd>2026년 · 출간 준비 중</dd></div>
+            <div class="info-row"><dt>ISBN</dt><dd>발급 예정</dd></div>
+          </dl>
+          <p class="final-note">좋은 결과를 만들면서도 사람과 조직이 함께 지속될 수 있는 일의 방식은 무엇인가.</p>
+        </div>
+      </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© 2026 김상화. All rights reserved.</span>
+      <a class="back-to-top" href="#top">처음으로 ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const progress = document.querySelector('.scroll-progress');
+      const updateProgress = () => {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        progress.style.width = `${max > 0 ? (window.scrollY / max) * 100 : 0}%`;
+      };
+      updateProgress();
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      window.addEventListener('resize', updateProgress);
+
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+      } else {
+        document.querySelectorAll('.reveal').forEach((element) => element.classList.add('is-visible'));
+      }
+    })();
+  </script>
+</body>
+</html>
