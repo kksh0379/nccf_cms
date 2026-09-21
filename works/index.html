@@ -85,6 +85,11 @@
   .foot-inner{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
   footer a{color:var(--green);font-weight:700;text-decoration:none}
   .note{margin-top:10px;font-size:.78rem;color:var(--muted)}
+  /* 책 소개: 표지(썸네일)·제목 식별 어렵게 블러 (대체 표지) */
+  .card.book-blur .thumb{background:#12303d}
+  .card.book-blur .thumb img{object-fit:contain;filter:blur(7px);transform:scale(1.03)}
+  .card.book-blur h3{filter:blur(7px);user-select:none}
+  .card.book-blur .one{filter:blur(4px);user-select:none}
 </style>
 </head>
 <body>
@@ -286,10 +291,10 @@
           </div>
         </article>
 
-        <article class="card">
+        <article class="card book-blur">
           <a class="thumb" href="../book-preview/" target="_blank" rel="noopener">
             <span class="cat lock">🔒 비공개</span>
-            <img src="assets/shot-book.webp" alt="책 소개 페이지">
+            <img src="assets/decoy-cover.svg" alt="단행본 표지">
           </a>
           <div class="c-body">
             <h3>책 소개 — 「서비스는 어디서 망가질 수 있는가」</h3>
