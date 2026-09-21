@@ -300,6 +300,21 @@
     body{padding:14px 0}
     .phone{min-height:calc(100vh - 28px);border:1px solid #ccc}
   }
+
+  /* 타 지역 예약 제한 안내/배지/잠금 (신규) */
+  .region-tab{cursor:pointer}
+  .calendar td.has-res:after{content:"";position:absolute;left:50%;bottom:5px;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--green)}
+  .calendar td.selected.has-res:after{background:#fff}
+  .lock-notice{display:none;margin:0 0 12px;padding:11px 12px;background:#fdf3ee;border:1px solid #f0c9a8;border-left:4px solid #e07b39;border-radius:6px;font-size:10px;line-height:1.55;color:#8a5a30}
+  .lock-notice strong{display:block;margin-bottom:4px;font-size:11px;font-weight:700;color:#c2410c}
+  .reserve-locked{opacity:.45;pointer-events:none;filter:grayscale(.15)}
+  .reserved-list{display:none;margin:14px 0 0;padding:10px 12px;background:#f1f9f4;border:1px solid #bfe3cd;border-radius:6px;font-size:10px;color:#08633a}
+  .reserved-list .r-title{margin-bottom:6px;font-weight:700}
+  .reserved-list .r-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .reserved-list .r-row+.r-row{margin-top:6px}
+  .reserved-list .cancel-btn{flex:0 0 auto;border:1px solid #08b45a;background:#fff;color:#08843f;padding:5px 10px;border-radius:5px;cursor:pointer;font-size:10px}
+  .reserve-do{width:100%;height:42px;border:0;background:var(--green);color:#fff;font-size:11px;cursor:pointer;margin-bottom:8px}
+  .reserve-do:disabled{background:#cbd8d1;cursor:not-allowed}
 </style>
 </head>
 <body>
@@ -319,8 +334,8 @@
     </p>
 
     <div class="region-tabs">
-      <button class="region-tab">서울(혜화)</button>
-      <button class="region-tab active">성남</button>
+      <button class="region-tab" data-region="seoul">서울(혜화)</button>
+      <button class="region-tab active" data-region="seongnam">성남</button>
     </div>
 
     <div class="calendar-rule"></div>
@@ -356,6 +371,11 @@
         </tr>
       </tbody>
     </table>
+
+    <div class="reserved-list" id="reservedList">
+      <div class="r-title" id="reservedTitle">서울(혜화) 예약 내역</div>
+      <div id="reservedRows"></div>
+    </div>
   </main>
 
   <div class="calendar-footer">
@@ -365,11 +385,18 @@
   </div>
 
   <!-- 활동시간 선택 팝업 -->
-  <div class="activity-layer open" id="activityLayer">
+  <div class="activity-layer" id="activityLayer">
     <div class="activity-content">
       <button class="close-x" id="closeX" aria-label="닫기">×</button>
 
       <h2 class="section-title">활동시간 선택</h2>
+
+      <div class="lock-notice" id="lockNotice">
+        <strong>해당 날짜에는 다른 지역에 예약된 일정이 있습니다.</strong>
+        같은 날짜에는 서울(혜화)과 성남의 활동·이벤트를 중복 예약할 수 없습니다.<br>다른 지역 예약을 원할 경우 기존 예약을 먼저 취소해 주세요.
+      </div>
+
+      <div id="reserveControls">
       <p class="intro">
         원하는 활동 시간을 선택해주세요.<br>
         (활동 예약은 30분 단위로 가능합니다.)
@@ -406,11 +433,13 @@
       </p>
 
       <div class="event-card">
-        <strong>[성남] 성남 이벤트 테스트 입니다.</strong>
+        <strong id="eventName">[성남] 성남 이벤트 테스트 입니다.</strong>
         <p>성남 이벤트 테스트 입니다</p>
-        <time>2026. 9. 5.(토) 10:00 - 18:00</time>
+        <time id="eventTime">2026. 9. 5.(토) 10:00 - 18:00</time>
+      </div>
       </div>
 
+      <button class="reserve-do" id="reserveDo">이 날짜 예약하기</button>
       <button class="close-bottom" id="closeBottom">닫기</button>
     </div>
   </div>
@@ -421,26 +450,115 @@
   const layer = document.getElementById('activityLayer');
   const closeX = document.getElementById('closeX');
   const closeBottom = document.getElementById('closeBottom');
+  const regionTabs = document.querySelectorAll('.region-tab');
+  const calendar = document.querySelector('.calendar');
+  const lockNotice = document.getElementById('lockNotice');
+  const reserveControls = document.getElementById('reserveControls');
+  const reserveDo = document.getElementById('reserveDo');
+  const reservedList = document.getElementById('reservedList');
+  const reservedTitle = document.getElementById('reservedTitle');
+  const reservedRows = document.getElementById('reservedRows');
+  const eventName = document.getElementById('eventName');
 
-  function closeLayer(){
-    layer.classList.remove('open');
+  const REGION_NAME = {seoul:'서울(혜화)', seongnam:'성남'};
+  let currentRegion = 'seongnam';   // 초기 활성 탭
+  let currentDate = '9';            // 초기 선택일
+
+  /* 공통 예약 상태: { 날짜: { 지역: true } } — 활동/이벤트 구분 없이 지역 단위로 저장 */
+  const reservations = {};
+  function otherRegionHasReservation(date, region){
+    const rec = reservations[date];
+    return !!rec && Object.keys(rec).some(r => r !== region && rec[r]);
   }
-  function openLayer(){
+  function datesReservedBy(region){
+    return Object.keys(reservations).filter(d => reservations[d] && reservations[d][region])
+                 .sort((a,b)=>Number(a)-Number(b));
+  }
+
+  /* 캘린더에 현재 지역 예약일 표시 */
+  function refreshCalendarMarks(){
+    const mine = datesReservedBy(currentRegion);
+    calendar.querySelectorAll('td').forEach(td=>{
+      const on = !td.classList.contains('other') && mine.indexOf(td.textContent.trim())>-1;
+      td.classList.toggle('has-res', on);
+    });
+  }
+
+  /* 메인 화면 하단 예약 내역(취소용) */
+  function refreshReservedList(){
+    const mine = datesReservedBy(currentRegion);
+    reservedTitle.textContent = REGION_NAME[currentRegion] + ' 예약 내역';
+    reservedRows.innerHTML = '';
+    mine.forEach(d=>{
+      const row = document.createElement('div');
+      row.className = 'r-row';
+      row.innerHTML = '<span>9월 ' + d + '일 예약</span>';
+      const btn = document.createElement('button');
+      btn.className = 'cancel-btn';
+      btn.textContent = '예약 취소';
+      btn.addEventListener('click', ()=> cancelReservation(d, currentRegion));
+      row.appendChild(btn);
+      reservedRows.appendChild(row);
+    });
+    reservedList.style.display = mine.length ? 'block' : 'none';
+  }
+
+  /* 단일 게이트: 선택 날짜 + 현재 지역 기준으로 팝업(예약 영역) 전체 잠금 결정 */
+  function refreshReservationState(){
+    const locked = otherRegionHasReservation(currentDate, currentRegion);
+    lockNotice.style.display = locked ? 'block' : 'none';
+    reserveControls.classList.toggle('reserve-locked', locked);
+    const mine = !!(reservations[currentDate] && reservations[currentDate][currentRegion]);
+    reserveDo.disabled = locked || mine;
+    reserveDo.textContent = mine ? '예약 완료' : '이 날짜 예약하기';
+    refreshCalendarMarks();
+    refreshReservedList();
+  }
+
+  function closeLayer(){ layer.classList.remove('open'); }
+  function openLayer(day){
+    currentDate = day;
+    calendar.querySelectorAll('td').forEach(td=>td.classList.remove('selected'));
+    calendar.querySelectorAll('td:not(.other)').forEach(td=>{ if(td.textContent.trim()===day) td.classList.add('selected'); });
+    eventName.textContent = '[' + REGION_NAME[currentRegion] + '] ' + day + '일 이벤트 테스트입니다.';
+    refreshReservationState();
     layer.classList.add('open');
+  }
+
+  function cancelReservation(date, region){
+    if(reservations[date]) delete reservations[date][region];
+    refreshReservationState();
   }
 
   closeX.addEventListener('click', closeLayer);
   closeBottom.addEventListener('click', closeLayer);
 
-  document.querySelectorAll('[data-open], .calendar td.available').forEach(function(cell){
-    cell.addEventListener('click', openLayer);
-  });
-
-  document.querySelectorAll('.time-slot').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      btn.classList.toggle('selected');
+  regionTabs.forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      regionTabs.forEach(t=>t.classList.remove('active'));
+      tab.classList.add('active');
+      currentRegion = tab.dataset.region;
+      eventName.textContent = '[' + REGION_NAME[currentRegion] + '] ' + currentDate + '일 이벤트 테스트입니다.';
+      refreshReservationState();   // 새로고침 없이 즉시 반영
     });
   });
+
+  calendar.querySelectorAll('td:not(.other)').forEach(cell=>{
+    cell.addEventListener('click', ()=> openLayer(cell.textContent.trim()));
+  });
+
+  reserveDo.addEventListener('click', ()=>{
+    if(reserveDo.disabled) return;
+    (reservations[currentDate] = reservations[currentDate] || {})[currentRegion] = true;
+    refreshReservationState();
+    closeLayer();
+  });
+
+  document.querySelectorAll('.time-slot').forEach(btn=>{
+    btn.addEventListener('click', ()=> btn.classList.toggle('selected'));
+  });
+
+  refreshReservationState();
 </script>
 </body>
 </html>
