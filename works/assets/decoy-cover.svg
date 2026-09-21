@@ -1,27 +1,33 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="1296" viewBox="0 0 900 1296" role="img" aria-label="과정의 언어 표지">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0.4" y2="1">
-      <stop offset="0" stop-color="#1e4a44"/>
-      <stop offset="1" stop-color="#132e2a"/>
+    <linearGradient id="band" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#264a56"/>
+      <stop offset="1" stop-color="#1a3742"/>
     </linearGradient>
   </defs>
   <style>
-    .t{font-family:'Nanum Myeongjo','Apple SD Gothic Neo','Noto Serif KR',serif}
-    .s{font-family:'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif}
+    .serif{font-family:'Nanum Myeongjo','Noto Serif KR','Apple SD Gothic Neo',serif}
+    .sans{font-family:'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif}
   </style>
-  <rect width="900" height="1296" fill="url(#bg)"/>
-  <!-- 골드 프레임 -->
-  <rect x="52" y="52" width="796" height="1192" fill="none" stroke="#c9a24b" stroke-width="2.5"/>
-  <!-- 상단 라벨 -->
-  <text x="450" y="210" text-anchor="middle" class="s" fill="#c9a24b" font-size="30" letter-spacing="10">ESSAY</text>
-  <circle cx="450" cy="262" r="5" fill="#c9a24b"/>
+  <!-- 종이 바탕 -->
+  <rect width="900" height="1296" fill="#efe9dd"/>
+  <!-- 상단 색면 -->
+  <rect x="0" y="0" width="900" height="560" fill="url(#band)"/>
+  <!-- 색면 속 얇은 라인 모티프 -->
+  <g stroke="#c9a24b" stroke-width="2" opacity="0.75">
+    <line x1="120" y1="150" x2="500" y2="150"/>
+    <line x1="120" y1="185" x2="420" y2="185"/>
+    <line x1="120" y1="220" x2="470" y2="220"/>
+  </g>
+  <circle cx="700" cy="360" r="96" fill="none" stroke="#c9a24b" stroke-width="3" opacity="0.85"/>
+  <text x="120" y="500" class="sans" fill="#dfe7ea" font-size="30" letter-spacing="10">ESSAY</text>
   <!-- 제목(가제) -->
-  <text x="450" y="620" text-anchor="middle" class="t" fill="#f4eede" font-size="128" letter-spacing="6">과정의 언어</text>
+  <text x="120" y="760" class="serif" fill="#22303a" font-size="118" font-weight="700" letter-spacing="4">과정의</text>
+  <text x="120" y="890" class="serif" fill="#22303a" font-size="118" font-weight="700" letter-spacing="4">언어</text>
   <!-- 구분선 -->
-  <line x1="360" y1="695" x2="540" y2="695" stroke="#c9a24b" stroke-width="3"/>
+  <line x1="123" y1="948" x2="300" y2="948" stroke="#c9784f" stroke-width="4"/>
   <!-- 부제 -->
-  <text x="450" y="770" text-anchor="middle" class="s" fill="#cdbf9e" font-size="38">기획자가 남긴 일의 기록</text>
-  <!-- 저자 -->
-  <text x="450" y="1120" text-anchor="middle" class="s" fill="#eadfc6" font-size="46" letter-spacing="4">김상화</text>
-  <text x="450" y="1168" text-anchor="middle" class="s" fill="#8faea6" font-size="26">지음</text>
+  <text x="122" y="1010" class="sans" fill="#6a5f4e" font-size="36">기획자가 남긴 일의 기록</text>
+  <!-- 저자 / 발행 -->
+  <text x="122" y="1180" class="sans" fill="#33404a" font-size="42" letter-spacing="3">김상화 <tspan font-size="26" fill="#8a8271">지음</tspan></text>
 </svg>
