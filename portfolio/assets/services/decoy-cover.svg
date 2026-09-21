@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1296" viewBox="0 0 900 1296" role="img" aria-label="단행본 표지">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#20404e"/>
+      <stop offset="1" stop-color="#0f2530"/>
+    </linearGradient>
+  </defs>
+  <!-- 표지 바탕 -->
+  <rect width="900" height="1296" fill="url(#bg)"/>
+  <!-- 내부 프레임 -->
+  <rect x="54" y="54" width="792" height="1188" fill="none" stroke="#3c5d6b" stroke-width="3"/>
+  <!-- 상단 색면(원) -->
+  <circle cx="640" cy="300" r="210" fill="#c9784f"/>
+  <circle cx="300" cy="250" r="70" fill="none" stroke="#e8d9b5" stroke-width="6"/>
+  <!-- 소제목 라벨 -->
+  <rect x="120" y="470" width="150" height="14" rx="7" fill="#8fb0bd"/>
+  <!-- 제목 자리(추상 바) -->
+  <rect x="120" y="560" width="560" height="46" rx="6" fill="#eef2f4"/>
+  <rect x="120" y="626" width="470" height="46" rx="6" fill="#eef2f4"/>
+  <rect x="120" y="692" width="300" height="46" rx="6" fill="#c9784f"/>
+  <!-- 구분선 -->
+  <rect x="120" y="800" width="200" height="4" rx="2" fill="#5a7a88"/>
+  <!-- 부제 자리 -->
+  <rect x="120" y="840" width="420" height="18" rx="9" fill="#6f909e"/>
+  <rect x="120" y="872" width="360" height="18" rx="9" fill="#6f909e"/>
+  <!-- 저자 자리 -->
+  <rect x="120" y="1120" width="220" height="22" rx="11" fill="#a9c3cd"/>
+  <rect x="120" y="1156" width="130" height="14" rx="7" fill="#5a7a88"/>
+</svg>
