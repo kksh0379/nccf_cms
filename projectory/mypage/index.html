@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>프로젝토리 마이페이지</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans KR",sans-serif;color:#222;background:#fff}
+button{font-family:inherit}
+.header{height:64px;border-bottom:1px solid #eee;display:flex;align-items:center;padding:0 36px}
+.logo{font-size:22px;font-weight:700;color:#009447;width:180px}
+.gnb{flex:1;display:flex;justify-content:center;gap:32px;font-size:13px;color:#333}
+.header-right{width:220px;display:flex;justify-content:flex-end;gap:15px;font-size:12px;align-items:center;color:#333}
+.reserve-btn{border:0;background:#008b43;color:#fff;padding:12px 20px;cursor:pointer}
+.container{width:1180px;max-width:calc(100% - 40px);margin:44px auto 90px}
+.page-title{text-align:center;font-size:30px;font-weight:700;margin:0 0 34px}
+.user-rule{border-top:1px solid #222}
+.user-row{display:flex;align-items:center;justify-content:space-between;padding:22px 4px;border-bottom:1px solid #eee}
+.user-name{font-size:17px;font-weight:700}
+.user-actions{display:flex;align-items:center;gap:26px;font-size:13px;color:#555}
+.user-actions .chip{border:1px solid #79c69b;color:#2e9d70;border-radius:4px;padding:3px 9px;font-size:12px;margin-left:8px}
+.user-actions a{color:#555;text-decoration:none}.user-actions u{cursor:pointer}
+.summary{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:0;padding:26px 4px;border-bottom:1px solid #eee}
+.summary>div{padding:0 24px;border-left:1px solid #eee}
+.summary>div:first-child{border-left:0;display:flex;gap:18px;align-items:flex-start}
+.sum-ico{flex:0 0 auto;width:58px;height:58px;border-radius:4px;background:#f2f5f3;display:flex;align-items:center;justify-content:center;color:#009447;font-weight:700;font-size:22px}
+.sum-title{font-size:16px;font-weight:700;margin-bottom:12px}
+.sum-line{display:flex;justify-content:space-between;font-size:12px;color:#666;margin-bottom:7px}
+.sum-line b{color:#222;font-weight:600}
+.sum-head{font-size:14px;font-weight:700;margin-bottom:16px}
+.sum-stat{display:flex;justify-content:space-between;font-size:13px;color:#666;margin-bottom:10px}
+.sum-stat b{color:#222;font-weight:700}
+.sum-link{margin-top:6px;font-size:12px;color:#333;text-decoration:underline;cursor:pointer}
+.tabs2{display:flex;justify-content:center;gap:18px;margin:56px 0 40px;font-size:16px}
+.tabs2 .t{color:#bbb;cursor:pointer;padding-bottom:4px}
+.tabs2 .t.active{color:#222;font-weight:700;border-bottom:2px solid #222}
+.tabs2 .sep{color:#ddd}
+.subtabs{display:flex;gap:14px;margin:0 4px 20px;font-size:13px;color:#999}
+.subtabs .s{cursor:pointer}.subtabs .s.active{color:#222;font-weight:700}
+.subtabs .sep{color:#ddd}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin:0 4px}
+.card{border:1px solid #ddd;border-top:2px solid #008b43;padding:22px 22px 20px;min-height:150px;display:flex;flex-direction:column}
+.card .region{align-self:flex-start;font-size:11px;font-weight:700;color:#008b43;background:#eef8f2;border:1px solid #bfe3cd;border-radius:99px;padding:3px 10px;margin-bottom:12px}
+.card .date{font-size:17px;font-weight:700;margin-bottom:12px}
+.card .time{font-size:13px;color:#555;margin-bottom:auto}
+.card .cancel{align-self:flex-start;margin-top:18px;border:1px solid #bbb;background:#fff;color:#555;font-size:12px;padding:8px 14px;cursor:pointer}
+.empty{grid-column:1/-1;padding:60px 0;text-align:center;color:#999;font-size:14px}
+.pager{display:flex;justify-content:center;gap:6px;margin-top:44px;color:#bbb}
+.pager span{width:34px;height:30px;display:flex;align-items:center;justify-content:center;font-size:13px}
+.pager .cur{color:#222;font-weight:700}
+@media(max-width:900px){
+  .header{padding:0 16px}.gnb{display:none}.header-right{width:auto}
+  .summary{grid-template-columns:1fr 1fr}.summary>div{padding:14px 12px;border-left:0;border-top:1px solid #eee}
+  .summary>div:first-child{border-top:0}
+  .cards{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="logo">projectory</div>
+  <nav class="gnb"><span>소개</span><span>활동</span><span>공간</span><span>멤버</span><span>크루</span><span>소식</span></nav>
+  <div class="header-right"><span>마이페이지</span><span>|</span><span>로그아웃</span><button class="reserve-btn" onclick="location.href='../reservation-pc/'">활동 예약</button></div>
+</header>
+
+<main class="container">
+  <h1 class="page-title">마이페이지</h1>
+
+  <div class="user-rule"></div>
+  <div class="user-row">
+    <div class="user-name">kksh000sn 님</div>
+    <div class="user-actions">
+      <span>상담 예약 <span class="chip">상담완료</span></span>
+      <span>🔔 알림 <u>7건</u></span>
+      <span>⚙ <u>개인정보 수정</u></span>
+    </div>
+  </div>
+
+  <div class="summary">
+    <div>
+      <div class="sum-ico">◧</div>
+      <div style="flex:1">
+        <div class="sum-title">성남출결테스트</div>
+        <div class="sum-line"><span>활동기간</span><b>2026. 2. 1. - 2026. 7. 31.</b></div>
+        <div class="sum-line"><span>총 프로젝트</span><b>0 건</b></div>
+        <div class="sum-line"><span>총 노트</span><b>0 건</b></div>
+      </div>
+    </div>
+    <div>
+      <div class="sum-head">활동 예약 현황</div>
+      <div class="sum-stat"><span>예약</span><b id="statReserved">0 건</b></div>
+      <div class="sum-stat"><span>취소</span><b id="statCancelled">0 건</b></div>
+      <div class="sum-link" onclick="location.href='../reservation-pc/'">활동 예약 신청</div>
+    </div>
+    <div>
+      <div class="sum-head">이벤트 예약 현황</div>
+      <div class="sum-stat"><span>예약</span><b>0 건</b></div>
+      <div class="sum-stat"><span>취소</span><b>0 건</b></div>
+      <div class="sum-link" onclick="location.href='../reservation-pc/'">이벤트 예약 신청</div>
+    </div>
+    <div>
+      <div class="sum-head">옐로카드 현황</div>
+      <div class="sum-stat"><span>총 건수</span><b>0 건</b></div>
+      <div class="sum-link">자세히 보기</div>
+    </div>
+  </div>
+
+  <div class="tabs2">
+    <span class="t active">활동 조회</span>
+    <span class="sep">|</span>
+    <span class="t">이벤트 조회</span>
+  </div>
+
+  <div class="subtabs">
+    <span class="s active">예정 활동</span><span class="sep">|</span>
+    <span class="s">지난 활동</span><span class="sep">|</span>
+    <span class="s">취소 활동</span>
+  </div>
+
+  <div class="cards" id="cards"></div>
+
+  <div class="pager">
+    <span>«</span><span>‹</span><span class="cur">1</span><span>›</span><span>»</span>
+  </div>
+</main>
+
+<script>
+  const REGION_NAME = {seoul:'서울(혜화)', seongnam:'성남'};
+  const STORE_KEY = 'projectory_reservations_v1';
+  function loadRes(){ try{return JSON.parse(localStorage.getItem(STORE_KEY))||[];}catch(e){return [];} }
+  function saveRes(a){ try{localStorage.setItem(STORE_KEY, JSON.stringify(a));}catch(e){} }
+
+  const cards = document.getElementById('cards');
+  const statReserved = document.getElementById('statReserved');
+
+  function render(){
+    const arr = loadRes().slice().sort((a,b)=>Number(b.day)-Number(a.day));
+    statReserved.textContent = arr.length + ' 건';
+    cards.innerHTML = '';
+    if(!arr.length){
+      cards.innerHTML = '<div class="empty">예정된 활동이 없습니다.</div>';
+      return;
+    }
+    arr.forEach(r=>{
+      const times = (r.times&&r.times.length) ? r.times.join(', ') : '13:00 - 14:00';
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML =
+        '<span class="region">'+ (REGION_NAME[r.region]||r.region) +'</span>' +
+        '<div class="date">'+ r.date +'('+ r.dow +')</div>' +
+        '<div class="time">'+ times +'</div>';
+      const btn = document.createElement('button');
+      btn.className = 'cancel';
+      btn.textContent = '예약취소';
+      btn.addEventListener('click', ()=>{
+        const list = loadRes().filter(x=>!(x.day===r.day && x.region===r.region));
+        saveRes(list);
+        render();
+      });
+      card.appendChild(btn);
+      cards.appendChild(card);
+    });
+  }
+
+  window.addEventListener('storage', render);
+  window.addEventListener('pageshow', render);
+  render();
+</script>
+</body>
+</html>
