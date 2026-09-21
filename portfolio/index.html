@@ -197,6 +197,10 @@
     .vibe-note a{color:var(--blue);font-weight:800}
     @media(max-width:960px){.vibe-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:680px){.vibe-grid{grid-template-columns:1fr;gap:16px}}
+    /* 책 소개: 표지·제목 식별 어렵게 블러 처리 (카드는 노출 유지) */
+    .book-card.book-blur .book-cover img{filter:blur(11px);transform:scale(1.03)}
+    .book-card.book-blur h3{filter:blur(8px);user-select:none}
+    .book-card.book-blur h3 + p{filter:blur(4.5px);user-select:none}
   </style>
 </head>
 <body>
@@ -463,7 +467,7 @@
             <div class="credential-copy"><span>2021 · 참여 프로젝트</span><h3>웹어워드 코리아<br>생활쇼핑몰분야 최우수상</h3><p>한살림 장보기 · (주)프레임아웃 기획 참여(김상화 매니저) · 공식 평가내역 기반 재구성</p></div>
           </article>
         </div>
-        <article class="book-card reveal"><div class="book-cover"><img src="assets/services/book-cover-v2.webp" alt="서비스는 어디서 망가질 수 있는가 책 표지"></div><div><p class="section-kicker">프로젝트 기록</p><h3>서비스는 어디서 망가질 수 있는가</h3><p>기획부터 운영까지 하나의 서비스를 완주하며, 서비스가 어디서 망가질 수 있는지 마주한 현실적인 고민과 실무 경험을 한 권으로 정리했습니다.</p><p class="book-meta">단행본 · 총 187페이지</p><a class="btn dark" href="https://kksh0379.github.io/nccf_cms/book-preview/" target="_blank" rel="noreferrer">책 소개 보기</a></div></article>
+        <article class="book-card reveal book-blur"><div class="book-cover"><img src="assets/services/book-cover-v2.webp" alt="프로젝트 기록 · 단행본 표지"></div><div><p class="section-kicker">프로젝트 기록</p><h3>서비스는 어디서 망가질 수 있는가</h3><p>기획부터 운영까지 하나의 서비스를 완주하며, 서비스가 어디서 망가질 수 있는지 마주한 현실적인 고민과 실무 경험을 한 권으로 정리했습니다.</p><p class="book-meta">단행본 · 총 187페이지</p><a class="btn dark" href="https://kksh0379.github.io/nccf_cms/book-preview/" target="_blank" rel="noreferrer">책 소개 보기</a></div></article>
       </div>
     </section>
 
