@@ -301,20 +301,31 @@
     .phone{min-height:calc(100vh - 28px);border:1px solid #ccc}
   }
 
-  /* 타 지역 예약 제한 안내/배지/잠금 (신규) */
+  /* 타 지역 예약 제한 안내/잠금 (신규) */
   .region-tab{cursor:pointer}
   .calendar td.has-res:after{content:"";position:absolute;left:50%;bottom:5px;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--green)}
   .calendar td.selected.has-res:after{background:#fff}
   .lock-notice{display:none;margin:0 0 12px;padding:11px 12px;background:#fdf3ee;border:1px solid #f0c9a8;border-left:4px solid #e07b39;border-radius:6px;font-size:10px;line-height:1.55;color:#8a5a30}
   .lock-notice strong{display:block;margin-bottom:4px;font-size:11px;font-weight:700;color:#c2410c}
+  .lock-notice .mypage-btn{display:inline-block;margin-top:9px;padding:7px 12px;border:1px solid #c2410c;border-radius:5px;background:#fff;color:#c2410c;font-size:10px;font-weight:700;text-decoration:none}
   .reserve-locked{opacity:.45;pointer-events:none;filter:grayscale(.15)}
-  .reserved-list{display:none;margin:14px 0 0;padding:10px 12px;background:#f1f9f4;border:1px solid #bfe3cd;border-radius:6px;font-size:10px;color:#08633a}
-  .reserved-list .r-title{margin-bottom:6px;font-weight:700}
-  .reserved-list .r-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
-  .reserved-list .r-row+.r-row{margin-top:6px}
-  .reserved-list .cancel-btn{flex:0 0 auto;border:1px solid #08b45a;background:#fff;color:#08843f;padding:5px 10px;border-radius:5px;cursor:pointer;font-size:10px}
   .reserve-do{width:100%;height:42px;border:0;background:var(--green);color:#fff;font-size:11px;cursor:pointer;margin-bottom:8px}
   .reserve-do:disabled{background:#cbd8d1;cursor:not-allowed}
+  /* 활동예약 확인 팝업 (운영환경과 동일 구조) */
+  .confirm-overlay{display:none;position:absolute;inset:0;z-index:80;background:rgba(0,0,0,.4);align-items:center;justify-content:center}
+  .confirm-overlay.open{display:flex}
+  .confirm-modal{position:relative;width:calc(100% - 40px);max-width:340px;background:#fff;border-radius:8px;padding:24px 20px 18px}
+  .confirm-close{position:absolute;top:10px;right:12px;width:26px;height:26px;border:0;background:none;font-size:20px;cursor:pointer}
+  .confirm-modal h2{margin:0 0 12px;text-align:center;font-size:15px;font-weight:700}
+  .confirm-sub{margin:0 0 16px;text-align:center;font-size:11px;color:#333}
+  .confirm-hint{margin:0 0 6px;font-size:9px;color:#333}.confirm-hint span{color:#00a651;margin-left:6px}
+  .confirm-table{width:100%;border-collapse:collapse;font-size:10px;border-top:1px solid #222;border-bottom:1px solid #222}
+  .confirm-table th{padding:8px 0;font-weight:700;color:#555;border-bottom:1px solid #e5e5e5}
+  .confirm-table td{padding:8px 0;text-align:center;color:#777}
+  .confirm-table td.time{font-weight:700;color:#222}
+  .confirm-actions{display:flex;gap:8px;margin-top:18px}
+  .confirm-actions .c-btn{flex:1;height:42px;border:1px solid #ddd;background:#fff;color:#333;font-size:12px;cursor:pointer}
+  .confirm-actions .c-btn.primary{border-color:var(--green);color:var(--green);font-weight:700}
 </style>
 </head>
 <body>
@@ -371,11 +382,6 @@
         </tr>
       </tbody>
     </table>
-
-    <div class="reserved-list" id="reservedList">
-      <div class="r-title" id="reservedTitle">서울(혜화) 예약 내역</div>
-      <div id="reservedRows"></div>
-    </div>
   </main>
 
   <div class="calendar-footer">
@@ -394,6 +400,7 @@
       <div class="lock-notice" id="lockNotice">
         <strong>해당 날짜에는 다른 지역에 예약된 일정이 있습니다.</strong>
         같은 날짜에는 서울(혜화)과 성남의 활동·이벤트를 중복 예약할 수 없습니다.<br>다른 지역 예약을 원할 경우 기존 예약을 먼저 취소해 주세요.
+        <a class="mypage-btn" href="../mypage/">마이페이지에서 예약 취소하기</a>
       </div>
 
       <div id="reserveControls">
@@ -444,6 +451,24 @@
     </div>
   </div>
 
+  <!-- 활동예약 확인 팝업 (운영환경과 동일: 예약하기 → 확인 → 예약완료) -->
+  <div class="confirm-overlay" id="confirmOverlay">
+    <div class="confirm-modal">
+      <button class="confirm-close" id="confirmClose" aria-label="닫기">×</button>
+      <h2>활동예약 확인</h2>
+      <p class="confirm-sub">아래와 같이 활동예약을 하시겠습니까?</p>
+      <p class="confirm-hint">• 선택한 활동 <span>예약 시간을 준수해주시기 바랍니다.</span></p>
+      <table class="confirm-table">
+        <thead><tr><th>예약일</th><th>활동시간</th></tr></thead>
+        <tbody id="confirmRows"></tbody>
+      </table>
+      <div class="confirm-actions">
+        <button class="c-btn" id="confirmCancel">취소</button>
+        <button class="c-btn primary" id="confirmOk">확인</button>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <script>
@@ -455,25 +480,30 @@
   const lockNotice = document.getElementById('lockNotice');
   const reserveControls = document.getElementById('reserveControls');
   const reserveDo = document.getElementById('reserveDo');
-  const reservedList = document.getElementById('reservedList');
-  const reservedTitle = document.getElementById('reservedTitle');
-  const reservedRows = document.getElementById('reservedRows');
   const eventName = document.getElementById('eventName');
+  const timeSlots = document.querySelectorAll('.time-slot');
+  const confirmOverlay = document.getElementById('confirmOverlay');
+  const confirmRows = document.getElementById('confirmRows');
+  const confirmOk = document.getElementById('confirmOk');
+  const confirmCancel = document.getElementById('confirmCancel');
+  const confirmClose = document.getElementById('confirmClose');
 
   const REGION_NAME = {seoul:'서울(혜화)', seongnam:'성남'};
+  const DOW = ['일','월','화','수','목','금','토'];
   let currentRegion = 'seongnam';   // 초기 활성 탭
   let currentDate = '9';            // 초기 선택일
+  let pendingTimes = [];
 
-  /* 공통 예약 상태: { 날짜: { 지역: true } } — 활동/이벤트 구분 없이 지역 단위로 저장 */
-  const reservations = {};
-  function otherRegionHasReservation(date, region){
-    const rec = reservations[date];
-    return !!rec && Object.keys(rec).some(r => r !== region && rec[r]);
-  }
-  function datesReservedBy(region){
-    return Object.keys(reservations).filter(d => reservations[d] && reservations[d][region])
-                 .sort((a,b)=>Number(a)-Number(b));
-  }
+  /* ── 공통 예약 상태: localStorage로 예약화면 ↔ 마이페이지 공유 (동일 오리진) ──
+     구조: [{ region, day, date, dow, times:[..] }] — 활동/이벤트 구분 없이 지역 단위로 판단 */
+  const STORE_KEY = 'projectory_reservations_v1';
+  function loadRes(){ try{return JSON.parse(localStorage.getItem(STORE_KEY))||[];}catch(e){return [];} }
+  function saveRes(a){ try{localStorage.setItem(STORE_KEY, JSON.stringify(a));}catch(e){} }
+  function otherRegionHasReservation(day, region){ return loadRes().some(r=>r.day===day && r.region!==region); }
+  function selfEntry(day, region){ return loadRes().find(r=>r.day===day && r.region===region); }
+  function datesReservedBy(region){ return loadRes().filter(r=>r.region===region).map(r=>r.day); }
+  function dowOf(day){ return DOW[new Date(2026,8,Number(day)).getDay()]; }
+  function selectedTimes(){ return [...timeSlots].filter(t=>t.classList.contains('selected')).map(t=>t.textContent.trim()); }
 
   /* 캘린더에 현재 지역 예약일 표시 */
   function refreshCalendarMarks(){
@@ -484,35 +514,15 @@
     });
   }
 
-  /* 메인 화면 하단 예약 내역(취소용) */
-  function refreshReservedList(){
-    const mine = datesReservedBy(currentRegion);
-    reservedTitle.textContent = REGION_NAME[currentRegion] + ' 예약 내역';
-    reservedRows.innerHTML = '';
-    mine.forEach(d=>{
-      const row = document.createElement('div');
-      row.className = 'r-row';
-      row.innerHTML = '<span>9월 ' + d + '일 예약</span>';
-      const btn = document.createElement('button');
-      btn.className = 'cancel-btn';
-      btn.textContent = '예약 취소';
-      btn.addEventListener('click', ()=> cancelReservation(d, currentRegion));
-      row.appendChild(btn);
-      reservedRows.appendChild(row);
-    });
-    reservedList.style.display = mine.length ? 'block' : 'none';
-  }
-
   /* 단일 게이트: 선택 날짜 + 현재 지역 기준으로 팝업(예약 영역) 전체 잠금 결정 */
   function refreshReservationState(){
     const locked = otherRegionHasReservation(currentDate, currentRegion);
     lockNotice.style.display = locked ? 'block' : 'none';
     reserveControls.classList.toggle('reserve-locked', locked);
-    const mine = !!(reservations[currentDate] && reservations[currentDate][currentRegion]);
+    const mine = !!selfEntry(currentDate, currentRegion);
     reserveDo.disabled = locked || mine;
     reserveDo.textContent = mine ? '예약 완료' : '이 날짜 예약하기';
     refreshCalendarMarks();
-    refreshReservedList();
   }
 
   function closeLayer(){ layer.classList.remove('open'); }
@@ -523,11 +533,6 @@
     eventName.textContent = '[' + REGION_NAME[currentRegion] + '] ' + day + '일 이벤트 테스트입니다.';
     refreshReservationState();
     layer.classList.add('open');
-  }
-
-  function cancelReservation(date, region){
-    if(reservations[date]) delete reservations[date][region];
-    refreshReservationState();
   }
 
   closeX.addEventListener('click', closeLayer);
@@ -547,16 +552,42 @@
     cell.addEventListener('click', ()=> openLayer(cell.textContent.trim()));
   });
 
+  timeSlots.forEach(btn=>{ btn.addEventListener('click', ()=> btn.classList.toggle('selected')); });
+
+  /* 이 날짜 예약하기 → 확인 팝업 (버튼별 검증 없음, 잠금 게이트만 통과하면 진행) */
   reserveDo.addEventListener('click', ()=>{
     if(reserveDo.disabled) return;
-    (reservations[currentDate] = reservations[currentDate] || {})[currentRegion] = true;
+    pendingTimes = selectedTimes();
+    if(!pendingTimes.length) pendingTimes = ['13:00 - 14:00']; // 시간 미선택 시 기본 1건
+    confirmRows.innerHTML = '';
+    pendingTimes.forEach(tm=>{
+      const tr = document.createElement('tr');
+      tr.innerHTML = '<td>2026. 9. ' + currentDate + '.</td><td class="time">' + tm + '</td>';
+      confirmRows.appendChild(tr);
+    });
+    confirmOverlay.classList.add('open');
+  });
+  function closeConfirm(){ confirmOverlay.classList.remove('open'); }
+  confirmCancel.addEventListener('click', closeConfirm);
+  confirmClose.addEventListener('click', closeConfirm);
+  confirmOverlay.addEventListener('click', e=>{ if(e.target===confirmOverlay) closeConfirm(); });
+
+  /* 확인 → 예약 완료 (localStorage 저장 → 마이페이지에서 조회) */
+  confirmOk.addEventListener('click', ()=>{
+    const arr = loadRes();
+    let e = arr.find(r=>r.day===currentDate && r.region===currentRegion);
+    if(!e){ e = {region:currentRegion, day:currentDate, date:'2026. 9. '+currentDate+'.', dow:dowOf(currentDate), times:[]}; arr.push(e); }
+    pendingTimes.forEach(t=>{ if(e.times.indexOf(t)<0) e.times.push(t); });
+    saveRes(arr);
+    timeSlots.forEach(t=>t.classList.remove('selected'));
+    closeConfirm();
     refreshReservationState();
     closeLayer();
   });
 
-  document.querySelectorAll('.time-slot').forEach(btn=>{
-    btn.addEventListener('click', ()=> btn.classList.toggle('selected'));
-  });
+  /* 다른 페이지(마이페이지)에서 취소 후 돌아와도 새로고침 없이 반영 */
+  window.addEventListener('storage', refreshReservationState);
+  window.addEventListener('pageshow', refreshReservationState);
 
   refreshReservationState();
 </script>
