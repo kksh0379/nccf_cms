@@ -195,35 +195,38 @@
     .vibe-open:hover{transform:translateY(-2px)}
     .vibe-note{margin-top:30px;color:var(--ink-2);font-size:.92rem}
     .vibe-note a{color:var(--blue);font-weight:800}
-    /* 휴 스코프 대표 블록 */
-    .vibe-feature{margin-bottom:38px;border:1px solid var(--line);border-radius:var(--radius);background:#fff;box-shadow:0 20px 44px rgba(9,31,53,.09);overflow:hidden}
-    .vf-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.92fr)}
-    .vf-copy{padding:36px 34px 32px}
-    .vf-badge{display:inline-flex;align-items:center;min-height:32px;margin-bottom:16px;padding:5px 14px;border-radius:99px;background:var(--navy);color:#fff;font-size:.8rem;font-weight:900;letter-spacing:.02em}
-    .vf-copy h3{margin:0 0 8px;font-size:1.9rem;letter-spacing:-.03em;line-height:1.15}
-    .vf-copy h3 .vf-en{margin-left:9px;color:#93a1b1;font-size:.86rem;font-weight:700;letter-spacing:.04em}
-    .vf-tagline{margin:0 0 16px;color:var(--navy);font-weight:800;font-size:1.06rem;line-height:1.5}
-    .vf-copy>p{margin:0 0 15px;color:var(--ink-2);line-height:1.68;font-size:.98rem}
-    .vf-copy>p strong{color:var(--ink);font-weight:800}
-    .vf-feats{display:grid;grid-template-columns:1fr 1fr;gap:9px 18px;margin:4px 0 20px;padding:0;list-style:none}
-    .vf-feats li{position:relative;padding-left:19px;color:var(--ink);font-size:.93rem;line-height:1.5}
-    .vf-feats li:before{content:"";position:absolute;left:0;top:7px;width:9px;height:9px;border-radius:3px;background:var(--blue)}
-    .vf-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:22px}
-    .vf-tags .tag{min-height:30px;padding:4px 11px;font-size:.82rem;background:#e2eaf2;color:#3f5468}
-    .vf-actions{display:flex;flex-wrap:wrap;gap:10px}
-    .vf-actions .btn{min-height:48px;padding:11px 18px;border-radius:12px;font-size:.95rem}
-    .vf-note{margin:18px 0 0;color:#7b8a99;font-size:.82rem;line-height:1.6}
-    .vf-shots{display:grid;grid-template-rows:auto auto;gap:12px;padding:26px;background:linear-gradient(160deg,#eef3f9,#dde7f2);border-left:1px solid var(--line)}
-    .vf-shot{position:relative;border:1px solid #cdd9e6;border-radius:12px;overflow:hidden;box-shadow:0 10px 24px rgba(9,31,53,.13);background:#fff}
-    .vf-shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
-    .vf-shot-main{aspect-ratio:16/10}
-    .vf-shot-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .vf-shot-row .vf-shot{aspect-ratio:16/11}
-    .vf-shot .vf-lab{position:absolute;left:9px;bottom:9px;padding:3px 9px;border-radius:7px;background:rgba(9,31,53,.86);color:#fff;font-size:.72rem;font-weight:800;letter-spacing:.01em}
-    .vibe-sub{margin:0 0 18px;font-size:1.05rem;font-weight:900;color:var(--ink);letter-spacing:-.01em}
-    @media(max-width:960px){.vibe-grid{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:860px){.vf-grid{grid-template-columns:1fr}.vf-shots{border-left:0;border-top:1px solid var(--line);order:-1}.vf-feats{grid-template-columns:1fr 1fr}}
-    @media(max-width:680px){.vibe-grid{grid-template-columns:1fr;gap:16px}.vf-copy{padding:26px 22px 24px}.vf-copy h3{font-size:1.6rem}.vf-feats{grid-template-columns:1fr}.vf-shots{padding:18px;gap:10px}.vf-actions .btn{width:100%}}
+    /* 개인 서비스: 목적, 구현 범위, 실제 화면 */
+    .vibe-feature{margin-bottom:38px;border:1px solid var(--line);border-radius:var(--radius);background:#fff;overflow:hidden;box-shadow:0 14px 30px rgba(9,31,53,.06)}
+    .vf-copy{padding:32px 34px 28px}
+    .vf-heading{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:18px}
+    .vf-badge{display:block;margin-bottom:8px;color:var(--blue);font-size:.8rem;font-weight:800}
+    .vf-heading h3{display:flex;align-items:baseline;flex-wrap:wrap;gap:10px;margin:0;font-size:1.8rem;line-height:1.3;letter-spacing:-.03em}
+    .vf-en{color:var(--ink-2);font-size:.88rem;font-weight:600;letter-spacing:0}
+    .vf-tagline{margin:0 0 10px;color:var(--ink);font-size:1.15rem;font-weight:800;line-height:1.55;text-wrap:pretty}
+    .vf-intro{max-width:850px;margin:0;color:var(--ink-2);font-size:.97rem;line-height:1.8;text-wrap:pretty}
+    .vf-context{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:26px 0 0;padding-top:24px;border-top:1px solid var(--line)}
+    .vf-context div{min-width:0}
+    .vf-context dt{margin-bottom:7px;color:var(--blue);font-weight:800;font-size:.86rem}
+    .vf-context dd{margin:0;color:var(--ink-2);font-size:.9rem;line-height:1.7;text-wrap:pretty}
+    .vf-context strong{color:var(--ink);font-weight:700}
+    .vf-actions{display:flex;flex-wrap:wrap;gap:8px;flex-shrink:0}
+    .vf-actions .btn{min-height:44px;padding:10px 16px;border-radius:10px;font-size:.88rem}
+    .vf-gallery{padding:26px 34px 28px;border-top:1px solid var(--line);background:#f5f8fb}
+    .vf-gallery-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:14px}
+    .vf-gallery-head p{margin:0;font-size:.84rem;color:var(--ink-2)}
+    .vf-gallery-head strong{color:var(--ink);font-size:.92rem}
+    .vf-shots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .vf-shot{margin:0;min-width:0}
+    .vf-shot .zoomable{display:block;width:100%;aspect-ratio:1080/742;min-height:0;padding:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;cursor:zoom-in;box-shadow:0 5px 14px rgba(9,31,53,.05)}
+    .vf-shot .zoomable img{display:block;width:100%;height:100%;max-height:none;object-fit:contain;transition:none}
+    .vf-shot figcaption{padding-top:12px;line-height:1.5}
+    .vf-shot figcaption strong{display:block;font-size:.9rem;color:var(--ink)}
+    .vf-shot figcaption span{display:block;margin-top:4px;font-size:.8rem;color:var(--ink-2)}
+    .vf-more{margin:18px 0 0;font-size:.82rem;color:var(--ink-2);line-height:1.7}
+    .vf-more a{color:var(--blue);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+    .vibe-sub{margin:0 0 18px;font-size:1.05rem;font-weight:800;color:var(--ink)}
+    @media(max-width:960px){.vibe-grid{grid-template-columns:repeat(2,1fr)}.vf-heading{align-items:flex-start}.vf-actions{flex-direction:column}}
+    @media(max-width:680px){.vibe-grid{grid-template-columns:1fr;gap:16px}.vf-copy{padding:24px 20px}.vf-heading{display:block;margin-bottom:20px}.vf-heading h3{font-size:1.6rem}.vf-actions{flex-direction:row;margin-top:18px}.vf-actions .btn{flex:1}.vf-tagline{font-size:1.06rem}.vf-context{grid-template-columns:1fr;gap:18px;margin-top:22px;padding-top:20px}.vf-gallery{padding:22px 20px}.vf-gallery-head{display:block}.vf-gallery-head p{margin-top:4px}.vf-shots{grid-template-columns:1fr;gap:24px}.vf-shot figcaption{padding-top:10px}}
     /* 책 소개: 비공개 배지 */
     .book-card .book-lock{position:absolute;top:10px;left:10px;z-index:2;display:inline-flex;align-items:center;gap:5px;font-size:.74rem;font-weight:800;color:#fff;background:rgba(18,48,61,.9);padding:5px 11px;border-radius:99px}
     /* 경력: 회사명 사이트 링크 */
@@ -384,38 +387,42 @@
 
     <section class="vibe" id="vibe">
       <div class="wrap">
-        <div class="section-head reveal"><div class="section-number">구현</div><div><p class="section-kicker">직접 기획하고 만든 결과물</p><h2>기획에서 멈추지 않고,<br>화면과 인터랙션까지 직접 구현합니다</h2><p class="section-copy">정책·화면·플로우를 설계하고, 바이브 코딩으로 실제 동작하는 결과물까지 직접 만듭니다. 매일 쓰는 실사용 서비스부터 기획 검증용 데모까지, 눌러서 바로 확인할 수 있습니다.</p></div></div>
+        <div class="section-head reveal"><div class="section-number">구현</div><div><p class="section-kicker">직접 기획하고 만든 결과물</p><h2>기획에서 멈추지 않고,<br>화면과 인터랙션까지 직접 구현합니다</h2><p class="section-copy">정책·화면·플로우를 설계하고, 바이브 코딩으로 실제 동작하는 결과물까지 직접 만듭니다. 개인적으로 사용하는 서비스와 기획 검증용 데모를 함께 소개합니다.</p></div></div>
 
-        <article class="vibe-feature reveal">
-          <div class="vf-grid">
-            <div class="vf-copy">
-              <span class="vf-badge">대표 바이브 코딩 · 실사용 서비스</span>
-              <h3>휴 스코프<span class="vf-en">hscope</span></h3>
-              <p class="vf-tagline">직접 기획하고 매일 쓰는, AI를 붙인 생활·업무 도구</p>
-              <p>작은 데모가 아니라 <strong>제가 실제로 매일 쓰려고 직접 만들고 계속 고쳐 나가는 서비스</strong>입니다. 관심 소식·행사·점심·재무세무처럼 흩어진 정보를 한곳에 모으고, AI로 요약·분류·리포트·추천까지 붙여 확인과 선택에 드는 시간을 줄였습니다.</p>
-              <p>기획뿐 아니라 <strong>수집(크롤링)·중복 제거·DB·본문 추출·AI 연동·계정/권한·테스트까지 전 과정을 직접 구현</strong>하고 배포·운영합니다. 기획자가 어디까지 기술을 이해하고 만들어낼 수 있는지를 보여주는 결과물입니다.</p>
-              <ul class="vf-feats">
-                <li>관심 분야별 뉴스 — 탭·검색·필터, 리스트/앨범</li>
-                <li>본문 읽기 + AI 핵심 요약 (리더뷰)</li>
-                <li>국내 행사 — 리스트·앨범·캘린더 + AI 큐레이션</li>
-                <li>AI 재단동향 · 월간 보안 리포트</li>
-                <li>주변 맛집 조건별 추천</li>
-                <li>재무세무 지표·계산기·공시 (beta)</li>
-              </ul>
-              <div class="vf-tags"><span class="tag">Python · Flask</span><span class="tag">웹 크롤링</span><span class="tag">AI 요약·분석</span><span class="tag">DB·캐시</span><span class="tag">반응형</span></div>
+        <article class="vibe-feature reveal" aria-labelledby="hscope-title">
+          <div class="vf-copy">
+            <div class="vf-heading">
+              <div><span class="vf-badge">개인 프로젝트 · 기획부터 배포·운영까지</span><h3 id="hscope-title">휴 스코프 <span class="vf-en">hscope</span></h3></div>
               <div class="vf-actions">
-                <a class="btn dark" href="https://hscope.onrender.com/" target="_blank" rel="noreferrer">서비스 열기 ↗</a>
-                <a class="btn line" href="https://hscope.onrender.com/intro" target="_blank" rel="noreferrer">서비스 소개 ↗</a>
+                <a class="btn dark" href="https://hscope.onrender.com/" target="_blank" rel="noreferrer">서비스 열기</a>
+                <a class="btn line" href="https://hscope.onrender.com/intro" target="_blank" rel="noreferrer">서비스 소개</a>
               </div>
-              <p class="vf-note">개인이 만든 비공식 서비스입니다. AI 결과·계산 정보는 참고용이며, 중요한 사실은 원문·공식 출처에서 확인합니다.</p>
             </div>
+            <p class="vf-tagline">내가 필요한 정보를, 더 적은 시간에 찾아 쓰기 위해 만들었습니다.</p>
+            <p class="vf-intro">관심 소식과 업무 자료를 찾고 정리하는 반복을 줄이고 싶었습니다. 개인적으로 사용할 목적으로 직접 기획하고, AI 코딩 도구를 활용해 구현했습니다. 뉴스에서 시작해 행사·맛집·재무세무·스크랩으로 넓혀 가며, 직접 사용하면서 필요한 기능과 불편한 흐름을 개선하고 있습니다.</p>
+            <dl class="vf-context">
+              <div><dt>만든 이유</dt><dd>여러 사이트에 흩어진 <strong>일상의 관심사와 업무 정보</strong>를 한곳에서 확인하고, 필요한 자료를 다시 찾기 쉽게 저장합니다.</dd></div>
+              <div><dt>AI 활용</dt><dd><strong>기사 요약·보안 이슈 분류·동향 리포트·행사 추천</strong>에 AI를 활용합니다. 점심 추천은 거리·평점·방문 이력 등을 반영한 조건 기반 방식입니다.</dd></div>
+              <div><dt>직접 기획·구현한 범위</dt><dd><strong>정보 수집부터 읽기·저장까지의 흐름</strong>을 설계하고, 데이터 수집·DB·AI 연동·계정과 권한을 구현해 배포·운영합니다.</dd></div>
+            </dl>
+          </div>
+          <div class="vf-gallery">
+            <div class="vf-gallery-head"><strong>실제 서비스 화면</strong><p>화면을 누르면 크게 볼 수 있습니다.</p></div>
             <div class="vf-shots">
-              <figure class="vf-shot vf-shot-main"><a href="https://hscope.onrender.com/" target="_blank" rel="noreferrer"><img src="assets/vibe/hscope-feed.webp" alt="휴 스코프 관심 분야별 뉴스 화면" loading="lazy"></a><figcaption class="vf-lab">관심 분야별 뉴스</figcaption></figure>
-              <div class="vf-shot-row">
-                <figure class="vf-shot"><a href="https://hscope.onrender.com/" target="_blank" rel="noreferrer"><img src="assets/vibe/hscope-reader.webp" alt="휴 스코프 본문 읽기 · AI 핵심 요약" loading="lazy"></a><figcaption class="vf-lab">AI 핵심 요약</figcaption></figure>
-                <figure class="vf-shot"><a href="https://hscope.onrender.com/" target="_blank" rel="noreferrer"><img src="assets/vibe/hscope-secreport.webp" alt="휴 스코프 월간 보안 리포트" loading="lazy"></a><figcaption class="vf-lab">AI 보안 리포트</figcaption></figure>
-              </div>
+              <figure class="vf-shot">
+                <button class="zoomable" type="button" data-src="assets/vibe/hscope-feed.webp" data-caption="휴 스코프 · 관심 분야별 뉴스" aria-label="휴 스코프 관심 분야별 뉴스 화면 확대 보기"><img src="assets/vibe/hscope-feed.webp" alt="관심 분야별 뉴스의 검색·분류·목록 화면" width="1080" height="742" loading="lazy"></button>
+                <figcaption><strong>관심 분야별 뉴스</strong><span>분야·검색·필터로 필요한 소식 좁히기</span></figcaption>
+              </figure>
+              <figure class="vf-shot">
+                <button class="zoomable" type="button" data-src="assets/vibe/hscope-reader.webp" data-caption="휴 스코프 · 본문 읽기와 AI 핵심 요약" aria-label="휴 스코프 본문 읽기와 AI 요약 화면 확대 보기"><img src="assets/vibe/hscope-reader.webp" alt="기사 본문과 AI 핵심 요약을 함께 읽는 화면" width="1080" height="742" loading="lazy"></button>
+                <figcaption><strong>본문 읽기·AI 요약</strong><span>지원되는 기사에서 본문과 핵심 함께 읽기</span></figcaption>
+              </figure>
+              <figure class="vf-shot">
+                <button class="zoomable" type="button" data-src="assets/vibe/hscope-secreport.webp" data-caption="휴 스코프 · 월간 보안 리포트" aria-label="휴 스코프 월간 보안 리포트 화면 확대 보기"><img src="assets/vibe/hscope-secreport.webp" alt="주요 보안 이슈와 확인사항을 정리한 월간 리포트" width="1080" height="742" loading="lazy"></button>
+                <figcaption><strong>월간 보안 리포트</strong><span>주요 이슈·확인사항과 연결된 근거 확인하기</span></figcaption>
+              </figure>
             </div>
+            <p class="vf-more">행사 캘린더·큐레이션, 주변 맛집, 재무세무(beta), 스크랩 등 전체 기능은 <a href="https://hscope.onrender.com/intro" target="_blank" rel="noreferrer">서비스 소개</a>에서 볼 수 있습니다. 개인이 제작·운영하는 비공식 서비스입니다.</p>
           </div>
         </article>
 
@@ -485,7 +492,7 @@
 
         <div class="library-callout reveal"><div><strong>바이브 코딩 결과물 더 보기</strong><p>기획·구현 상세와 전체 목록을 한 곳에서 볼 수 있습니다.</p></div><a class="btn" href="../works/" target="_blank" rel="noreferrer">전체 보기</a></div>
 
-        <p class="vibe-note reveal">※ 위 화면은 기획 의도와 인터랙션 검증을 위해 직접 구현한 데모입니다. 일부 데이터는 예시이며 실제 운영 화면과 차이가 있을 수 있습니다.</p>
+        <p class="vibe-note reveal">※ 휴 스코프 아래의 데모는 기획 의도와 인터랙션 검증을 위해 직접 구현한 화면입니다. 일부 데이터는 예시이며 실제 운영 화면과 차이가 있을 수 있습니다.</p>
       </div>
     </section>
 

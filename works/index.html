@@ -88,6 +88,12 @@
   /* 책 소개: 대체(가제) 표지 표시 */
   .card.book-decoy .thumb{background:#e6ded0}
   .card.book-decoy .thumb img{object-fit:contain}
+  .hscope-card{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
+  .hscope-card .thumb{aspect-ratio:auto;background:#e7eff6;display:flex;align-items:center;padding:22px}
+  .hscope-card .thumb img{width:100%;height:auto;object-fit:contain;border:1px solid var(--line);border-radius:8px}
+  .hscope-card .c-body{padding:26px}
+  #hscope{scroll-margin-top:76px}
+  @media(max-width:680px){.hscope-card{grid-template-columns:1fr}.hscope-card .thumb{padding:18px}.hscope-card .c-body{padding:20px}}
 </style>
 </head>
 <body>
@@ -96,6 +102,7 @@
   <div class="wrap top-inner">
     <div class="brand"><b>works</b> · 김상화</div>
     <nav>
+      <a href="#hscope">휴 스코프</a>
       <a href="#projectory">프로젝토리</a>
       <a href="#nccf">NC문화재단</a>
       <a href="#brand">브랜딩·저술</a>
@@ -109,7 +116,7 @@
     <div class="wrap">
       <span class="eyebrow">VIBE CODING WORKS</span>
       <h1>기획에서 멈추지 않고,<br><span class="hl">화면과 인터랙션까지 직접</span> 구현합니다.</h1>
-      <p class="lead">정책·화면·플로우를 설계하고, 바이브 코딩으로 실제 동작하는 프로토타입까지 만들어 검증합니다. 아래는 직접 기획하고 구현한 작업물입니다. (자세한 기획·구현은 각 카드의 <b>‘자세히’</b>에서 볼 수 있어요.)</p>
+      <p class="lead">정책·화면·플로우를 설계하고, 바이브 코딩으로 실제 동작하는 프로토타입까지 만들어 검증합니다. 개인적으로 사용하는 서비스와 직접 기획·구현한 데모를 함께 소개합니다. (자세한 기획·구현은 각 카드의 <b>‘자세히’</b>에서 볼 수 있어요.)</p>
       <p class="who">김상화 · 서비스 기획 / 프로젝트 관리</p>
 
       <div class="strengths">
@@ -117,6 +124,26 @@
         <div class="st"><div class="n">STRENGTH 02</div><b>직접 만드는 프로토타입</b><span>문서로 설명하기 어려운 흐름을 실제 화면으로.</span></div>
         <div class="st"><div class="n">STRENGTH 03</div><b>운영 환경과 동일한 재현</b><span>현업·개발 설명과 검수에 바로 쓰이는 완성도.</span></div>
       </div>
+    </div>
+  </section>
+
+  <section class="section" id="hscope">
+    <div class="wrap">
+      <div class="section-head"><span class="idx">개인 프로젝트</span><h2>휴 스코프 — 생활·업무 도구</h2></div>
+      <article class="card hscope-card">
+        <a class="thumb" href="https://hscope.onrender.com/intro" target="_blank" rel="noopener"><img src="assets/hscope-feed.webp" alt="휴 스코프 관심 분야별 뉴스 화면" width="1080" height="742"></a>
+        <div class="c-body">
+          <h3>내가 필요한 정보를, 더 적은 시간에 찾아 쓰기 위해</h3>
+          <p class="one">관심 소식과 업무 자료를 찾고 정리하는 반복을 줄이려는 개인적인 필요에서 시작했습니다. 직접 기획하고 AI 코딩 도구로 구현한 뒤, 사용하면서 기능과 흐름을 개선하고 있습니다.</p>
+          <div class="tags"><span class="tag">개인 서비스</span><span class="tag">기획·구현·운영</span><span class="tag">AI 요약·분석</span><span class="tag">Python · Flask</span></div>
+          <details><summary>기획 · 구현 자세히</summary><div class="detail">
+            <p><b>기획</b>관심 뉴스·행사·맛집·재무세무를 한곳에서 확인하고, 필요한 자료를 스크랩과 그룹으로 저장하는 흐름을 설계했습니다.</p>
+            <p><b>구현</b>데이터 수집·중복 정리·본문 추출·DB·계정과 권한을 구현하고 AI 요약·보안 분류·동향 리포트·행사 추천을 연동했습니다. 점심 추천은 생성형 AI 호출 없이 거리·평점·방문 이력 등을 반영합니다.</p>
+            <p><b>운영</b>기획부터 배포까지 직접 진행하고, 실제 사용 중 발견한 불편을 개선합니다. 개인이 제작·운영하는 비공식 서비스입니다.</p>
+          </div></details>
+          <div class="card-actions"><a class="btn primary" href="https://hscope.onrender.com/" target="_blank" rel="noopener">서비스 열기</a><a class="btn ghost" href="https://hscope.onrender.com/intro" target="_blank" rel="noopener">서비스 소개</a></div>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -239,25 +266,7 @@
           </div>
         </article>
 
-        <article class="card">
-          <a class="thumb" href="https://hscope.onrender.com/" target="_blank" rel="noopener">
-            <span class="cat">실사용 서비스 · AI</span>
-            <img src="assets/hscope-feed.webp" alt="휴 스코프 관심 분야별 뉴스 화면">
-          </a>
-          <div class="c-body">
-            <h3>휴 스코프 (hscope) — AI 생활·업무 도구</h3>
-            <p class="one">관심 소식·행사·점심·재무세무를 한곳에 모으고 AI로 요약·분류·리포트·추천까지 붙인, 직접 만들어 매일 쓰는 멀티 기능 서비스. 작은 데모가 아닌 풀스택 결과물입니다.</p>
-            <div class="tags"><span class="tag">Python · Flask</span><span class="tag">웹 크롤링</span><span class="tag">AI 요약·분석</span><span class="tag">DB·캐시</span><span class="tag">반응형</span></div>
-            <details><summary>기획 · 구현 자세히</summary>
-              <div class="detail">
-                <p><b>기획</b>흩어진 정보를 찾고, 긴 글을 읽고, 필요한 내용을 다시 정리하는 데 드는 시간을 줄이려는 개인적 필요에서 출발. 뉴스·행사·맛집·재무세무·스크랩을 필요할 때 골라 쓰는 구조로 정보설계하고, 매일 쓰며 불편한 부분을 계속 개선.</p>
-                <p><b>구현</b>웹 크롤링·RSS 수집·본문 추출·중복 제거·DB/캐시·계정&권한·테스트까지 풀스택 직접 구현. AI로 리더뷰 핵심 요약, 월간 보안 브리핑, 재단동향 리포트, 행사 큐레이션, 조건 기반 점심 추천 제공. Flask 기반으로 배포·운영하며 모바일·태블릿·PC 반응형.</p>
-                <p><b>강점</b>작은 데모가 아니라 실제로 매일 쓰며 개선하는 완결형 서비스. 기획자가 기술을 이해하고 복합 서비스를 끝까지 만들어 운영한다는 증거이며, 월간 보안 리포트는 정보보안·개인정보보호 담당 경험과 직접 연결됩니다.</p>
-              </div>
-            </details>
-            <div class="card-actions"><a class="btn primary" href="https://hscope.onrender.com/" target="_blank" rel="noopener">화면 열기</a><a class="btn ghost" href="https://hscope.onrender.com/intro" target="_blank" rel="noopener">서비스 소개</a></div>
-          </div>
-        </article>
+
 
         <article class="card">
           <a class="thumb" href="../membership/join/#membership-service" target="_blank" rel="noopener">
@@ -389,7 +398,7 @@
     <div>© 2026 김상화 · 서비스 기획 / 프로젝트 관리</div>
     <div><a href="../portfolio/">전체 포트폴리오 보기 →</a></div>
   </div>
-  <div class="wrap note">※ 작업물은 기획 의도·인터랙션 검증용 데모입니다. 일부 데이터는 예시이며 실제 운영 화면과 차이가 있을 수 있습니다.</div>
+  <div class="wrap note">※ 휴 스코프 외 작업물은 기획 의도·인터랙션 검증용 데모입니다. 일부 데이터는 예시이며 실제 운영 화면과 차이가 있을 수 있습니다.</div>
 </footer>
 
 </body>
