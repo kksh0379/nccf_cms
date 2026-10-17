@@ -1,0 +1,19 @@
+{
+  "name": "nccf-portfolio-analytics-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Minimal page-view collection and admin authentication API for the NCCF portfolio",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22 <25"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "pg": "^8.16.3"
+  }
+}
+
