@@ -51,6 +51,11 @@ function safeIp(value) {
   return net.isIP(ip) ? ip : null;
 }
 
+function forwardedClientIp(header, fallback) {
+  const firstForwarded = typeof header === 'string' ? header.split(',')[0].trim() : '';
+  return safeIp(firstForwarded) || safeIp(fallback);
+}
+
 module.exports = {
   PORTFOLIO_PREFIX,
   normalizePortfolioPath,
@@ -58,6 +63,7 @@ module.exports = {
   verifyPassword,
   tokenDigest,
   bearerToken,
-  safeIp
+  safeIp,
+  forwardedClientIp
 };
 

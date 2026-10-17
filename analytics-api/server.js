@@ -8,7 +8,7 @@ const {
   verifyPassword,
   tokenDigest,
   bearerToken,
-  safeIp
+  forwardedClientIp
 } = require('./lib');
 
 const PORT = Number(process.env.PORT || 10000);
@@ -24,7 +24,6 @@ const pool = new Pool({
 });
 
 const app = express();
-app.set('trust proxy', 1);
 app.disable('x-powered-by');
 app.use(express.json({ limit: '8kb', strict: true }));
 app.use((req, res, next) => {
@@ -53,7 +52,7 @@ function requireAllowedOrigin(req, res, next) {
 
 const failedLogins = new Map();
 function loginRateLimit(req, res, next) {
-  const key = safeIp(req.ip) || 'unknown';
+  const key = forwardedClientIp(req.get('x-forwarded-for'), req.socket.remoteAddress) || 'unknown';
   const now = Date.now();
   const entry = failedLogins.get(key);
   if (entry && entry.resetAt > now && entry.count >= 5) {
@@ -101,7 +100,7 @@ app.get('/health', async (_req, res, next) => {
 
 app.post('/api/pageviews', requireAllowedOrigin, async (req, res, next) => {
   const pagePath = normalizePortfolioPath(req.body && req.body.path);
-  const ip = safeIp(req.ip);
+  const ip = forwardedClientIp(req.get('x-forwarded-for'), req.socket.remoteAddress);
   if (!pagePath || !ip) return res.status(400).json({ error: 'invalid_request' });
   try {
     await pool.query('INSERT INTO page_views (page_path, ip_address) VALUES ($1, $2::inet)', [pagePath, ip]);
@@ -185,6 +184,16 @@ async function migrate() {
      WHERE ip_address IS NOT NULL AND visited_at < NOW() - ($1 * INTERVAL '1 day')`,
     [IP_RETENTION_DAYS]
   );
+  await pool.query(`
+    DELETE FROM page_views
+    WHERE ip_address <<= inet '10.0.0.0/8'
+       OR ip_address <<= inet '172.16.0.0/12'
+       OR ip_address <<= inet '192.168.0.0/16'
+       OR ip_address <<= inet '127.0.0.0/8'
+       OR ip_address <<= inet 'fc00::/7'
+       OR ip_address <<= inet 'fe80::/10'
+       OR ip_address = inet '::1'
+  `);
 }
 
 async function start() {
