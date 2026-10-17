@@ -178,6 +178,10 @@ app.use((error, _req, res, _next) => {
 async function migrate() {
   const sql = fs.readFileSync(path.join(__dirname, 'migrations', '001_init.sql'), 'utf8');
   await pool.query(sql);
+  await cleanupExpiredData();
+}
+
+async function cleanupExpiredData() {
   await pool.query('DELETE FROM admin_sessions WHERE expires_at <= NOW()');
   await pool.query(
     `UPDATE page_views SET ip_address = NULL
@@ -201,6 +205,10 @@ async function start() {
     if (!process.env[key]) throw new Error(`Missing required environment variable: ${key}`);
   }
   await migrate();
+  const cleanupTimer = setInterval(() => {
+    cleanupExpiredData().catch((error) => console.error(error && error.message ? error.message : 'Cleanup failed'));
+  }, 24 * 60 * 60 * 1000);
+  cleanupTimer.unref();
   app.listen(PORT, '0.0.0.0', () => console.log(`Analytics API listening on ${PORT}`));
 }
 
@@ -211,5 +219,5 @@ if (require.main === module) {
   });
 }
 
-module.exports = { app, migrate, start };
+module.exports = { app, migrate, cleanupExpiredData, start };
 
