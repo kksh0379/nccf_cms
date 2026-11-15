@@ -20,3 +20,8 @@ CREATE TABLE IF NOT EXISTS admin_sessions (
 CREATE INDEX IF NOT EXISTS admin_sessions_expires_idx
   ON admin_sessions (expires_at);
 
+
+-- Efficient per-IP as-of visit counts for the private recent-visit log.
+CREATE INDEX IF NOT EXISTS page_views_ip_visited_id_idx
+  ON page_views (ip_address, visited_at, id)
+  WHERE ip_address IS NOT NULL;
