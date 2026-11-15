@@ -155,9 +155,17 @@ app.get('/api/admin/stats', requireAllowedOrigin, requireAdmin, async (_req, res
         ORDER BY total DESC, page_path ASC
       `),
       pool.query(`
-        SELECT visited_at AS time, COALESCE(host(ip_address), '보존기간 만료') AS ip, page_path AS path
-        FROM page_views
-        ORDER BY visited_at DESC
+        SELECT pv.visited_at AS time,
+               COALESCE(host(pv.ip_address), '보존기간 만료') AS ip,
+               pv.page_path AS path,
+               CASE WHEN pv.ip_address IS NULL THEN NULL ELSE (
+                 SELECT COUNT(*)::int
+                 FROM page_views earlier
+                 WHERE earlier.ip_address = pv.ip_address
+                   AND (earlier.visited_at, earlier.id) <= (pv.visited_at, pv.id)
+               ) END AS ip_visits
+        FROM page_views pv
+        ORDER BY pv.visited_at DESC, pv.id DESC
         LIMIT 100
       `)
     ]);
