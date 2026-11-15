@@ -1,329 +1,53 @@
 'use strict';
-
 const net = require('node:net');
 
-// IPWho free HTTPS endpoint: country and ASN/ISP metadata. It does not reliably
-// distinguish home from office access. Never claim a residential identity.
 const UNKNOWN = '확인 불가';
 function classifyNetwork(data) {
-  const c = data && data.connection || {};
+  const c = data?.connection || {};
   const explicit = String(c.connection_type || '').toLowerCase();
-  if (explicit === 'cellular') return '이동통신';
-  if (explicit === 'cable/dsl') return '유선 회선';
-  if (explicit === 'corporate') return '기업망';
-  if (explicit === 'satellite') return '위성 회선';
-  const provider = [c.isp, c.org, c.domain].filter(Boolean).join(' ').toLowerCase();
-  if (/amazon|aws|google cloud|google llc|microsoft|azure|digitalocean|cloudflare|akamai|ovh|hetzner|vultr|linode|oracle cloud|hosting|data ?center|datacentre|cloud computing/.test(provider))
-    return '데이터센터(추정)';
-  if (/mobile|cellular|wireless|lte|5g|sk telecom|skt |kt mobile|lg u\+ mobile/.test(provider))
-    return '이동통신(추정)';
-  if (/broadband|telecom|telecommunication|internet|korea telecom|korea telecommunications|sk broadband|kt corporation|lg u\+/.test(provider))
-    return '통신사망(추정)';
+  const direct = {'cellular':'이동통신','cable/dsl':'유선 회선','corporate':'기업망','satellite':'위성 회선'};
+  if (direct[explicit]) return direct[explicit];
+  const provider = [c.isp,c.org,c.domain].filter(Boolean).join(' ').toLowerCase();
+  if (/amazon|aws|google cloud|google llc|microsoft|azure|digitalocean|cloudflare|akamai|ovh|hetzner|vultr|linode|oracle cloud|hosting|data ?center|datacentre|cloud computing/.test(provider)) return '데이터센터(추정)';
+  if (/mobile|cellular|wireless|lte|5g|sk telecom|skt |kt mobile|lg u\+ mobile/.test(provider)) return '이동통신(추정)';
+  if (/broadband|telecom|telecommunication|internet|korea telecom|sk broadband|kt corporation|lg u\+/.test(provider)) return '통신사망(추정)';
   return UNKNOWN;
 }
-
 function normalizeLookup(data) {
-  if (!data || data.success !== true) return {country_code:null, network_type:UNKNOWN};
+  if (!data || data.success !== true) return {country_code:null,network_type:UNKNOWN};
   const code = String(data.country_code || '').toUpperCase();
-  return {
-    country_code: /^[A-Z]{2}$/.test(code) ? code : null,
-    network_type: classifyNetwork(data)
-  };
+  return {country_code:/^[A-Z]{2}$/.test(code)?code:null,network_type:classifyNetwork(data)};
 }
-
 function lookupable(ip) {
   if (typeof ip !== 'string' || !net.isIP(ip)) return false;
-  if (ip === '::1' || ip === '0.0.0.0' || ip === '255.255.255.255') return false;
   if (net.isIP(ip) === 4) {
-    const [a,b] = ip.split('.').map(Number);
-    if (a === 0 || a === 10 || a === 127 || a >= 224
-      || (a === 169 && b === 254)
-      || (a === 172 && b >= 16 && b <= 31)
-      || (a === 192 && b === 168)
-      || (a === 100 && b >= 64 && b <= 127)
-      || (a === 192 && b === 0) || (a === 192 && b === 0 && ip.endsWith('.0'))
-      || (a === 192 && b === 0 && ip.endsWith('.9'))
-      || (a === 192 && b === 0 && ip.endsWith('.10'))
-      || (a === 192 && b === 0 && ip.endsWith('.170'))
-      || (a === 192 && b === 0 && ip.endsWith('.171'))
-      || (a === 192 && b === 0 && ip.endsWith('.8'))
-      || (a === 192 && b === 0 && ip.endsWith('.11'))
-      || (a === 192 && b === 0 && ip.endsWith('.1'))
-      || (a === 192 && b === 0 && ip.endsWith('.2'))
-      || (a === 192 && b === 0 && ip.endsWith('.3'))
-      || (a === 192 && b === 0 && ip.endsWith('.4'))
-      || (a === 192 && b === 0 && ip.endsWith('.5'))
-      || (a === 192 && b === 0 && ip.endsWith('.6'))
-      || (a === 192 && b === 0 && ip.endsWith('.7'))
-      || (a === 192 && b === 0 && ip.endsWith('.12'))
-      || (a === 192 && b === 0 && ip.endsWith('.13'))
-      || (a === 192 && b === 0 && ip.endsWith('.14'))
-      || (a === 192 && b === 0 && ip.endsWith('.15'))
-      || (a === 192 && b === 0 && ip.endsWith('.16'))
-      || (a === 192 && b === 0 && ip.endsWith('.17'))
-      || (a === 192 && b === 0 && ip.endsWith('.18'))
-      || (a === 192 && b === 0 && ip.endsWith('.19'))
-      || (a === 192 && b === 0 && ip.endsWith('.20'))
-      || (a === 192 && b === 0 && ip.endsWith('.21'))
-      || (a === 192 && b === 0 && ip.endsWith('.22'))
-      || (a === 192 && b === 0 && ip.endsWith('.23'))
-      || (a === 192 && b === 0 && ip.endsWith('.24'))
-      || (a === 192 && b === 0 && ip.endsWith('.25'))
-      || (a === 192 && b === 0 && ip.endsWith('.26'))
-      || (a === 192 && b === 0 && ip.endsWith('.27'))
-      || (a === 192 && b === 0 && ip.endsWith('.28'))
-      || (a === 192 && b === 0 && ip.endsWith('.29'))
-      || (a === 192 && b === 0 && ip.endsWith('.30'))
-      || (a === 192 && b === 0 && ip.endsWith('.31'))
-      || (a === 192 && b === 0 && ip.endsWith('.32'))
-      || (a === 192 && b === 0 && ip.endsWith('.33'))
-      || (a === 192 && b === 0 && ip.endsWith('.34'))
-      || (a === 192 && b === 0 && ip.endsWith('.35'))
-      || (a === 192 && b === 0 && ip.endsWith('.36'))
-      || (a === 192 && b === 0 && ip.endsWith('.37'))
-      || (a === 192 && b === 0 && ip.endsWith('.38'))
-      || (a === 192 && b === 0 && ip.endsWith('.39'))
-      || (a === 192 && b === 0 && ip.endsWith('.40'))
-      || (a === 192 && b === 0 && ip.endsWith('.41'))
-      || (a === 192 && b === 0 && ip.endsWith('.42'))
-      || (a === 192 && b === 0 && ip.endsWith('.43'))
-      || (a === 192 && b === 0 && ip.endsWith('.44'))
-      || (a === 192 && b === 0 && ip.endsWith('.45'))
-      || (a === 192 && b === 0 && ip.endsWith('.46'))
-      || (a === 192 && b === 0 && ip.endsWith('.47'))
-      || (a === 192 && b === 0 && ip.endsWith('.48'))
-      || (a === 192 && b === 0 && ip.endsWith('.49'))
-      || (a === 192 && b === 0 && ip.endsWith('.50'))
-      || (a === 192 && b === 0 && ip.endsWith('.51'))
-      || (a === 192 && b === 0 && ip.endsWith('.52'))
-      || (a === 192 && b === 0 && ip.endsWith('.53'))
-      || (a === 192 && b === 0 && ip.endsWith('.54'))
-      || (a === 192 && b === 0 && ip.endsWith('.55'))
-      || (a === 192 && b === 0 && ip.endsWith('.56'))
-      || (a === 192 && b === 0 && ip.endsWith('.57'))
-      || (a === 192 && b === 0 && ip.endsWith('.58'))
-      || (a === 192 && b === 0 && ip.endsWith('.59'))
-      || (a === 192 && b === 0 && ip.endsWith('.60'))
-      || (a === 192 && b === 0 && ip.endsWith('.61'))
-      || (a === 192 && b === 0 && ip.endsWith('.62'))
-      || (a === 192 && b === 0 && ip.endsWith('.63'))
-      || (a === 192 && b === 0 && ip.endsWith('.64'))
-      || (a === 192 && b === 0 && ip.endsWith('.65'))
-      || (a === 192 && b === 0 && ip.endsWith('.66'))
-      || (a === 192 && b === 0 && ip.endsWith('.67'))
-      || (a === 192 && b === 0 && ip.endsWith('.68'))
-      || (a === 192 && b === 0 && ip.endsWith('.69'))
-      || (a === 192 && b === 0 && ip.endsWith('.70'))
-      || (a === 192 && b === 0 && ip.endsWith('.71'))
-      || (a === 192 && b === 0 && ip.endsWith('.72'))
-      || (a === 192 && b === 0 && ip.endsWith('.73'))
-      || (a === 192 && b === 0 && ip.endsWith('.74'))
-      || (a === 192 && b === 0 && ip.endsWith('.75'))
-      || (a === 192 && b === 0 && ip.endsWith('.76'))
-      || (a === 192 && b === 0 && ip.endsWith('.77'))
-      || (a === 192 && b === 0 && ip.endsWith('.78'))
-      || (a === 192 && b === 0 && ip.endsWith('.79'))
-      || (a === 192 && b === 0 && ip.endsWith('.80'))
-      || (a === 192 && b === 0 && ip.endsWith('.81'))
-      || (a === 192 && b === 0 && ip.endsWith('.82'))
-      || (a === 192 && b === 0 && ip.endsWith('.83'))
-      || (a === 192 && b === 0 && ip.endsWith('.84'))
-      || (a === 192 && b === 0 && ip.endsWith('.85'))
-      || (a === 192 && b === 0 && ip.endsWith('.86'))
-      || (a === 192 && b === 0 && ip.endsWith('.87'))
-      || (a === 192 && b === 0 && ip.endsWith('.88'))
-      || (a === 192 && b === 0 && ip.endsWith('.89'))
-      || (a === 192 && b === 0 && ip.endsWith('.90'))
-      || (a === 192 && b === 0 && ip.endsWith('.91'))
-      || (a === 192 && b === 0 && ip.endsWith('.92'))
-      || (a === 192 && b === 0 && ip.endsWith('.93'))
-      || (a === 192 && b === 0 && ip.endsWith('.94'))
-      || (a === 192 && b === 0 && ip.endsWith('.95'))
-      || (a === 192 && b === 0 && ip.endsWith('.96'))
-      || (a === 192 && b === 0 && ip.endsWith('.97'))
-      || (a === 192 && b === 0 && ip.endsWith('.98'))
-      || (a === 192 && b === 0 && ip.endsWith('.99'))
-      || (a === 192 && b === 0 && ip.endsWith('.100'))
-      || (a === 192 && b === 0 && ip.endsWith('.101'))
-      || (a === 192 && b === 0 && ip.endsWith('.102'))
-      || (a === 192 && b === 0 && ip.endsWith('.103'))
-      || (a === 192 && b === 0 && ip.endsWith('.104'))
-      || (a === 192 && b === 0 && ip.endsWith('.105'))
-      || (a === 192 && b === 0 && ip.endsWith('.106'))
-      || (a === 192 && b === 0 && ip.endsWith('.107'))
-      || (a === 192 && b === 0 && ip.endsWith('.108'))
-      || (a === 192 && b === 0 && ip.endsWith('.109'))
-      || (a === 192 && b === 0 && ip.endsWith('.110'))
-      || (a === 192 && b === 0 && ip.endsWith('.111'))
-      || (a === 192 && b === 0 && ip.endsWith('.112'))
-      || (a === 192 && b === 0 && ip.endsWith('.113'))
-      || (a === 192 && b === 0 && ip.endsWith('.114'))
-      || (a === 192 && b === 0 && ip.endsWith('.115'))
-      || (a === 192 && b === 0 && ip.endsWith('.116'))
-      || (a === 192 && b === 0 && ip.endsWith('.117'))
-      || (a === 192 && b === 0 && ip.endsWith('.118'))
-      || (a === 192 && b === 0 && ip.endsWith('.119'))
-      || (a === 192 && b === 0 && ip.endsWith('.120'))
-      || (a === 192 && b === 0 && ip.endsWith('.121'))
-      || (a === 192 && b === 0 && ip.endsWith('.122'))
-      || (a === 192 && b === 0 && ip.endsWith('.123'))
-      || (a === 192 && b === 0 && ip.endsWith('.124'))
-      || (a === 192 && b === 0 && ip.endsWith('.125'))
-      || (a === 192 && b === 0 && ip.endsWith('.126'))
-      || (a === 192 && b === 0 && ip.endsWith('.127'))
-      || (a === 192 && b === 0 && ip.endsWith('.128'))
-      || (a === 192 && b === 0 && ip.endsWith('.129'))
-      || (a === 192 && b === 0 && ip.endsWith('.130'))
-      || (a === 192 && b === 0 && ip.endsWith('.131'))
-      || (a === 192 && b === 0 && ip.endsWith('.132'))
-      || (a === 192 && b === 0 && ip.endsWith('.133'))
-      || (a === 192 && b === 0 && ip.endsWith('.134'))
-      || (a === 192 && b === 0 && ip.endsWith('.135'))
-      || (a === 192 && b === 0 && ip.endsWith('.136'))
-      || (a === 192 && b === 0 && ip.endsWith('.137'))
-      || (a === 192 && b === 0 && ip.endsWith('.138'))
-      || (a === 192 && b === 0 && ip.endsWith('.139'))
-      || (a === 192 && b === 0 && ip.endsWith('.140'))
-      || (a === 192 && b === 0 && ip.endsWith('.141'))
-      || (a === 192 && b === 0 && ip.endsWith('.142'))
-      || (a === 192 && b === 0 && ip.endsWith('.143'))
-      || (a === 192 && b === 0 && ip.endsWith('.144'))
-      || (a === 192 && b === 0 && ip.endsWith('.145'))
-      || (a === 192 && b === 0 && ip.endsWith('.146'))
-      || (a === 192 && b === 0 && ip.endsWith('.147'))
-      || (a === 192 && b === 0 && ip.endsWith('.148'))
-      || (a === 192 && b === 0 && ip.endsWith('.149'))
-      || (a === 192 && b === 0 && ip.endsWith('.150'))
-      || (a === 192 && b === 0 && ip.endsWith('.151'))
-      || (a === 192 && b === 0 && ip.endsWith('.152'))
-      || (a === 192 && b === 0 && ip.endsWith('.153'))
-      || (a === 192 && b === 0 && ip.endsWith('.154'))
-      || (a === 192 && b === 0 && ip.endsWith('.155'))
-      || (a === 192 && b === 0 && ip.endsWith('.156'))
-      || (a === 192 && b === 0 && ip.endsWith('.157'))
-      || (a === 192 && b === 0 && ip.endsWith('.158'))
-      || (a === 192 && b === 0 && ip.endsWith('.159'))
-      || (a === 192 && b === 0 && ip.endsWith('.160'))
-      || (a === 192 && b === 0 && ip.endsWith('.161'))
-      || (a === 192 && b === 0 && ip.endsWith('.162'))
-      || (a === 192 && b === 0 && ip.endsWith('.163'))
-      || (a === 192 && b === 0 && ip.endsWith('.164'))
-      || (a === 192 && b === 0 && ip.endsWith('.165'))
-      || (a === 192 && b === 0 && ip.endsWith('.166'))
-      || (a === 192 && b === 0 && ip.endsWith('.167'))
-      || (a === 192 && b === 0 && ip.endsWith('.168'))
-      || (a === 192 && b === 0 && ip.endsWith('.169'))
-      || (a === 192 && b === 0 && ip.endsWith('.170'))
-      || (a === 192 && b === 0 && ip.endsWith('.171'))
-      || (a === 192 && b === 0 && ip.endsWith('.172'))
-      || (a === 192 && b === 0 && ip.endsWith('.173'))
-      || (a === 192 && b === 0 && ip.endsWith('.174'))
-      || (a === 192 && b === 0 && ip.endsWith('.175'))
-      || (a === 192 && b === 0 && ip.endsWith('.176'))
-      || (a === 192 && b === 0 && ip.endsWith('.177'))
-      || (a === 192 && b === 0 && ip.endsWith('.178'))
-      || (a === 192 && b === 0 && ip.endsWith('.179'))
-      || (a === 192 && b === 0 && ip.endsWith('.180'))
-      || (a === 192 && b === 0 && ip.endsWith('.181'))
-      || (a === 192 && b === 0 && ip.endsWith('.182'))
-      || (a === 192 && b === 0 && ip.endsWith('.183'))
-      || (a === 192 && b === 0 && ip.endsWith('.184'))
-      || (a === 192 && b === 0 && ip.endsWith('.185'))
-      || (a === 192 && b === 0 && ip.endsWith('.186'))
-      || (a === 192 && b === 0 && ip.endsWith('.187'))
-      || (a === 192 && b === 0 && ip.endsWith('.188'))
-      || (a === 192 && b === 0 && ip.endsWith('.189'))
-      || (a === 192 && b === 0 && ip.endsWith('.190'))
-      || (a === 192 && b === 0 && ip.endsWith('.191'))
-      || (a === 192 && b === 0 && ip.endsWith('.192'))
-      || (a === 192 && b === 0 && ip.endsWith('.193'))
-      || (a === 192 && b === 0 && ip.endsWith('.194'))
-      || (a === 192 && b === 0 && ip.endsWith('.195'))
-      || (a === 192 && b === 0 && ip.endsWith('.196'))
-      || (a === 192 && b === 0 && ip.endsWith('.197'))
-      || (a === 192 && b === 0 && ip.endsWith('.198'))
-      || (a === 192 && b === 0 && ip.endsWith('.199'))
-      || (a === 192 && b === 0 && ip.endsWith('.200'))
-      || (a === 192 && b === 0 && ip.endsWith('.201'))
-      || (a === 192 && b === 0 && ip.endsWith('.202'))
-      || (a === 192 && b === 0 && ip.endsWith('.203'))
-      || (a === 192 && b === 0 && ip.endsWith('.204'))
-      || (a === 192 && b === 0 && ip.endsWith('.205'))
-      || (a === 192 && b === 0 && ip.endsWith('.206'))
-      || (a === 192 && b === 0 && ip.endsWith('.207'))
-      || (a === 192 && b === 0 && ip.endsWith('.208'))
-      || (a === 192 && b === 0 && ip.endsWith('.209'))
-      || (a === 192 && b === 0 && ip.endsWith('.210'))
-      || (a === 192 && b === 0 && ip.endsWith('.211'))
-      || (a === 192 && b === 0 && ip.endsWith('.212'))
-      || (a === 192 && b === 0 && ip.endsWith('.213'))
-      || (a === 192 && b === 0 && ip.endsWith('.214'))
-      || (a === 192 && b === 0 && ip.endsWith('.215'))
-      || (a === 192 && b === 0 && ip.endsWith('.216'))
-      || (a === 192 && b === 0 && ip.endsWith('.217'))
-      || (a === 192 && b === 0 && ip.endsWith('.218'))
-      || (a === 192 && b === 0 && ip.endsWith('.219'))
-      || (a === 192 && b === 0 && ip.endsWith('.220'))
-      || (a === 192 && b === 0 && ip.endsWith('.221'))
-      || (a === 192 && b === 0 && ip.endsWith('.222'))
-      || (a === 192 && b === 0 && ip.endsWith('.223'))
-      || (a === 192 && b === 0 && ip.endsWith('.224'))
-      || (a === 192 && b === 0 && ip.endsWith('.225'))
-      || (a === 192 && b === 0 && ip.endsWith('.226'))
-      || (a === 192 && b === 0 && ip.endsWith('.227'))
-      || (a === 192 && b === 0 && ip.endsWith('.228'))
-      || (a === 192 && b === 0 && ip.endsWith('.229'))
-      || (a === 192 && b === 0 && ip.endsWith('.230'))
-      || (a === 192 && b === 0 && ip.endsWith('.231'))
-      || (a === 192 && b === 0 && ip.endsWith('.232'))
-      || (a === 192 && b === 0 && ip.endsWith('.233'))
-      || (a === 192 && b === 0 && ip.endsWith('.234'))
-      || (a === 192 && b === 0 && ip.endsWith('.235'))
-      || (a === 192 && b === 0 && ip.endsWith('.236'))
-      || (a === 192 && b === 0 && ip.endsWith('.237'))
-      || (a === 192 && b === 0 && ip.endsWith('.238'))
-      || (a === 192 && b === 0 && ip.endsWith('.239'))
-      || (a === 192 && b === 0 && ip.endsWith('.240'))
-      || (a === 192 && b === 0 && ip.endsWith('.241'))
-      || (a === 192 && b === 0 && ip.endsWith('.242'))
-      || (a === 192 && b === 0 && ip.endsWith('.243'))
-      || (a === 192 && b === 0 && ip.endsWith('.244'))
-      || (a === 192 && b === 0 && ip.endsWith('.245'))
-      || (a === 192 && b === 0 && ip.endsWith('.246'))
-      || (a === 192 && b === 0 && ip.endsWith('.247'))
-      || (a === 192 && b === 0 && ip.endsWith('.248'))
-      || (a === 192 && b === 0 && ip.endsWith('.249'))
-      || (a === 192 && b === 0 && ip.endsWith('.250'))
-      || (a === 192 && b === 0 && ip.endsWith('.251'))
-      || (a === 192 && b === 0 && ip.endsWith('.252'))
-      || (a === 192 && b === 0 && ip.endsWith('.253'))
-      || (a === 192 && b === 0 && ip.endsWith('.254'))
-      || (a === 192 && b === 0 && ip.endsWith('.255'))
-      || (a === 198 && b === 18)
-      || (a === 198 && b === 19)
-      || (a === 198 && b === 51)
-      || (a === 203 && b === 0)) return false;
+    const [a,b,c] = ip.split('.').map(Number);
+    return !(a === 0 || a === 10 || a === 127 || a >= 224 ||
+      (a === 169 && b === 254) || (a === 172 && b >= 16 && b <= 31) ||
+      (a === 192 && b === 168) || (a === 100 && b >= 64 && b <= 127) ||
+      (a === 192 && b === 0) || (a === 192 && b === 0 && c === 2) ||
+      (a === 198 && (b === 18 || b === 19 || (b === 51 && c === 100))) ||
+      (a === 203 && b === 0 && c === 113));
   }
-  return true;
+  const lower = ip.toLowerCase();
+  return !(lower === '::1' || lower === '::' || lower.startsWith('fe8') ||
+    lower.startsWith('fe9') || lower.startsWith('fea') || lower.startsWith('feb') ||
+    lower.startsWith('fc') || lower.startsWith('fd') || lower.startsWith('ff') ||
+    lower.startsWith('2001:db8:'));
 }
-
 async function queryIp(ip, requester = fetch) {
-  if (!lookupable(ip)) return {country_code:null, network_type:UNKNOWN};
+  if (!lookupable(ip)) return {country_code:null,network_type:UNKNOWN};
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 1500);
+  const timeout = setTimeout(() => controller.abort(), 1800);
   try {
     const result = await requester('https://ipwho.is/' + encodeURIComponent(ip), {
-      signal: controller.signal, redirect:'error',
-      headers:{accept:'application/json'}
+      signal:controller.signal,redirect:'error',headers:{accept:'application/json'}
     });
-    if (!result.ok) return {country_code:null, network_type:UNKNOWN};
-    const data = await result.json();
-    return normalizeLookup(data);
+    return result.ok ? normalizeLookup(await result.json()) : {country_code:null,network_type:UNKNOWN};
   } catch {
-    return {country_code:null, network_type:UNKNOWN};
+    return {country_code:null,network_type:UNKNOWN};
   } finally {
     clearTimeout(timeout);
   }
 }
-
-module.exports = { UNKNOWN, classifyNetwork, normalizeLookup, lookupable, queryIp };
+module.exports = {UNKNOWN,classifyNetwork,normalizeLookup,lookupable,queryIp};
