@@ -1,0 +1,24 @@
+name: Analytics tests
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'analytics-api/**'
+      - 'portfolio/reports-8f3d2a/**'
+      - '.github/workflows/analytics-tests.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run analytics and IP label tests
+        run: node --test analytics-api/test/*.test.js
