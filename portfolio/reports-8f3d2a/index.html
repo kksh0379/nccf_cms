@@ -21,7 +21,7 @@
       <div class="metric"><span>집계 페이지</span><strong id="pageCount">—</strong></div>
     </section>
     <section class="panel"><div class="panel-head"><h2>페이지별 통계</h2><span class="stamp">기준: 한국 시간</span></div><div class="table-wrap"><table><thead><tr><th>페이지 경로</th><th>전체 PV</th><th>오늘 PV</th></tr></thead><tbody id="pages"></tbody></table></div></section>
-    <section class="panel"><div class="panel-head"><h2>최근 방문 로그</h2><span class="stamp" id="updated"></span></div><div class="table-wrap"><table><thead><tr><th>방문 시각</th><th>IP 주소</th><th>식별명</th><th>누적 방문</th><th>페이지 경로</th></tr></thead><tbody id="recent"></tbody></table></div></section>
+    <section class="panel"><div class="panel-head"><h2>최근 방문 로그</h2><span class="stamp" id="updated"></span></div><div class="table-wrap"><table><thead><tr><th>식별명</th><th>누적 방문</th><th>방문 시각</th><th>IP 주소</th><th>페이지 경로</th></tr></thead><tbody id="recent"></tbody></table></div></section>
   </main>
   <script>
     const API_BASE='https://nccf-portfolio-analytics.onrender.com',TOKEN_KEY='portfolioAdminToken';
@@ -59,7 +59,7 @@
         document.getElementById('todayPv').textContent=fmt(pages.reduce((s,p)=>s+p.today,0));
         document.getElementById('pageCount').textContent=fmt(pages.length);
         document.getElementById('pages').innerHTML=pages.length?pages.map(p=>`<tr><td>${esc(p.path)}</td><td class="num">${fmt(p.total)}</td><td class="num">${fmt(p.today)}</td></tr>`).join(''):'<tr><td class="empty" colspan="3">아직 수집된 방문 기록이 없습니다.</td></tr>';
-        document.getElementById('recent').innerHTML=recent.length?recent.map(v=>`<tr><td>${esc(new Date(v.time).toLocaleString('ko-KR',{timeZone:'Asia/Seoul'}))}</td><td>${displayIp(v.ip)}</td><td>${displayIpName(v.ip)}</td><td class="num">${displayVisitCount(v.ip,v.ip_visits)}</td><td>${esc(v.path)}</td></tr>`).join(''):'<tr><td class="empty" colspan="5">최근 방문 기록이 없습니다.</td></tr>';
+        document.getElementById('recent').innerHTML=recent.length?recent.map(v=>`<tr><td>${displayIpName(v.ip)}</td><td class="num">${displayVisitCount(v.ip,v.ip_visits)}</td><td>${esc(new Date(v.time).toLocaleString('ko-KR',{timeZone:'Asia/Seoul'}))}</td><td>${displayIp(v.ip)}</td><td>${esc(v.path)}</td></tr>`).join(''):'<tr><td class="empty" colspan="5">최근 방문 기록이 없습니다.</td></tr>';
         document.getElementById('updated').textContent='갱신 '+new Date().toLocaleTimeString('ko-KR');
       }catch(e){const el=document.getElementById('error');el.textContent=e.message;el.classList.add('on')}
     }
