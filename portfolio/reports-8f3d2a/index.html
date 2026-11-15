@@ -8,7 +8,7 @@
   <title>방문 통계 | 김상화 포트폴리오</title>
   <style>
     :root{--ink:#172536;--muted:#66778a;--paper:#f3f6f9;--card:#fff;--line:#ced8e3;--navy:#163451;--navy2:#091f35;--blue:#315f8c;--shadow:0 16px 44px rgba(9,31,53,.1)}
-    *{box-sizing:border-box}html{font-size:16px}body{margin:0;background:var(--paper);color:var(--ink);font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.6}button{font:inherit}.wrap{width:min(calc(100% - 32px),1120px);margin:auto}.top{padding:44px 0 72px;background:linear-gradient(135deg,var(--navy2),var(--navy));color:#fff}.top-row{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}.eyebrow{margin:0 0 10px;color:#b9cfe0;font-weight:800}.top h1{margin:0;font-size:clamp(2rem,5vw,3.4rem);letter-spacing:-.05em}.top p{margin:14px 0 0;color:#d9e4ec}.logout{border:1px solid rgba(255,255,255,.35);border-radius:12px;background:transparent;color:#fff;padding:10px 14px;cursor:pointer}.content{margin-top:-34px;padding-bottom:60px}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}.metric,.panel{border:1px solid var(--line);border-radius:18px;background:var(--card);box-shadow:var(--shadow)}.metric{padding:22px}.metric span{display:block;color:var(--muted);font-size:.88rem;font-weight:800}.metric strong{display:block;margin-top:4px;font-size:2rem}.panel{padding:22px;margin-top:18px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}.panel h2{margin:0;font-size:1.25rem}.stamp{color:var(--muted);font-size:.82rem}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:640px}th,td{padding:13px 12px;border-bottom:1px solid #e4e9ef;text-align:left;white-space:nowrap}th{color:var(--muted);font-size:.82rem}td.num{text-align:right;font-variant-numeric:tabular-nums}.empty{padding:28px;text-align:center;color:var(--muted)}.error{display:none;margin:18px 0;padding:14px 16px;border:1px solid #e2a8a8;border-radius:12px;background:#fff1f1;color:#9f2424}.error.on{display:block}@media(max-width:680px){.top{padding-top:30px}.top-row{align-items:center}.summary{grid-template-columns:1fr}.metric{padding:18px}.panel{padding:16px}.logout{white-space:nowrap}}
+    *{box-sizing:border-box}html{font-size:16px}body{margin:0;background:var(--paper);color:var(--ink);font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.6}button{font:inherit}.wrap{width:min(calc(100% - 32px),1120px);margin:auto}.top{padding:44px 0 72px;background:linear-gradient(135deg,var(--navy2),var(--navy));color:#fff}.top-row{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}.eyebrow{margin:0 0 10px;color:#b9cfe0;font-weight:800}.top h1{margin:0;font-size:clamp(2rem,5vw,3.4rem);letter-spacing:-.05em}.top p{margin:14px 0 0;color:#d9e4ec}.logout{border:1px solid rgba(255,255,255,.35);border-radius:12px;background:transparent;color:#fff;padding:10px 14px;cursor:pointer}.content{margin-top:-34px;padding-bottom:60px}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}.metric,.panel{border:1px solid var(--line);border-radius:18px;background:var(--card);box-shadow:var(--shadow)}.metric{padding:22px}.metric span{display:block;color:var(--muted);font-size:.88rem;font-weight:800}.metric strong{display:block;margin-top:4px;font-size:2rem}.panel{padding:22px;margin-top:18px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}.panel h2{margin:0;font-size:1.25rem}.stamp{color:var(--muted);font-size:.82rem}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:640px}th,td{padding:13px 12px;border-bottom:1px solid #e4e9ef;text-align:left;white-space:nowrap}th{color:var(--muted);font-size:.82rem}td.num{text-align:right;font-variant-numeric:tabular-nums}.ip-label{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:999px;background:#eaf1f7;color:#163451;font-size:.78rem;font-weight:800;vertical-align:middle}.empty{padding:28px;text-align:center;color:var(--muted)}.error{display:none;margin:18px 0;padding:14px 16px;border:1px solid #e2a8a8;border-radius:12px;background:#fff1f1;color:#9f2424}.error.on{display:block}@media(max-width:680px){.top{padding-top:30px}.top-row{align-items:center}.summary{grid-template-columns:1fr}.metric{padding:18px}.panel{padding:16px}.logout{white-space:nowrap}}
   </style>
 </head>
 <body>
@@ -29,6 +29,17 @@
     if(!token)location.replace('../');
     const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     const fmt=n=>new Intl.NumberFormat('ko-KR').format(Number(n)||0);
+    // Private analytics view only: exact IP matches receive an owner-defined label.
+    const ipLabels=Object.freeze({
+      '211.109.218.86':'시댁',
+      '112.147.189.34':'회사',
+      '211.211.43.183':'우리집'
+    });
+    const displayIp=ip=>{
+      const address=String(ip??'');
+      const label=ipLabels[address.replace(/^::ffff:/i,'')];
+      return esc(address)+(label?' <span class="ip-label">'+esc(label)+'</span>':'');
+    };
     async function load(){
       try{
         const r=await fetch(API_BASE+'/api/admin/stats',{headers:{Authorization:'Bearer '+token},cache:'no-store'});
@@ -39,7 +50,7 @@
         document.getElementById('todayPv').textContent=fmt(pages.reduce((s,p)=>s+p.today,0));
         document.getElementById('pageCount').textContent=fmt(pages.length);
         document.getElementById('pages').innerHTML=pages.length?pages.map(p=>`<tr><td>${esc(p.path)}</td><td class="num">${fmt(p.total)}</td><td class="num">${fmt(p.today)}</td></tr>`).join(''):'<tr><td class="empty" colspan="3">아직 수집된 방문 기록이 없습니다.</td></tr>';
-        document.getElementById('recent').innerHTML=recent.length?recent.map(v=>`<tr><td>${esc(new Date(v.time).toLocaleString('ko-KR',{timeZone:'Asia/Seoul'}))}</td><td>${esc(v.ip)}</td><td>${esc(v.path)}</td></tr>`).join(''):'<tr><td class="empty" colspan="3">최근 방문 기록이 없습니다.</td></tr>';
+        document.getElementById('recent').innerHTML=recent.length?recent.map(v=>`<tr><td>${esc(new Date(v.time).toLocaleString('ko-KR',{timeZone:'Asia/Seoul'}))}</td><td>${displayIp(v.ip)}</td><td>${esc(v.path)}</td></tr>`).join(''):'<tr><td class="empty" colspan="3">최근 방문 기록이 없습니다.</td></tr>';
         document.getElementById('updated').textContent='갱신 '+new Date().toLocaleTimeString('ko-KR');
       }catch(e){const el=document.getElementById('error');el.textContent=e.message;el.classList.add('on')}
     }
