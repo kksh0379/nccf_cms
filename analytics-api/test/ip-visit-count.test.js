@@ -19,7 +19,9 @@ test('all three known IPs including company render identification names in their
   assert.doesNotMatch(context.showCount('112.217.189.34', 3), /3회/);
   assert.match(html, /<th>식별명<\/th><th>누적 방문<\/th>/);
   assert.match(html, /<th>식별명<\/th><th>누적 방문<\/th><th>방문 시각<\/th><th>IP 주소<\/th>/);
-  assert.match(html, /displayIpName\(v\.ip\)<\/td><td class="num">\$\{displayVisitCount\(v\.ip,v\.ip_visits\)\}<\/td><td>\$\{esc\(new Date/);
+  const row = html.match(/recent\\.map\\(v=>`<tr>.*?<\\/tr>/)?.[0] || '';
+  assert.ok(row.indexOf('displayIpName(v.ip)') < row.indexOf('displayVisitCount(v.ip,v.ip_visits)'));
+  assert.ok(row.indexOf('displayVisitCount(v.ip,v.ip_visits)') < row.indexOf('new Date(v.time)'));
 });
 
 test('unknown IP has no identification name and a separate numeric count cell', () => {
