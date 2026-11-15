@@ -16,10 +16,13 @@ test('all three known IPs including company render identification names in their
   assert.match(context.showName('211.211.43.183'), /우리집/);
   assert.match(context.showName(' ::ffff:112.217.189.34 '), /회사/);
   assert.match(context.showIp('112.217.189.34'), /112\.217\.189\.34/);
-  assert.doesNotMatch(context.showCount('112.217.189.34', 3), /3회/);
+  assert.match(context.showCount('112.217.189.34', 3), /3<span class="unit">회/);
+  assert.match(context.showCount('211.109.218.86', 12), /12<span class="unit">회/);
+  assert.match(context.showCount('211.211.43.183', 7), /7<span class="unit">회/);
   assert.match(html, /<th>식별명<\/th><th>누적 방문<\/th>/);
   assert.match(html, /<th>식별명<\/th><th>누적 방문<\/th><th>방문 시각<\/th><th>IP 주소<\/th>/);
-  const row = html.match(/recent\\.map\\(v=>`<tr>.*?<\\/tr>/)?.[0] || '';
+  const start = html.indexOf('recent.map(v=>`<tr>');
+  const row = start < 0 ? '' : html.slice(start, html.indexOf('</tr>`', start));
   assert.ok(row.indexOf('displayIpName(v.ip)') < row.indexOf('displayVisitCount(v.ip,v.ip_visits)'));
   assert.ok(row.indexOf('displayVisitCount(v.ip,v.ip_visits)') < row.indexOf('new Date(v.time)'));
 });
