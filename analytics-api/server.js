@@ -3,6 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const express = require('express');
 const { Pool } = require('pg');
+const {queryIp, lookupable, UNKNOWN} = require('./ip-enrichment');
 const {
   normalizePortfolioPath,
   verifyPassword,
@@ -141,6 +142,44 @@ app.post('/api/book/unlock', requireAllowedOrigin, loginRateLimit, (req, res) =>
   res.json({ key: process.env.BOOK_CONTENT_KEY });
 });
 
+// A lookup is performed only when the owner opens the protected analytics page.
+// Limit new external requests, keep the page usable on provider failure, and reuse
+// the result across repeat visits from the same IP.
+async function enrichRecentLogs(rows) {
+  const ips = [...new Set(rows.map(r => r.ip).filter(lookupable))];
+  if (!ips.length) return rows.map(row => ({...row,country_code:null,network_type:UNKNOWN}));
+  const existing = await pool.query(
+    `SELECT host(ip_address) AS ip,country_code,network_type,checked_at
+       FROM ip_network_cache WHERE ip_address = ANY($1::inet[])
+       AND checked_at > NOW() - INTERVAL '30 days'`, [ips]
+  );
+  const known = new Map(existing.rows.filter(row =>
+    (row.country_code != null || Date.now() - new Date(row.checked_at).getTime() < 86400000)
+  ).map(row => [row.ip,row]));
+  const toFetch = ips.filter(ip => !known.has(ip)).slice(0, 8);
+  // Eight parallel requests cap the cold-start latency near one provider timeout.
+  const fetched = await Promise.all(toFetch.map(async ip => ({ip,...await queryIp(ip)})));
+  await Promise.all(fetched.map(async row => {
+    known.set(row.ip,row);
+    try {
+      await pool.query(
+        `INSERT INTO ip_network_cache (ip_address,country_code,network_type,checked_at)
+         VALUES ($1::inet,$2,$3,NOW())
+         ON CONFLICT (ip_address) DO UPDATE
+           SET country_code=EXCLUDED.country_code,
+               network_type=EXCLUDED.network_type,checked_at=NOW()`,
+        [row.ip,row.country_code,row.network_type]
+      );
+    } catch {
+      // Enrichment is best-effort. Never break the private statistics view.
+    }
+  }));
+  return rows.map(row => ({
+    ...row,country_code:known.get(row.ip)?.country_code || null,
+    network_type:known.get(row.ip)?.network_type || UNKNOWN
+  }));
+}
+
 app.get('/api/admin/stats', requireAllowedOrigin, requireAdmin, async (_req, res, next) => {
   try {
     const [totals, logs] = await Promise.all([
@@ -169,7 +208,10 @@ app.get('/api/admin/stats', requireAllowedOrigin, requireAdmin, async (_req, res
         LIMIT 100
       `)
     ]);
-    res.json({ pages: totals.rows, recent: logs.rows, timezone: 'Asia/Seoul' });
+    let recent = logs.rows;
+    try { recent = await enrichRecentLogs(logs.rows); }
+    catch { recent = logs.rows.map(row => ({...row,country_code:null,network_type:UNKNOWN})); }
+    res.json({ pages: totals.rows, recent, timezone: 'Asia/Seoul' });
   } catch (error) {
     next(error);
   }
@@ -196,6 +238,13 @@ async function cleanupExpiredData() {
      WHERE ip_address IS NOT NULL AND visited_at < NOW() - ($1 * INTERVAL '1 day')`,
     [IP_RETENTION_DAYS]
   );
+  await pool.query(`
+    DELETE FROM ip_network_cache
+    WHERE checked_at < NOW() - INTERVAL '90 days'
+       OR NOT EXISTS (
+         SELECT 1 FROM page_views WHERE page_views.ip_address = ip_network_cache.ip_address
+       )
+  `);
   await pool.query(`
     DELETE FROM page_views
     WHERE ip_address <<= inet '10.0.0.0/8'
