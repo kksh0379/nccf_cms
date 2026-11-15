@@ -43,7 +43,7 @@
       return name?'<span class="ip-label">'+esc(name)+'</span>':'<span class="unknown-label">미식별</span>';
     };
     const displayVisitCount=(ip,visits)=>{
-      if(ipName(ip))return '<span class="muted-dash">—</span>';
+      // Identified and unidentified IPs share the same historical as-of-log count.
       const count=Number(visits);
       if(visits===null||visits===undefined||!Number.isSafeInteger(count)||count<=0)
         return '<span class="muted-dash">—</span>';
