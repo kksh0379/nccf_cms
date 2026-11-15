@@ -15,7 +15,7 @@ test('all three known IPs including company render identification names in their
   assert.match(context.showName('112.217.189.34'), /회사/);
   assert.match(context.showName('211.211.43.183'), /우리집/);
   assert.match(context.showName(' ::ffff:112.217.189.34 '), /회사/);
-  assert.match(context.showIp('112.217.189.34'), /112\.147\.189\.34/);
+  assert.match(context.showIp('112.217.189.34'), /112\.217\.189\.34/);
   assert.doesNotMatch(context.showCount('112.217.189.34', 3), /3회/);
   assert.match(html, /<th>식별명<\/th><th>누적 방문<\/th>/);
 });
