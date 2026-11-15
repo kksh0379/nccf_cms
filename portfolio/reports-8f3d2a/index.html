@@ -35,10 +35,15 @@
       '112.147.189.34':'회사',
       '211.211.43.183':'우리집'
     });
-    const displayIp=ip=>{
+    const displayIp=(ip,visits)=>{
       const address=String(ip??'');
       const label=ipLabels[address.replace(/^::ffff:/i,'')];
-      return esc(address)+(label?' <span class="ip-label">'+esc(label)+'</span>':'');
+      if(label)return esc(address)+' <span class="ip-label">'+esc(label)+'</span>';
+      // Count is calculated by the server as of this log's timestamp,
+      // not from the latest lifetime total or only the visible 100 rows.
+      const count=Number(visits);
+      const counted=visits!==null&&visits!==undefined&&Number.isSafeInteger(count)&&count>0;
+      return esc(address)+(counted?' <span class="ip-label">누적 '+fmt(count)+'회</span>':'');
     };
     async function load(){
       try{
@@ -50,7 +55,7 @@
         document.getElementById('todayPv').textContent=fmt(pages.reduce((s,p)=>s+p.today,0));
         document.getElementById('pageCount').textContent=fmt(pages.length);
         document.getElementById('pages').innerHTML=pages.length?pages.map(p=>`<tr><td>${esc(p.path)}</td><td class="num">${fmt(p.total)}</td><td class="num">${fmt(p.today)}</td></tr>`).join(''):'<tr><td class="empty" colspan="3">아직 수집된 방문 기록이 없습니다.</td></tr>';
-        document.getElementById('recent').innerHTML=recent.length?recent.map(v=>`<tr><td>${esc(new Date(v.time).toLocaleString('ko-KR',{timeZone:'Asia/Seoul'}))}</td><td>${displayIp(v.ip)}</td><td>${esc(v.path)}</td></tr>`).join(''):'<tr><td class="empty" colspan="3">최근 방문 기록이 없습니다.</td></tr>';
+        document.getElementById('recent').innerHTML=recent.length?recent.map(v=>`<tr><td>${esc(new Date(v.time).toLocaleString('ko-KR',{timeZone:'Asia/Seoul'}))}</td><td>${displayIp(v.ip,v.ip_visits)}</td><td>${esc(v.path)}</td></tr>`).join(''):'<tr><td class="empty" colspan="3">최근 방문 기록이 없습니다.</td></tr>';
         document.getElementById('updated').textContent='갱신 '+new Date().toLocaleTimeString('ko-KR');
       }catch(e){const el=document.getElementById('error');el.textContent=e.message;el.classList.add('on')}
     }
