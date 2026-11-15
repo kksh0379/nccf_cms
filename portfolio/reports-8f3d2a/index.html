@@ -8,7 +8,7 @@
   <title>방문 통계 | 김상화 포트폴리오</title>
   <style>
     :root{--ink:#172536;--muted:#66778a;--paper:#f3f6f9;--card:#fff;--line:#ced8e3;--navy:#163451;--navy2:#091f35;--blue:#315f8c;--shadow:0 16px 44px rgba(9,31,53,.1)}
-    *{box-sizing:border-box}html{font-size:16px}body{margin:0;background:var(--paper);color:var(--ink);font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.6}button{font:inherit}.wrap{width:min(calc(100% - 32px),1120px);margin:auto}.top{padding:44px 0 72px;background:linear-gradient(135deg,var(--navy2),var(--navy));color:#fff}.top-row{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}.eyebrow{margin:0 0 10px;color:#b9cfe0;font-weight:800}.top h1{margin:0;font-size:clamp(2rem,5vw,3.4rem);letter-spacing:-.05em}.top p{margin:14px 0 0;color:#d9e4ec}.logout{border:1px solid rgba(255,255,255,.35);border-radius:12px;background:transparent;color:#fff;padding:10px 14px;cursor:pointer}.content{margin-top:-34px;padding-bottom:60px}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}.metric,.panel{border:1px solid var(--line);border-radius:18px;background:var(--card);box-shadow:var(--shadow)}.metric{padding:22px}.metric span{display:block;color:var(--muted);font-size:.88rem;font-weight:800}.metric strong{display:block;margin-top:4px;font-size:2rem}.panel{padding:22px;margin-top:18px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}.panel h2{margin:0;font-size:1.25rem}.stamp{color:var(--muted);font-size:.82rem}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:640px}th,td{padding:13px 12px;border-bottom:1px solid #e4e9ef;text-align:left;white-space:nowrap}th{color:var(--muted);font-size:.82rem}td.num{text-align:right;font-variant-numeric:tabular-nums}.ip-label{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:999px;background:#eaf1f7;color:#163451;font-size:.78rem;font-weight:800;vertical-align:middle}.empty{padding:28px;text-align:center;color:var(--muted)}.error{display:none;margin:18px 0;padding:14px 16px;border:1px solid #e2a8a8;border-radius:12px;background:#fff1f1;color:#9f2424}.error.on{display:block}@media(max-width:680px){.top{padding-top:30px}.top-row{align-items:center}.summary{grid-template-columns:1fr}.metric{padding:18px}.panel{padding:16px}.logout{white-space:nowrap}}
+    *{box-sizing:border-box}html{font-size:16px}body{margin:0;background:var(--paper);color:var(--ink);font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.6}button{font:inherit}.wrap{width:min(calc(100% - 32px),1120px);margin:auto}.top{padding:44px 0 72px;background:linear-gradient(135deg,var(--navy2),var(--navy));color:#fff}.top-row{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}.eyebrow{margin:0 0 10px;color:#b9cfe0;font-weight:800}.top h1{margin:0;font-size:clamp(2rem,5vw,3.4rem);letter-spacing:-.05em}.top p{margin:14px 0 0;color:#d9e4ec}.logout{border:1px solid rgba(255,255,255,.35);border-radius:12px;background:transparent;color:#fff;padding:10px 14px;cursor:pointer}.content{margin-top:-34px;padding-bottom:60px}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}.metric,.panel{border:1px solid var(--line);border-radius:18px;background:var(--card);box-shadow:var(--shadow)}.metric{padding:22px}.metric span{display:block;color:var(--muted);font-size:.88rem;font-weight:800}.metric strong{display:block;margin-top:4px;font-size:2rem}.panel{padding:22px;margin-top:18px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}.panel h2{margin:0;font-size:1.25rem}.stamp{color:var(--muted);font-size:.82rem}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:640px}th,td{padding:13px 12px;border-bottom:1px solid #e4e9ef;text-align:left;white-space:nowrap}th{color:var(--muted);font-size:.82rem}td.num{text-align:right;font-variant-numeric:tabular-nums}.ip-label{display:inline-block;margin-left:0;padding:2px 8px;border-radius:999px;background:#eaf1f7;color:#163451;font-size:.78rem;font-weight:800;vertical-align:middle}.visit-count{font-variant-numeric:tabular-nums;font-weight:800;color:var(--navy)}.visit-count .unit{font-weight:500;color:var(--muted)}.unknown-label{color:var(--muted);font-size:.84rem}.muted-dash{color:var(--muted)}.empty{padding:28px;text-align:center;color:var(--muted)}.error{display:none;margin:18px 0;padding:14px 16px;border:1px solid #e2a8a8;border-radius:12px;background:#fff1f1;color:#9f2424}.error.on{display:block}@media(max-width:680px){.top{padding-top:30px}.top-row{align-items:center}.summary{grid-template-columns:1fr}.metric{padding:18px}.panel{padding:16px}.logout{white-space:nowrap}}
   </style>
 </head>
 <body>
@@ -21,7 +21,7 @@
       <div class="metric"><span>집계 페이지</span><strong id="pageCount">—</strong></div>
     </section>
     <section class="panel"><div class="panel-head"><h2>페이지별 통계</h2><span class="stamp">기준: 한국 시간</span></div><div class="table-wrap"><table><thead><tr><th>페이지 경로</th><th>전체 PV</th><th>오늘 PV</th></tr></thead><tbody id="pages"></tbody></table></div></section>
-    <section class="panel"><div class="panel-head"><h2>최근 방문 로그</h2><span class="stamp" id="updated"></span></div><div class="table-wrap"><table><thead><tr><th>방문 시각</th><th>IP 주소</th><th>페이지 경로</th></tr></thead><tbody id="recent"></tbody></table></div></section>
+    <section class="panel"><div class="panel-head"><h2>최근 방문 로그</h2><span class="stamp" id="updated"></span></div><div class="table-wrap"><table><thead><tr><th>방문 시각</th><th>IP 주소</th><th>식별명</th><th>누적 방문</th><th>페이지 경로</th></tr></thead><tbody id="recent"></tbody></table></div></section>
   </main>
   <script>
     const API_BASE='https://nccf-portfolio-analytics.onrender.com',TOKEN_KEY='portfolioAdminToken';
@@ -35,15 +35,19 @@
       '112.147.189.34':'회사',
       '211.211.43.183':'우리집'
     });
-    const displayIp=(ip,visits)=>{
-      const address=String(ip??'');
-      const label=ipLabels[address.replace(/^::ffff:/i,'')];
-      if(label)return esc(address)+' <span class="ip-label">'+esc(label)+'</span>';
-      // Count is calculated by the server as of this log's timestamp,
-      // not from the latest lifetime total or only the visible 100 rows.
+    const canonicalIp=ip=>String(ip??'').trim().replace(/^::ffff:/i,'').replace(/\/32$/,'');
+    const ipName=ip=>ipLabels[canonicalIp(ip)]||'';
+    const displayIp=ip=>esc(String(ip??''));
+    const displayIpName=ip=>{
+      const name=ipName(ip);
+      return name?'<span class="ip-label">'+esc(name)+'</span>':'<span class="unknown-label">미식별</span>';
+    };
+    const displayVisitCount=(ip,visits)=>{
+      if(ipName(ip))return '<span class="muted-dash">—</span>';
       const count=Number(visits);
-      const counted=visits!==null&&visits!==undefined&&Number.isSafeInteger(count)&&count>0;
-      return esc(address)+(counted?' <span class="ip-label">누적 '+fmt(count)+'회</span>':'');
+      if(visits===null||visits===undefined||!Number.isSafeInteger(count)||count<=0)
+        return '<span class="muted-dash">—</span>';
+      return '<span class="visit-count">'+fmt(count)+'<span class="unit">회</span></span>';
     };
     async function load(){
       try{
@@ -55,7 +59,7 @@
         document.getElementById('todayPv').textContent=fmt(pages.reduce((s,p)=>s+p.today,0));
         document.getElementById('pageCount').textContent=fmt(pages.length);
         document.getElementById('pages').innerHTML=pages.length?pages.map(p=>`<tr><td>${esc(p.path)}</td><td class="num">${fmt(p.total)}</td><td class="num">${fmt(p.today)}</td></tr>`).join(''):'<tr><td class="empty" colspan="3">아직 수집된 방문 기록이 없습니다.</td></tr>';
-        document.getElementById('recent').innerHTML=recent.length?recent.map(v=>`<tr><td>${esc(new Date(v.time).toLocaleString('ko-KR',{timeZone:'Asia/Seoul'}))}</td><td>${displayIp(v.ip,v.ip_visits)}</td><td>${esc(v.path)}</td></tr>`).join(''):'<tr><td class="empty" colspan="3">최근 방문 기록이 없습니다.</td></tr>';
+        document.getElementById('recent').innerHTML=recent.length?recent.map(v=>`<tr><td>${esc(new Date(v.time).toLocaleString('ko-KR',{timeZone:'Asia/Seoul'}))}</td><td>${displayIp(v.ip)}</td><td>${displayIpName(v.ip)}</td><td class="num">${displayVisitCount(v.ip,v.ip_visits)}</td><td>${esc(v.path)}</td></tr>`).join(''):'<tr><td class="empty" colspan="5">최근 방문 기록이 없습니다.</td></tr>';
         document.getElementById('updated').textContent='갱신 '+new Date().toLocaleTimeString('ko-KR');
       }catch(e){const el=document.getElementById('error');el.textContent=e.message;el.classList.add('on')}
     }
