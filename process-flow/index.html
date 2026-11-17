@@ -95,11 +95,26 @@ svg{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 .seg .arw{color:#ADB5C7;font-size:16px}
 .pill.ng{background:#FFF4E6;color:#8A4B0F;margin:6px 0 0}
 .supp{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:13px;font-weight:800;color:#fff;background:#0F8A6A;border-radius:999px;padding:4px 12px}
+.seg button{white-space:nowrap;flex:none}
+.hint{display:none}
+@media (max-width:700px){
+.phead{padding:20px 16px 0}.phead h1{font-size:21px}
+.bar{justify-content:flex-start;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:14px 12px 8px}
+.bar::-webkit-scrollbar{display:none}
+.seg{flex:none}
+.seg button{font-size:14px;padding:8px 14px}
+.seg .arw{font-size:14px}
+.hint{display:flex;align-items:center;justify-content:center;gap:4px;margin:0 0 8px;font-size:12px;font-weight:600;color:var(--sub)}
+.layout{padding:0 12px 24px;gap:16px}
+#wrap{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:14px;box-sizing:border-box}
+.side{align-self:stretch}.pane{padding:18px 16px 20px}
+}
 </style>
 </head>
 <body>
 <div class="phead"><h1>서비스 운영 프로세스 개선안</h1></div>
 <div class="bar"><div class="seg" role="group" aria-label="프로세스 보기"><button type="button" data-v="asis" class="on">현재 프로세스</button><i class="ti ti-chevron-right arw" aria-hidden="true"></i><button type="button" data-v="tobe">변경 프로세스 (제안)</button><i class="ti ti-chevron-right arw" aria-hidden="true"></i><button type="button" data-v="ideal">이상적인 안 (일원화)</button><i class="ti ti-chevron-right arw" aria-hidden="true"></i><button type="button" data-v="merge">중장기 통합안 (서비스 통합)</button></div></div>
+<p class="hint"><i class="ti ti-arrows-horizontal"></i>도식은 좌우로 밀거나 확대해서 볼 수 있어요</p>
 <svg width="0" height="0" style="position:absolute"><defs>
 <marker id="ab" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9z" fill="#4263EB"/></marker>
 <marker id="ao" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9z" fill="#F76707"/></marker>
@@ -368,8 +383,8 @@ svg{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 </div>
 <script>
 var cur='asis',HS={asis:1020,tobe:960,ideal:980,merge:566},WS={asis:1600,tobe:1284,ideal:1324,merge:1324};
-function fit(){var h=HS[cur],w=WS[cur];var wr=document.getElementById('wrap');wr.style.maxWidth=w+'px';var s=Math.min(1,wr.clientWidth/w);var st=document.getElementById('stage');st.style.width=w+'px';st.style.height=h+'px';st.style.transform='scale('+s+')';var sd=document.querySelector('.side');if(window.innerWidth>1100){var v=document.getElementById(cur),t=1e9,b=0;v.querySelectorAll('.card,.itbox').forEach(function(e){t=Math.min(t,e.offsetTop);b=Math.max(b,e.offsetTop+e.offsetHeight);});sd.style.marginTop=(t*s)+'px';sd.style.height=((b-t)*s)+'px';}else{sd.style.marginTop='';sd.style.height='';}document.getElementById('wrap').style.height=(h*s)+'px';}
-function show(v){cur=HS[v]?v:'asis';document.querySelectorAll('.view').forEach(function(e){e.hidden=e.id!==cur;});document.querySelectorAll('.pane').forEach(function(e){e.hidden=e.dataset.v!==cur;});document.querySelectorAll('.seg button').forEach(function(b){var on=b.dataset.v===cur;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);});try{history.replaceState(null,'',cur==='asis'?location.pathname+location.search:'#'+cur);}catch(e){}fit();}
+function fit(){var h=HS[cur],w=WS[cur];var wr=document.getElementById('wrap');wr.style.maxWidth=w+'px';var mob=window.innerWidth<=700;var s=Math.min(1,wr.clientWidth/w);if(mob)s=Math.max(s,0.6);var st=document.getElementById('stage');st.style.width=w+'px';st.style.height=h+'px';st.style.transform='scale('+s+')';st.style.marginRight=(w*s-w)+'px';st.style.marginBottom=(h*s-h)+'px';var sd=document.querySelector('.side');if(window.innerWidth>1100){var v=document.getElementById(cur),t=1e9,b=0;v.querySelectorAll('.card,.itbox').forEach(function(e){t=Math.min(t,e.offsetTop);b=Math.max(b,e.offsetTop+e.offsetHeight);});sd.style.marginTop=(t*s)+'px';sd.style.height=((b-t)*s)+'px';}else{sd.style.marginTop='';sd.style.height='';}document.getElementById('wrap').style.height=(h*s)+'px';}
+function show(v){cur=HS[v]?v:'asis';document.querySelectorAll('.view').forEach(function(e){e.hidden=e.id!==cur;});document.querySelectorAll('.pane').forEach(function(e){e.hidden=e.dataset.v!==cur;});document.querySelectorAll('.seg button').forEach(function(b){var on=b.dataset.v===cur;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);if(on&&window.innerWidth<=700){var bar=document.querySelector('.bar');bar.scrollLeft=b.offsetLeft-(bar.clientWidth-b.offsetWidth)/2;}});var wr0=document.getElementById('wrap');if(wr0)wr0.scrollLeft=0;try{history.replaceState(null,'',cur==='asis'?location.pathname+location.search:'#'+cur);}catch(e){}fit();}
 document.querySelectorAll('.seg button').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.v);});});
 addEventListener('resize',fit);show(location.hash.slice(1));window.scrollTo(0,0);addEventListener('load',function(){window.scrollTo(0,0);});
 </script>
