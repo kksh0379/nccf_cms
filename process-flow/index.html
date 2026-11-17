@@ -35,10 +35,46 @@ html,body{margin:0;background:#fff;font-family:'Noto Sans KR',sans-serif;color:v
 .legend{position:absolute;left:0;right:0;top:982px;display:flex;justify-content:center;gap:36px;font-size:15px;font-weight:500;color:var(--sub)}
 .legend span{display:flex;align-items:center;gap:8px}
 svg{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
+.bar{display:flex;justify-content:center;padding:18px 16px 14px}
+.seg{display:inline-flex;background:#EEF1F7;border-radius:999px;padding:4px;gap:4px}
+.seg button{font-family:inherit;font-size:16px;font-weight:700;color:#5C6B8A;background:transparent;border:0;border-radius:999px;padding:9px 22px;cursor:pointer;letter-spacing:-0.3px}
+.seg button.on{background:#2B3A67;color:#fff}
+.view[hidden]{display:none}
+.colh{position:absolute;font-size:15px;font-weight:700;color:#5C6B8A;letter-spacing:-0.2px}
+.svc{position:absolute;left:40px;width:540px;box-sizing:border-box;background:#F7F8FB;border:1.5px solid var(--line);border-radius:18px;padding:16px 20px}
+.svc h3{margin:0 0 12px;display:flex;align-items:center;gap:10px;font-size:22px;font-weight:800;letter-spacing:-0.4px}
+.svc h3 i{font-size:24px}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.t{display:inline-flex;align-items:center;gap:5px;height:28px;padding:0 9px;border-radius:14px;font-size:14px;font-weight:700;background:#fff;border:1px solid var(--line);letter-spacing:-0.3px}
+.t i{font-size:16px;color:var(--sub)}
+.t.sec{background:#EFEDFB;border-color:#D8D3F4}
+.t.mem{background:#EEF6E4;border-color:#D0E3B8}
+.sub{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)}
+.col{position:absolute;border-radius:20px;box-sizing:border-box}
+.own{background:#F7F8FB;border:1.5px solid var(--line)}
+.lab{background:#F3F1FD;border:1.5px solid #CFC9F2}
+.n2{position:absolute;display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;border:1.5px solid #2B3A67;border-radius:12px;font-size:18px;font-weight:700;box-sizing:border-box;letter-spacing:-0.3px;white-space:nowrap}
+.n2 i{font-size:22px;font-weight:400}
+.n2 small{font-size:12px;font-weight:800;color:#fff;background:#2B3A67;border-radius:999px;padding:2px 9px}
+.it2{position:absolute;display:flex;align-items:center;gap:14px;background:#E6F6F0;border:2px solid #0F8A6A;border-radius:14px;box-sizing:border-box;padding:0 26px;color:#0B4F3E}
+.it2>i{font-size:34px;color:#0F8A6A}
+.it2 b{display:block;font-size:22px;font-weight:800}
+.it2 span{display:block;font-size:15px;font-weight:600;margin-top:2px}
+.it2 em{display:block;font-style:normal;font-size:14px;font-weight:700;color:#E03131;margin-top:3px}
+.rel{position:absolute;font-size:14px;font-weight:700;color:#0F8A6A;white-space:nowrap;line-height:1.5}
+.lg2{position:absolute;left:0;right:0;display:flex;justify-content:center;gap:36px;font-size:15px;font-weight:500;color:var(--sub)}
+.lg2 span{display:flex;align-items:center;gap:8px}
 </style>
 </head>
 <body>
+<div class="bar"><div class="seg" role="group" aria-label="프로세스 보기"><button type="button" data-v="asis" class="on">현재 프로세스</button><button type="button" data-v="tobe">변경 프로세스</button></div></div>
+<svg width="0" height="0" style="position:absolute"><defs>
+<marker id="ab" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9z" fill="#4263EB"/></marker>
+<marker id="ao" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9z" fill="#F76707"/></marker>
+<marker id="at" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M1 1L9 5L1 9z" fill="#0F8A6A"/></marker>
+</defs></svg>
 <div id="wrap"><div id="stage">
+<div class="view" id="asis">
 <div class="card" style="left:24px;top:24px;width:740px;height:440px"></div>
 <div class="card" style="left:836px;top:24px;width:740px;height:440px"></div>
 <div class="card" style="left:24px;top:500px;width:540px;height:460px"></div>
@@ -47,10 +83,6 @@ svg{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 <div class="grp" style="left:606px;top:590px;width:172px;height:212px"></div>
 <div class="grp" style="left:802px;top:590px;width:192px;height:212px"></div>
 <svg width="1600" height="1020" viewBox="0 0 1600 1020">
-<defs>
-<marker id="ab" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9z" fill="#4263EB"/></marker>
-<marker id="ao" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9z" fill="#F76707"/></marker>
-</defs>
 <g stroke="#ADB5C7" stroke-width="2" stroke-dasharray="6 6" fill="none">
 <path d="M530 375H789"/><path d="M1342 375H1551"/>
 </g>
@@ -139,10 +171,63 @@ svg{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 <span><svg style="position:static" width="40" height="18"><path d="M2 9H38" stroke="#ADB5C7" stroke-width="2" stroke-dasharray="5 4"/><path d="M14 3L26 15M26 3L14 15" stroke="#E03131" stroke-width="3" stroke-linecap="round"/></svg>하이브랩 직접 소통 없음</span>
 <span><span style="width:16px;height:16px;border-radius:4px;background:#E6F6F0;border:1.5px solid #0F8A6A;box-sizing:border-box"></span>경영지원팀 IT담당자 (모두 동일 인물, 가치지음 TF 겸직)</span>
 </div>
+</div>
+<div class="view" id="tobe" hidden>
+<div class="colh" style="left:40px;top:14px">서비스 · 업무 항목</div>
+<div class="colh" style="left:840px;top:14px">운영 주관팀 (운영 + 보안·인프라 직접 수행)</div>
+<div class="colh" style="left:1200px;top:14px">하이브랩</div>
+<div class="col own" style="left:820px;top:44px;width:300px;height:556px"></div>
+<div class="col lab" style="left:1180px;top:44px;width:380px;height:556px"></div>
+<div class="grp" style="left:1196px;top:66px;width:348px;height:330px"></div>
+<div class="grp" style="left:1196px;top:455px;width:348px;height:136px"></div>
+<svg width="1600" height="840" viewBox="0 0 1600 840">
+<g fill="none" stroke="#4263EB" stroke-width="2" stroke-linecap="round">
+<path d="M780 112H836" marker-end="url(#ab)"/>
+<path d="M780 232H836" marker-end="url(#ab)"/>
+<path d="M780 352H836" marker-end="url(#ab)"/>
+<path d="M780 495H836" marker-end="url(#ab)"/>
+<path d="M780 551H836" marker-end="url(#ab)"/>
+</g>
+<g fill="none" stroke="#F76707" stroke-width="2.5" stroke-linecap="round">
+<path d="M1090 112H1206" marker-end="url(#ao)"/>
+<path d="M1090 232H1206" marker-end="url(#ao)"/>
+<path d="M1090 352H1206" marker-end="url(#ao)"/>
+<path d="M1090 495H1206" marker-end="url(#ao)"/>
+<path d="M1090 551H1206" marker-end="url(#ao)"/>
+</g>
+<g fill="none" stroke="#0F8A6A" stroke-width="2" stroke-dasharray="6 5">
+<path d="M970 606V654" marker-start="url(#at)" marker-end="url(#at)"/>
+</g>
+</svg>
+<div class="svc" style="top:60px;width:740px;height:104px"><h3><i class="ti ti-device-laptop"></i>나의AAC</h3><div class="tags"><span class="t"><i class="ti ti-file-pencil"></i>계약</span><span class="t"><i class="ti ti-browser"></i>홈페이지 운영</span><span class="t"><i class="ti ti-settings"></i>어드민 운영</span><span class="t"><i class="ti ti-device-mobile"></i>앱 운영</span><span class="t sec"><i class="ti ti-shield-check"></i>개인정보</span><span class="t sec"><i class="ti ti-lock"></i>정보보안</span><span class="t sec"><i class="ti ti-server"></i>서버</span></div></div>
+<div class="svc" style="top:180px;width:740px;height:104px"><h3><i class="ti ti-device-laptop"></i>FAIR AI</h3><div class="tags"><span class="t"><i class="ti ti-file-pencil"></i>계약</span><span class="t"><i class="ti ti-browser"></i>홈페이지 운영</span><span class="t"><i class="ti ti-settings"></i>어드민 운영</span><span class="t sec"><i class="ti ti-shield-check"></i>개인정보</span><span class="t sec"><i class="ti ti-lock"></i>정보보안</span><span class="t sec"><i class="ti ti-server"></i>서버</span></div></div>
+<div class="svc" style="top:300px;width:740px;height:104px"><h3><i class="ti ti-stack-2"></i>프로젝토리</h3><div class="tags"><span class="t"><i class="ti ti-file-pencil"></i>계약</span><span class="t"><i class="ti ti-browser"></i>홈페이지 운영</span><span class="t"><i class="ti ti-settings"></i>어드민 운영</span><span class="t"><i class="ti ti-device-mobile"></i>앱 운영</span><span class="t sec"><i class="ti ti-shield-check"></i>개인정보</span><span class="t sec"><i class="ti ti-lock"></i>정보보안</span><span class="t sec"><i class="ti ti-server"></i>서버</span></div></div>
+<div class="svc" style="top:420px;width:740px;height:164px"><h3><i class="ti ti-browser"></i>대표 홈페이지</h3><div class="tags"><span class="t"><i class="ti ti-file-pencil"></i>계약</span><span class="t"><i class="ti ti-users"></i>멤버십 외</span><span class="t"><i class="ti ti-settings"></i>어드민 운영</span><span class="t sec"><i class="ti ti-shield-check"></i>개인정보</span><span class="t sec"><i class="ti ti-lock"></i>정보보안</span><span class="t sec"><i class="ti ti-server"></i>서버</span></div><div class="sub"><div class="tags"><span class="t mem"><i class="ti ti-users-group"></i>멤버십 운영</span></div></div></div>
+<div class="n2" style="left:840px;top:74px;width:250px;height:196px"><i class="ti ti-users-group"></i>포용기술사업팀</div>
+<div class="n2" style="left:840px;top:326px;width:250px;height:52px"><i class="ti ti-users-group"></i>창의사업팀</div>
+<div class="n2" style="left:840px;top:473px;width:250px;height:44px"><i class="ti ti-users-group"></i>커뮤니케이션팀</div>
+<div class="n2" style="left:840px;top:529px;width:250px;height:44px"><i class="ti ti-users-group"></i>가치지음 TF</div>
+<div class="tag" style="left:1370px;top:66px">B조직</div>
+<div class="n2" style="left:1210px;top:86px;width:320px;height:52px"><i class="ti ti-user"></i>개발2팀</div>
+<div class="n2" style="left:1210px;top:206px;width:320px;height:52px"><i class="ti ti-user"></i>개발3팀</div>
+<div class="n2" style="left:1210px;top:326px;width:320px;height:52px"><i class="ti ti-user"></i>개발1팀</div>
+<div class="tag" style="left:1370px;top:455px">A조직</div>
+<div class="n2" style="left:1210px;top:473px;width:320px;height:100px"><i class="ti ti-user"></i>PM팀</div>
+<div class="rel" style="left:987px;top:608px">↑ 반영 필요사항 요청<br>↓ 자문 요청 → 자문·가이드</div>
+<div class="it2" style="left:745px;top:660px;width:450px;height:104px"><i class="ti ti-user"></i><div><b>경영지원팀 IT담당자</b><span>개인정보 · 정보보안 · 서버 자문</span><em>운영 미참여 · 하이브랩 직접 소통 없음</em></div></div>
+<div class="lg2" style="top:800px">
+<span><svg style="position:static" width="36" height="10"><path d="M2 5H34" stroke="#4263EB" stroke-width="2.5"/></svg>업무 → 운영 주관팀</span>
+<span><svg style="position:static" width="36" height="10"><path d="M2 5H34" stroke="#F76707" stroke-width="3"/></svg>하이브랩 업무 요청·조율 (주관팀 직접)</span>
+<span><svg style="position:static" width="36" height="10"><path d="M2 5H34" stroke="#0F8A6A" stroke-width="2" stroke-dasharray="6 5"/></svg>IT담당자 자문 관계</span>
+</div>
+</div>
 </div></div>
 <script>
-function fit(){var s=Math.min(1,document.getElementById('wrap').clientWidth/1600);document.getElementById('stage').style.transform='scale('+s+')';document.getElementById('wrap').style.height=(1020*s)+'px';}
-addEventListener('resize',fit);fit();
+var cur='asis';
+function fit(){var h=cur==='tobe'?840:1020;var s=Math.min(1,document.getElementById('wrap').clientWidth/1600);var st=document.getElementById('stage');st.style.height=h+'px';st.style.transform='scale('+s+')';document.getElementById('wrap').style.height=(h*s)+'px';}
+function show(v){cur=(v==='tobe')?'tobe':'asis';document.querySelectorAll('.view').forEach(function(e){e.hidden=e.id!==cur;});document.querySelectorAll('.seg button').forEach(function(b){var on=b.dataset.v===cur;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);});try{history.replaceState(null,'',cur==='tobe'?'#tobe':location.pathname+location.search);}catch(e){}fit();}
+document.querySelectorAll('.seg button').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.v);});});
+addEventListener('resize',fit);show(location.hash==='#tobe'?'tobe':'asis');
 </script>
 </body>
 </html>
