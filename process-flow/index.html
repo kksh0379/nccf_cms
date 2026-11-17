@@ -97,6 +97,15 @@ svg{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 .supp{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:13px;font-weight:800;color:#fff;background:#0F8A6A;border-radius:999px;padding:4px 12px}
 .seg button{white-space:nowrap;flex:none}
 .hint{display:none}
+@media (max-width:1100px){
+.side{align-self:stretch;width:auto}
+.pane:not([hidden]){display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));column-gap:16px;align-content:start}
+.pane h2,.pane .sub{grid-column:1/-1}
+.pane .sub{margin-bottom:2px}
+.bar{justify-content:safe center;overflow-x:auto;scrollbar-width:none}
+.bar::-webkit-scrollbar{display:none}
+.seg{flex:none}
+}
 @media (max-width:700px){
 .phead{padding:20px 16px 0}.phead h1{font-size:21px}
 .bar{justify-content:flex-start;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:14px 12px 8px}
@@ -383,8 +392,8 @@ svg{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 </div>
 <script>
 var cur='asis',HS={asis:1020,tobe:960,ideal:980,merge:566},WS={asis:1600,tobe:1284,ideal:1324,merge:1324};
-function fit(){var h=HS[cur],w=WS[cur];var wr=document.getElementById('wrap');wr.style.maxWidth=w+'px';var mob=window.innerWidth<=700;var s=Math.min(1,wr.clientWidth/w);if(mob)s=Math.max(s,0.6);var st=document.getElementById('stage');st.style.width=w+'px';st.style.height=h+'px';st.style.transform='scale('+s+')';st.style.marginRight=(w*s-w)+'px';st.style.marginBottom=(h*s-h)+'px';var sd=document.querySelector('.side');if(window.innerWidth>1100){var v=document.getElementById(cur),t=1e9,b=0;v.querySelectorAll('.card,.itbox').forEach(function(e){t=Math.min(t,e.offsetTop);b=Math.max(b,e.offsetTop+e.offsetHeight);});sd.style.marginTop=(t*s)+'px';sd.style.height=((b-t)*s)+'px';}else{sd.style.marginTop='';sd.style.height='';}document.getElementById('wrap').style.height=(h*s)+'px';}
-function show(v){cur=HS[v]?v:'asis';document.querySelectorAll('.view').forEach(function(e){e.hidden=e.id!==cur;});document.querySelectorAll('.pane').forEach(function(e){e.hidden=e.dataset.v!==cur;});document.querySelectorAll('.seg button').forEach(function(b){var on=b.dataset.v===cur;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);if(on&&window.innerWidth<=700){var bar=document.querySelector('.bar');bar.scrollLeft=b.offsetLeft-(bar.clientWidth-b.offsetWidth)/2;}});var wr0=document.getElementById('wrap');if(wr0)wr0.scrollLeft=0;try{history.replaceState(null,'',cur==='asis'?location.pathname+location.search:'#'+cur);}catch(e){}fit();}
+function fit(){var h=HS[cur],w=WS[cur];var wr=document.getElementById('wrap');wr.style.maxWidth=w+'px';var mob=window.innerWidth<=700;var s=Math.min(1,wr.clientWidth/w);if(mob)s=Math.max(s,0.6);var st=document.getElementById('stage');st.style.width=w+'px';st.style.height=h+'px';st.style.transform='scale('+s+')';st.style.marginRight=(w*s-w)+'px';st.style.marginBottom=(h*s-h)+'px';var sd=document.querySelector('.side');if(window.innerWidth>1100){var v=document.getElementById(cur),t=1e9,b=0;v.querySelectorAll('.card,.itbox').forEach(function(e){t=Math.min(t,e.offsetTop);b=Math.max(b,e.offsetTop+e.offsetHeight);});sd.style.marginTop=(t*s)+'px';sd.style.minHeight=((b-t)*s)+'px';}else{sd.style.marginTop='';sd.style.minHeight='';}document.getElementById('wrap').style.height=(h*s)+'px';}
+function show(v){cur=HS[v]?v:'asis';document.querySelectorAll('.view').forEach(function(e){e.hidden=e.id!==cur;});document.querySelectorAll('.pane').forEach(function(e){e.hidden=e.dataset.v!==cur;});document.querySelectorAll('.seg button').forEach(function(b){var on=b.dataset.v===cur;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);if(on&&window.innerWidth<=1100){var bar=document.querySelector('.bar');bar.scrollLeft=b.offsetLeft-(bar.clientWidth-b.offsetWidth)/2;}});var wr0=document.getElementById('wrap');if(wr0)wr0.scrollLeft=0;try{history.replaceState(null,'',cur==='asis'?location.pathname+location.search:'#'+cur);}catch(e){}fit();}
 document.querySelectorAll('.seg button').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.v);});});
 addEventListener('resize',fit);show(location.hash.slice(1));window.scrollTo(0,0);addEventListener('load',function(){window.scrollTo(0,0);});
 </script>
