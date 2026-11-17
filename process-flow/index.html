@@ -3,7 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>서비스 업무 흐름도</title>
+<title>서비스 운영 프로세스 개선안</title>
+<meta name="description" content="현재 프로세스부터 중장기 통합안까지, 단계별 서비스 운영 구조와 장단점">
+<meta property="og:title" content="서비스 운영 프로세스 개선안">
+<meta property="og:description" content="현재 → 변경(단기) → 이상적인 안(중기) → 중장기 통합안(장기), 단계별 운영 구조와 장단점">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
 <style>
@@ -81,12 +84,22 @@ svg{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 .pc.fix .lb{background:#E7F5FF;color:#1864AB}
 .pc.fix li{background:#F8F9FA}
 .pc.fix li i{color:#1C7ED6}
-.pc li .old{text-decoration:line-through;color:#868E96;font-weight:500}
+.pc li .old{text-decoration:line-through;color:#868E96;font-weight:500;font-size:13px;letter-spacing:-0.4px}
 .pc li em{margin-left:auto;font-style:normal;font-size:12px;font-weight:800;color:#1864AB;background:#E7F5FF;border-radius:999px;padding:2px 8px;flex:none}
+.phead{text-align:center;padding:26px 16px 0}
+.phead h1{margin:0;font-size:26px;font-weight:800;letter-spacing:-0.6px}
+.phead p{margin:6px 0 0;font-size:14px;font-weight:500;color:var(--sub)}
+.seg{align-items:center}
+.seg button{display:flex;flex-direction:column;align-items:center;line-height:1.25;padding:7px 20px}
+.seg button small{font-size:11px;font-weight:800;opacity:.75;letter-spacing:0}
+.seg .arw{color:#ADB5C7;font-size:16px}
+.pill.ng{background:#FFF4E6;color:#8A4B0F;margin:6px 0 0}
+.supp{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:13px;font-weight:800;color:#fff;background:#0F8A6A;border-radius:999px;padding:4px 12px}
 </style>
 </head>
 <body>
-<div class="bar"><div class="seg" role="group" aria-label="프로세스 보기"><button type="button" data-v="asis" class="on">현재 프로세스</button><button type="button" data-v="tobe">변경 프로세스 (제안)</button><button type="button" data-v="ideal">이상적인 안 (일원화)</button><button type="button" data-v="merge">중장기 통합안 (서비스 통합)</button></div></div>
+<div class="phead"><h1>서비스 운영 프로세스 개선안</h1><p>현재 프로세스에서 중장기 통합안까지, 단계마다 이전 단계의 단점을 보완하는 운영 구조 · 2026.11</p></div>
+<div class="bar"><div class="seg" role="group" aria-label="프로세스 보기"><button type="button" data-v="asis" class="on"><small>현재</small>현재 프로세스</button><i class="ti ti-chevron-right arw" aria-hidden="true"></i><button type="button" data-v="tobe"><small>단기</small>변경 프로세스 (제안)</button><i class="ti ti-chevron-right arw" aria-hidden="true"></i><button type="button" data-v="ideal"><small>중기</small>이상적인 안 (일원화)</button><i class="ti ti-chevron-right arw" aria-hidden="true"></i><button type="button" data-v="merge"><small>장기</small>중장기 통합안 (서비스 통합)</button></div></div>
 <svg width="0" height="0" style="position:absolute"><defs>
 <marker id="ab" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9z" fill="#4263EB"/></marker>
 <marker id="ao" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9z" fill="#F76707"/></marker>
@@ -296,7 +309,7 @@ svg{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 <div class="hdr" style="left:818px;top:26px"><i class="ti ti-arrows-join"></i>운영 일원화</div>
 <div class="node it" style="left:817px;top:101px;width:220px;height:675px;flex-direction:column;gap:10px;padding-bottom:0;line-height:1.35"><i class="ti ti-user" style="font-size:36px"></i><div style="font-size:22px">경영지원팀<br>IT담당자</div><div style="font-size:14px;font-weight:600;margin-top:4px">전 서비스 운영<br>하이브랩 단일 창구</div></div>
 <div class="hdr" style="left:1102px;top:26px"><i class="ti ti-users-group"></i>하이브랩</div>
-<div class="node" style="left:1100px;top:338px;width:318px;height:200px;flex-direction:column;gap:8px;line-height:1.35"><i class="ti ti-users-group" style="font-size:36px"></i><div style="font-size:22px">원팀</div><div style="font-size:15px;font-weight:600;color:#5C6B8A">운영 · 유지보수 통합</div><div style="font-size:13px;font-weight:500;color:#5C6B8A;margin-top:4px">기존 PM팀 · 개발1·2·3팀 통합</div></div>
+<div class="node" style="left:1100px;top:338px;width:318px;height:200px;flex-direction:column;gap:8px;line-height:1.35"><i class="ti ti-users-group" style="font-size:36px"></i><div style="font-size:22px">원팀</div><div style="font-size:15px;font-weight:600;color:#5C6B8A">운영 · 유지보수 통합</div><div style="font-size:13px;font-weight:500;color:#5C6B8A;margin-top:4px">기존 PM팀 · 개발1·2·3팀 통합</div><span class="pill ng">개발사 협의 필요</span></div>
 <div class="rel" style="left:737px;top:796px;width:150px;text-align:right;color:#4263EB">운영 사항 공유</div>
 <div class="rel" style="left:967px;top:796px;color:#4263EB">요구사항 요청 → IT담당자 접수</div>
 <div class="tag" style="left:927px;top:840px">운영 주관팀 → 경영지원팀에 운영 위임</div>
@@ -334,9 +347,9 @@ svg{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 <div class="crow" style="left:188px;top:264px"><span class="rlab">앱</span><div class="chip inl"><span class="sic sm aac"></span>나의AAC 앱</div><div class="chip inl"><span class="sic sm proj"></span>프로젝토리 앱</div></div>
 <div class="crow" style="left:188px;top:308px"><span class="rlab">서버</span><div class="chip inl sec"><span class="sic sm aac"></span>나의AAC</div><div class="chip inl sec"><span class="sic sm fair"></span>FAIR AI</div><div class="chip inl sec"><span class="sic sm proj"></span>프로젝토리</div><div class="chip inl sec"><span class="sic sm nc"></span>대표 홈페이지</div></div>
 <div class="hdr" style="left:818px;top:26px"><i class="ti ti-arrows-join"></i>운영 일원화</div>
-<div class="node it" style="left:817px;top:86px;width:220px;height:278px;flex-direction:column;gap:10px;padding-bottom:0;line-height:1.35"><i class="ti ti-user" style="font-size:36px"></i><div style="font-size:22px">경영지원팀<br>IT담당자</div><div style="font-size:14px;font-weight:600;margin-top:4px">통합 운영<br>하이브랩 단일 창구</div></div>
+<div class="node it" style="left:817px;top:86px;width:220px;height:278px;flex-direction:column;gap:10px;padding-bottom:0;line-height:1.35"><i class="ti ti-user" style="font-size:36px"></i><div style="font-size:22px">경영지원팀<br>IT담당자</div><div style="font-size:14px;font-weight:600;margin-top:4px">통합 운영<br>하이브랩 단일 창구</div><span class="supp"><i class="ti ti-user-plus"></i>+ 부사수 · 서포터</span></div>
 <div class="hdr" style="left:1102px;top:26px"><i class="ti ti-users-group"></i>하이브랩</div>
-<div class="node" style="left:1100px;top:125px;width:318px;height:200px;flex-direction:column;gap:8px;line-height:1.35"><i class="ti ti-users-group" style="font-size:36px"></i><div style="font-size:22px">원팀</div><div style="font-size:15px;font-weight:600;color:#5C6B8A">운영 · 유지보수 통합</div><div style="font-size:13px;font-weight:500;color:#5C6B8A;margin-top:4px">기존 PM팀 · 개발1·2·3팀 통합</div></div>
+<div class="node" style="left:1100px;top:125px;width:318px;height:200px;flex-direction:column;gap:8px;line-height:1.35"><i class="ti ti-users-group" style="font-size:36px"></i><div style="font-size:22px">원팀</div><div style="font-size:15px;font-weight:600;color:#5C6B8A">운영 · 유지보수 통합</div><div style="font-size:13px;font-weight:500;color:#5C6B8A;margin-top:4px">기존 PM팀 · 개발1·2·3팀 통합</div><span class="pill ng">개발사 협의 필요</span></div>
 <div class="rel" style="left:737px;top:383px;width:150px;text-align:right;color:#4263EB">운영 사항 공유</div>
 <div class="rel" style="left:967px;top:383px;color:#4263EB">요구사항 요청 → IT담당자 접수</div>
 <div class="tag" style="left:927px;top:426px">운영 주관팀 → 경영지원팀에 운영 위임</div>
@@ -358,7 +371,7 @@ var cur='asis',HS={asis:1020,tobe:960,ideal:980,merge:566},WS={asis:1600,tobe:12
 function fit(){var h=HS[cur],w=WS[cur];var wr=document.getElementById('wrap');wr.style.maxWidth=w+'px';var s=Math.min(1,wr.clientWidth/w);var st=document.getElementById('stage');st.style.width=w+'px';st.style.height=h+'px';st.style.transform='scale('+s+')';var sd=document.querySelector('.side');if(window.innerWidth>1100){var v=document.getElementById(cur),t=1e9,b=0;v.querySelectorAll('.card,.itbox').forEach(function(e){t=Math.min(t,e.offsetTop);b=Math.max(b,e.offsetTop+e.offsetHeight);});sd.style.marginTop=(t*s)+'px';sd.style.height=((b-t)*s)+'px';}else{sd.style.marginTop='';sd.style.height='';}document.getElementById('wrap').style.height=(h*s)+'px';}
 function show(v){cur=HS[v]?v:'asis';document.querySelectorAll('.view').forEach(function(e){e.hidden=e.id!==cur;});document.querySelectorAll('.pane').forEach(function(e){e.hidden=e.dataset.v!==cur;});document.querySelectorAll('.seg button').forEach(function(b){var on=b.dataset.v===cur;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);});try{history.replaceState(null,'',cur==='asis'?location.pathname+location.search:'#'+cur);}catch(e){}fit();}
 document.querySelectorAll('.seg button').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.v);});});
-addEventListener('resize',fit);show(location.hash.slice(1));
+addEventListener('resize',fit);show(location.hash.slice(1));window.scrollTo(0,0);addEventListener('load',function(){window.scrollTo(0,0);});
 </script>
 </body>
 </html>
