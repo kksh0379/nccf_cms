@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>서비스 업무 흐름도</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<style>
+:root{--ink:#1F2A44;--sub:#5C6B8A;--line:#D9DEEA;--blue:#4263EB;--orange:#F76707;--red:#E03131}
+html,body{margin:0;background:#fff;font-family:'Noto Sans KR',sans-serif;color:var(--ink)}
+#wrap{width:100%;overflow:hidden}
+#stage{position:relative;width:1600px;height:1020px;transform-origin:0 0}
+.card{position:absolute;border-radius:22px;background:#F7F8FB;border:1.5px solid var(--line);box-sizing:border-box}
+.card.hb{background:#F3F1FD;border-color:#CFC9F2}
+.hdr{position:absolute;height:44px;display:flex;align-items:center;gap:12px;font-size:28px;font-weight:800;letter-spacing:-0.5px;white-space:nowrap}
+.hdr>i{font-size:32px}
+.pill{margin-left:6px;font-size:14px;font-weight:700;padding:6px 13px;border-radius:999px;background:#E6ECFA;color:#2B3A67;letter-spacing:-0.3px;white-space:nowrap}
+.chip{position:absolute;width:220px;height:38px;border-radius:19px;display:flex;align-items:center;gap:10px;padding:0 16px;font-size:16px;font-weight:700;background:#fff;border:1px solid var(--line);box-sizing:border-box;white-space:nowrap;letter-spacing:-0.3px}
+.chip i{font-size:20px;color:var(--sub);font-weight:400}
+.chip.sec{background:#EFEDFB;border-color:#D8D3F4}
+.chip.mem{background:#EEF6E4;border-color:#D0E3B8}
+.node{position:absolute;width:200px;height:52px;display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;border:1.5px solid #2B3A67;border-radius:12px;font-size:17px;font-weight:700;box-sizing:border-box;text-align:center;line-height:1.25;letter-spacing:-0.3px;white-space:nowrap}
+.node.two{height:64px}
+.node i{font-size:24px;font-weight:400}
+.node.big{font-size:22px;border-width:2px}
+.node.big i{font-size:32px}
+.node.it{background:#E6F6F0;border-color:#0F8A6A;color:#0B4F3E}
+.node.it>i{color:#0F8A6A}
+.node.it{padding-bottom:12px}
+.badge{position:absolute;left:50%;bottom:-11px;transform:translateX(-50%);font-size:12px;font-weight:800;color:#fff;background:#0F8A6A;border-radius:999px;padding:1px 10px;line-height:1.6;white-space:nowrap}
+.grp{position:absolute;border:1.5px solid #B9B2EC;border-radius:16px;box-sizing:border-box}
+.tag{position:absolute;transform:translate(-50%,-50%);font-size:14px;font-weight:800;color:#fff;background:#2B3A67;border-radius:999px;padding:3px 14px}
+.note{position:absolute;transform:translateX(-50%);font-size:14px;font-weight:700;color:var(--red);white-space:nowrap;letter-spacing:-0.3px}
+.legend{position:absolute;left:0;right:0;top:982px;display:flex;justify-content:center;gap:36px;font-size:15px;font-weight:500;color:var(--sub)}
+.legend span{display:flex;align-items:center;gap:8px}
+svg{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
+</style>
+</head>
+<body>
+<div id="wrap"><div id="stage">
+<div class="card" style="left:24px;top:24px;width:740px;height:440px"></div>
+<div class="card" style="left:836px;top:24px;width:740px;height:440px"></div>
+<div class="card" style="left:24px;top:500px;width:540px;height:460px"></div>
+<div class="card hb" style="left:590px;top:500px;width:420px;height:320px"></div>
+<div class="card" style="left:1036px;top:500px;width:540px;height:460px"></div>
+<div class="grp" style="left:606px;top:590px;width:172px;height:212px"></div>
+<div class="grp" style="left:802px;top:590px;width:192px;height:212px"></div>
+<svg width="1600" height="1020" viewBox="0 0 1600 1020">
+<defs>
+<marker id="ab" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9z" fill="#4263EB"/></marker>
+<marker id="ao" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9z" fill="#F76707"/></marker>
+</defs>
+<g stroke="#ADB5C7" stroke-width="2" stroke-dasharray="6 6" fill="none">
+<path d="M530 375H789"/><path d="M1342 375H1551"/>
+</g>
+<g fill="none" stroke="#4263EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M270 129H290M270 175H290M270 221H290M270 267H290M290 129V267"/>
+<path d="M290 198H326" marker-end="url(#ab)"/>
+<path d="M270 329H290M270 375H290M270 421H290M290 329V421"/>
+<path d="M290 375H326" marker-end="url(#ab)"/>
+<path d="M430 343V228" marker-end="url(#ab)"/>
+<path d="M1082 129H1102M1082 175H1102M1082 221H1102M1102 129V221"/>
+<path d="M1102 175H1138" marker-end="url(#ab)"/>
+<path d="M1082 329H1102M1082 375H1102M1082 421H1102M1102 329V421"/>
+<path d="M1102 375H1138" marker-end="url(#ab)"/>
+<path d="M1242 343V205" marker-end="url(#ab)"/>
+<path d="M270 605H290M270 651H290M270 697H290M290 605V697"/>
+<path d="M290 651H326" marker-end="url(#ab)"/>
+<path d="M270 759H326" marker-end="url(#ab)"/>
+<path d="M270 821H290M270 867H290M270 913H290M290 821V913"/>
+<path d="M290 867H614" marker-end="url(#ab)"/>
+<path d="M1330 605H1310M1330 651H1310M1330 697H1310M1330 743H1310M1330 805H1310M1330 851H1310M1330 897H1310M1310 605V897"/>
+<path d="M1310 867H987" marker-end="url(#ab)"/>
+</g>
+<g fill="none" stroke="#F76707" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M530 198H776Q790 198 790 212V622Q790 636 804 636H809" marker-end="url(#ao)"/>
+<path d="M1342 175H1538Q1552 175 1552 189V468Q1552 482 1538 482H1037Q1023 482 1023 496V684Q1023 698 1009 698H987" marker-end="url(#ao)"/>
+<path d="M530 651H614" marker-end="url(#ao)"/>
+<path d="M530 759H614" marker-end="url(#ao)"/>
+<path d="M692 840V790" marker-end="url(#ao)"/>
+<path d="M898 840V790" marker-end="url(#ao)"/>
+</g>
+<g stroke="#E03131" stroke-width="4" stroke-linecap="round">
+<path d="M650 365L670 385M670 365L650 385"/>
+<path d="M1437 365L1457 385M1457 365L1437 385"/>
+</g>
+</svg>
+<div class="hdr" style="left:50px;top:44px"><i class="ti ti-device-laptop"></i>나의AAC<span class="pill">운영 주관: 포용기술사업팀</span></div>
+<div class="chip" style="left:50px;top:110px"><i class="ti ti-file-pencil"></i>계약</div>
+<div class="chip" style="left:50px;top:156px"><i class="ti ti-browser"></i>홈페이지 운영</div>
+<div class="chip" style="left:50px;top:202px"><i class="ti ti-settings"></i>어드민 운영</div>
+<div class="chip" style="left:50px;top:248px"><i class="ti ti-device-mobile"></i>앱 운영</div>
+<div class="chip sec" style="left:50px;top:310px"><i class="ti ti-shield-check"></i>개인정보</div>
+<div class="chip sec" style="left:50px;top:356px"><i class="ti ti-lock"></i>정보보안</div>
+<div class="chip sec" style="left:50px;top:402px"><i class="ti ti-server"></i>서버</div>
+<div class="node" style="left:330px;top:172px"><i class="ti ti-users-group"></i>포용기술사업팀</div>
+<div class="node two it" style="left:330px;top:343px"><i class="ti ti-user"></i>경영지원팀<br>IT담당자<span class="badge">동일 담당자</span></div>
+<div class="note" style="left:660px;top:336px">하이브랩 직접 소통 없음</div>
+<div class="hdr" style="left:862px;top:44px"><i class="ti ti-device-laptop"></i>FAIR AI<span class="pill">운영 주관: 포용기술사업팀</span></div>
+<div class="chip" style="left:862px;top:110px"><i class="ti ti-file-pencil"></i>계약</div>
+<div class="chip" style="left:862px;top:156px"><i class="ti ti-browser"></i>홈페이지 운영</div>
+<div class="chip" style="left:862px;top:202px"><i class="ti ti-settings"></i>어드민 운영</div>
+<div class="chip sec" style="left:862px;top:310px"><i class="ti ti-shield-check"></i>개인정보</div>
+<div class="chip sec" style="left:862px;top:356px"><i class="ti ti-lock"></i>정보보안</div>
+<div class="chip sec" style="left:862px;top:402px"><i class="ti ti-server"></i>서버</div>
+<div class="node" style="left:1142px;top:149px"><i class="ti ti-users-group"></i>포용기술사업팀</div>
+<div class="node two it" style="left:1142px;top:343px"><i class="ti ti-user"></i>경영지원팀<br>IT담당자<span class="badge">동일 담당자</span></div>
+<div class="note" style="left:1447px;top:336px">하이브랩 직접 소통 없음</div>
+<div class="hdr" style="left:50px;top:520px"><i class="ti ti-browser"></i>대표 홈페이지<span class="pill">운영 주관: 커뮤니케이션팀</span></div>
+<div class="chip" style="left:50px;top:586px"><i class="ti ti-file-pencil"></i>계약</div>
+<div class="chip" style="left:50px;top:632px"><i class="ti ti-users"></i>멤버십 외</div>
+<div class="chip" style="left:50px;top:678px"><i class="ti ti-settings"></i>어드민 운영</div>
+<div class="node" style="left:330px;top:625px"><i class="ti ti-users-group"></i>커뮤니케이션팀</div>
+<div class="chip mem" style="left:50px;top:740px"><i class="ti ti-users-group"></i>멤버십 운영</div>
+<div class="node" style="left:330px;top:733px"><i class="ti ti-users-group"></i>가치지음 TF</div>
+<div class="chip sec" style="left:50px;top:802px"><i class="ti ti-shield-check"></i>개인정보</div>
+<div class="chip sec" style="left:50px;top:848px"><i class="ti ti-lock"></i>정보보안</div>
+<div class="chip sec" style="left:50px;top:894px"><i class="ti ti-server"></i>서버</div>
+<div class="hdr" style="left:616px;top:520px"><i class="ti ti-users-group"></i>하이브랩</div>
+<div class="tag" style="left:692px;top:590px">A조직</div>
+<div class="node" style="left:618px;top:610px;width:148px;height:176px"><i class="ti ti-user"></i>PM팀</div>
+<div class="tag" style="left:898px;top:590px">B조직</div>
+<div class="node" style="left:813px;top:610px;width:170px"><i class="ti ti-user"></i>개발2팀</div>
+<div class="node" style="left:813px;top:672px;width:170px"><i class="ti ti-user"></i>개발3팀</div>
+<div class="node" style="left:813px;top:734px;width:170px"><i class="ti ti-user"></i>개발1팀</div>
+<div class="node big it" style="left:618px;top:840px;width:365px;height:100px"><i class="ti ti-user"></i>경영지원팀<br>IT담당자<span class="badge">동일 담당자</span></div>
+<div class="hdr" style="left:1062px;top:520px"><i class="ti ti-stack-2"></i>프로젝토리<span class="pill">운영 주관: 창의사업팀 → 경영지원팀 위임</span></div>
+<div class="chip" style="left:1330px;top:586px"><i class="ti ti-file-pencil"></i>계약</div>
+<div class="chip" style="left:1330px;top:632px"><i class="ti ti-browser"></i>홈페이지 운영</div>
+<div class="chip" style="left:1330px;top:678px"><i class="ti ti-settings"></i>어드민 운영</div>
+<div class="chip" style="left:1330px;top:724px"><i class="ti ti-device-mobile"></i>앱 운영</div>
+<div class="chip sec" style="left:1330px;top:786px"><i class="ti ti-shield-check"></i>개인정보</div>
+<div class="chip sec" style="left:1330px;top:832px"><i class="ti ti-lock"></i>정보보안</div>
+<div class="chip sec" style="left:1330px;top:878px"><i class="ti ti-server"></i>서버</div>
+<div class="legend">
+<span><svg style="position:static" width="36" height="10"><path d="M2 5H34" stroke="#4263EB" stroke-width="2.5"/></svg>사내 업무 전달</span>
+<span><svg style="position:static" width="36" height="10"><path d="M2 5H34" stroke="#F76707" stroke-width="3"/></svg>하이브랩 업무 요청·조율</span>
+<span><svg style="position:static" width="40" height="18"><path d="M2 9H38" stroke="#ADB5C7" stroke-width="2" stroke-dasharray="5 4"/><path d="M14 3L26 15M26 3L14 15" stroke="#E03131" stroke-width="3" stroke-linecap="round"/></svg>하이브랩 직접 소통 없음</span>
+<span><span style="width:16px;height:16px;border-radius:4px;background:#E6F6F0;border:1.5px solid #0F8A6A;box-sizing:border-box"></span>경영지원팀 IT담당자 (3곳 모두 동일 인물, 서비스별 역할만 다름)</span>
+</div>
+</div></div>
+<script>
+function fit(){var s=Math.min(1,document.getElementById('wrap').clientWidth/1600);document.getElementById('stage').style.transform='scale('+s+')';document.getElementById('wrap').style.height=(1020*s)+'px';}
+addEventListener('resize',fit);fit();
+</script>
+</body>
+</html>
