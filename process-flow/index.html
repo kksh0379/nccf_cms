@@ -81,7 +81,7 @@ svg{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 </style>
 </head>
 <body>
-<div class="bar"><div class="seg" role="group" aria-label="프로세스 보기"><button type="button" data-v="asis" class="on">현재 프로세스</button><button type="button" data-v="tobe">변경 프로세스 (제안)</button><button type="button" data-v="ideal">이상적인 안 (일원화)</button><button type="button" data-v="merge">통합안 (서비스 통합)</button></div></div>
+<div class="bar"><div class="seg" role="group" aria-label="프로세스 보기"><button type="button" data-v="asis" class="on">현재 프로세스</button><button type="button" data-v="tobe">변경 프로세스 (제안)</button><button type="button" data-v="ideal">이상적인 안 (일원화)</button><button type="button" data-v="merge">중장기 통합안 (서비스 통합)</button></div></div>
 <svg width="0" height="0" style="position:absolute"><defs>
 <marker id="ab" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9z" fill="#4263EB"/></marker>
 <marker id="ao" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9z" fill="#F76707"/></marker>
@@ -306,53 +306,50 @@ svg{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 </div>
 </div>
 <div class="view" id="merge" hidden>
-<div class="card" style="left:798px;top:20px;width:258px;height:480px"></div>
-<div class="card hb" style="left:1080px;top:20px;width:358px;height:480px"></div>
-<div class="card" style="left:487px;top:548px;width:880px;height:80px"></div>
-<svg width="1600" height="690" viewBox="0 0 1600 690">
+<div class="card" style="left:798px;top:20px;width:258px;height:358px"></div>
+<div class="card hb" style="left:1080px;top:20px;width:358px;height:358px"></div>
+<div class="card" style="left:487px;top:426px;width:880px;height:80px"></div>
+<svg width="1600" height="566" viewBox="0 0 1600 566">
 <g fill="none" stroke="#4263EB" stroke-width="2" stroke-linecap="round">
-<path d="M762 249H813" marker-end="url(#ab)"/>
-<path d="M762 427H813" marker-end="url(#ab)"/>
-<path d="M897 488V532" stroke-dasharray="6 5" marker-end="url(#ab)"/>
-<path d="M957 534V492" marker-end="url(#ab)"/>
+<path d="M762 127H813" marker-end="url(#ab)"/>
+<path d="M762 305H813" marker-end="url(#ab)"/>
+<path d="M897 366V410" stroke-dasharray="6 5" marker-end="url(#ab)"/>
+<path d="M957 412V370" marker-end="url(#ab)"/>
 </g>
 <g fill="none" stroke="#F76707" stroke-width="3" stroke-linecap="round">
-<path d="M1037 286H1096" marker-end="url(#ao)"/>
+<path d="M1037 225H1096" marker-end="url(#ao)"/>
 </g>
 </svg>
-<div class="card" style="left:162px;top:20px;width:600px;height:110px"></div>
-<div class="hdr" style="left:188px;top:34px"><i class="ti ti-apps"></i>대상 서비스<span class="pill mg">4개 서비스</span></div>
-<div class="crow" style="left:188px;top:82px"><div class="chip inl"><span class="sic sm aac"></span>나의AAC</div><div class="chip inl"><span class="sic sm fair"></span>FAIR AI</div><div class="chip inl"><span class="sic sm proj"></span>프로젝토리</div><div class="chip inl"><span class="sic sm nc"></span>대표 홈페이지</div></div>
-<div class="card" style="left:162px;top:142px;width:600px;height:166px"></div>
-<div class="hdr" style="left:188px;top:156px"><i class="ti ti-arrows-join"></i>통합 운영<span class="pill mg">하나로 통합</span></div>
-<div class="crow" style="left:188px;top:208px"><div class="chip inl"><i class="ti ti-file-pencil"></i>계약</div><div class="chip inl"><i class="ti ti-browser"></i>통합 홈페이지</div><div class="chip inl"><i class="ti ti-settings"></i>통합 회원관리 (어드민)</div></div>
-<div class="crow" style="left:188px;top:252px"><div class="chip inl sec"><i class="ti ti-shield-check"></i>개인정보</div><div class="chip inl sec"><i class="ti ti-lock"></i>정보보안</div></div>
-<div class="card" style="left:162px;top:320px;width:600px;height:166px"></div>
-<div class="hdr" style="left:188px;top:334px"><i class="ti ti-arrows-split"></i>서비스별 유지<span class="pill sp">분리 운영</span></div>
-<div class="crow" style="left:188px;top:386px"><span class="rlab">앱</span><div class="chip inl"><span class="sic sm aac"></span>나의AAC 앱</div><div class="chip inl"><span class="sic sm proj"></span>프로젝토리 앱</div></div>
-<div class="crow" style="left:188px;top:430px"><span class="rlab">서버</span><div class="chip inl sec"><span class="sic sm aac"></span>나의AAC</div><div class="chip inl sec"><span class="sic sm fair"></span>FAIR AI</div><div class="chip inl sec"><span class="sic sm proj"></span>프로젝토리</div><div class="chip inl sec"><span class="sic sm nc"></span>대표 홈페이지</div></div>
+<div class="card" style="left:162px;top:20px;width:600px;height:166px"></div>
+<div class="hdr" style="left:188px;top:34px"><i class="ti ti-arrows-join"></i>통합 운영<span class="pill mg">하나로 통합</span><span style="display:flex;gap:4px;margin-left:6px"><span class="sic sm aac"></span><span class="sic sm fair"></span><span class="sic sm proj"></span><span class="sic sm nc"></span></span></div>
+<div class="crow" style="left:188px;top:86px"><div class="chip inl"><i class="ti ti-file-pencil"></i>계약</div><div class="chip inl"><i class="ti ti-browser"></i>통합 홈페이지</div><div class="chip inl"><i class="ti ti-settings"></i>통합 회원관리 (어드민)</div></div>
+<div class="crow" style="left:188px;top:130px"><div class="chip inl sec"><i class="ti ti-shield-check"></i>개인정보</div><div class="chip inl sec"><i class="ti ti-lock"></i>정보보안</div></div>
+<div class="card" style="left:162px;top:198px;width:600px;height:166px"></div>
+<div class="hdr" style="left:188px;top:212px"><i class="ti ti-arrows-split"></i>서비스별 유지<span class="pill sp">분리 운영</span></div>
+<div class="crow" style="left:188px;top:264px"><span class="rlab">앱</span><div class="chip inl"><span class="sic sm aac"></span>나의AAC 앱</div><div class="chip inl"><span class="sic sm proj"></span>프로젝토리 앱</div></div>
+<div class="crow" style="left:188px;top:308px"><span class="rlab">서버</span><div class="chip inl sec"><span class="sic sm aac"></span>나의AAC</div><div class="chip inl sec"><span class="sic sm fair"></span>FAIR AI</div><div class="chip inl sec"><span class="sic sm proj"></span>프로젝토리</div><div class="chip inl sec"><span class="sic sm nc"></span>대표 홈페이지</div></div>
 <div class="hdr" style="left:818px;top:26px"><i class="ti ti-arrows-join"></i>운영 일원화</div>
-<div class="node it" style="left:817px;top:86px;width:220px;height:400px;flex-direction:column;gap:10px;padding-bottom:0;line-height:1.35"><i class="ti ti-user" style="font-size:36px"></i><div style="font-size:22px">경영지원팀<br>IT담당자</div><div style="font-size:14px;font-weight:600;margin-top:4px">통합 운영<br>하이브랩 단일 창구</div></div>
+<div class="node it" style="left:817px;top:86px;width:220px;height:278px;flex-direction:column;gap:10px;padding-bottom:0;line-height:1.35"><i class="ti ti-user" style="font-size:36px"></i><div style="font-size:22px">경영지원팀<br>IT담당자</div><div style="font-size:14px;font-weight:600;margin-top:4px">통합 운영<br>하이브랩 단일 창구</div></div>
 <div class="hdr" style="left:1102px;top:26px"><i class="ti ti-users-group"></i>하이브랩</div>
-<div class="node" style="left:1100px;top:186px;width:318px;height:200px;flex-direction:column;gap:8px;line-height:1.35"><i class="ti ti-users-group" style="font-size:36px"></i><div style="font-size:22px">원팀</div><div style="font-size:15px;font-weight:600;color:#5C6B8A">운영 · 유지보수 통합</div><div style="font-size:13px;font-weight:500;color:#5C6B8A;margin-top:4px">기존 PM팀 · 개발1·2·3팀 통합</div></div>
-<div class="rel" style="left:737px;top:505px;width:150px;text-align:right;color:#4263EB">운영 사항 공유</div>
-<div class="rel" style="left:967px;top:505px;color:#4263EB">요구사항 요청 → IT담당자 접수</div>
-<div class="tag" style="left:927px;top:548px">운영 주관팀 → 경영지원팀에 운영 위임</div>
-<div class="node" style="left:503px;top:564px;width:200px;height:48px"><i class="ti ti-users-group"></i>포용기술사업팀</div>
-<div class="node" style="left:719px;top:564px;width:200px;height:48px"><i class="ti ti-users-group"></i>창의사업팀</div>
-<div class="node" style="left:935px;top:564px;width:200px;height:48px"><i class="ti ti-users-group"></i>커뮤니케이션팀</div>
-<div class="node" style="left:1151px;top:564px;width:200px;height:48px"><i class="ti ti-users-group"></i>가치지음 TF</div>
-<div class="legend" style="top:652px">
+<div class="node" style="left:1100px;top:125px;width:318px;height:200px;flex-direction:column;gap:8px;line-height:1.35"><i class="ti ti-users-group" style="font-size:36px"></i><div style="font-size:22px">원팀</div><div style="font-size:15px;font-weight:600;color:#5C6B8A">운영 · 유지보수 통합</div><div style="font-size:13px;font-weight:500;color:#5C6B8A;margin-top:4px">기존 PM팀 · 개발1·2·3팀 통합</div></div>
+<div class="rel" style="left:737px;top:383px;width:150px;text-align:right;color:#4263EB">운영 사항 공유</div>
+<div class="rel" style="left:967px;top:383px;color:#4263EB">요구사항 요청 → IT담당자 접수</div>
+<div class="tag" style="left:927px;top:426px">운영 주관팀 → 경영지원팀에 운영 위임</div>
+<div class="node" style="left:503px;top:442px;width:200px;height:48px"><i class="ti ti-users-group"></i>포용기술사업팀</div>
+<div class="node" style="left:719px;top:442px;width:200px;height:48px"><i class="ti ti-users-group"></i>창의사업팀</div>
+<div class="node" style="left:935px;top:442px;width:200px;height:48px"><i class="ti ti-users-group"></i>커뮤니케이션팀</div>
+<div class="node" style="left:1151px;top:442px;width:200px;height:48px"><i class="ti ti-users-group"></i>가치지음 TF</div>
+<div class="legend" style="top:530px">
 <span><svg style="position:static" width="36" height="10"><path d="M2 5H34" stroke="#4263EB" stroke-width="2.5"/></svg>업무 위임 · 요구사항 요청 → IT담당자</span>
 <span><svg style="position:static" width="36" height="10"><path d="M2 5H34" stroke="#F76707" stroke-width="3"/></svg>하이브랩 원팀 업무 요청·조율 (단일 창구)</span>
 <span><svg style="position:static" width="36" height="10"><path d="M2 5H34" stroke="#4263EB" stroke-width="2" stroke-dasharray="6 5"/></svg>운영 사항 공유</span>
 </div>
 </div>
 </div></div>
-<aside class="side"><section class="pane" data-v="asis"><h2>현재 프로세스</h2><p class="sub">사업부서별 혼합 운영</p><div class="pc pro"><span class="lb"><i class="ti ti-thumb-up"></i>장점</span><ul><li><i class="ti ti-circle-check"></i><span>사업부서별 사정에 맞춘 유연한 위임</span></li><li><i class="ti ti-circle-check"></i><span>사업부서 부족 영역을 경영지원팀이 보완</span></li></ul></div><div class="pc con"><span class="lb"><i class="ti ti-thumb-down"></i>단점</span><ul><li><i class="ti ti-alert-circle"></i><span>서비스별 프로세스 불일치</span></li><li><i class="ti ti-alert-circle"></i><span>중간 경유가 많은 비효율 프로세스</span></li></ul></div></section><section class="pane" data-v="tobe" hidden><h2>변경 프로세스 (제안)</h2><p class="sub">운영 주관팀 직접 운영 · IT담당자 자문</p><div class="pc pro"><span class="lb"><i class="ti ti-thumb-up"></i>장점</span><ul><li><i class="ti ti-circle-check"></i><span>프로세스 일관성 확보</span></li><li><i class="ti ti-circle-check"></i><span>서비스별 책임 주체 명확</span></li></ul></div><div class="pc con"><span class="lb"><i class="ti ti-thumb-down"></i>단점</span><ul><li><i class="ti ti-alert-circle"></i><span>기술 검토가 필요한 운영 이슈 대응에 한계</span></li><li><i class="ti ti-alert-circle"></i><span>개발사 주도의 의사결정 구조 우려</span></li></ul></div></section><section class="pane" data-v="ideal" hidden><h2>이상적인 안 (일원화 + 원팀)</h2><p class="sub">IT담당자 단일 창구 · 하이브랩 원팀</p><div class="pc pro"><span class="lb"><i class="ti ti-thumb-up"></i>장점</span><ul><li><i class="ti ti-circle-check"></i><span>원팀 운영으로 비용 절감 기대</span></li><li><i class="ti ti-circle-check"></i><span>단일 창구로 프로세스 효율화</span></li></ul></div><div class="pc con"><span class="lb"><i class="ti ti-thumb-down"></i>단점</span><ul><li><i class="ti ti-alert-circle"></i><span>1인 부재 시 대체 불가</span></li><li><i class="ti ti-alert-circle"></i><span>부사수·서포터 확보 필요</span></li></ul></div></section><section class="pane" data-v="merge" hidden><h2>통합안 (서비스 통합)</h2><p class="sub">이상적인 안 + 계약·홈페이지·어드민·보안 통합</p><div class="pc pro"><span class="lb"><i class="ti ti-thumb-up"></i>장점</span><ul><li><i class="ti ti-circle-check"></i><span>중복 운영 업무 제거로 운영 효율 향상</span></li><li><i class="ti ti-circle-check"></i><span>통합 회원관리로 회원 편의성 향상</span></li></ul></div><div class="pc con"><span class="lb"><i class="ti ti-thumb-down"></i>단점</span><ul><li><i class="ti ti-alert-circle"></i><span>서비스 통합 전환에 비용·기간 소요</span></li></ul></div></section></aside>
+<aside class="side"><section class="pane" data-v="asis"><h2>현재 프로세스</h2><p class="sub">사업부서별 혼합 운영</p><div class="pc pro"><span class="lb"><i class="ti ti-thumb-up"></i>장점</span><ul><li><i class="ti ti-circle-check"></i><span>사업부서별 사정에 맞춘 유연한 위임</span></li><li><i class="ti ti-circle-check"></i><span>사업부서 부족 영역을 경영지원팀이 보완</span></li></ul></div><div class="pc con"><span class="lb"><i class="ti ti-thumb-down"></i>단점</span><ul><li><i class="ti ti-alert-circle"></i><span>서비스별 프로세스 불일치</span></li><li><i class="ti ti-alert-circle"></i><span>중간 경유가 많은 비효율 프로세스</span></li></ul></div></section><section class="pane" data-v="tobe" hidden><h2>변경 프로세스 (제안)</h2><p class="sub">운영 주관팀 직접 운영 · IT담당자 자문</p><div class="pc pro"><span class="lb"><i class="ti ti-thumb-up"></i>장점</span><ul><li><i class="ti ti-circle-check"></i><span>프로세스 일관성 확보</span></li><li><i class="ti ti-circle-check"></i><span>서비스별 책임 주체 명확</span></li></ul></div><div class="pc con"><span class="lb"><i class="ti ti-thumb-down"></i>단점</span><ul><li><i class="ti ti-alert-circle"></i><span>기술 검토가 필요한 운영 이슈 대응에 한계</span></li><li><i class="ti ti-alert-circle"></i><span>개발사 주도의 의사결정 구조 우려</span></li></ul></div></section><section class="pane" data-v="ideal" hidden><h2>이상적인 안 (일원화 + 원팀)</h2><p class="sub">IT담당자 단일 창구 · 하이브랩 원팀</p><div class="pc pro"><span class="lb"><i class="ti ti-thumb-up"></i>장점</span><ul><li><i class="ti ti-circle-check"></i><span>원팀 운영으로 비용 절감 기대</span></li><li><i class="ti ti-circle-check"></i><span>단일 창구로 프로세스 효율화</span></li></ul></div><div class="pc con"><span class="lb"><i class="ti ti-thumb-down"></i>단점</span><ul><li><i class="ti ti-alert-circle"></i><span>1인 부재 시 대체 불가</span></li><li><i class="ti ti-alert-circle"></i><span>부사수·서포터 확보 필요</span></li></ul></div></section><section class="pane" data-v="merge" hidden><h2>중장기 통합안 (서비스 통합)</h2><p class="sub">이상적인 안 + 계약·홈페이지·어드민·보안 통합</p><div class="pc pro"><span class="lb"><i class="ti ti-thumb-up"></i>장점</span><ul><li><i class="ti ti-circle-check"></i><span>중복 운영 업무 제거로 운영 효율 향상</span></li><li><i class="ti ti-circle-check"></i><span>통합 회원관리로 회원 편의성 향상</span></li></ul></div><div class="pc con"><span class="lb"><i class="ti ti-thumb-down"></i>단점</span><ul><li><i class="ti ti-alert-circle"></i><span>서비스 통합 전환에 비용·기간 소요</span></li></ul></div></section></aside>
 </div>
 <script>
-var cur='asis',HS={asis:1020,tobe:960,ideal:980,merge:690},WS={asis:1600,tobe:1284,ideal:1324,merge:1324};
+var cur='asis',HS={asis:1020,tobe:960,ideal:980,merge:566},WS={asis:1600,tobe:1284,ideal:1324,merge:1324};
 function fit(){var h=HS[cur],w=WS[cur];var wr=document.getElementById('wrap');wr.style.maxWidth=w+'px';var s=Math.min(1,wr.clientWidth/w);var st=document.getElementById('stage');st.style.width=w+'px';st.style.height=h+'px';st.style.transform='scale('+s+')';var sd=document.querySelector('.side');if(window.innerWidth>1100){var v=document.getElementById(cur),t=1e9,b=0;v.querySelectorAll('.card,.itbox').forEach(function(e){t=Math.min(t,e.offsetTop);b=Math.max(b,e.offsetTop+e.offsetHeight);});sd.style.marginTop=(t*s)+'px';sd.style.height=((b-t)*s)+'px';}else{sd.style.marginTop='';sd.style.height='';}document.getElementById('wrap').style.height=(h*s)+'px';}
 function show(v){cur=HS[v]?v:'asis';document.querySelectorAll('.view').forEach(function(e){e.hidden=e.id!==cur;});document.querySelectorAll('.pane').forEach(function(e){e.hidden=e.dataset.v!==cur;});document.querySelectorAll('.seg button').forEach(function(b){var on=b.dataset.v===cur;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);});try{history.replaceState(null,'',cur==='asis'?location.pathname+location.search:'#'+cur);}catch(e){}fit();}
 document.querySelectorAll('.seg button').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.v);});});
