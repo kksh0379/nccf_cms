@@ -51,8 +51,8 @@ svg{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 .rel{position:absolute;font-size:14px;font-weight:700;color:#0F8A6A;white-space:nowrap;line-height:1.5;letter-spacing:-0.3px}
 .layout{display:flex;gap:24px;align-items:flex-start;justify-content:center;padding:0 24px 32px}
 .layout #wrap{flex:1;min-width:0}
-.side{flex:none;width:320px;position:sticky;top:16px}
-.pane{background:#F7F8FB;border:1.5px solid var(--line);border-radius:18px;padding:22px 22px 24px}
+.side{flex:none;width:370px;display:flex}
+.pane{flex:1;box-sizing:border-box;background:#F7F8FB;border:1.5px solid var(--line);border-radius:18px;padding:22px 22px 24px}
 .pane[hidden]{display:none}
 .pane h2{margin:0 0 4px;font-size:20px;font-weight:800;letter-spacing:-0.4px}
 .pane .sub{margin:0 0 18px;font-size:13px;font-weight:500;color:var(--sub)}
@@ -61,11 +61,11 @@ svg{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 .pc.pro .lb{background:#EBFBEE;color:#2B8A3E}
 .pc.con .lb{background:#FFF5F5;color:#C92A2A}
 .pc ul{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
-.pc li{word-break:keep-all;display:flex;gap:8px;align-items:flex-start;font-size:15px;font-weight:600;line-height:1.45;letter-spacing:-0.3px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
-.pc li i{font-size:18px;margin-top:1px;flex:none}
+.pc li{word-break:keep-all;white-space:nowrap;display:flex;gap:8px;align-items:center;font-size:14px;font-weight:600;line-height:1.45;letter-spacing:-0.3px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.pc li i{font-size:18px;flex:none}
 .pc.pro li i{color:#2F9E44}
 .pc.con li i{color:#E03131}
-@media (max-width:1100px){.layout{flex-direction:column}.side{width:auto;position:static}}
+@media (max-width:1100px){.layout{flex-direction:column}.side{width:auto}.pc li{white-space:normal}}
 #tobe{position:absolute;left:-158px;top:0;width:1600px}
 #ideal{position:absolute;left:-138px;top:0;width:1600px}
 </style>
@@ -177,7 +177,7 @@ svg{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 <span><svg style="position:static" width="36" height="10"><path d="M2 5H34" stroke="#4263EB" stroke-width="2.5"/></svg>사내 업무 전달</span>
 <span><svg style="position:static" width="36" height="10"><path d="M2 5H34" stroke="#F76707" stroke-width="3"/></svg>하이브랩 업무 요청·조율</span>
 <span><svg style="position:static" width="40" height="18"><path d="M2 9H38" stroke="#ADB5C7" stroke-width="2" stroke-dasharray="5 4"/><path d="M14 3L26 15M26 3L14 15" stroke="#E03131" stroke-width="3" stroke-linecap="round"/></svg>하이브랩 직접 소통 없음</span>
-<span><span style="width:16px;height:16px;border-radius:4px;background:#E6F6F0;border:1.5px solid #0F8A6A;box-sizing:border-box"></span>경영지원팀 IT담당자 (모두 동일 인물, 가치지음 TF 겸직)</span>
+<span><span style="width:16px;height:16px;border-radius:4px;background:#E6F6F0;border:1.5px solid #0F8A6A;box-sizing:border-box"></span>경영지원팀 IT담당자</span>
 </div>
 </div>
 <div class="view" id="tobe" hidden>
@@ -300,7 +300,7 @@ svg{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 </div>
 <script>
 var cur='asis',HS={asis:1020,tobe:960,ideal:980},WS={asis:1600,tobe:1284,ideal:1324};
-function fit(){var h=HS[cur],w=WS[cur];var wr=document.getElementById('wrap');wr.style.maxWidth=w+'px';var s=Math.min(1,wr.clientWidth/w);var st=document.getElementById('stage');st.style.width=w+'px';st.style.height=h+'px';st.style.transform='scale('+s+')';document.getElementById('wrap').style.height=(h*s)+'px';}
+function fit(){var h=HS[cur],w=WS[cur];var wr=document.getElementById('wrap');wr.style.maxWidth=w+'px';var s=Math.min(1,wr.clientWidth/w);var st=document.getElementById('stage');st.style.width=w+'px';st.style.height=h+'px';st.style.transform='scale('+s+')';var sd=document.querySelector('.side');if(window.innerWidth>1100){var v=document.getElementById(cur),t=1e9,b=0;v.querySelectorAll('.card,.itbox').forEach(function(e){t=Math.min(t,e.offsetTop);b=Math.max(b,e.offsetTop+e.offsetHeight);});sd.style.marginTop=(t*s)+'px';sd.style.height=((b-t)*s)+'px';}else{sd.style.marginTop='';sd.style.height='';}document.getElementById('wrap').style.height=(h*s)+'px';}
 function show(v){cur=HS[v]?v:'asis';document.querySelectorAll('.view').forEach(function(e){e.hidden=e.id!==cur;});document.querySelectorAll('.pane').forEach(function(e){e.hidden=e.dataset.v!==cur;});document.querySelectorAll('.seg button').forEach(function(b){var on=b.dataset.v===cur;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);});try{history.replaceState(null,'',cur==='asis'?location.pathname+location.search:'#'+cur);}catch(e){}fit();}
 document.querySelectorAll('.seg button').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.v);});});
 addEventListener('resize',fit);show(location.hash.slice(1));
